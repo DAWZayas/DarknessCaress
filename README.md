@@ -1,5 +1,5 @@
 # DarknessCaress
 Proyecto Web :
-Carlos Ballesteros
-Alberto Mata
-Alejandro Sánchez
+Carlos Ballesteros,
+Alberto Mata,
+Alejandro Sánchez.
