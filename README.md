@@ -1,5 +1,5 @@
 #Darkness' Caress:
-...The world-wide well-known on-line game.
+### The world-wide well-known on-line game.
 
 
 Rpg-themed turn-based on-line multiplayin'-game featuring:
