@@ -20,4 +20,4 @@ Server side:
 * Matchmaking with players, or IA.
 * And more!
 
-[Additional information](https://github.com/CarlosBallesteros/DarknessCaress#darkness-caress)
+[Additional information](https://github.com/CarlosBallesteros/DarknessCaress)
