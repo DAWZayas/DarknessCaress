@@ -19,3 +19,5 @@ Server side:
 * Database storage for every important data.
 * Matchmaking with players, or IA.
 * And more!
+
+[Additional information](https://github.com/CarlosBallesteros/DarknessCaress)
