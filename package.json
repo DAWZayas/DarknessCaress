@@ -13,6 +13,7 @@
   "author": "Alberto, Alejandro, Carlos",
   "license": "ISC",
   "devDependencies": {
+    "chai-immutable": "^1.5.2",
     "autoprefixer-loader": "^3.1.0",
     "babel": "^5.8.29",
     "babel-eslint": "^4.1.3",
@@ -35,6 +36,7 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "immutable": "^3.7.5",
     "babel-runtime": "^5.8.29",
     "bootstrap": "^3.3.5",
     "history": "^1.13.0",

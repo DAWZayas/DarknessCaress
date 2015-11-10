@@ -63,28 +63,120 @@ const equipment = [
   }
 ];
 
-const board = [
-  {
-    id: 1,
-    row: '0',
-    column: '0'
-  },
-  {
-    id: 2,
-    row: '0',
-    column: '1'
-  },
-  {
-    id: 3,
-    row: '1',
-    column: '0'
-  },
-  {
-    id: 4,
-    row: '1',
-    column: '1'
-  },
+const terrains = [
+{
+  name: 'forest',
+  defense: 1,
+  avoid: 0,
+  movementSlow: 2,
+  passable: true
+},
+{
+  name: 'path',
+  defense: 0,
+  avoid: 1,
+  movementSlow: 0.5,
+  passable: true
+},
+{
+  name: 'plain',
+  defense: 0,
+  avoid: 0,
+  movementSlow: 1,
+  passable: true
+},
+{
+  name: 'desert',
+  defense: 0,
+  avoid: 0,
+  movementSlow: 3,
+  passable: true
+},
+{
+  name: 'snow',
+  defense: 0,
+  avoid: 0,
+  movementSlow: 3,
+  passable: true
+},
+{
+  name: 'mountain',
+  defense: 2,
+  avoid: 2,
+  movementSlow: 1,
+  passable: false
+},
+{
+  name: 'river',
+  defense: 0,
+  avoid: 0,
+  movementSlow: 1,
+  passable: false
+},
+{
+  name: 'lake',
+  defense: 0,
+  avoid: 0,
+  movementSlow: 1,
+  passable: false
+},
+{
+  name: 'lava',
+  defense: 0,
+  avoid: 0,
+  movementSlow: 1,
+  passable: false
+},
+{
+  name: 'building',
+  defense: 2,
+  avoid: 2,
+  movementSlow: 1,
+  passable: true
+},
+{
+  name: 'bridge',
+  defense: 0,
+  avoid: 0,
+  movementSlow: 1,
+  passable: true
+},
+{
+  name: 'wall',
+  defense: 10,
+  avoid: 10,
+  movementSlow: 10,
+  passable: false
+}
 ];
+
+function createBoard(size) {
+  let idSquare = 0;
+  let _board = [];
+  for (let i = 0; i < size; i++) {
+    _board[i] = [];
+    for (let j = 0; j < size; j++) {
+      _board[i][j] = generateSquare(idSquare++);
+    };
+  };
+  return _board.slice();
+}
+
+function generateSquare(idSquare) {
+  return {
+    id: idSquare, //size * i + j, Buen intento Carlos. :(
+    terrain: generateInitialTerrain(),
+    unit: false,
+    interactive: false
+  };
+}
+
+function generateInitialTerrain() {
+  let number = Math.floor(Math.random()*5);
+  return terrains[number].name;
+}
+
+const board = createBoard(16);
 
 const friends = [
 	{
