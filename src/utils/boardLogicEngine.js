@@ -238,6 +238,84 @@ function multiplierTerrain(terrain){
 }
 function takeSquares(percent){return Math.floor((randomNumber(percent, 0))*getBoardSize()/100)}
 
+//!\\ Begins: Arceso's code piece: unestable shit.
+
+function riverCreator(rivers)
+{
+  arrayOfRiverArrays=[];
+  for(i=0;i<rivers;i++)
+  { 
+    arrayOfRiverArray[i]=[];
+    for(u=0;u<rivers;u++)
+    {
+      arrayOfRiverArrays[i][u]=river.initRiver();
+      riverBridge=0;
+      while(!arrayOfRiverArrays[i][u].isDead)
+      {
+        if(arrayOfRiverArrays[i][u].pathTileUnder() || riverBrige===5)
+        {
+          arrayOfRiverArrays[i][u].hasBridge=true; 
+          riverBridge=0;
+        }
+        arrayOfRiverArrays[i][u].goWithTheFlow(randomNumber(3,1));
+        riverBridge++;
+      }
+    }
+  }return arrayOfRiverArrays;
+}
+
+river={
+  id: getBoardSize()*y+x,
+  name: 'river',
+  unit: false,
+  interactive: false,
+  position:{},
+  sense:1,
+  direction:'x',
+  isDead:false,
+  hasBridge:false,
+  
+  initRiver: function ()
+  {
+    this.position['x']=randomNumber(getBoardSize(),0);
+    this.position['y']=randomNumber(getBoardSize(),0);
+    this.sense = randomBool() ? 1 : -1;
+    this.direction = randomBool() ? 'x' : 'y';  
+  },
+
+  goWithTheFlow: function(action)
+  {
+    if(!outOfTheMap(advance()))
+    {
+      if(action === 1) foward();
+      else if(action === 2) rotate();
+      else die();
+    }else die();
+  },
+           
+  outOfTheMap: function(position)
+  {
+    if (position[x] >= getBoardSize() && position[y] >= getBoardSize()) return true;
+    else return false;
+  },
+      
+  advance: function(){ return this.position[direction]+sense;},
+        
+  foward: function(){ this.position[direction]=advance();},
+  
+  turn: function(){ return this.direction==='x'?'y':'x';},
+
+  rotate: function(){ foward(); this.direction=turn();},
+
+  die: function(){ this.isDead=true;},
+
+  path: function (){ return 'path to the file'(direction === 'x' ? 'nombre del horizontal' : 'nombre del vertical')'.formato' }
+
+};
+
+  pathTileUnder: function(){ return board[this.position['x']][this.position['y']].terrain.name=='plain'? true:false;}
+};
+
 //######################## PATTERN SECCION #################################
 
 function patternCreator(terrainArray)
