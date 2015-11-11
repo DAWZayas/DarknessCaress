@@ -193,124 +193,50 @@ function createBoard() {
 function generateTerrain(type){terrainComplete=createTerrain(type);}
 function generateSquare(idSquare) {
   shuffle(terrainComplete);
-  return {
-    id: idSquare,
-    terrain: terrainComplete.pop().name; 
-    unit: false,
-    //path: 'url/img',
-    interactive: false
-  };
-
+  return terrainComplete.pop(); 
 }
 function takeType(type){
   array=['Plains', 'Forest','Desert', 'Snow'];
   return array[type];
 }
 function createTerrain(type){
-  let terrain = iterateTakeSquares(determineType(takeType(type)));
+  let terrain = multiplierTerrain(iterateTakeSquares(determineType(takeType(type))));
   let terrainObjets = [];
+  let count = 0;
   for (let i = 0; i < terrain.length; i++) {
     for (let j = 0; j < terrain[i]; j++) {
-      terrainObjet.length=terrains[i];
+      terrainObjets[count]=terrains[i].name;
+      count++;
     };
   };
   return terrainObjets;
 }
-function determineType(){
-  if (type==='Plains')terrain = [-1, 20, 10, 10, 10, 10, 5];
-  else if(type==='Forest')terrain = [20, -1, 10, 10, 10, 10, 5];
-  else if(type==='Desert')terrain = [20, 10,-1, 10, 10, 10, 5];
-  else terrain = [20, 10, 10, -1, 10, 10, 5]; //nieve!!
+function determineType(type){
+  if (type==='Plains')terrain = [40, 30,-1, 30, 30, 30, 25];
+  else if(type==='Forest')terrain = [40, 30,-1, 30, 30, 30, 25];
+  else if(type==='Desert')terrain = [40, 30,-1, 30, 30, 30, 25];
+  else terrain = [40, 30,-1, 30, 30, 30, 25]; //nieve!!
   return terrain; 
 }
 function iterateTakeSquares(terrain){
+  let terrainBase = 0;
+  let terrainBasePosition = 0;
   for (let i = 0; i < terrain.length; i++) {
     if(terrain[i]!==-1){
     terrain[i] = takeSquares(terrain[i]);
-    let terrainBase+=terrain[i];
-    }else terrainBasePositon=i;
+    terrainBase+=terrain[i];
+    }else terrainBasePosition=i;
   };
-  return terrain[terrainBasePosition] = getBoardSize()-terrainBase;
+  terrain[terrainBasePosition] = getBoardSize()-terrainBase;
+  return terrain;
 }
-function takeSquares(percent){return Math.floor((randomNumber(percent, 0))*getBoardSize())/100)}
-
-//!\\ Begins: Arceso's code piece: unestable shit.
-
-function riverCreator(rivers)
-{
-  arrayOfRiverArrays=[];
-  for(i=0;i<rivers;i++)
-  { 
-    arrayOfRiverArray[i]=[];
-    for(u=0;u<rivers;u++)
-    {
-      arrayOfRiverArrays[i][u]=river.initRiver();
-      riverBridge=0;
-      while(!arrayOfRiverArrays[i][u].isDead)
-      {
-        if(arrayOfRiverArrays[i][u].pathTileUnder() || riverBrige===5)
-        {
-          arrayOfRiverArrays[i][u].hasBridge=true; 
-          riverBridge=0;
-        }
-        arrayOfRiverArrays[i][u].goWithTheFlow(randomNumber(3,1));
-        riverBridge++;
-      }
-    }
-  }return arrayOfRiverArrays;
+function multiplierTerrain(terrain){
+  for (let i = 0; i < terrain.length; i++){
+    terrain[i]=terrain[i]*getBoardSize();
+  };
+  return terrain;
 }
-
-river={
-  id: getBoardSize()*y+x,
-  name: 'river',
-  unit: false,
-  interactive: false,
-  position:{},
-  sense:1,
-  direction:'x',
-  isDead:false,
-  hasBridge:false,
-  
-  initRiver: function ()
-  {
-    this.position['x']=randomNumber(getBoardSize(),0);
-    this.position['y']=randomNumber(getBoardSize(),0);
-    this.sense = randomBool() ? 1 : -1;
-    this.direction = randomBool() ? 'x' : 'y';  
-  },
-
-  goWithTheFlow: function(action)
-  {
-    if(!outOfTheMap(advance()))
-    {
-      if(action === 1) foward();
-      else if(action === 2) rotate();
-      else die();
-    }else die();
-  },
-           
-  outOfTheMap: function(position)
-  {
-    if (position[x] >= getBoardSize() && position[y] >= getBoardSize()) return true;
-    else return false;
-  },
-      
-  advance: function(){ return this.position[direction]+sense;},
-        
-  foward: function(){ this.position[direction]=advance();},
-  
-  turn: function(){ return this.direction==='x'?'y':'x';},
-
-  rotate: function(){ foward(); this.direction=turn();},
-
-  die: function(){ this.isDead=true;},
-
-  path: function (){ return 'path to the file'(direction === 'x' ? 'nombre del horizontal' : 'nombre del vertical')'.formato' }
-
-};
-
-  pathTileUnder: function(){ return board[this.position['x']][this.position['y']].terrain.name=='plain'? true:false;}
-};
+function takeSquares(percent){return Math.floor((randomNumber(percent, 0))*getBoardSize()/100)}
 
 //######################## PATTERN SECCION #################################
 
