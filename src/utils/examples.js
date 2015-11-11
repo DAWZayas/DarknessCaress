@@ -1,4 +1,22 @@
-const units = [
+export const friends = [
+  {
+    id: 1,
+    name: 'Carlos',
+    status: 'offline'
+  },
+  {
+    id: 2,
+    name: 'Alejandro',
+    status: 'offline'
+  },
+  {
+    id: 3,
+    name: 'Barba',
+    status: 'online'
+  }
+];
+
+export const units = [
   {
     id: 1,
     type: 'Mage',
@@ -36,7 +54,7 @@ const units = [
   }
 ];
 
-const equipment = [
+export const equipment = [
   {
     id: 1,
     name: 'Sword',
@@ -63,7 +81,7 @@ const equipment = [
   }
 ];
 
-const terrains = [
+export const terrains = [
 {
   name: 'forest',
   defense: 1,
@@ -153,49 +171,37 @@ const terrains = [
 function createBoard(size) {
   let idSquare = 0;
   let _board = [];
+  let number = Math.floor(Math.random()*5);
   for (let i = 0; i < size; i++) {
     _board[i] = [];
     for (let j = 0; j < size; j++) {
-      _board[i][j] = generateSquare(idSquare++);
+      _board[i][j] = generateSquare(idSquare++, number);
     };
   };
   return _board.slice();
 }
 
-function generateSquare(idSquare) {
+function generateSquare(idSquare, number) {
   return {
     id: idSquare, //size * i + j, Buen intento Carlos. :(
-    terrain: generateInitialTerrain(),
+    terrain: generateInitialTerrain(number),
     unit: false,
+    //path: 'url/img',
     interactive: false
   };
 }
 
-function generateInitialTerrain() {
-  let number = Math.floor(Math.random()*5);
+function generateInitialTerrain(number) {
   return terrains[number].name;
 }
 
-const board = createBoard(16);
+export const board = createBoard(8);
 
-const friends = [
-	{
-		id: 1,
-		name: 'Carlos',
-		status: 'offline'
-	},
-	{
-		id: 2,
-		name: 'Alejandro',
-		status: 'offline'
-	},
-	{
-		id: 3,
-		name: 'Barba',
-		status: 'online'
-	}
-];
+export const turn = {
+  active: true,
+  selected: -1
+};
 
 export const initialState = {
-  units, equipment, board, friends
+  units, equipment, board, friends, turn
 };

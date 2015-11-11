@@ -1,19 +1,30 @@
-import { connect } from 'react-redux';
+import React, { Component, PropTypes } from 'react';
 
-import Board from '../components/Board';
+import BoardContainer from './BoardContainer';
+import SubMenuContainer from './SubMenuContainer';
 
-function mapStateToProps(state) {
-  return {
-    board: state.board
-  };
+export default class GameContainer extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+      	<div>
+      		<BoardContainer />
+      	</div>
+      	<div>
+      		<SubMenuContainer />
+      	</div>
+        {this.props.children}
+      </div>
+    );
+  }
 }
 
-function mapActionsToProps(dispatch) {
-  return {
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(Board);
+GameContainer.propTypes = {
+  // Injected by React Router
+  children: PropTypes.node
+};

@@ -5,11 +5,13 @@ import units from './units';
 import board from './board';
 import equipment from './equipment';
 import friends from './friends';
+import turn from './turn';
 
 export default combineReducers({
 	units,
 	board,
 	equipment,
 	friends,
+	turn,
   router
 });

@@ -1,3 +1,3 @@
-export default function unitsReducer(state = []) {
+export default function unitsReducer(state = {}) {
 	return state;
 }

@@ -1,53 +1,33 @@
-import {List, Map} from 'immutable';
 import {expect} from 'chai';
-import {setFriend} from '../src/actions';
+
+import { setFriend } from '../src/actions';
+import friendsReducer from '../src/reducers/friends';
+import { friends } from '../src/utils/examples';
 
 describe('application logic', () => {
 
-  describe('setFriend', () => {
+	describe('setFriend', () => {
 
-  	it('adds the first friend to the state', () => {
-      const state = Map();
-      const friend = {
+    it('should add a friend to an empty friends state', () => {
+    	const friend = {
 				name: 'Alberto',
 				status: 'offline'
 			};
-      const nextState = setFriend(state, friend);
-      expect(nextState).to.equal(Map({
-        friends: List.of({
-        	id: 1,
-					name: 'Alberto',
-					status: 'offline'
-				})
-      }));
+      const nextState = friendsReducer(undefined, setFriend(friend));
+      expect(nextState.length).to.equal(1);
+      expect(nextState[0].name).to.equal('Alberto');
     });
 
-    it('adds a new friend to the state', () => {
-      const state = Map({
-        friends: List.of({
-        	id: 1,
-					name: 'Carlos',
-					status: 'online'
-				})
-			});
-      const friend = {
+    it('should add a friend to a non empty friends state', () => {
+    	const friend = {
 				name: 'Alberto',
 				status: 'offline'
 			};
-      const nextState = setFriend(state, friend);
-      expect(nextState).to.equal(Map({
-        friends: List.of({
-        	id: 1,
-					name: 'Carlos',
-					status: 'online'
-				},
-				{
-					id: 2,
-					name: 'Alberto',
-					status: 'offline'
-				})
-      }));
+      const nextState = friendsReducer(friends, setFriend(friend));
+      expect(nextState.length).to.equal(friends.length + 1);
+      expect(nextState[friends.length].name).to.equal('Alberto');
     });
 
- 	});
+  });
+
 });

@@ -1,3 +1,3 @@
-export default function equipmentReducer(state = []) {
+export default function equipmentReducer(state = {}) {
 	return state;
 }
