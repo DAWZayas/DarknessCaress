@@ -1,2 +1,1 @@
-require('./sampleTest');
-require('./actions_test');
+require('./actionsTest');

@@ -2,9 +2,9 @@ import {expect} from 'chai';
 
 import { setFriend } from '../src/actions';
 import friendsReducer from '../src/reducers/friends';
-import { friends } from '../src/utils/examples';
+import { friends } from '../src/utils/initialState';
 
-describe('application logic', () => {
+describe('Application actions', () => {
 
 	describe('setFriend', () => {
 
@@ -24,8 +24,7 @@ describe('application logic', () => {
 				status: 'offline'
 			};
       const nextState = friendsReducer(friends, setFriend(friend));
-      expect(nextState.length).to.equal(friends.length + 1);
-      expect(nextState[friends.length].name).to.equal('Alberto');
+      expect(nextState[nextState.length - 1].name).to.equal('Alberto');
     });
 
   });
