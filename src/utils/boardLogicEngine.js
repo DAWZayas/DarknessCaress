@@ -130,7 +130,7 @@ function shuffle(array) {
         var temp = array[i];
         array[i] = array[j];
         array[j] = temp;
-    };
+    }
 }
 function getBoardSize(){ return 4;}
 function createBoard() {
@@ -144,8 +144,8 @@ function createBoard() {
     for (let j = 0; j < size; j++) {
       _board[i][j] = generateSquare(idSquare++); 
       
-    };
-  };
+    }
+  }
   return _board.slice();
 }
 function generateTerrain(type){terrainComplete=createTerrain(type);}
@@ -170,8 +170,8 @@ function createTerrain(type){
     for (let j = 0; j < terrain[i]; j++) {
       terrainObjets[count]=terrains[i].name;
       count++;
-    };
-  };
+    }
+  }
   return terrainObjets;
 }
 function determineType(type){
@@ -189,17 +189,19 @@ function iterateTakeSquares(terrain){
     terrain[i] = takeSquares(terrain[i]);
     terrainBase+=terrain[i];
     }else terrainBasePosition=i;
-  };
+  }
   terrain[terrainBasePosition] = getBoardSize()-terrainBase;
   return terrain;
 }
 function multiplierTerrain(terrain){
   for (let i = 0; i < terrain.length; i++){
     terrain[i]=terrain[i]*getBoardSize();
-  };
+  }
   return terrain;
 }
-function takeSquares(percent){return Math.floor((randomNumber(percent, 0))*getBoardSize()/100);}
+function takeSquares(percent){
+  return Math.floor((randomNumber(percent, 0))*getBoardSize()/100);
+}
 
 //!\\ Begins: Arceso's code piece: unestable shit.
 /*
@@ -389,4 +391,3 @@ const turn = {
 export const initialState = {
   units, equipment, board, friends, turn
 };
-
