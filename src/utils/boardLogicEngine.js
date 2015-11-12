@@ -123,15 +123,14 @@ const terrains = [
 }
 ];
 let terrainComplete = [];
-function randomNumber(max, min){ return Math.floor(Math.random() * max) + min; }
+function randomNumber(max, min){ return Math.round(Math.random() * max) + min; }
 function shuffle(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var temp = array[i];
         array[i] = array[j];
         array[j] = temp;
-    }
-    return array;
+    };
 }
 function getBoardSize(){ return 4;}
 function createBoard() {
@@ -139,19 +138,25 @@ function createBoard() {
   let idSquare = 0;
   let _board = [];
   generateTerrain(randomNumber(3, 0));
+  shuffle(terrainComplete);
   for (let i = 0; i < size; i++) {
     _board[i] = [];
     for (let j = 0; j < size; j++) {
-      _board[i][j] = generateSquare(); 
-      (idSquare++);
+      _board[i][j] = generateSquare(idSquare++); 
+      
     };
   };
   return _board.slice();
 }
 function generateTerrain(type){terrainComplete=createTerrain(type);}
-function generateSquare() {
-  shuffle(terrainComplete);
-  return terrainComplete.pop(); 
+function generateSquare(idSquare) {
+  return {
+    id: idSquare, //size * i + j, Buen intento Carlos. :(
+    terrain: terrainComplete.pop(),
+    unit: false,
+    //path: 'url/img',
+    interactive: false
+  };
 }
 function takeType(type){
   array=['Plains', 'Forest', 'Desert', 'Snow'];
@@ -170,10 +175,10 @@ function createTerrain(type){
   return terrainObjets;
 }
 function determineType(type){
-  if (type==='Plains')terrain = [40, 30, -1, 30, 30, 30, 25];
-  else if(type==='Forest')terrain = [40, 30, -1, 30, 30, 30, 25];
-  else if(type==='Desert')terrain = [40, 30, -1, 30, 30, 30, 25];
-  else terrain = [40, 30, -1, 30, 30, 30, 25]; //nieve!!
+  if (type==='Plains') terrain = [(-1), 30, 40, 30, 30, 30, 25];
+  else if(type==='Forest') terrain = [40, (-1), 30, 30, 30, 30, 25];
+  else if(type==='Desert') terrain = [40, 30, (-1), 30, 30, 30, 25];
+  else terrain = [40, 30, 30, (-1), 30, 30, 25]; //nieve!!
   return terrain; 
 }
 function iterateTakeSquares(terrain){
@@ -239,7 +244,7 @@ const riverLikeTerrains = [
   movementSlow: 10,
   passable: false
 }
-]
+];
 function randomBool(){return randomNumber(10, 1)>5?true:false;}
 function riverCreator(rivers)
 {
@@ -376,7 +381,12 @@ const friends = [
 	}
 ];
 
+const turn = {
+  active: true,
+  selected: -1
+};
+
 export const initialState = {
-  units, equipment, board, friends
+  units, equipment, board, friends, turn
 };
 

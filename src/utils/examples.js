@@ -1,4 +1,4 @@
-export const friends = [
+const friends = [
   {
     id: 1,
     name: 'Carlos',
@@ -16,7 +16,7 @@ export const friends = [
   }
 ];
 
-export const units = [
+const units = [
   {
     id: 1,
     type: 'Mage',
@@ -54,7 +54,7 @@ export const units = [
   }
 ];
 
-export const equipment = [
+const equipment = [
   {
     id: 1,
     name: 'Sword',
@@ -81,7 +81,7 @@ export const equipment = [
   }
 ];
 
-export const terrains = [
+const terrains = [
 {
   name: 'forest',
   defense: 1,
@@ -195,9 +195,9 @@ function generateInitialTerrain(number) {
   return terrains[number].name;
 }
 
-export const board = createBoard(8);
+const board = createBoard(4);
 
-export const turn = {
+const turn = {
   active: true,
   selected: -1
 };
