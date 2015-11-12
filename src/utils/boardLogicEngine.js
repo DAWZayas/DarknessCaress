@@ -1,4 +1,4 @@
-const units = [
+export const units = [
   {
     id: 1,
     type: 'Mage',
@@ -36,7 +36,7 @@ const units = [
   }
 ];
 
-const equipment = [
+export const equipment = [
   {
     id: 1,
     name: 'Sword',
@@ -63,7 +63,7 @@ const equipment = [
   }
 
 ];
-const riverLikeTerrains = [
+export const riverLikeTerrains = [
 {
   id: 2,
   name: 'path',
@@ -105,7 +105,7 @@ const riverLikeTerrains = [
   passable: false
 }
 ]
-const terrains = [
+export const terrains = [
 {
   id: 0,
   name: 'plains',
@@ -175,7 +175,7 @@ function shuffle(array) {
     }
     return array;
 }
-function getBoardSize(){ return 16;}
+function getBoardSize(){ return 5;}
 function createBoard() {
   size=getBoardSize();
   let idSquare = 0;
@@ -239,7 +239,7 @@ function multiplierTerrain(terrain){
 function takeSquares(percent){return Math.floor((randomNumber(percent, 0))*getBoardSize()/100)}
 
 //!\\ Begins: Arceso's code piece: unestable shit.
-
+/*
 function riverCreator(rivers)
 {
   arrayOfRiverArrays=[];
@@ -261,7 +261,8 @@ function riverCreator(rivers)
         riverBridge++;
       }
     }
-  }return arrayOfRiverArrays;
+  }
+  return arrayOfRiverArrays;
 }
 
 river={
@@ -352,11 +353,11 @@ function patternCreator(terrainArray)
 }
 
 //!\\ END: Arceso's code piece.
+*/
 
+export const board = createBoard();
 
-const board = createBoard();
-
-const friends = [
+export const friends = [
 	{
 		id: 1,
 		name: 'Carlos',
