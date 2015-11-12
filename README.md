@@ -21,5 +21,6 @@ Server side:
 * Matchmaking with players, or IA.
 * And more!
 
-[Additional information](https://github.com/DAWZayas/DarknessCaress)
-...
+[Additional information](https://github.com/DAWZayas/DarknessCaress).
+
+[DEMO](http://dawzayas.github.io/DarknessCaress/)

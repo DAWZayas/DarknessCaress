@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import FriendsList from '../components/FriendsList';
+import { setFriend } from '../actions';
 
 function mapStateToProps(state) {
   return {
@@ -10,6 +11,7 @@ function mapStateToProps(state) {
 
 function mapActionsToProps(dispatch) {
   return {
+  	onAddFriendClick: (friend) => dispatch(setFriend(friend))
   };
 }
 

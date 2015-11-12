@@ -6,6 +6,10 @@ export default class TurnMenu extends Component {
     super(props);
   }
 
+  handleDeselectButtonClick() {
+    this.props.onSelectSquare(-1);
+  }
+
   render() {
     const { turn } = this.props;
     return (
@@ -16,11 +20,13 @@ export default class TurnMenu extends Component {
         <span  className={turn.selected === -1? 'hidden' : ''}>
           <h3>Select actions for this unit</h3>
         </span>
+        <button className="btn btn-info" type="button" onClick={() => this.handleDeselectButtonClick()}>Deselect Unit</button>
       </div>
     );
   }
 }
 
 TurnMenu.propTypes = {
-  turn: PropTypes.object
+  turn: PropTypes.object,
+  onSelectSquare: PropTypes.func
 };

@@ -1,4 +1,4 @@
-export const units = [
+const units = [
   {
     id: 1,
     type: 'Mage',
@@ -36,7 +36,7 @@ export const units = [
   }
 ];
 
-export const equipment = [
+const equipment = [
   {
     id: 1,
     name: 'Sword',
@@ -63,49 +63,8 @@ export const equipment = [
   }
 
 ];
-export const riverLikeTerrains = [
-{
-  id: 2,
-  name: 'path',
-  defense: 0,
-  avoid: 0,
-  movementSlow: 1,
-  passable: true
-},
-{
-  id: 6,
-  name: 'river',
-  defense: 0,
-  avoid: 0,
-  movementSlow: 1,
-  passable: false
-},
-{
-  id: 8,
-  name: 'lava',
-  defense: 0,
-  avoid: 0,
-  movementSlow: 1,
-  passable: false
-},
-{
-  id: 10,
-  name: 'bridge',
-  defense: 0,
-  avoid: 0,
-  movementSlow: 1,
-  passable: true
-},
-{
-  id: 11,
-  name: 'wall',
-  defense: 10,
-  avoid: 10,
-  movementSlow: 10,
-  passable: false
-}
-]
-export const terrains = [
+
+const terrains = [
 {
   id: 0,
   name: 'plains',
@@ -165,7 +124,6 @@ export const terrains = [
 ];
 let terrainComplete = [];
 function randomNumber(max, min){ return Math.floor(Math.random() * max) + min; }
-function randomBool(){return randomNumber(10, 1)>5?true:false;}
 function shuffle(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -175,28 +133,28 @@ function shuffle(array) {
     }
     return array;
 }
-function getBoardSize(){ return 5;}
+function getBoardSize(){ return 4;}
 function createBoard() {
   size=getBoardSize();
   let idSquare = 0;
   let _board = [];
-  generateTerrain(randomNumber(3,0));
+  generateTerrain(randomNumber(3, 0));
   for (let i = 0; i < size; i++) {
     _board[i] = [];
     for (let j = 0; j < size; j++) {
-      _board[i][j] = generateSquare(idSquare++); 
+      _board[i][j] = generateSquare(); 
       (idSquare++);
     };
   };
   return _board.slice();
 }
 function generateTerrain(type){terrainComplete=createTerrain(type);}
-function generateSquare(idSquare) {
+function generateSquare() {
   shuffle(terrainComplete);
   return terrainComplete.pop(); 
 }
 function takeType(type){
-  array=['Plains', 'Forest','Desert', 'Snow'];
+  array=['Plains', 'Forest', 'Desert', 'Snow'];
   return array[type];
 }
 function createTerrain(type){
@@ -212,10 +170,10 @@ function createTerrain(type){
   return terrainObjets;
 }
 function determineType(type){
-  if (type==='Plains')terrain = [40, 30,-1, 30, 30, 30, 25];
-  else if(type==='Forest')terrain = [40, 30,-1, 30, 30, 30, 25];
-  else if(type==='Desert')terrain = [40, 30,-1, 30, 30, 30, 25];
-  else terrain = [40, 30,-1, 30, 30, 30, 25]; //nieve!!
+  if (type==='Plains')terrain = [40, 30, -1, 30, 30, 30, 25];
+  else if(type==='Forest')terrain = [40, 30, -1, 30, 30, 30, 25];
+  else if(type==='Desert')terrain = [40, 30, -1, 30, 30, 30, 25];
+  else terrain = [40, 30, -1, 30, 30, 30, 25]; //nieve!!
   return terrain; 
 }
 function iterateTakeSquares(terrain){
@@ -236,10 +194,53 @@ function multiplierTerrain(terrain){
   };
   return terrain;
 }
-function takeSquares(percent){return Math.floor((randomNumber(percent, 0))*getBoardSize()/100)}
+function takeSquares(percent){return Math.floor((randomNumber(percent, 0))*getBoardSize()/100);}
 
 //!\\ Begins: Arceso's code piece: unestable shit.
 /*
+const riverLikeTerrains = [
+{
+  id: 2,
+  name: 'path',
+  defense: 0,
+  avoid: 0,
+  movementSlow: 1,
+  passable: true
+},
+{
+  id: 6,
+  name: 'river',
+  defense: 0,
+  avoid: 0,
+  movementSlow: 1,
+  passable: false
+},
+{
+  id: 8,
+  name: 'lava',
+  defense: 0,
+  avoid: 0,
+  movementSlow: 1,
+  passable: false
+},
+{
+  id: 10,
+  name: 'bridge',
+  defense: 0,
+  avoid: 0,
+  movementSlow: 1,
+  passable: true
+},
+{
+  id: 11,
+  name: 'wall',
+  defense: 10,
+  avoid: 10,
+  movementSlow: 10,
+  passable: false
+}
+]
+function randomBool(){return randomNumber(10, 1)>5?true:false;}
 function riverCreator(rivers)
 {
   arrayOfRiverArrays=[];
@@ -355,9 +356,9 @@ function patternCreator(terrainArray)
 //!\\ END: Arceso's code piece.
 */
 
-export const board = createBoard();
+const board = createBoard();
 
-export const friends = [
+const friends = [
 	{
 		id: 1,
 		name: 'Carlos',

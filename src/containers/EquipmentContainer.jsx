@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import EquipmentList from '../components/EquipmentList';
+import { setEquipment } from '../actions';
 
 
 function mapStateToProps(state) {
@@ -11,6 +12,7 @@ function mapStateToProps(state) {
 
 function mapActionsToProps(dispatch) {
   return {
+  	onAddEquipmentClick: equip => dispatch(setEquipment(equip))
   };
 }
 

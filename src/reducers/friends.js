@@ -1,12 +1,6 @@
 import { SET_FRIEND } from '../actions';
 
 function setFriend(state, friend) {
-	/*
-  const selection = {
-    selected: id
-  };
-  return Object.assign({}, state, selection);
-  */
   return state.slice().concat(friend);
 }
 

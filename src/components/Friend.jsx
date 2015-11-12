@@ -3,10 +3,10 @@ import React, { Component, PropTypes } from 'react';
 export default class Friend extends Component {
 
   render() {
-    const { name, status } = this.props;
+    const { id, name, status } = this.props;
     return (
       <li>
-        <span>{name}: {status}.</span>
+        <span>{id} {name}: {status}.</span>
       </li>
     );
   }
@@ -14,6 +14,7 @@ export default class Friend extends Component {
 }
 
 Friend.propTypes = {
+  id: PropTypes.number,
 	name: PropTypes.string,
 	status: PropTypes.string
 };
