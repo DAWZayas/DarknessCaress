@@ -26268,10 +26268,10 @@
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _examples = __webpack_require__(308);
+	var _initialState = __webpack_require__(308);
 
 	function init() {
-	  var store = (0, _store2['default'])(_examples.initialState);
+	  var store = (0, _store2['default'])(_initialState.initialState);
 	  return store;
 	}
 
@@ -26537,7 +26537,7 @@
 
 	var _equipment2 = _interopRequireDefault(_equipment);
 
-	var _friends = __webpack_require__(279);
+	var _friends = __webpack_require__(280);
 
 	var _friends2 = _interopRequireDefault(_friends);
 
@@ -26595,25 +26595,6 @@
 
 /***/ },
 /* 278 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports["default"] = equipmentReducer;
-
-	function equipmentReducer() {
-		var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-		return state;
-	}
-
-	module.exports = exports["default"];
-
-/***/ },
-/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26621,26 +26602,20 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	exports['default'] = friendsReducer;
+	exports['default'] = equipmentReducer;
 
-	var _actions = __webpack_require__(280);
+	var _actions = __webpack_require__(279);
 
-	function setFriend(state, friend) {
-	  /*
-	   const selection = {
-	     selected: id
-	   };
-	   return Object.assign({}, state, selection);
-	   */
-	  return state.slice().concat(friend);
+	function setEquipment(state, equipment) {
+	  return state.slice().concat(equipment);
 	}
 
-	function friendsReducer(state, action) {
+	function equipmentReducer(state, action) {
 	  if (state === undefined) state = [];
 
 	  switch (action.type) {
-	    case _actions.SET_FRIEND:
-	      return setFriend(state, action.friend);
+	    case _actions.SET_EQUIPMENT:
+	      return setEquipment(state, action.equipment);
 	    default:
 	      return state;
 	  }
@@ -26649,7 +26624,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 280 */
+/* 279 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26709,6 +26684,36 @@
 	}
 
 /***/ },
+/* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports['default'] = friendsReducer;
+
+	var _actions = __webpack_require__(279);
+
+	function setFriend(state, friend) {
+	  return state.slice().concat(friend);
+	}
+
+	function friendsReducer(state, action) {
+	  if (state === undefined) state = [];
+
+	  switch (action.type) {
+	    case _actions.SET_FRIEND:
+	      return setFriend(state, action.friend);
+	    default:
+	      return state;
+	  }
+	}
+
+	module.exports = exports['default'];
+
+/***/ },
 /* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -26721,7 +26726,7 @@
 	});
 	exports['default'] = turnReducer;
 
-	var _actions = __webpack_require__(280);
+	var _actions = __webpack_require__(279);
 
 	function selectSquare(state, id) {
 	  var selection = {
@@ -27138,7 +27143,7 @@
 
 	var _componentsBoard2 = _interopRequireDefault(_componentsBoard);
 
-	var _actions = __webpack_require__(280);
+	var _actions = __webpack_require__(279);
 
 	function mapStateToProps(state) {
 	  return {
@@ -27327,6 +27332,8 @@
 
 	var _componentsSubMenu2 = _interopRequireDefault(_componentsSubMenu);
 
+	var _actions = __webpack_require__(279);
+
 	function mapStateToProps(state) {
 	  return {
 	    turn: state.turn
@@ -27334,7 +27341,11 @@
 	}
 
 	function mapActionsToProps(dispatch) {
-	  return {};
+	  return {
+	    onSelectSquare: function onSelectSquare(id) {
+	      return dispatch((0, _actions.selectSquare)(id));
+	    }
+	  };
 	}
 
 	exports['default'] = (0, _reactRedux.connect)(mapStateToProps, mapActionsToProps)(_componentsSubMenu2['default']);
@@ -27380,7 +27391,9 @@
 	  _createClass(SubMenu, [{
 	    key: 'render',
 	    value: function render() {
-	      var turn = this.props.turn;
+	      var _props = this.props;
+	      var turn = _props.turn;
+	      var onSelectSquare = _props.onSelectSquare;
 
 	      return _react2['default'].createElement(
 	        'div',
@@ -27397,7 +27410,7 @@
 	        _react2['default'].createElement(
 	          'span',
 	          { className: turn.active ? '' : 'hidden' },
-	          _react2['default'].createElement(_TurnMenu2['default'], { turn: turn })
+	          _react2['default'].createElement(_TurnMenu2['default'], { turn: turn, onSelectSquare: onSelectSquare })
 	        )
 	      );
 	    }
@@ -27409,6 +27422,7 @@
 	exports['default'] = SubMenu;
 
 	SubMenu.propTypes = {
+	  onSelectSquare: _react.PropTypes.func,
 	  turn: _react.PropTypes.object
 	};
 	module.exports = exports['default'];
@@ -27447,8 +27461,15 @@
 	  }
 
 	  _createClass(TurnMenu, [{
+	    key: 'handleDeselectButtonClick',
+	    value: function handleDeselectButtonClick() {
+	      this.props.onSelectSquare(-1);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this = this;
+
 	      var turn = this.props.turn;
 
 	      return _react2['default'].createElement(
@@ -27471,6 +27492,13 @@
 	            null,
 	            'Select actions for this unit'
 	          )
+	        ),
+	        _react2['default'].createElement(
+	          'button',
+	          { className: 'btn btn-info', type: 'button', onClick: function () {
+	              return _this.handleDeselectButtonClick();
+	            } },
+	          'Deselect Unit'
 	        )
 	      );
 	    }
@@ -27482,7 +27510,8 @@
 	exports['default'] = TurnMenu;
 
 	TurnMenu.propTypes = {
-	  turn: _react.PropTypes.object
+	  turn: _react.PropTypes.object,
+	  onSelectSquare: _react.PropTypes.func
 	};
 	module.exports = exports['default'];
 
@@ -27706,6 +27735,8 @@
 
 	var _componentsEquipmentList2 = _interopRequireDefault(_componentsEquipmentList);
 
+	var _actions = __webpack_require__(279);
+
 	function mapStateToProps(state) {
 	  return {
 	    equipment: state.equipment
@@ -27713,7 +27744,11 @@
 	}
 
 	function mapActionsToProps(dispatch) {
-	  return {};
+	  return {
+	    onAddEquipmentClick: function onAddEquipmentClick(equip) {
+	      return dispatch((0, _actions.setEquipment)(equip));
+	    }
+	  };
 	}
 
 	exports['default'] = (0, _reactRedux.connect)(mapStateToProps, mapActionsToProps)(_componentsEquipmentList2['default']);
@@ -27759,8 +27794,29 @@
 	  }
 
 	  _createClass(EquipmentList, [{
+	    key: 'handleAddButtonClick',
+	    value: function handleAddButtonClick() {
+	      var _props = this.props;
+	      var equipment = _props.equipment;
+	      var onAddEquipmentClick = _props.onAddEquipmentClick;
+
+	      var newId = equipment[equipment.length - 1].id + 1;
+	      var node = this.refs.name;
+	      var names = node.value.trim().split(' ');
+	      var equip = {
+	        id: newId,
+	        name: names[0],
+	        damage: names[1],
+	        durability: names[2]
+	      };
+	      onAddEquipmentClick(equip);
+	      node.value = '';
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this = this;
+
 	      var equipment = this.props.equipment;
 
 	      return _react2['default'].createElement(
@@ -27777,6 +27833,22 @@
 	          equipment.map(function (equipment) {
 	            return _react2['default'].createElement(_Equipment2['default'], _extends({ key: equipment.id }, equipment));
 	          })
+	        ),
+	        _react2['default'].createElement(
+	          'div',
+	          { className: 'input-group col-md-3' },
+	          _react2['default'].createElement('input', { type: 'text', className: 'form-control', placeholder: 'Input: name damage durability', ref: 'name' }),
+	          _react2['default'].createElement(
+	            'span',
+	            { className: 'input-group-btn' },
+	            _react2['default'].createElement(
+	              'button',
+	              { className: 'btn btn-info', type: 'button', onClick: function () {
+	                  return _this.handleAddButtonClick();
+	                } },
+	              'Add Equipment'
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -27788,7 +27860,8 @@
 	exports['default'] = EquipmentList;
 
 	EquipmentList.propTypes = {
-	  equipment: _react.PropTypes.array.isRequired
+	  equipment: _react.PropTypes.array.isRequired,
+	  onAddEquipmentClick: _react.PropTypes.func
 	};
 	module.exports = exports['default'];
 
@@ -27880,6 +27953,8 @@
 
 	var _componentsFriendsList2 = _interopRequireDefault(_componentsFriendsList);
 
+	var _actions = __webpack_require__(279);
+
 	function mapStateToProps(state) {
 	  return {
 	    friends: state.friends
@@ -27887,7 +27962,11 @@
 	}
 
 	function mapActionsToProps(dispatch) {
-	  return {};
+	  return {
+	    onAddFriendClick: function onAddFriendClick(friend) {
+	      return dispatch((0, _actions.setFriend)(friend));
+	    }
+	  };
 	}
 
 	exports['default'] = (0, _reactRedux.connect)(mapStateToProps, mapActionsToProps)(_componentsFriendsList2['default']);
@@ -27933,8 +28012,28 @@
 	  }
 
 	  _createClass(FriendsList, [{
+	    key: 'handleAddButtonClick',
+	    value: function handleAddButtonClick() {
+	      var _props = this.props;
+	      var friends = _props.friends;
+	      var onAddFriendClick = _props.onAddFriendClick;
+
+	      var newId = friends[friends.length - 1].id + 1;
+	      var node = this.refs.name;
+	      var newName = node.value.trim();
+	      var friend = {
+	        id: newId,
+	        name: newName,
+	        status: 'offline'
+	      };
+	      onAddFriendClick(friend);
+	      node.value = '';
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this = this;
+
 	      var friends = this.props.friends;
 
 	      return _react2['default'].createElement(
@@ -27951,6 +28050,22 @@
 	          friends.map(function (friend) {
 	            return _react2['default'].createElement(_Friend2['default'], _extends({ key: friend.id }, friend));
 	          })
+	        ),
+	        _react2['default'].createElement(
+	          'div',
+	          { className: 'input-group col-md-3' },
+	          _react2['default'].createElement('input', { type: 'text', className: 'form-control', placeholder: 'Friend Name', ref: 'name' }),
+	          _react2['default'].createElement(
+	            'span',
+	            { className: 'input-group-btn' },
+	            _react2['default'].createElement(
+	              'button',
+	              { className: 'btn btn-info', type: 'button', onClick: function () {
+	                  return _this.handleAddButtonClick();
+	                } },
+	              'Add Friend'
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -27962,7 +28077,8 @@
 	exports['default'] = FriendsList;
 
 	FriendsList.propTypes = {
-	  friends: _react.PropTypes.array.isRequired
+	  friends: _react.PropTypes.array.isRequired,
+	  onAddFriendClick: _react.PropTypes.func
 	};
 	module.exports = exports['default'];
 
@@ -28003,6 +28119,7 @@
 	    key: 'render',
 	    value: function render() {
 	      var _props = this.props;
+	      var id = _props.id;
 	      var name = _props.name;
 	      var status = _props.status;
 
@@ -28012,6 +28129,8 @@
 	        _react2['default'].createElement(
 	          'span',
 	          null,
+	          id,
+	          ' ',
 	          name,
 	          ': ',
 	          status,
@@ -28027,6 +28146,7 @@
 	exports['default'] = Friend;
 
 	Friend.propTypes = {
+	  id: _react.PropTypes.number,
 	  name: _react.PropTypes.string,
 	  status: _react.PropTypes.string
 	};
@@ -28063,190 +28183,157 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	var friends = [{
-	  id: 1,
-	  name: 'Carlos',
-	  status: 'offline'
-	}, {
-	  id: 2,
-	  name: 'Alejandro',
-	  status: 'offline'
-	}, {
-	  id: 3,
-	  name: 'Barba',
-	  status: 'online'
-	}];
-
-	exports.friends = friends;
-	var units = [{
-	  id: 1,
-	  type: 'Mage',
-	  hp: '100',
-	  mp: '50',
-	  movement: '5'
-	}, {
-	  id: 2,
-	  type: 'Healer',
-	  hp: '80',
-	  mp: '75',
-	  movement: '4'
-	}, {
-	  id: 3,
-	  type: 'Knight',
-	  hp: '150',
-	  mp: '0',
-	  movement: '4'
-	}, {
-	  id: 4,
-	  type: 'Archer',
-	  hp: '120',
-	  mp: '0',
-	  movement: '6'
-	}, {
-	  id: 5,
-	  type: 'Scout',
-	  hp: '80',
-	  mp: '10',
-	  movement: '7'
-	}];
-
-	exports.units = units;
-	var equipment = [{
-	  id: 1,
-	  name: 'Sword',
-	  damage: '10',
-	  durability: '100'
-	}, {
-	  id: 2,
-	  name: 'Axe',
-	  damage: '12',
-	  durability: '100'
-	}, {
-	  id: 3,
-	  name: 'Bow',
-	  damage: '8',
-	  durability: '100'
-	}, {
-	  id: 4,
-	  name: 'Spell Tome',
-	  damage: '5',
-	  durability: '100'
-	}];
-
-	exports.equipment = equipment;
-	var terrains = [{
-	  name: 'forest',
-	  defense: 1,
-	  avoid: 0,
-	  movementSlow: 2,
-	  passable: true
-	}, {
-	  name: 'path',
-	  defense: 0,
-	  avoid: 1,
-	  movementSlow: 0.5,
-	  passable: true
-	}, {
-	  name: 'plain',
-	  defense: 0,
-	  avoid: 0,
-	  movementSlow: 1,
-	  passable: true
-	}, {
-	  name: 'desert',
-	  defense: 0,
-	  avoid: 0,
-	  movementSlow: 3,
-	  passable: true
-	}, {
-	  name: 'snow',
-	  defense: 0,
-	  avoid: 0,
-	  movementSlow: 3,
-	  passable: true
-	}, {
-	  name: 'mountain',
-	  defense: 2,
-	  avoid: 2,
-	  movementSlow: 1,
-	  passable: false
-	}, {
-	  name: 'river',
-	  defense: 0,
-	  avoid: 0,
-	  movementSlow: 1,
-	  passable: false
-	}, {
-	  name: 'lake',
-	  defense: 0,
-	  avoid: 0,
-	  movementSlow: 1,
-	  passable: false
-	}, {
-	  name: 'lava',
-	  defense: 0,
-	  avoid: 0,
-	  movementSlow: 1,
-	  passable: false
-	}, {
-	  name: 'building',
-	  defense: 2,
-	  avoid: 2,
-	  movementSlow: 1,
-	  passable: true
-	}, {
-	  name: 'bridge',
-	  defense: 0,
-	  avoid: 0,
-	  movementSlow: 1,
-	  passable: true
-	}, {
-	  name: 'wall',
-	  defense: 10,
-	  avoid: 10,
-	  movementSlow: 10,
-	  passable: false
-	}];
-
-	exports.terrains = terrains;
-	function createBoard(size) {
-	  var idSquare = 0;
-	  var _board = [];
-	  var number = Math.floor(Math.random() * 5);
-	  for (var i = 0; i < size; i++) {
-	    _board[i] = [];
-	    for (var j = 0; j < size; j++) {
-	      _board[i][j] = generateSquare(idSquare++, number);
-	    };
-	  };
-	  return _board.slice();
-	}
-
-	function generateSquare(idSquare, number) {
-	  return {
-	    id: idSquare, //size * i + j, Buen intento Carlos. :(
-	    terrain: generateInitialTerrain(number),
-	    unit: false,
-	    //path: 'url/img',
-	    interactive: false
-	  };
-	}
-
-	function generateInitialTerrain(number) {
-	  return terrains[number].name;
-	}
-
-	var board = createBoard(8);
-
-	exports.board = board;
-	var turn = {
-	  active: true,
-	  selected: -1
-	};
-
-	exports.turn = turn;
 	var initialState = {
-	  units: units, equipment: equipment, board: board, friends: friends, turn: turn
+	  board: [[{
+	    id: 0,
+	    interactive: false,
+	    terrain: 'forest',
+	    unit: false
+	  }, {
+	    id: 1,
+	    interactive: false,
+	    terrain: 'mountain',
+	    unit: false
+	  }, {
+	    id: 2,
+	    interactive: false,
+	    terrain: 'mountain',
+	    unit: false
+	  }, {
+	    id: 3,
+	    interactive: false,
+	    terrain: 'mountain',
+	    unit: false
+	  }], [{
+	    id: 4,
+	    interactive: false,
+	    terrain: 'plains',
+	    unit: false
+	  }, {
+	    id: 5,
+	    interactive: false,
+	    terrain: 'plains',
+	    unit: false
+	  }, {
+	    id: 6,
+	    interactive: false,
+	    terrain: 'desert',
+	    unit: false
+	  }, {
+	    id: 7,
+	    interactive: false,
+	    terrain: 'forest',
+	    unit: false
+	  }], [{
+	    id: 8,
+	    interactive: false,
+	    terrain: 'desert',
+	    unit: false
+	  }, {
+	    id: 9,
+	    interactive: false,
+	    terrain: 'plains',
+	    unit: false
+	  }, {
+	    id: 10,
+	    interactive: false,
+	    terrain: 'desert',
+	    unit: false
+	  }, {
+	    id: 11,
+	    interactive: false,
+	    terrain: 'desert',
+	    unit: false
+	  }], [{
+	    id: 12,
+	    interactive: false,
+	    terrain: 'forest',
+	    unit: false
+	  }, {
+	    id: 13,
+	    interactive: false,
+	    terrain: 'forest',
+	    unit: false
+	  }, {
+	    id: 14,
+	    interactive: false,
+	    terrain: 'plains',
+	    unit: false
+	  }, {
+	    id: 15,
+	    interactive: false,
+	    terrain: 'mountain',
+	    unit: false
+	  }]],
+	  equipment: [{
+	    damage: '10',
+	    durability: '100',
+	    id: 1,
+	    name: 'Sword'
+	  }, {
+	    damage: '12',
+	    durability: '100',
+	    id: 2,
+	    name: 'Axe'
+	  }, {
+	    damage: '8',
+	    durability: '100',
+	    id: 3,
+	    name: 'Bow'
+	  }, {
+	    damage: '5',
+	    durability: '100',
+	    id: 4,
+	    name: 'Spell Tome'
+	  }],
+	  friends: [{
+	    id: 1,
+	    name: 'Carlos',
+	    status: 'offline'
+	  }, {
+	    id: 2,
+	    name: 'Alejandro',
+	    status: 'offline'
+	  }, {
+	    id: 3,
+	    name: 'Barberto',
+	    status: 'online'
+	  }],
+	  turn: {
+	    active: true,
+	    selected: -1
+	  },
+	  units: [{
+	    hp: '100',
+	    id: 1,
+	    movement: '5',
+	    mp: '50',
+	    type: 'Mage'
+	  }, {
+	    hp: '80',
+	    id: 2,
+	    movement: '4',
+	    mp: '75',
+	    type: 'Healer'
+	  }, {
+	    hp: '150',
+	    id: 3,
+	    movement: '4',
+	    mp: '0',
+	    type: 'Knight'
+	  }, {
+	    hp: '120',
+	    id: 4,
+	    movement: '6',
+	    mp: '0',
+	    type: 'Archer'
+	  }, {
+	    hp: '80',
+	    id: 5,
+	    movement: '7',
+	    mp: '10',
+	    type: 'Scout'
+	  }]
 	};
 	exports.initialState = initialState;
 
