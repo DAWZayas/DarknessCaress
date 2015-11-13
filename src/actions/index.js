@@ -1,7 +1,7 @@
 export const SET_FRIEND = 'SET_FRIEND';
 export const REMOVE_FRIEND = 'REMOVE_FRIEND';
 export const SET_UNIT = 'SET_UNIT';
-export const REMOVE_UNIT = 'SET_FRIEND';
+export const REMOVE_UNIT = 'REMOVE_UNIT';
 export const SET_EQUIPMENT = 'SET_EQUIPMENT';
 export const REMOVE_EQUIPMENT = 'REMOVE_EQUIPMENT';
 export const SELECT_SQUARE = 'SELECT_SQUARE';

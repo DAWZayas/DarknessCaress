@@ -1,5 +1,5 @@
 import configureStore from '../store';
-import { initialState } from './initialState';
+import { initialState } from './exports';
 
 
 export default function init() {

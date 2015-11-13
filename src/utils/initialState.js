@@ -1,6 +1,4 @@
-//const boardSize = board.length;
-
-const units = [
+export const units = [
   {
     id: 1,
     type: 'Mage',
@@ -38,7 +36,7 @@ const units = [
   }
 ];
 
-const equipment = [
+export const equipment = [
   {
     id: 1,
     name: 'Sword',
@@ -66,7 +64,7 @@ const equipment = [
 
 ];
 
-const friends = [
+export const friends = [
 	{
 		id: 1,
 		name: 'Carlos',
@@ -84,12 +82,12 @@ const friends = [
 	}
 ];
 
-const turn = {
+export const turn = {
   active: true,
   selected: -1
 };
 
-const terrains = [
+export const terrains = [
 {
   id: 0,
   name: 'plains',
@@ -240,7 +238,9 @@ export function shuffle(array) {
   return arrayAux;
 }
 
-const board = createBoard(8, terrains);
+export const board = createBoard(8, terrains);
+
+//const boardSize = board.length;
 
 export const initialState = {
   units, equipment, board, friends, turn
