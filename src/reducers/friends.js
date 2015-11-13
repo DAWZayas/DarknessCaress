@@ -4,7 +4,7 @@ function setFriend(state, friend) {
   return state.slice().concat(friend);
 }
 
-export default function friendsReducer(state = [], action) {
+export function friendsReducer(state = [], action) {
 	switch (action.type) {
   	case SET_FRIEND:
   		return setFriend(state, action.friend);

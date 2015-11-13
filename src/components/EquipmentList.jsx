@@ -12,12 +12,12 @@ export default class EquipmentList extends Component {
     const { equipment, onAddEquipmentClick } = this.props;
     const newId = equipment[equipment.length - 1].id + 1;
     const node = this.refs.name;
-    const names = node.value.trim().split(' ');
+    const values = node.value.trim().split(' ');
     const equip = {
       id: newId,
-      name: names[0],
-      damage: names[1],
-      durability: names[2]
+      name: values[0],
+      damage: values[1],
+      durability: values[2]
     };
     onAddEquipmentClick(equip);
     node.value = '';

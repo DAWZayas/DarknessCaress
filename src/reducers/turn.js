@@ -7,7 +7,7 @@ function selectSquare(state, id) {
   return Object.assign({}, state, selection);
 }
 
-export default function turnReducer(state = {}, action) {
+export function turnReducer(state = {}, action) {
 	switch (action.type) {
   	case SELECT_SQUARE:
   		return selectSquare(state, action.id);

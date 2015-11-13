@@ -4,7 +4,7 @@ function setEquipment(state, equipment) {
   return state.slice().concat(equipment);
 }
 
-export default function equipmentReducer(state = [], action) {
+export function equipmentReducer(state = [], action) {
 	switch (action.type) {
   	case SET_EQUIPMENT:
   		return setEquipment(state, action.equipment);

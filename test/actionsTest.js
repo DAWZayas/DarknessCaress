@@ -1,8 +1,6 @@
 import {expect} from 'chai';
 
-import { setFriend } from '../src/actions';
-import friendsReducer from '../src/reducers/friends';
-import { friends } from '../src/utils/initialState';
+import { setFriend, setUnit, friends, units, friendsReducer, unitsReducer } from '../src/utils/exports';
 
 describe('Application actions', () => {
 
@@ -25,6 +23,33 @@ describe('Application actions', () => {
 			};
       const nextState = friendsReducer(friends, setFriend(friend));
       expect(nextState[nextState.length - 1].name).to.equal('Alberto');
+    });
+
+  });
+
+  describe('setUnit', () => {
+
+    it('should add a unit to an empty units state', () => {
+      const unit = {
+        type: 'Wololo',
+        hp: '70',
+        mp: '100',
+        movement: '4'
+      };
+      const nextState = unitsReducer(undefined, setUnit(unit));
+      expect(nextState.length).to.equal(1);
+      expect(nextState[0].type).to.equal('Wololo');
+    });
+
+    it('should add a unit to a non empty units state', () => {
+      const unit = {
+        type: 'Wololo',
+        hp: '70',
+        mp: '100',
+        movement: '4'
+      };
+      const nextState = unitsReducer(units, setUnit(unit));
+      expect(nextState[nextState.length - 1].type).to.equal('Wololo');
     });
 
   });

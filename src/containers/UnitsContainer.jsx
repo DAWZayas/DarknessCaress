@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import UnitsList from '../components/UnitsList';
+import { setUnit } from '../actions';
 
 
 function mapStateToProps(state) {
@@ -11,6 +12,7 @@ function mapStateToProps(state) {
 
 function mapActionsToProps(dispatch) {
   return {
+  	onAddUnitClick: equip => dispatch(setUnit(equip))
   };
 }
 

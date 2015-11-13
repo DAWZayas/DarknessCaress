@@ -1,3 +1,5 @@
+//const boardSize = board.length;
+
 const units = [
   {
     id: 1,

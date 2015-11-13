@@ -1,3 +1,3 @@
-export default function boardReducer(state = []) {
+export function boardReducer(state = []) {
 	return state;
 }
