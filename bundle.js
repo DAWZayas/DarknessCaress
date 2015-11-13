@@ -26529,11 +26529,11 @@
 
 	var _units2 = _interopRequireDefault(_units);
 
-	var _board = __webpack_require__(277);
+	var _board = __webpack_require__(278);
 
 	var _board2 = _interopRequireDefault(_board);
 
-	var _equipment = __webpack_require__(278);
+	var _equipment = __webpack_require__(279);
 
 	var _equipment2 = _interopRequireDefault(_equipment);
 
@@ -26557,44 +26557,6 @@
 
 /***/ },
 /* 276 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports["default"] = unitsReducer;
-
-	function unitsReducer() {
-		var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-		return state;
-	}
-
-	module.exports = exports["default"];
-
-/***/ },
-/* 277 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports["default"] = boardReducer;
-
-	function boardReducer() {
-		var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-		return state;
-	}
-
-	module.exports = exports["default"];
-
-/***/ },
-/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26602,29 +26564,27 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	exports['default'] = equipmentReducer;
+	exports.unitsReducer = unitsReducer;
 
-	var _actions = __webpack_require__(279);
+	var _actions = __webpack_require__(277);
 
-	function setEquipment(state, equipment) {
-	  return state.slice().concat(equipment);
+	function setUnit(state, unit) {
+	  return state.slice().concat(unit);
 	}
 
-	function equipmentReducer(state, action) {
+	function unitsReducer(state, action) {
 	  if (state === undefined) state = [];
 
 	  switch (action.type) {
-	    case _actions.SET_EQUIPMENT:
-	      return setEquipment(state, action.equipment);
+	    case _actions.SET_UNIT:
+	      return setUnit(state, action.unit);
 	    default:
 	      return state;
 	  }
 	}
 
-	module.exports = exports['default'];
-
 /***/ },
-/* 279 */
+/* 277 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26684,6 +26644,51 @@
 	}
 
 /***/ },
+/* 278 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.boardReducer = boardReducer;
+
+	function boardReducer() {
+		var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+
+		return state;
+	}
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports.equipmentReducer = equipmentReducer;
+
+	var _actions = __webpack_require__(277);
+
+	function setEquipment(state, equipment) {
+	  return state.slice().concat(equipment);
+	}
+
+	function equipmentReducer(state, action) {
+	  if (state === undefined) state = [];
+
+	  switch (action.type) {
+	    case _actions.SET_EQUIPMENT:
+	      return setEquipment(state, action.equipment);
+	    default:
+	      return state;
+	  }
+	}
+
+/***/ },
 /* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -26692,9 +26697,9 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	exports['default'] = friendsReducer;
+	exports.friendsReducer = friendsReducer;
 
-	var _actions = __webpack_require__(279);
+	var _actions = __webpack_require__(277);
 
 	function setFriend(state, friend) {
 	  return state.slice().concat(friend);
@@ -26711,8 +26716,6 @@
 	  }
 	}
 
-	module.exports = exports['default'];
-
 /***/ },
 /* 281 */
 /***/ function(module, exports, __webpack_require__) {
@@ -26724,9 +26727,9 @@
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	exports['default'] = turnReducer;
+	exports.turnReducer = turnReducer;
 
-	var _actions = __webpack_require__(279);
+	var _actions = __webpack_require__(277);
 
 	function selectSquare(state, id) {
 	  var selection = {
@@ -26745,8 +26748,6 @@
 	      return state;
 	  }
 	}
-
-	module.exports = exports['default'];
 
 /***/ },
 /* 282 */
@@ -27143,7 +27144,7 @@
 
 	var _componentsBoard2 = _interopRequireDefault(_componentsBoard);
 
-	var _actions = __webpack_require__(279);
+	var _actions = __webpack_require__(277);
 
 	function mapStateToProps(state) {
 	  return {
@@ -27332,7 +27333,7 @@
 
 	var _componentsSubMenu2 = _interopRequireDefault(_componentsSubMenu);
 
-	var _actions = __webpack_require__(279);
+	var _actions = __webpack_require__(277);
 
 	function mapStateToProps(state) {
 	  return {
@@ -27533,6 +27534,8 @@
 
 	var _componentsUnitsList2 = _interopRequireDefault(_componentsUnitsList);
 
+	var _actions = __webpack_require__(277);
+
 	function mapStateToProps(state) {
 	  return {
 	    units: state.units
@@ -27540,7 +27543,11 @@
 	}
 
 	function mapActionsToProps(dispatch) {
-	  return {};
+	  return {
+	    onAddUnitClick: function onAddUnitClick(equip) {
+	      return dispatch((0, _actions.setUnit)(equip));
+	    }
+	  };
 	}
 
 	exports['default'] = (0, _reactRedux.connect)(mapStateToProps, mapActionsToProps)(_componentsUnitsList2['default']);
@@ -27586,8 +27593,30 @@
 	  }
 
 	  _createClass(UnitsList, [{
+	    key: 'handleAddButtonClick',
+	    value: function handleAddButtonClick() {
+	      var _props = this.props;
+	      var units = _props.units;
+	      var onAddUnitClick = _props.onAddUnitClick;
+
+	      var newId = units[units.length - 1].id + 1;
+	      var node = this.refs.name;
+	      var values = node.value.trim().split(' ');
+	      var unit = {
+	        id: newId,
+	        type: values[0],
+	        hp: values[1],
+	        mp: values[2],
+	        movement: values[3]
+	      };
+	      onAddUnitClick(unit);
+	      node.value = '';
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this = this;
+
 	      var units = this.props.units;
 
 	      return _react2['default'].createElement(
@@ -27604,6 +27633,22 @@
 	          units.map(function (unit) {
 	            return _react2['default'].createElement(_Unit2['default'], _extends({ key: unit.id }, unit));
 	          })
+	        ),
+	        _react2['default'].createElement(
+	          'div',
+	          { className: 'input-group col-md-3' },
+	          _react2['default'].createElement('input', { type: 'text', className: 'form-control', placeholder: 'Input: name HP MP movement', ref: 'name' }),
+	          _react2['default'].createElement(
+	            'span',
+	            { className: 'input-group-btn' },
+	            _react2['default'].createElement(
+	              'button',
+	              { className: 'btn btn-info', type: 'button', onClick: function () {
+	                  return _this.handleAddButtonClick();
+	                } },
+	              'Add Unit'
+	            )
+	          )
 	        )
 	      );
 	    }
@@ -27615,7 +27660,8 @@
 	exports['default'] = UnitsList;
 
 	UnitsList.propTypes = {
-	  units: _react.PropTypes.array.isRequired
+	  units: _react.PropTypes.array.isRequired,
+	  onAddUnitClick: _react.PropTypes.func
 	};
 	module.exports = exports['default'];
 
@@ -27735,7 +27781,7 @@
 
 	var _componentsEquipmentList2 = _interopRequireDefault(_componentsEquipmentList);
 
-	var _actions = __webpack_require__(279);
+	var _actions = __webpack_require__(277);
 
 	function mapStateToProps(state) {
 	  return {
@@ -27802,12 +27848,12 @@
 
 	      var newId = equipment[equipment.length - 1].id + 1;
 	      var node = this.refs.name;
-	      var names = node.value.trim().split(' ');
+	      var values = node.value.trim().split(' ');
 	      var equip = {
 	        id: newId,
-	        name: names[0],
-	        damage: names[1],
-	        durability: names[2]
+	        name: values[0],
+	        damage: values[1],
+	        durability: values[2]
 	      };
 	      onAddEquipmentClick(equip);
 	      node.value = '';
@@ -27953,7 +27999,7 @@
 
 	var _componentsFriendsList2 = _interopRequireDefault(_componentsFriendsList);
 
-	var _actions = __webpack_require__(279);
+	var _actions = __webpack_require__(277);
 
 	function mapStateToProps(state) {
 	  return {
@@ -28178,164 +28224,403 @@
 /* 308 */
 /***/ function(module, exports) {
 
+	//const boardSize = board.length;
+
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
 	});
-	var initialState = {
-	  board: [[{
-	    id: 0,
-	    interactive: false,
-	    terrain: 'forest',
-	    unit: false
-	  }, {
-	    id: 1,
-	    interactive: false,
-	    terrain: 'mountain',
-	    unit: false
-	  }, {
-	    id: 2,
-	    interactive: false,
-	    terrain: 'mountain',
-	    unit: false
-	  }, {
-	    id: 3,
-	    interactive: false,
-	    terrain: 'mountain',
-	    unit: false
-	  }], [{
-	    id: 4,
-	    interactive: false,
-	    terrain: 'plains',
-	    unit: false
-	  }, {
-	    id: 5,
-	    interactive: false,
-	    terrain: 'plains',
-	    unit: false
-	  }, {
-	    id: 6,
-	    interactive: false,
-	    terrain: 'desert',
-	    unit: false
-	  }, {
-	    id: 7,
-	    interactive: false,
-	    terrain: 'forest',
-	    unit: false
-	  }], [{
-	    id: 8,
-	    interactive: false,
-	    terrain: 'desert',
-	    unit: false
-	  }, {
-	    id: 9,
-	    interactive: false,
-	    terrain: 'plains',
-	    unit: false
-	  }, {
-	    id: 10,
-	    interactive: false,
-	    terrain: 'desert',
-	    unit: false
-	  }, {
-	    id: 11,
-	    interactive: false,
-	    terrain: 'desert',
-	    unit: false
-	  }], [{
-	    id: 12,
-	    interactive: false,
-	    terrain: 'forest',
-	    unit: false
-	  }, {
-	    id: 13,
-	    interactive: false,
-	    terrain: 'forest',
-	    unit: false
-	  }, {
-	    id: 14,
-	    interactive: false,
-	    terrain: 'plains',
-	    unit: false
-	  }, {
-	    id: 15,
-	    interactive: false,
-	    terrain: 'mountain',
-	    unit: false
-	  }]],
-	  equipment: [{
-	    damage: '10',
-	    durability: '100',
-	    id: 1,
-	    name: 'Sword'
-	  }, {
-	    damage: '12',
-	    durability: '100',
-	    id: 2,
-	    name: 'Axe'
-	  }, {
-	    damage: '8',
-	    durability: '100',
-	    id: 3,
-	    name: 'Bow'
-	  }, {
-	    damage: '5',
-	    durability: '100',
-	    id: 4,
-	    name: 'Spell Tome'
-	  }],
-	  friends: [{
-	    id: 1,
-	    name: 'Carlos',
-	    status: 'offline'
-	  }, {
-	    id: 2,
-	    name: 'Alejandro',
-	    status: 'offline'
-	  }, {
-	    id: 3,
-	    name: 'Barberto',
-	    status: 'online'
-	  }],
-	  turn: {
-	    active: true,
-	    selected: -1
-	  },
-	  units: [{
-	    hp: '100',
-	    id: 1,
-	    movement: '5',
-	    mp: '50',
-	    type: 'Mage'
-	  }, {
-	    hp: '80',
-	    id: 2,
-	    movement: '4',
-	    mp: '75',
-	    type: 'Healer'
-	  }, {
-	    hp: '150',
-	    id: 3,
-	    movement: '4',
-	    mp: '0',
-	    type: 'Knight'
-	  }, {
-	    hp: '120',
-	    id: 4,
-	    movement: '6',
-	    mp: '0',
-	    type: 'Archer'
-	  }, {
-	    hp: '80',
-	    id: 5,
-	    movement: '7',
-	    mp: '10',
-	    type: 'Scout'
-	  }]
+	exports.createBoard = createBoard;
+	exports.createTerrain = createTerrain;
+	exports.determineType = determineType;
+	exports.iterateTakeSquares = iterateTakeSquares;
+	exports.generateSquare = generateSquare;
+	exports.takeSquares = takeSquares;
+	exports.randomNumber = randomNumber;
+	exports.shuffle = shuffle;
+	var units = [{
+	  id: 1,
+	  type: 'Mage',
+	  hp: '100',
+	  mp: '50',
+	  movement: '5'
+	}, {
+	  id: 2,
+	  type: 'Healer',
+	  hp: '80',
+	  mp: '75',
+	  movement: '4'
+	}, {
+	  id: 3,
+	  type: 'Knight',
+	  hp: '150',
+	  mp: '0',
+	  movement: '4'
+	}, {
+	  id: 4,
+	  type: 'Archer',
+	  hp: '120',
+	  mp: '0',
+	  movement: '6'
+	}, {
+	  id: 5,
+	  type: 'Scout',
+	  hp: '80',
+	  mp: '10',
+	  movement: '7'
+	}];
+
+	var equipment = [{
+	  id: 1,
+	  name: 'Sword',
+	  damage: '10',
+	  durability: '100'
+	}, {
+	  id: 2,
+	  name: 'Axe',
+	  damage: '12',
+	  durability: '100'
+	}, {
+	  id: 3,
+	  name: 'Bow',
+	  damage: '8',
+	  durability: '100'
+	}, {
+	  id: 4,
+	  name: 'Spell Tome',
+	  damage: '5',
+	  durability: '100'
+	}];
+
+	var friends = [{
+	  id: 1,
+	  name: 'Carlos',
+	  status: 'offline'
+	}, {
+	  id: 2,
+	  name: 'Alejandro',
+	  status: 'offline'
+	}, {
+	  id: 3,
+	  name: 'Barberto',
+	  status: 'online'
+	}];
+
+	var turn = {
+	  active: true,
+	  selected: -1
 	};
+
+	var terrains = [{
+	  id: 0,
+	  name: 'plains',
+	  defense: 1,
+	  avoid: 0,
+	  movementSlow: 2,
+	  passable: true
+	}, {
+	  id: 1,
+	  name: 'forest',
+	  defense: 0,
+	  avoid: 1,
+	  movementSlow: 0.5,
+	  passable: true
+	}, {
+	  id: 2,
+	  name: 'desert',
+	  defense: 0,
+	  avoid: 0,
+	  movementSlow: 3,
+	  passable: true
+	}, {
+	  id: 3,
+	  name: 'snow',
+	  defense: 0,
+	  avoid: 0,
+	  movementSlow: 3,
+	  passable: true
+	}, {
+	  id: 4,
+	  name: 'mountain',
+	  defense: 2,
+	  avoid: 2,
+	  movementSlow: 1,
+	  passable: false
+	}, {
+	  id: 5,
+	  name: 'lake',
+	  defense: 0,
+	  avoid: 0,
+	  movementSlow: 1,
+	  passable: false
+	}, {
+	  id: 6,
+	  name: 'building',
+	  defense: 2,
+	  avoid: 2,
+	  movementSlow: 1,
+	  passable: true
+	}];
+
+	function createBoard(size, terrains) {
+	  var idSquare = 0;
+	  var board = [];
+	  var random = randomNumber(0, 3);
+	  var terrainComplete = createTerrain(random, size, terrains);
+	  terrainComplete = shuffle(terrainComplete);
+	  for (var i = 0; i < size; i++) {
+	    board[i] = [];
+	    for (var j = 0; j < size; j++) {
+	      var currentTerrain = terrainComplete[idSquare];
+	      board[i][j] = generateSquare(idSquare, currentTerrain);
+	      idSquare++;
+	    }
+	  }
+	  return board.slice();
+	}
+
+	function createTerrain(type, size, terrains) {
+	  var percentagesOfTerrain = determineType(type);
+	  var quantityOfTerrain = iterateTakeSquares(percentagesOfTerrain, size);
+	  var namesOfTerrain = [];
+	  var count = 0;
+	  for (var i = 0; i < quantityOfTerrain.length; i++) {
+	    for (var j = 0; j < quantityOfTerrain[i]; j++) {
+	      namesOfTerrain[count] = terrains[i].name;
+	      count++;
+	    }
+	  }
+	  return namesOfTerrain;
+	}
+
+	function determineType(type) {
+	  var terrain = [];
+	  switch (type) {
+	    case 1:
+	      terrain = [40, -1, 30, 30, 30, 30, 25];
+	      break;
+	    case 2:
+	      terrain = [40, 30, -1, 30, 30, 30, 25];
+	      break;
+	    case 3:
+	      terrain = [40, 30, 30, -1, 30, 30, 25];
+	      break;
+	    default:
+	      terrain = [-1, 30, 40, 30, 30, 30, 25];
+	  }
+	  return terrain;
+	}
+
+	function iterateTakeSquares(terrain, size) {
+	  var terrainBase = 0;
+	  var terrainBasePosition = 0;
+	  for (var i = 0; i < terrain.length; i++) {
+	    if (terrain[i] !== -1) {
+	      terrain[i] = Math.round(takeSquares(terrain[i], size) * size);
+	      terrainBase = terrainBase + terrain[i];
+	    } else {
+	      terrainBasePosition = i;
+	    }
+	  }
+	  terrain[terrainBasePosition] = size * size - terrainBase;
+	  return terrain;
+	}
+
+	function generateSquare(idSquare, currentTerrain) {
+	  return {
+	    id: idSquare,
+	    terrain: currentTerrain,
+	    unit: false,
+	    interactive: false
+	  };
+	}
+
+	function takeSquares(percent, size) {
+	  return Math.floor(randomNumber(0, percent) * size / 100);
+	}
+
+	function randomNumber(min, max) {
+	  return Math.floor(Math.random() * max) + min;
+	}
+
+	function shuffle(array) {
+	  var arrayAux = array.slice();
+	  for (var i = arrayAux.length - 1; i > 0; i--) {
+	    var j = Math.floor(Math.random() * (i + 1));
+	    var temp = arrayAux[i];
+	    arrayAux[i] = arrayAux[j];
+	    arrayAux[j] = temp;
+	  }
+	  return arrayAux;
+	}
+
+	var board = createBoard(8, terrains);
+
+	var initialState = {
+	  units: units, equipment: equipment, board: board, friends: friends, turn: turn
+	};
+
 	exports.initialState = initialState;
+	//!\\ Begins: Arceso's code piece: unestable shit.
+	/*
+	const riverLikeTerrains = [
+	{
+	  id: 2,
+	  name: 'path',
+	  defense: 0,
+	  avoid: 0,
+	  movementSlow: 1,
+	  passable: true
+	},
+	{
+	  id: 6,
+	  name: 'river',
+	  defense: 0,
+	  avoid: 0,
+	  movementSlow: 1,
+	  passable: false
+	},
+	{
+	  id: 8,
+	  name: 'lava',
+	  defense: 0,
+	  avoid: 0,
+	  movementSlow: 1,
+	  passable: false
+	},
+	{
+	  id: 10,
+	  name: 'bridge',
+	  defense: 0,
+	  avoid: 0,
+	  movementSlow: 1,
+	  passable: true
+	},
+	{
+	  id: 11,
+	  name: 'wall',
+	  defense: 10,
+	  avoid: 10,
+	  movementSlow: 10,
+	  passable: false
+	}
+	];
+	function randomBool(){return randomNumber(10, 1)>5?true:false;}
+	function riverCreator(rivers)
+	{
+	  arrayOfRiverArrays=[];
+	  for(i=0;i<rivers;i++)
+	  { 
+	    arrayOfRiverArray[i]=[];
+	    for(u=0;u<rivers;u++)
+	    {
+	      arrayOfRiverArrays[i][u]=river.initRiver();
+	      riverBridge=0;
+	      while(!arrayOfRiverArrays[i][u].isDead)
+	      {
+	        if(arrayOfRiverArrays[i][u].pathTileUnder() || riverBrige===5)
+	        {
+	          arrayOfRiverArrays[i][u].hasBridge=true; 
+	          riverBridge=0;
+	        }
+	        arrayOfRiverArrays[i][u].goWithTheFlow(randomNumber(3,1));
+	        riverBridge++;
+	      }
+	    }
+	  }
+	  return arrayOfRiverArrays;
+	}
+
+	river={
+	  id: getBoardSize()*y+x,
+	  name: 'river',
+	  unit: false,
+	  interactive: false,
+	  position:{},
+	  sense:1,
+	  direction:'x',
+	  isDead:false,
+	  hasBridge:false,
+	  
+	  initRiver: function ()
+	  {
+	    this.position['x']=randomNumber(getBoardSize(),0);
+	    this.position['y']=randomNumber(getBoardSize(),0);
+	    this.sense = randomBool() ? 1 : -1;
+	    this.direction = randomBool() ? 'x' : 'y';  
+	  },
+
+	  goWithTheFlow: function(action)
+	  {
+	    if(!outOfTheMap(advance()))
+	    {
+	      if(action === 1) foward();
+	      else if(action === 2) rotate();
+	      else die();
+	    }else die();
+	  },
+	           
+	  outOfTheMap: function(position)
+	  {
+	    if (position[x] >= getBoardSize() && position[y] >= getBoardSize()) return true;
+	    else return false;
+	  },
+	      
+	  advance: function(){ return this.position[direction]+sense;},
+	        
+	  foward: function(){ this.position[direction]=advance();},
+	  
+	  turn: function(){ return this.direction==='x'?'y':'x';},
+
+	  rotate: function(){ foward(); this.direction=turn();},
+
+	  die: function(){ this.isDead=true;},
+
+	  path: function (){ return 'path to the file'(direction === 'x' ? 'nombre del horizontal' : 'nombre del vertical')'.formato' }
+
+	};
+
+	  pathTileUnder: function(){ return board[this.position['x']][this.position['y']].terrain.name=='plain'? true:false;}
+	};
+
+	//######################## PATTERN SECCION #################################
+
+	function patternCreator(terrainArray)
+	{
+	  terrainArray[i].position['x']=randomNumber(getBoardSize(), 0);
+	  terrainArray[i].position['y']=randomNumber(getBoardSize(), 0);
+	  for(i=1;i<terrainArray.lenght();i++)
+	  {
+	    do
+	    {
+	      willXUpdate=randomBool();
+	      willYUpdate=randomBool();
+	    }while (( willXUpdate && willYUpdate ) === 0);
+	    
+	    do
+	    {
+	      xUpdate=terrainArray[i-1].position['x'] + (randomBool() ? 1 : -1);
+	      yUpdate=terrainArray[i-1].position['x'] + (randomBool() ? 1 : -1);
+	    }while ( (isOutOfTheBoard(xUpdate) && isOutOfTheBoard(yUpdate)) !== true);
+
+	    if( willXUpdate === true ) terrainArray[i].position['x'] = xUpdate;
+	    if( willYUpdate === true ) terrainArray[i].position['y'] = yUpdate;
+	  }
+
+	  function isThisPositionUsed(positionX, positionY)
+	  {
+	    positionUsed=false;
+	    for(u=0;u<terrainArray.lenght();u++)
+	    {
+	     if ( terrainArray[u].position['x'] === positionX && terrainArray[u].position['y'] === positionY) positionUsed=true;
+	    }
+	    return positionUsed;
+	  }
+	}
+
+	//!\\ END: Arceso's code piece.
+	*/
 
 /***/ },
 /* 309 */
