@@ -2,6 +2,7 @@ import { randomNumber } from '/home/arceso/WorkSpace/DarknessCaress/src/utils/ex
 function getBoardSize(){
   return 16;
 }
+/*
 const riverLikeTerrains = [
 {
 id: 2,
@@ -44,7 +45,7 @@ movementSlow: 10,
 passable: false
 }
 ];
-
+*/
 
 export function randomBool() { return randomNumber(1, 10) > 5 ? true : false; }
 
@@ -54,7 +55,7 @@ export function riverCreator(rivers) {
     arrayOfRiverArrays[i]=[];
     for(u=0; u<rivers; u++) {
       console.log('He llegado.');
-      (i===0&&u===0)?arrayOfRiverArrays[i][u]=new firstRiverCreator():arrayOfRiverArrays[i][u]=previousRiver(i,u);
+      (i===0&&u===0)?arrayOfRiverArrays[i][u]=new firstRiverCreator():arrayOfRiverArrays[i][u]=previousRiver(i, u);
       console.log(arrayOfRiverArrays[i][u]);
       riverBridge=0;
       while(!arrayOfRiverArrays[i][u].isDead) {
@@ -62,7 +63,7 @@ export function riverCreator(rivers) {
           arrayOfRiverArrays[i][u].hasBridge=true; 
           riverBridge=0;
         }
-        arrayOfRiverArrays[i][u].goWithTheFlow(randomNumber(3,1));
+        arrayOfRiverArrays[i][u].goWithTheFlow(randomNumber(3, 1));
         riverBridge++;
       }
     }
@@ -88,8 +89,8 @@ export function firstRiverCreator() {
 
 export function initPos(){
   let  pos={};
-  pos['x']=randomNumber(getBoardSize(),0);
-  pos['y']=randomNumber(getBoardSize(),0);
+  pos['x']=randomNumber(getBoardSize(), 0);
+  pos['y']=randomNumber(getBoardSize(), 0);
   return pos;
 }
 
@@ -127,4 +128,4 @@ export function rotate(){ foward(); this.direction=turn();}
 export function die(){ this.isDead=true;}
 //path: function (){ return 'path to the file'(direction === 'x' ? 'nombre del horizontal' : 'nombre del vertical')'.formato' }
 //};
-export function pathTileUnder(){ return board[this.position['x']][this.position['y']]=='plain'? true:false;}
+export function pathTileUnder(){ return board[this.position['x']][this.position['y']]==='plain'? true:false;}
