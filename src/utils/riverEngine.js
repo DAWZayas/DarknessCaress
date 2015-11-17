@@ -1,7 +1,5 @@
-import { randomNumber } from '/home/arceso/WorkSpace/DarknessCaress/src/utils/exports.js';
-function getBoardSize(){
-  return 16;
-}
+import { randomNumber, boardSize } from './exports.js';
+
 /*
 const riverLikeTerrains = [
 {
@@ -63,7 +61,7 @@ export function riverCreator(rivers) {
           arrayOfRiverArrays[i][u].hasBridge=true; 
           riverBridge=0;
         }
-        arrayOfRiverArrays[i][u].goWithTheFlow(randomNumber(3, 1));
+        arrayOfRiverArrays[i][u].goWithTheFlow(randomNumber(1, 3));
         riverBridge++;
       }
     }
@@ -89,13 +87,13 @@ export function firstRiverCreator() {
 
 export function initPos(){
   let  pos={};
-  pos['x']=randomNumber(getBoardSize(), 0);
-  pos['y']=randomNumber(getBoardSize(), 0);
+  pos['x']=randomNumber(0, boardSize);
+  pos['y']=randomNumber(0, boardSize);
   return pos;
 }
 
 function generateId(position){
-  return getBoardSize() * position['y'] + position['x'];
+  return boardSize * position['y'] + position['x'];
 }
 
 export function previousRiver(i, u){
@@ -115,7 +113,7 @@ export function goWithTheFlow(action){
 }
 
 export function outOfTheMap (position){
-  if (position['x'] >= getBoardSize() && position['y'] >= getBoardSize()) return true;
+  if (position['x'] >= boardSize && position['y'] >= boardSize) return true;
   else return false;
 }
 

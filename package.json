@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node_modules/.bin/webpack-dev-server",
-    "test": "npm run lint ; node_modules/.bin/mocha --compilers js:babel-core/register --require test/test_helper.js './test/testSeq.js'",
+    "test": "npm run lint ; node_modules/.bin/mocha --compilers js:babel-core/register --require test/test_helper.js './test/tests.js'",
     "test:watch": "npm run test -- --watch",
     "lint": "./node_modules/.bin/eslint --ext=jsx --ext=js src/ test/",
     "dist": "rm -rf dist/bundle.js dist/*.svg && ./node_modules/.bin/webpack --config webpack.production.config.js"

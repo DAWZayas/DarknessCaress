@@ -240,7 +240,7 @@ export function shuffle(array) {
 
 export const board = createBoard(8, terrains);
 
-//const boardSize = board.length;
+export const boardSize = board.length;
 
 export const initialState = {
   units, equipment, board, friends, turn

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {firstRiverCreator}from '/home/arceso/a.js';
+import {firstRiverCreator}from '../src/utils/riverEngine.js';
 describe('River functions', () => {
   describe('First river creator:', () => {
     const river1 = firstRiverCreator();
