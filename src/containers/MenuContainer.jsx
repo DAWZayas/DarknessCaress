@@ -1,5 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Tabs, Tab } from 'material-ui';
+import injecTapEventPlugin from 'react-tap-event-plugin';
+import EquipmentContainer from './EquipmentContainer';
+import FriendsContainer from './FriendsContainer';
+import UnitsContainer from './UnitsContainer';
+
+injecTapEventPlugin();
 
 export default class MenuContainer extends Component {
 
@@ -9,28 +15,17 @@ export default class MenuContainer extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <h3>All the info of the game</h3>
-          {this.props.children}
-        </div>
-        <li className={'list-group-item action-element'} >
-        <div className="row">
-          <div className="col-lg-1">
-            <Link to="/game">Game</Link>
-          </div>
-          <div className="col-lg-1">
-            <Link to="/units">Units</Link>
-          </div>
-          <div className="col-lg-1">
-            <Link to="/equipment">Equipment</Link>
-          </div>
-          <div className="col-lg-1">
-            <Link to="/friends">Friends</Link>
-          </div>
-        </div>
-        </li>
-      </div>
+      <Tabs>
+        <Tab label="Equipment">
+          <EquipmentContainer />
+        </Tab>
+        <Tab label="Characters">
+          <UnitsContainer />
+        </Tab>
+         <Tab label="Friends">
+         <FriendsContainer />
+        </Tab>
+      </Tabs>
     );
   }
 }

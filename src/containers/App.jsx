@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-
+import Nav from '../components/Nav';
 import MenuContainer from './MenuContainer';
 
 export default class App extends Component {
@@ -12,11 +11,8 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <div>
-          <h1><Link to="/">Main Menu (always visible)</Link></h1>
-        </div>
+        <Nav />
         <MenuContainer />
-        {this.props.children}
       </div>
     );
   }
