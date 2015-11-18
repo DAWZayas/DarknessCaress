@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { LeftNav, AppBar } from 'material-ui';
 import injecTapEventPlugin from 'react-tap-event-plugin';
 import { Link } from 'react-router';
-import Profile from '../components/Profile';
+import MenuProfile from './MenuProfile';
 
 injecTapEventPlugin();
 
@@ -29,7 +29,7 @@ export default class Nav extends Component {
     return (
       <nav>
         <LeftNav ref="leftNav" docked={false} menuItems={menuItems} />
-          <AppBar title={fancyTitle} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<Profile />} />
+          <AppBar title={fancyTitle} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfile />} />
       </nav> 
     );
   }
