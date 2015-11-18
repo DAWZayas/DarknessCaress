@@ -92,15 +92,22 @@ export function initPos(){
   return pos;
 }
 
-function generateId(position){
+export function generateId(position){
   return boardSize * position['y'] + position['x'];
 }
 
-export function previousRiver(i, u){
-  p=i;
-  q=u;
-  u===0? p-- : q-- ;
-  return arrayOfRiverArrays[p][q];
+export function previousPosition(i, u){
+  let p=i;
+  let q=u; 
+//  let arrayOfPositions=[];
+  if (p === 0 && q === 0) return false;
+  else {
+    if ( q === 0 ) {
+      p--;
+      q=boardSize;
+    }else q--;
+    return [p, q];
+  }
 }
 
 export function goWithTheFlow(action){
@@ -108,8 +115,7 @@ export function goWithTheFlow(action){
     if(action === 1) foward();
     else if(action === 2) rotate();
     else die();
-  }
-  else die();
+  }else die();
 }
 
 export function outOfTheMap (position){
@@ -117,13 +123,19 @@ export function outOfTheMap (position){
   else return false;
 }
 
-export function advance(){ return this.position[direction]+sense;}
+export function advance(riverLike) { return riverLike.position[riverLike.direction] + riverLike.sense;}
 
-export function foward(){ this.position[direction]=advance();}
+/*export function foward(riverLike) { riverLike.position[direction] = advance(riverLike);}
+*/
+export function turn(riverLike) { return riverLike.direction === 'x' ? 'y' : 'x';}
 
-export function turn(){ return this.direction==='x'?'y':'x';}
-export function rotate(){ foward(); this.direction=turn();}
-export function die(){ this.isDead=true;}
+/*export function rotate(riverLike) { 
+  foward(riverLike); 
+  riverLike.direction=turn(riverLike);
+}*/
+
+export function die(riverLike){ riverLike.isDead = true;}
+
 //path: function (){ return 'path to the file'(direction === 'x' ? 'nombre del horizontal' : 'nombre del vertical')'.formato' }
 //};
-export function pathTileUnder(){ return board[this.position['x']][this.position['y']]==='plain'? true:false;}
+export function pathTileUnder(){ return board[this.position['x']][this.position['y']] === 'plain' ? true : false;}
