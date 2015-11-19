@@ -1,24 +1,21 @@
-import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
 
 import Nav from '../components/Nav';
 
-export default class App extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div>
-        <Nav />
-        {this.props.children}
-      </div>
-    );
-  }
+function mapStateToProps(state) {
+  return {
+    friends: state.friends
+  };
 }
 
-App.propTypes = {
-  // Injected by React Router
-  children: PropTypes.node
-};
+function mapActionsToProps(dispatch) {
+  return {
+    navigate: (path) => dispatch(pushState(null, path))
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(Nav);

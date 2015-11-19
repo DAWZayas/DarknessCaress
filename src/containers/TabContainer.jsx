@@ -9,7 +9,7 @@ import UnitsContainer from './UnitsContainer';
 
 injecTapEventPlugin();
 
-export default class MenuContainer extends Component {
+export default class TabContainer extends Component {
 
   constructor(props) {
     super(props);
