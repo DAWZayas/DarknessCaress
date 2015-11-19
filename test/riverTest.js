@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import {firstRiverCreator, randomBool, initPos, generateId, previousPosition, advance, turn}from '../src/utils/riverEngine.js';
-import boardSize from '../src/utils/initialState.js';
+import {firstRiverCreator, randomBool, riverCreator, riverLikeTerrains, getTerrainIndexByName, generateRandomAction, initPos, generateId, previousPosition, advance, turn, outOfTheMap}from '../src/utils/riverEngine.js';
+import {randomNumber, boardSize} from '../src/utils/initialState.js';
 
 describe('River functions', () => {
   describe('First river creator:', () => {
@@ -11,6 +11,10 @@ describe('River functions', () => {
     });
     it('Should create the object with propper values types', () => {  
       expect (river1.name).to.be.a('string');
+ let index      expect (river1.defense).to.be.a('number');
+      expect (river1.avoid).to.be.a('number');
+      expect (river1.movementSlow).to.be.a('number');
+      expect (river1.passable).to.be.a('boolean');
       expect (river1.unit).to.be.a('boolean');
       expect (river1.interactive).to.be.a('boolean');
       expect (river1.position).to.be.an('object');
@@ -18,13 +22,19 @@ describe('River functions', () => {
       expect (river1.sense).to.be.a('number');
       expect (river1.direction).to.be.a('string');
       expect (river1.isDead).to.be.a('boolean');
+
       expect (river1.hasBridge).to.be.a('boolean');
     });
     it('Should create different rivers each time it is called', () => {
       expect (river1).to.not.eql(river2);
     });
   });
-
+  describe('cosas pa que no me grite chai', () => {
+    it('Should callarse de una vez.', () => {
+      riverCreator();
+      randomNumber();
+     });
+  });
   describe('Random boolean:', () => {
     const randomBoolean = randomBool();
     it('Should be a boolean', () => {
@@ -46,7 +56,26 @@ describe('River functions', () => {
       expect (position['y']).to.be.a('number');
     });
   });
-
+  describe('Get terrain index by name:', () => {
+    const number = getTerrainIndexByName('river');
+    it('Should be a number', () => {
+      expect (number).to.be.a('number');
+    });
+    it('Should be on a range from 0 to the array lenght', () => {
+      const sizeOfArray = riverLikeTerrains.length;
+      expect (number).to.be.at.least(0);
+      expect (number).to.be.at.most(sizeOfArray);
+    });
+  describe('Generate random action from 1 to 3, porcentually parsed:', () => {
+    const number = generateRandomAction();
+    it('Should be a number', () => {
+      expect (number).to.be.a('number');
+    });
+    it('Sould be on a 1, 3 range', () => {
+      expect (number).to.be.at.least(1);
+      expect (number).to.be.at.most(3);
+    });
+  });
   describe('Generate an unique ID', () => { // It does not check to be unique but -\('^ ' ) /-
     const id1 = generateId(initPos());
     const id2 = generateId(initPos());
@@ -101,4 +130,18 @@ describe('River functions', () => {
       });
     });
   });
+  describe('Out of the map ? :', () => {
+    let pos = initPos();
+    it('Should be a boolean.', () => {
+      expect (outOfTheMap(pos)).to.be.a('boolean');
+    });
+    it('Should be true if initPosition was stored and unmodiffied.', () => {
+      expect (outOfTheMap(pos)).to.be.true;
+    });
+    pos['x']= -1;
+    it('Should be false if forced to be so.', () => {
+      expect (outOfTheMap(pos)).to.be.a('boolean');
+    });
+  });
+});
 });

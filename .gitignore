@@ -8,3 +8,5 @@ node_modules
 dist/bundle.js
 dist/*.svg
 build
+*.swp
+*.swo
