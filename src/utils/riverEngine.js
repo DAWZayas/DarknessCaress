@@ -48,25 +48,7 @@ passable: false
 export function randomBool() { return randomNumber(1, 10) > 5 ? true : false; }
 
 export function riverCreator(rivers) {
-  arrayOfRiverArrays=[];
-  for(i=0; i<rivers; i++){ 
-    arrayOfRiverArrays[i]=[];
-    for(u=0; u<rivers; u++) {
-      console.log('He llegado.');
-      (i===0&&u===0)?arrayOfRiverArrays[i][u]=new firstRiverCreator():arrayOfRiverArrays[i][u]=previousRiver(i, u);
-      console.log(arrayOfRiverArrays[i][u]);
-      riverBridge=0;
-      while(!arrayOfRiverArrays[i][u].isDead) {
-        if(arrayOfRiverArrays[i][u].pathTileUnder() || riverBrige===5) {
-          arrayOfRiverArrays[i][u].hasBridge=true; 
-          riverBridge=0;
-        }
-        arrayOfRiverArrays[i][u].goWithTheFlow(randomNumber(1, 3));
-        riverBridge++;
-      }
-    }
-  }
-  return arrayOfRiverArrays;
+
 }
 export function firstRiverCreator() {
   let position = initPos();
@@ -126,14 +108,7 @@ export function outOfTheMap (position){
 
 export function advance(riverLike) { return riverLike.position[riverLike.direction] + riverLike.sense;}
 
-/*export function foward(riverLike) { riverLike.position[direction] = advance(riverLike);}
-*/
 export function turn(riverLike) { return riverLike.direction === 'x' ? 'y' : 'x';}
-
-/*export function rotate(riverLike) { 
-  foward(riverLike); 
-  riverLike.direction=turn(riverLike);
-}*/
 
 export function die(riverLike){ riverLike.isDead = true;}
 
