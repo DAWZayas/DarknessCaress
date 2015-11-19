@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { LeftNav, AppBar } from 'material-ui';
 import injecTapEventPlugin from 'react-tap-event-plugin';
-
 import MenuProfile from './MenuProfile';
 import Title from './Title';
 
@@ -26,9 +25,10 @@ export default class Nav extends Component {
     ];
 
     return (
-      <nav>
+      <nav> 
         <LeftNav ref="leftNav" docked={false} menuItems={menuItems} />
         <AppBar title={<Title />} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfile />} />
+          
       </nav> 
     );
   }
