@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+
 import Nav from '../components/Nav';
-import MenuContainer from './MenuContainer';
 
 export default class App extends Component {
 
@@ -12,7 +12,7 @@ export default class App extends Component {
     return (
       <div>
         <Nav />
-        <MenuContainer />
+        {this.props.children}
       </div>
     );
   }

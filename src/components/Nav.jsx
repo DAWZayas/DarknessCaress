@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { LeftNav, AppBar } from 'material-ui';
 import injecTapEventPlugin from 'react-tap-event-plugin';
-import { Link } from 'react-router';
+
 import MenuProfile from './MenuProfile';
+import Title from './Title';
 
 injecTapEventPlugin();
 
@@ -17,19 +18,17 @@ export default class Nav extends Component {
   }
 
   render() {
-    const fancyTitle = (
-      <Link to="/" class="fancyTitle">Darkness Caress</Link>
-    );
     const menuItems = [
-      { route: 'Home', text: 'Home' },
-      { route: 'gameGuide', text: 'Game Guide' },
-      { route: 'Characteres', text: 'Characteres' },
-      { route: 'Equipment', text: 'Equipment' },
+      { route: '/', text: 'Home' },
+      { route: 'game', text: 'Game Guide' },
+      { route: 'units', text: 'Characteres' },
+      { route: 'equipment', text: 'Equipment' },
     ];
+
     return (
       <nav>
         <LeftNav ref="leftNav" docked={false} menuItems={menuItems} />
-          <AppBar title={fancyTitle} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfile />} />
+        <AppBar title={<Title />} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfile />} />
       </nav> 
     );
   }

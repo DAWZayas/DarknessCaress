@@ -1,4 +1,4 @@
-import { randomNumber, boardSize } from './exports.js';
+import { randomNumber, boardSize } from './exports';
 
 /*
 const riverLikeTerrains = [
@@ -98,7 +98,8 @@ export function generateId(position){
 
 export function previousPosition(i, u){
   let p=i;
-  let q=u; 
+  let q=u;
+  const boardSize = boardSize;
 //  let arrayOfPositions=[];
   if (p === 0 && q === 0) return false;
   else {

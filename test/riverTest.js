@@ -1,11 +1,7 @@
 import {expect} from 'chai';
 import {firstRiverCreator, randomBool, initPos, generateId, previousPosition, advance, turn}from '../src/utils/riverEngine.js';
-//Hasta que a carlos le apetezca especificarme como la llamo...:
-const boardSize = 8;//FIXME
-//ARREGLA ESTO CARLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
-//########################################################################################
-//ME HARÍAS MU JAPI.
-//tyvm for your time.
+import boardSize from '../src/utils/initialState.js';
+
 describe('River functions', () => {
   describe('First river creator:', () => {
     const river1 = firstRiverCreator();
@@ -85,7 +81,7 @@ describe('River functions', () => {
     const riverAdvance1 = riverBase;
     describe('Advance: return the next position', () => {
       it('Should advance to south', () => {
-        expect (advance(riverAdvance1)).to.be.below(riverAdvance1.position['y']);
+        expect (advance(riverAdvance1)).to.be.below(riverAdvance1.position['y']); //?????????????
       });
     });
     riverBase.sense = 1;
@@ -93,7 +89,7 @@ describe('River functions', () => {
     const riverAdvance2 = riverBase;
     describe('Advance: return the next position', () => {
       it('Should advance to west', () => {
-        expect (advance(riverAdvance2)).to.be.over(riverAdvance2.position['y']);
+        expect (advance(riverAdvance2)).to.be.above(riverAdvance2.position['x']); //?????????????
       });
     });
     describe('Turn: change the advance direcction', () => {

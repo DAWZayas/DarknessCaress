@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { LeftNav, IconButton, FontIcon } from 'material-ui';
+import { LeftNav, IconButton, MenuItem } from 'material-ui';
+import { Link } from 'react-router';
 import injecTapEventPlugin from 'react-tap-event-plugin';
 
 injecTapEventPlugin();
@@ -13,16 +14,15 @@ export default class MenuProfile extends Component {
     this.refs.rightNav.toggle();// Show/Hide the Menu
   }
   render() {
-    const menuItems = [
-      { route: "Profile", text: "Profile" rightIcon:{<FontIcon className="material-icons">person</FontIcon>},
-      { route: "Profile", text: "settings" rightIcon:{<FontIcon className="material-icons">settings</FontIcon>},
-      { route: "help", text: "help" rightIcon:{<FontIcon className="material-icons">help</FontIcon>},
-      { route: "Log_Out", text: "Log Out" rightIcon:{<FontIcon className="glyphicon glyphicon-log-out" />},
-    ];
     return (
       <span>
       <IconButton iconClassName="material-icons" onClick={this.toggle.bind(this)}>home</IconButton>
-      <LeftNav ref="rightNav" openRight={true} docked={false} menuItems={menuItems} />
+      <LeftNav ref="rightNav" openRight docked={false}>
+        <MenuItem><Link to="profile" onClick={this.toggle.bind(this)}>Profile</Link></MenuItem>
+        <MenuItem><Link to="settings" onClick={this.toggle.bind(this)}>Settings</Link></MenuItem>
+        <MenuItem><Link to="help" onClick={this.toggle.bind(this)}>Help</Link></MenuItem>
+        <MenuItem><Link to="logout" onClick={this.toggle.bind(this)}>Log Out</Link></MenuItem>
+      </LeftNav>
       </span> 
     );
   }

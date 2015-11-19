@@ -238,11 +238,10 @@ export function shuffle(array) {
   return arrayAux;
 }
 
-export const board = createBoard(8, terrains);
+export const boardSize = 8;
 
-export const boardSize = board.length;
+export const board = createBoard(boardSize, terrains);
 
 export const initialState = {
   units, equipment, board, friends, turn
 };
-
