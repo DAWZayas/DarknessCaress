@@ -76,20 +76,22 @@ describe('River functions', () => {
   });
   describe('River modification of flow:', () => {
     let riverBase = firstRiverCreator();
-    riverBase.sense = -1;
-    riverBase.direction ='y';
-    const riverAdvance1 = riverBase;
-    describe('Advance: return the next position', () => {
+    describe('Advance: return the next position', () => {    
       it('Should advance to south', () => {
-        expect (advance(riverAdvance1)).to.be.below(riverAdvance1.position['y']); //?????????????
+        riverBase.position['y'] = 5;
+        riverBase.sense = -1;
+        riverBase.direction = 'y';
+        const riverAdvance1 = riverBase;
+          expect (advance(riverAdvance1)).to.be.below(riverAdvance1.position['y']); 
       });
     });
-    riverBase.sense = 1;
-    riverBase.direction = 'x';
-    const riverAdvance2 = riverBase;
     describe('Advance: return the next position', () => {
       it('Should advance to west', () => {
-        expect (advance(riverAdvance2)).to.be.above(riverAdvance2.position['x']); //?????????????
+        riverBase.position['x'] = 9;
+        riverBase.sense = 1;
+        riverBase.direction = 'x';
+        const riverAdvance2 = riverBase;
+          expect (advance(riverAdvance2)).to.be.above(riverAdvance2.position['x']);
       });
     });
     describe('Turn: change the advance direcction', () => {
