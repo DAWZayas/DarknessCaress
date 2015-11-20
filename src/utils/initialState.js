@@ -146,6 +146,49 @@ export const terrains = [
 }
 ];
 
+export const riverLikeTerrains = [
+{
+id: 2,
+name: 'path',
+defense: 0,
+avoid: 0,
+movementSlow: 1,
+passable: true
+},
+{
+id: 6,
+name: 'river',
+defense: 0,
+avoid: 0,
+movementSlow: 1,
+passable: false
+},
+{
+id: 8,
+name: 'lava',
+defense: 0,
+avoid: 0,
+movementSlow: 1,
+passable: false
+},
+{
+id: 10,
+name: 'bridge',
+defense: 0,
+avoid: 0,
+movementSlow: 1,
+passable: true
+},
+{
+id: 11,
+name: 'wall',
+defense: 10,
+avoid: 10,
+movementSlow: 10,
+passable: false
+}
+];
+
 export const boardSize = 8;
 
 export const board = createBoard(boardSize, terrains);

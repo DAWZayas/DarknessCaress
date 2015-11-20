@@ -1,3 +1,5 @@
+import {} from './exports';
+
 export function createBoard(size, terrains) {
   let idSquare = 0;
   let board = [];
