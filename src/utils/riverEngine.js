@@ -1,49 +1,15 @@
-import { randomNumber, boardSize } from './initialState.js';
+import { randomNumber, boardSize } from './exports';
 
-export const riverLikeTerrains = [
-{
-id: 2,
-name: 'path',
-defense: 0,
-avoid: 0,
-movementSlow: 1,
-passable: true
-},
-{
-id: 6,
-name: 'river',
-defense: 0,
-avoid: 0,
-movementSlow: 1,
-passable: false
-},
-{
-id: 8,
-name: 'lava',
-defense: 0,
-avoid: 0,
-movementSlow: 1,
-passable: false
-},
-{
-id: 10,
-name: 'bridge',
-defense: 0,
-avoid: 0,
-movementSlow: 1,
-passable: true
-},
-{
-id: 11,
-name: 'wall',
-defense: 10,
-avoid: 10,
-movementSlow: 10,
-passable: false
+export function applyRivers(boardBase, rivers){
+  const rivers = riverCreator(1, 'river');
+  let board = boardBase;
+  rivers.map(river => {
+    river.map(tile => {
+      board[tile.position.y][tile.posiion.x] = tile;
+    });
+  });
+  return board;
 }
-];
-
-export function randomBool() { return randomNumber(1, 10) > 5 ? true : false; }
 
 export function riverCreator(rivers, terrainName) {
   let arrayOfRivers = [];
