@@ -43,8 +43,6 @@ passable: false
 }
 ];
 
-export function randomBool() { return randomNumber(1, 10) > 5 ? true : false; }
-
 export function riverCreator(rivers, terrainName) {
   let arrayOfRivers = [];
   let u = 0;
