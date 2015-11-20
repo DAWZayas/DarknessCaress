@@ -1,8 +1,23 @@
 import {expect} from 'chai';
-import {firstRiverCreator, randomBool, riverCreator, riverLikeTerrains, getTerrainIndexByName, generateRandomAction, initPos, generateId, previousPosition, advance, turn, outOfTheMap}from '../src/utils/riverEngine.js';
-import {randomNumber, boardSize} from '../src/utils/initialState.js';
+import {firstRiverCreator, randomBool, riverCreator, riverLikeTerrains, getTerrainIndexByName, generateRandomAction, initPos, generateId, previousPosition, advance, turn, outOfTheMap, randomNumber, boardSize} from '../src/utils/export';
 
 describe('River functions', () => {
+  describe('River creator:', () => {
+    const arrayOfRivers = riverCreator(1, 'river');
+    it('Should be an object', () => {
+      expect (arrayOfRivers).to.be.an('object');
+    });
+    it('Should have an object inside of the first position', () => {
+      expect (arrayOfRivers[0]).to.be.an('object');
+    });
+    it('Should have a river object insde of the object on the first position, wich is inside of another', () => {
+      expect (arrayOfRivers[0][0]).to.be.an('object');
+    });
+    it('Should result that the river object has inside a bunch of properties', () => {
+      expect (arrayOfRivers[0][0]).to.be.an.instanceof(firstRiverCreator());
+    });
+  });
+
   describe('First river creator:', () => {
     const river1 = firstRiverCreator();
     const river2 = firstRiverCreator();
@@ -11,7 +26,7 @@ describe('River functions', () => {
     });
     it('Should create the object with propper values types', () => {  
       expect (river1.name).to.be.a('string');
- let index      expect (river1.defense).to.be.a('number');
+      expect (river1.defense).to.be.a('number');
       expect (river1.avoid).to.be.a('number');
       expect (river1.movementSlow).to.be.a('number');
       expect (river1.passable).to.be.a('boolean');
