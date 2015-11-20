@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { LeftNav, AppBar } from 'material-ui';
+import { LeftNav, AppBar} from 'material-ui';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import injecTapEventPlugin from 'react-tap-event-plugin';
-
-import MenuProfile from './MenuProfile';
+import MenuDivider from 'material-ui/lib/menus/menu-divider';
+import MenuProfilePC from './MenuProfilePC';
 import Title from './Title';
 
 injecTapEventPlugin();
@@ -26,15 +26,17 @@ export default class Nav extends Component {
   }
 
   render() {
+    const { navigate } = this.props;
     return (
       <nav>
-        <LeftNav ref="leftNav" docked={false} disableSwipeToOpen={false}>
+        <LeftNav id="mainNav" ref="leftNav" docked={false} header={<div id="headerNav">DarknessCaress</div>} disableSwipeToOpen>
           <MenuItem primaryText="Home" onTouchTap={this.handleTouchTap.bind(this)} />
           <MenuItem primaryText="Game" onTouchTap={this.handleTouchTap.bind(this)} />
-          <MenuItem primaryText="Profile" onTouchTap={this.handleTouchTap.bind(this)} />
-          <MenuItem primaryText="Stuff" onTouchTap={this.handleTouchTap.bind(this)} />
+          <MenuDivider />
+          <MenuItem primaryText="GitHub" onTouchTap={this.handleTouchTap.bind(this)} />
+          <MenuItem primaryText="Follow Us :)" onTouchTap={this.handleTouchTap.bind(this)} />
         </LeftNav>
-        <AppBar title={<Title />} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfile />} />
+        <AppBar title={<Title navigate={navigate} />} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfilePC navigate={navigate} />} />
       {this.props.children}
       </nav>
     );
