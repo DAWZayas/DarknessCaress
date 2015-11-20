@@ -10,21 +10,26 @@ export default class Title extends Component {
   constructor(props) {
     super(props);
   }
-    handleTouchTap(e){
+
+  handleTouchTap(){
     const { navigate } = this.props;
-    const path = e.target.innerHTML.toLowerCase();
+    const path = 'game';
     navigate(path);
   }
+
   render() {
     return (
       <div>
         <Link to="/">Darkness Caress</Link>
-        <IconButton onTouchTap={this.handleTouchTap.bind(this)} iconClassName="material-icons" id="playButton" >videogame_asset</IconButton> // must be the summ of the left brother width and half of the property size below.
+        <div onClick={this.handleTouchTap.bind(this)}>
+          <IconButton iconClassName="material-icons" id="playButton" >videogame_asset</IconButton> // must be the summ of the left brother width and half of the property size below.
+        </div>
       </div>
     );
   }
 }
-Nav.propTypes = {
+
+Title.propTypes = {
   // Injected by React Router
   children: PropTypes.node,
   navigate: PropTypes.func

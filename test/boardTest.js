@@ -1,30 +1,9 @@
 import {expect} from 'chai';
 
 import { createBoard, createTerrain, determineType, iterateTakeSquares, generateSquare,
-   takeSquares, randomNumber, shuffle } from '../src/utils/initialState';
+   takeSquares } from '../src/utils/boardEngine';
 
-describe('State functions', () => {
-
-	describe('shuffle', () => {
-
-    it('should shuffle entries of an array', () => {
-    	const array = [1, 2, 3, 4, 5];
-      const shuffledArray = shuffle(array);
-      expect(shuffledArray.length).to.equal(array.length);
-      expect(shuffledArray).to.not.eql(array);
-    });
-
-  });
-
-  describe('randomNumber', () => {
-
-    it('should generate a random number', () => {
-      const number = randomNumber(1, 4);
-      expect(number).to.above(0);
-      expect(number).to.below(5);
-    });
-
-  });
+describe('Board functions', () => {
 
   describe('takeSquares', () => {
 

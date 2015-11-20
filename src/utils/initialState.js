@@ -1,3 +1,5 @@
+import { createBoard } from './boardEngine.js';
+
 export const units = [
   {
     id: 1,

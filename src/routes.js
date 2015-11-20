@@ -16,5 +16,6 @@ export default (
     <Route path="equipment" component={EquipmentContainer} />
     <Route path="friends" component={FriendsContainer} />
     <Redirect path="*" to="/" />
+    <Redirect path="github" to="https://github.com" />
   </Route>
 );

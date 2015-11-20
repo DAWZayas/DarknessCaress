@@ -1,6 +1,7 @@
-import { randomNumber, boardSize } from './exports';
+import { randomNumber, randomBool } from './exports';
+import { riverLikeTerrains, boardSize } from './initialState';
 
-export function applyRivers(boardBase, rivers){
+export function applyRivers(boardBase){
   const rivers = riverCreator(1, 'river');
   let board = boardBase;
   rivers.map(river => {
@@ -25,14 +26,6 @@ export function riverCreator(rivers, terrainName) {
     } 
   }
   return arrayOfRivers;
-}
-
-export function getTerrainIndexByName(name){
-  let index = 0;
-  for(let i = 0; i < riverLikeTerrains.length; i++){
-    if (riverLikeTerrains[i].name === name) index = i;
-  }
-  return index;
 }
 
 export function firstRiverCreator(terrainName) {
@@ -64,17 +57,24 @@ export function initPos(){
   return pos;
 }
 
+export function getTerrainIndexByName(name){
+  let index = 0;
+  for(let i = 0; i < riverLikeTerrains.length; i++){
+    if (riverLikeTerrains[i].name === name) index = i;
+  }
+  return index;
+}
+
 export function generateId(position){ return boardSize * position['y'] + position['x']; }
 
-export function previousPosition(i, u){
-  let p=i;
-  let q=u;
-  const boardSize = boardSize;
+export function previousPosition(i, u){ //  NEVER USED ???
+  let p = i;
+  let q = u;
   if (p === 0 && q === 0) return false;
   else {
     if ( q === 0 ) {
       p--;
-      q=boardSize;
+      q = boardSize;
     }else q--;
     return [p, q];
   }
@@ -84,7 +84,7 @@ export function goWithTheFlow(river){
   let action = generateRandomAction();
   if(!outOfTheMap(advance(river))){
     if(action === 1) advance(river);
-    else if(action === 2) rotate(river);
+    else if(action === 2) turn(river);
     else die(river);
   }else die(river);
 }
@@ -97,11 +97,7 @@ export function generateRandomAction(){
 }
 
 export function outOfTheMap (position){
-  if (position['x'] >= boardSize && position['y'] >= boardSize) {
-    if (position['x'] < 0 && position['y'] < 0) 
-      return true;
-  }
-  else return false;
+  return ( position.x >= boardSize || position.y >= boardSize || position.x < 0 || position.y < 0 ) ? true : false;
 }
 
 export function advance(riverLike) { return riverLike.position[riverLike.direction] + riverLike.sense;}
@@ -112,4 +108,4 @@ export function die(riverLike){ riverLike.isDead = true;}
 
 //path: function (){ return 'path to the file'(direction === 'x' ? 'nombre del horizontal' : 'nombre del vertical')'.formato' }
 //};
-export function pathTileUnder(){ return board[this.position['x']][this.position['y']] === 'plain' ? true : false;}
+//export function pathTileUnder(){ return board[this.position['x']][this.position['y']] === 'plain' ? true : false;}

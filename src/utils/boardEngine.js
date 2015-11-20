@@ -1,4 +1,4 @@
-import {} from './exports';
+import { randomNumber, shuffle } from './generalFunctions';
 
 export function createBoard(size, terrains) {
   let idSquare = 0;
@@ -7,7 +7,7 @@ export function createBoard(size, terrains) {
   let terrainComplete = createTerrain(random, size, terrains);
   terrainComplete = shuffle(terrainComplete);
   for (let i = 0; i < size; i++) {
-    board[i] = [];
+    board[i] = []; 
     for (let j = 0; j < size; j++) {
       let currentTerrain = terrainComplete[idSquare];
       board[i][j] = generateSquare(idSquare, currentTerrain); 

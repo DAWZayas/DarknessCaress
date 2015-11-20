@@ -1,5 +1,4 @@
 //NO LO CAMBIEIS, NO FUNCIONA!!
-import board from './initialState.js';
 
 export const users = [
   {

@@ -2,11 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { IconMenu, IconButton, FontIcon } from 'material-ui';
 import injecTapEventPlugin from 'react-tap-event-plugin';
 import MenuItem from 'material-ui/lib/menus/menu-item';//the older folder(default) is bug
-import MenuDivider from  'material-ui/lib/menus/menu-divider';//same as MenuItem 
+import MenuDivider from  'material-ui/lib/menus/menu-divider';//same as MenuItem
+
 injecTapEventPlugin();
-
-
-
 
 export default class MenuProfilePC extends Component {
 
@@ -21,7 +19,6 @@ export default class MenuProfilePC extends Component {
   }
 
   render() {
-
     return (
       <IconMenu iconButtonElement={<IconButton iconClassName="material-icons">account_circle</IconButton>}>
        <MenuItem primaryText="Profile" onTouchTap={this.handleTouchTap.bind(this)} leftIcon={<FontIcon className="material-icons">person</FontIcon>} />
