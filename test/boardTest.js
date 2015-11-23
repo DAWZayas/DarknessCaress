@@ -25,7 +25,7 @@ describe('Board functions', () => {
       const terrainObject = generateSquare(id, name);
       const desiredResult = {
         id: id,
-        terrain: name,
+        name: name,
         unit: false,
         interactive: false
       };

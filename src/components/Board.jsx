@@ -20,7 +20,7 @@ export default class Board extends Component {
             		{
             			row.map ( (square) => {
             				return (
-        							<Square id={ square.id } terrain={ square.terrain } selected={ turn.selected } onSelectSquare={onSelectSquare} />
+        							<Square id={ square.id } name={ square.name } selected={ turn.selected } onSelectSquare={onSelectSquare} />
             				);
             			})
             		}

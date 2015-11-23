@@ -1,12 +1,22 @@
-import { randomNumber, randomBool } from './exports';
+import { randomNumber, randomBool } from './generalFunctions';
 import { riverLikeTerrains, boardSize } from './initialState';
 
-export function applyRivers(boardBase){
+export function applyRiversOld(boardBase){
   const rivers = riverCreator(1, 'river');
   let board = boardBase;
   rivers.map(river => {
     river.map(tile => {
-      board[tile.position.y][tile.posiion.x] = tile;
+      board[tile.position.y][tile.position.x] = tile;
+    });
+  });
+  return board;
+}
+
+export function applyRivers(boardBase, rivers){
+  let board = boardBase;
+  rivers.map(river => {
+    river.map(tile => {
+      board[tile.position.y][tile.position.x] = cloneRiver(tile);
     });
   });
   return board;
@@ -17,10 +27,10 @@ export function riverCreator(rivers, terrainName) {
   let u = 0;
   for(let i = 0; i < rivers; i++) {
     arrayOfRivers[i]=[];
-    arrayOfRivers[i][0]=firstRiverCreator(terrainName);
-    u=1;
-    while (! arrayOfRivers[i][u-1].isDead) {
-      arrayOfRivers[i][u]=arrayOfRivers[i][u-1];
+    arrayOfRivers[i][0] = firstRiverCreator(terrainName);
+    u = 1;
+    while (!arrayOfRivers[i][u-1].isDead) {
+      arrayOfRivers[i][u] = cloneRiver(arrayOfRivers[i][u-1]);
       goWithTheFlow(arrayOfRivers[i][u]);
       u++;
     } 
@@ -32,7 +42,7 @@ export function firstRiverCreator(terrainName) {
   let position = initPos();
   let id = generateId(position);
   let terrainIndex = getTerrainIndexByName(terrainName);
-  const firstRiverObject = {
+  let firstRiverObject = {
     name : riverLikeTerrains[terrainIndex].name,
     defense: riverLikeTerrains[terrainIndex].defense,
     avoid: riverLikeTerrains[terrainIndex].avoid,
@@ -50,10 +60,40 @@ export function firstRiverCreator(terrainName) {
   return firstRiverObject;
 }
 
+export function cloneRiver(river) {
+  let newPosition = {};
+  newPosition.x = river.position.x;
+  newPosition.y = river.position.y;
+  let newId = generateId(newPosition);
+  let clonedRiver = {
+    name : river.name,
+    defense: river.defense,
+    avoid: river.avoid,
+    movementSlow: river.movementSlow,
+    passable: river.passable,
+    unit : false,
+    interactive : false,
+    position : newPosition,
+    id : newId,   
+    sense : river.sense,
+    direction : river.direction,
+    isDead : river.isDead,
+    hasBridge : false
+  };
+  return clonedRiver;
+}
+
 export function initPos(){
-  let  pos = {};
-  pos['x'] = randomNumber(0, boardSize);
-  pos['y'] = randomNumber(0, boardSize);
+  let pos = {};
+  let bool1 = randomBool();
+  let bool2 = randomBool();
+  if(bool1) {
+    pos.x = bool2 ? randomNumber(0, boardSize) : 0;
+    pos.y = bool2 ? 0 : randomNumber(0, boardSize);
+  }else{
+    pos.x = bool2 ? randomNumber(0, boardSize) : boardSize - 1;
+    pos.y = bool2 ? boardSize - 1 : randomNumber(0, boardSize);
+  }
   return pos;
 }
 
@@ -65,7 +105,7 @@ export function getTerrainIndexByName(name){
   return index;
 }
 
-export function generateId(position){ return boardSize * position['y'] + position['x']; }
+export function generateId(position){ return boardSize * position.y + position.x; }
 
 export function previousPosition(i, u){ //  NEVER USED ???
   let p = i;
@@ -82,11 +122,17 @@ export function previousPosition(i, u){ //  NEVER USED ???
 
 export function goWithTheFlow(river){
   let action = generateRandomAction();
-  if(!outOfTheMap(advance(river))){
-    if(action === 1) advance(river);
-    else if(action === 2) turn(river);
-    else die(river);
-  }else die(river);
+  switch(action) {
+    case 2:
+      turn(river);
+    case 1:
+      if(!outOfTheMap(advance(cloneRiver(river)))) {
+        advance(river);
+      }else die(river);
+      break;
+    default:
+      die(river);
+  }
 }
 
 export function generateRandomAction(){
@@ -100,9 +146,16 @@ export function outOfTheMap (position){
   return ( position.x >= boardSize || position.y >= boardSize || position.x < 0 || position.y < 0 ) ? true : false;
 }
 
-export function advance(riverLike) { return riverLike.position[riverLike.direction] + riverLike.sense;}
+export function advance(riverLike) {
+  riverLike.position[riverLike.direction] = riverLike.position[riverLike.direction] + riverLike.sense;
+  riverLike.id = boardSize * riverLike.position.y + riverLike.position.x;
+  return riverLike.position;
+}
 
-export function turn(riverLike) { return riverLike.direction === 'x' ? 'y' : 'x';}
+export function turn(riverLike) {
+  riverLike.direction = (riverLike.direction === 'x') ? 'y' : 'x';
+  return riverLike.direction;
+}
 
 export function die(riverLike){ riverLike.isDead = true;}
 

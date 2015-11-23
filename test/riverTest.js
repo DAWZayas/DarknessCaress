@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import { firstRiverCreator, riverCreator, riverLikeTerrains, 
         getTerrainIndexByName, generateRandomAction, initPos, generateId,
-        advance, outOfTheMap, previousPosition, boardSize } from '../src/utils/exports';
+        advance, outOfTheMap, previousPosition, boardSize, cloneRiver } from '../src/utils/exports';
 import { turn } from '../src/utils/riverEngine';
 
 describe('River functions', () => {
@@ -114,27 +114,29 @@ describe('River functions', () => {
 
   describe('River modification of flow:', () => {
     let riverBase = firstRiverCreator();
+    riverBase.position['y'] = 5;
+    riverBase.sense = -1;
+    riverBase.direction = 'y';
     describe('Advance: return the next position', () => {    
       it('Should advance to south', () => {
-        riverBase.position['y'] = 5;
-        riverBase.sense = -1;
-        riverBase.direction = 'y';
-        const riverAdvance1 = riverBase;
-        expect (advance(riverAdvance1)).to.be.below(riverAdvance1.position['y']); 
+        const riverAdvance1 = cloneRiver(riverBase);
+        expect (advance(riverAdvance1).y).to.be.below(riverBase.position.y); 
       });
       it('Should advance to west', () => {
         riverBase.position['x'] = 9;
         riverBase.sense = 1;
         riverBase.direction = 'x';
-        const riverAdvance2 = riverBase;
-        expect (advance(riverAdvance2)).to.be.above(riverAdvance2.position['x']);
+        const riverAdvance2 = cloneRiver(riverBase);
+        expect (advance(riverAdvance2).x).to.be.above(riverBase.position.x);
       });
     });
 
     describe('Turn: change the advance direcction', () => {
       it('Should return an swapped X for Y or biceversa.', () => {
-        expect (turn(riverBase.direction)).to.be.a('string');
-        expect (turn(riverBase)).to.not.equal(riverBase);
+        const riverTurn = cloneRiver(riverBase);
+        turn(riverTurn);
+        expect (riverTurn.direction).to.be.a('string');
+        expect (riverTurn).to.not.equal(riverBase.direction);
       });
     });
   });

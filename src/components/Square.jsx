@@ -11,11 +11,11 @@ export default class Square extends Component {
   }
 
   render() {
-    const { id, terrain, selected } = this.props;
+    const { id, name, selected } = this.props;
     const select = selected === id ? 'success' : '';
     return (
       <td className={ select } onClick={() => this.handleClick(id)}>
-        {id} : { terrain }
+        {id} : { name }
       </td>
     );
   }
@@ -24,7 +24,7 @@ export default class Square extends Component {
 
 Square.propTypes = {
 	id: PropTypes.number,
-	terrain: PropTypes.string,
+	name: PropTypes.string,
   selected: PropTypes.number,
   onSelectSquare: PropTypes.func
 };

@@ -1,4 +1,13 @@
 import { randomNumber, shuffle } from './generalFunctions';
+import { riverCreator, applyRivers } from './riverEngine.js';
+import { terrains } from './initialState';
+
+export function createBoardWithRiver(boardSize, numberOfRivers, typeOfRiver) {
+  const boardBase = createBoard(boardSize, terrains);
+  const rivers = riverCreator(numberOfRivers, typeOfRiver);
+  const board = applyRivers(boardBase, rivers);
+  return board;
+}
 
 export function createBoard(size, terrains) {
   let idSquare = 0;
@@ -67,7 +76,7 @@ export function iterateTakeSquares(terrain, size) {
 export function generateSquare(idSquare, currentTerrain) {
   return {
     id: idSquare,
-    terrain: currentTerrain,
+    name: currentTerrain,
     unit: false,
     interactive: false
   };
