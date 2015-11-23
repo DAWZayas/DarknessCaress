@@ -21,9 +21,9 @@ export default class Title extends Component {
     return (
       <div>
         <Link to="/">Darkness Caress</Link>
-        <div onClick={this.handleTouchTap.bind(this)}>
-          <IconButton iconClassName="material-icons" id="playButton" >videogame_asset</IconButton> // must be the summ of the left brother width and half of the property size below.
-        </div>
+        <span onClick={this.handleTouchTap.bind(this)}>
+          <IconButton iconClassName="material-icons" id="playButton" >videogame_asset</IconButton> 
+        </span>
       </div>
     );
   }
