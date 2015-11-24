@@ -159,6 +159,6 @@ export function turn(riverLike) {
 
 export function die(riverLike){ riverLike.isDead = true;}
 
-//path: function (){ return 'path to the file'(direction === 'x' ? 'nombre del horizontal' : 'nombre del vertical')'.formato' }
+function setImage(riverLike) {  return '../media/terrains/riverLike/river/'+Like.name+'/'+riverLike.name+(direction === 'x' ? 'x' : 'y')+'.png' ;}
 //};
 //export function pathTileUnder(){ return board[this.position['x']][this.position['y']] === 'plain' ? true : false;}
