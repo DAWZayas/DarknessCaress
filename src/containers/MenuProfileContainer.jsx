@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
+import MenuProfile from '../containers/MenuProfile';
+import { changeLogging } from '../actions';
 import { pushState } from 'redux-router';
-import Nav from './Nav';
+
 
 function mapStateToProps(state) {
   return {
@@ -19,4 +21,4 @@ function mapActionsToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(Nav);
+)(MenuProfile);

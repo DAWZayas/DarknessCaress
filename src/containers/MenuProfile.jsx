@@ -8,7 +8,7 @@ injecTapEventPlugin();
 
 export default class MenuProfile extends Component {
 
-const { navigate } = this.props;
+
 
   constructor(props) {
     super(props);
@@ -20,10 +20,11 @@ const { navigate } = this.props;
   }
 
   render() {
+    const { navigate } = this.props;
     const { logging } = this.props;
-    const a = ({logging} ? <Offline  navigate={navigate} /> : <Online  navigate={navigate} />);
+    
     return (
-      {a}
+       {logging} ? <Online  navigate={navigate} /> : <Offline  navigate={navigate} />
       );
   }
 }

@@ -6,6 +6,7 @@ import board from './board';
 import equipment from './equipment';
 import friends from './friends';
 import turn from './turn';
+import logging from './logging';
 
 export default combineReducers({
 	units,
@@ -13,5 +14,6 @@ export default combineReducers({
 	equipment,
 	friends,
 	turn,
-  router
+    router,
+    logging
 });

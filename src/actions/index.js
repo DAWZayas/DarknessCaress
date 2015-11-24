@@ -5,6 +5,7 @@ export const REMOVE_UNIT = 'REMOVE_UNIT';
 export const SET_EQUIPMENT = 'SET_EQUIPMENT';
 export const REMOVE_EQUIPMENT = 'REMOVE_EQUIPMENT';
 export const SELECT_SQUARE = 'SELECT_SQUARE';
+export const CHANGE_LOGGING = 'CHANGE_LOGGING';
 
 export function setFriend(friend) {
 	return { type: SET_FRIEND, friend};
@@ -32,4 +33,8 @@ export function removeEquipment(equipment) {
 
 export function selectSquare(id) {
 	return { type: SELECT_SQUARE, id};
+}
+
+export function changeLogging() {
+	return { type: CHANGE_LOGGING };
 }

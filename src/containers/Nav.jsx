@@ -3,8 +3,8 @@ import { LeftNav, AppBar} from 'material-ui';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import injecTapEventPlugin from 'react-tap-event-plugin';
 import MenuDivider from 'material-ui/lib/menus/menu-divider';
-import MenuProfileContainer from '../containers/MenuProfileContainer';
-import Title from './Title';
+import MenuProfile from './MenuProfile';
+import Title from '../components/Title';
 
 injecTapEventPlugin();
 
@@ -36,7 +36,7 @@ export default class Nav extends Component {
           <MenuItem primaryText="GitHub" onTouchTap={this.handleTouchTap.bind(this)} />
           <MenuItem primaryText="Follow Us :)" onTouchTap={this.handleTouchTap.bind(this)} />
         </LeftNav>
-        <AppBar title={<Title navigate={navigate} />} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfileContainer navigate={navigate} />} />
+        <AppBar title={<Title navigate={navigate} />} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfile navigate={navigate} />} />
       {this.props.children}
       </nav>
     );

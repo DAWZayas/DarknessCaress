@@ -191,10 +191,12 @@ export const riverLikeTerrains = [
 }
 ];
 
+export const logging = false;
+
 export const boardSize = 8;
 
 const board = createBoardWithRiver(boardSize, 2, 'river');
 
 export const initialState = {
-  units, equipment, board, friends, turn
+  units, equipment, board, friends, turn, logging
 };
