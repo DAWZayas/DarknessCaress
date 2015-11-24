@@ -20,8 +20,7 @@ export default class MenuProfile extends Component {
   }
 
   render() {
-    const { navigate } = this.props;
-    const { logging } = this.props;
+    const { navigate, logging } = this.props;
     
     return (
        {logging} ? <Online  navigate={navigate} /> : <Offline  navigate={navigate} />
