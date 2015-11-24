@@ -13,18 +13,20 @@ export default class MenuProfile extends Component {
   constructor(props) {
     super(props);
   }
-  handleTouchTap(e){
-    const { navigate } = this.props;
-    const path = e.target.innerHTML.toLowerCase();
-    navigate(path);
-  }
 
   render() {
-    const { navigate, logging } = this.props;
-    
+    const { navigate, logging, loggingState } = this.props;
+    let log;
+    if(logging===true) {
+      log = <Online loggingState={loggingState} navigate={navigate} logging={logging} />;
+    }else{
+      log = <Offline loggingState={loggingState} navigate={navigate} logging={logging} />;
+    }
     return (
-       {logging} ? <Online  navigate={navigate} /> : <Offline  navigate={navigate} />
-      );
+      <span>
+      {log}
+      </span>
+    );
   }
 }
 
@@ -32,5 +34,6 @@ MenuProfile.propTypes = {
   // Injected by React Router
   children: PropTypes.node,
   logging: PropTypes.bool,
-  navigate: PropTypes.func
+  navigate: PropTypes.func,
+  loggingState: PropTypes.func
 };

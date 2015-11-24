@@ -26,7 +26,7 @@ export default class Nav extends Component {
   }
 
   render() {
-    const { navigate } = this.props;
+    const { navigate, logging, loggingState } = this.props;
     return (
       <nav>
         <LeftNav id="mainNav" ref="leftNav" docked={false} header={<div id="headerNav">DarknessCaress</div>} disableSwipeToOpen>
@@ -36,7 +36,7 @@ export default class Nav extends Component {
           <MenuItem primaryText="GitHub" onTouchTap={this.handleTouchTap.bind(this)} />
           <MenuItem primaryText="Follow Us :)" onTouchTap={this.handleTouchTap.bind(this)} />
         </LeftNav>
-        <AppBar title={<Title navigate={navigate} />} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfile navigate={navigate} />} />
+        <AppBar title={<Title navigate={navigate} />} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfile navigate={navigate} logging={logging} loggingState={loggingState} />} />
       {this.props.children}
       </nav>
     );
@@ -46,5 +46,7 @@ export default class Nav extends Component {
 Nav.propTypes = {
   // Injected by React Router
   children: PropTypes.node,
-  navigate: PropTypes.func
+  navigate: PropTypes.func,
+  logging: PropTypes.bool,
+  loggingState: PropTypes.func
 };

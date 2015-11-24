@@ -16,7 +16,10 @@ export default class Online extends Component {
     const path = e.target.innerHTML.toLowerCase();
     navigate(path);
   }
-
+  handleLog(){
+    const { loggingState, logging } = this.props;
+    loggingState(logging);
+  }
   render() {
     return (
        <IconMenu iconButtonElement={<IconButton iconClassName="material-icons">account_circle</IconButton>}>
@@ -24,7 +27,7 @@ export default class Online extends Component {
          <MenuItem primaryText="Settings" onTouchTap={this.handleTouchTap.bind(this)} leftIcon={<FontIcon className="material-icons">settings</FontIcon>} />
          <MenuItem primaryText="Help" onTouchTap={this.handleTouchTap.bind(this)} leftIcon={<FontIcon className="material-icons">help</FontIcon>} />
          <MenuDivider />
-         <MenuItem primaryText="Log Out" onTouchTap={this.handleTouchTap.bind(this)} leftIcon={<FontIcon className="glyphicon glyphicon-log-out" />} />
+         <MenuItem primaryText="Log Out" onTouchTap={this.handleLog.bind(this)} leftIcon={<FontIcon className="glyphicon glyphicon-log-out" />} />
        </IconMenu>
     );
   }
@@ -33,6 +36,7 @@ export default class Online extends Component {
 Online.propTypes = {
   // Injected by React Router
   children: PropTypes.node,
+  loggingState: PropTypes.func,
   logging: PropTypes.bool,
   navigate: PropTypes.func
 };

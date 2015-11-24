@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 import Nav from './Nav';
+import { changeLogging } from '../actions';
 
 function mapStateToProps(state) {
   return {
