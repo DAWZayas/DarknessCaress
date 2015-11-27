@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import { images } from '../utils/imageExports';
+
 export default class Square extends Component {
 
   constructor(props) {
@@ -11,11 +13,11 @@ export default class Square extends Component {
   }
 
   render() {
-    const { id, name, selected } = this.props;
+    const { id, image, selected } = this.props;
     const select = selected === id ? 'success' : '';
     return (
-      <td className={ select } onClick={() => this.handleClick(id)}>
-        {id} : { name }
+      <td height="32px" width="32px" className={ select } onClick={() => this.handleClick(id)}>
+        <img src={ images[image] } alt={ id } height="32px" width="32px" />
       </td>
     );
   }
@@ -23,8 +25,8 @@ export default class Square extends Component {
 }
 
 Square.propTypes = {
-	id: PropTypes.number,
-	name: PropTypes.string,
+  id: PropTypes.number,
+	image: PropTypes.string,
   selected: PropTypes.number,
   onSelectSquare: PropTypes.func
 };

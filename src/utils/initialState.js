@@ -1,4 +1,6 @@
 import { createBoardWithRiver } from './boardEngine.js';
+//import { riverX } from '../media/images/riverX';
+//import { riverY } from '../media/images/riverY';
 
 export const units = [
   {
@@ -96,7 +98,8 @@ export const terrains = [
   defense: 1,
   avoid: 0,
   movementSlow: 2,
-  passable: true
+  passable: true,
+  image: 'plain'
 },
 {
   id: 1,
@@ -104,7 +107,8 @@ export const terrains = [
   defense: 0,
   avoid: 1,
   movementSlow: 0.5,
-  passable: true
+  passable: true,
+  image: 'forest'
 },
 {
   id: 2,
@@ -112,7 +116,8 @@ export const terrains = [
   defense: 0,
   avoid: 0,
   movementSlow: 3,
-  passable: true
+  passable: true,
+  image: 'desert1'
 },
 {
   id: 3,
@@ -120,7 +125,8 @@ export const terrains = [
   defense: 0,
   avoid: 0,
   movementSlow: 3,
-  passable: true
+  passable: true,
+  image: 'snow'
 },
 {
   id: 4,
@@ -128,15 +134,8 @@ export const terrains = [
   defense: 2,
   avoid: 2,
   movementSlow: 1,
-  passable: false
-},
-{
-  id: 5,
-  name: 'lake',
-  defense: 0,
-  avoid: 0,
-  movementSlow: 1,
-  passable: false
+  passable: false,
+  image: 'mountain'
 },
 {
   id: 6,
@@ -144,7 +143,8 @@ export const terrains = [
   defense: 2,
   avoid: 2,
   movementSlow: 1,
-  passable: true
+  passable: true,
+  image: 'building1'
 }
 ];
 

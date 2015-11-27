@@ -40,20 +40,20 @@ export function createTerrain(type, size, terrains) {
   return namesOfTerrain;
 }
 
-export function determineType(type) {
+export function determineType(type) { //PORCENTAJES, SOBRAN O FALTAN DOS TIPOS DE TERRENO....
   let terrain = [];
   switch(type) {
     case 1:
-      terrain = [40, (-1), 30, 30, 30, 30, 25];
+      terrain = [40, (-1), 30, 30, 30, 10];
       break;
     case 2:
-      terrain = [40, 30, (-1), 30, 30, 30, 25];
+      terrain = [40, 30, (-1), 30, 30, 10];
       break;
     case 3:
-      terrain = [40, 30, 30, (-1), 30, 30, 25];
+      terrain = [40, 30, 30, (-1), 30, 10];
       break;
     default:
-      terrain = [(-1), 30, 40, 30, 30, 30, 25];
+      terrain = [(-1), 30, 40, 30, 30, 10];
   }
   return terrain;
 }
@@ -78,7 +78,8 @@ export function generateSquare(idSquare, currentTerrain) {
     id: idSquare,
     name: currentTerrain,
     unit: false,
-    interactive: false
+    interactive: false,
+    image: currentTerrain
   };
 }
 

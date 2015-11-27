@@ -10,17 +10,19 @@ export default class Board extends Component {
 
   render() {
     const { board, turn, onSelectSquare } = this.props;
+    let key = 0;
     return (
       <div>
         <table className="table table-bordered table-condensed col-md-0.5">
+        <tbody>
           {
             board.map ( (row) => {
             	return (
-            		<tr>
+            		<tr key={ key++ }>
             		{
             			row.map ( (square) => {
             				return (
-        							<Square id={ square.id } name={ square.name } selected={ turn.selected } onSelectSquare={onSelectSquare} />
+        							<Square key={ square.id } id={ square.id } image={ square.image } selected={ turn.selected } onSelectSquare={onSelectSquare} />
             				);
             			})
             		}
@@ -28,6 +30,7 @@ export default class Board extends Component {
             	);
           	})
           }
+        </tbody>
         </table>
       </div>
     );

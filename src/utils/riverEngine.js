@@ -43,20 +43,22 @@ export function firstRiverCreator(terrainName) {
   let id = generateId(position);
   let terrainIndex = getTerrainIndexByName(terrainName);
   let firstRiverObject = {
-    name : riverLikeTerrains[terrainIndex].name,
+    name: riverLikeTerrains[terrainIndex].name,
     defense: riverLikeTerrains[terrainIndex].defense,
     avoid: riverLikeTerrains[terrainIndex].avoid,
     movementSlow: riverLikeTerrains[terrainIndex].movementSlow,
     passable: riverLikeTerrains[terrainIndex].passable,
-    unit : false,
-    interactive : false,
-    position : position,
-    id : id,   
-    sense : randomBool() ? 1 : -1,
-    direction : randomBool() ? 'x' : 'y',
-    isDead : randomBool(),
-    hasBridge : false
+    unit: false,
+    interactive: false,
+    position: position,
+    id: id,   
+    sense: randomBool() ? 1 : -1,
+    direction: randomBool() ? 'x' : 'y',
+    isDead: randomBool(),
+    hasBridge: false,
+    image: 'riverX'
   };
+  firstRiverObject.image = setImage(firstRiverObject);
   return firstRiverObject;
 }
 
@@ -66,19 +68,20 @@ export function cloneRiver(river) {
   newPosition.y = river.position.y;
   let newId = generateId(newPosition);
   let clonedRiver = {
-    name : river.name,
+    name: river.name,
     defense: river.defense,
     avoid: river.avoid,
     movementSlow: river.movementSlow,
     passable: river.passable,
-    unit : false,
-    interactive : false,
-    position : newPosition,
-    id : newId,   
-    sense : river.sense,
-    direction : river.direction,
-    isDead : river.isDead,
-    hasBridge : false
+    unit: false,
+    interactive: false,
+    position: newPosition,
+    id: newId,   
+    sense: river.sense,
+    direction: river.direction,
+    isDead: river.isDead,
+    hasBridge: false,
+    image: river.image
   };
   return clonedRiver;
 }
@@ -154,11 +157,12 @@ export function advance(riverLike) {
 
 export function turn(riverLike) {
   riverLike.direction = (riverLike.direction === 'x') ? 'y' : 'x';
+  riverLike.image = setImage(riverLike);
   return riverLike.direction;
 }
 
 export function die(riverLike){ riverLike.isDead = true;}
 
-function setImage(riverLike) {  return '../media/terrains/riverLike/river/'+Like.name+'/'+riverLike.name+(direction === 'x' ? 'x' : 'y')+'.png' ;}
-//};
+export function setImage(riverLike) {  return (riverLike.direction === 'x') ? 'riverX' : 'riverY';}
+
 //export function pathTileUnder(){ return board[this.position['x']][this.position['y']] === 'plain' ? true : false;}
