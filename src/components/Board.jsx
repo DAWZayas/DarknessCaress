@@ -13,7 +13,7 @@ export default class Board extends Component {
     let key = 0;
     return (
       <div>
-        <table className="table table-bordered table-condensed col-md-0.5">
+        <table className="customTable">
         <tbody>
           {
             board.map ( (row) => {

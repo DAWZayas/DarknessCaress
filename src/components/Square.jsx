@@ -16,8 +16,8 @@ export default class Square extends Component {
     const { id, image, selected } = this.props;
     const select = selected === id ? 'success' : '';
     return (
-      <td height="32px" width="32px" className={ select } onClick={() => this.handleClick(id)}>
-        <img src={ images[image] } alt={ id } height="32px" width="32px" />
+      <td height="48px" width="48px" className={ select } onClick={() => this.handleClick(id)}>
+        <img src={ images[image] } alt={ id } height="48px" width="48px" />
       </td>
     );
   }

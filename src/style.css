@@ -84,6 +84,8 @@
   margin-bottom: 8px;
 }
 
-.board-component {
-  height: 80%!important;
+.customTable {
+  margin: 0;
+  height: 393px;
+  width: 393px;
 }

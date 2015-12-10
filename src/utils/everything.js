@@ -275,7 +275,7 @@ export function generateSquare(idSquare, currentTerrain) {
 export function takeSquares(percent, size) {
   return Math.floor((randomNumber(0, percent)) * size / 100);
 }
-
+/*
 export function applyRiversOld(boardBase){
   const rivers = riverCreator(1, 'river');
   let board = boardBase;
@@ -286,7 +286,7 @@ export function applyRiversOld(boardBase){
   });
   return board;
 }
-
+*/
 export function applyRivers(boardBase, rivers){
   let board = boardBase;
   rivers.map(river => {
@@ -317,6 +317,8 @@ export function firstRiverCreator(terrainName) {
   let position = initPos();
   let id = generateId(position);
   let terrainIndex = getTerrainIndexByName(terrainName);
+  let direction = randomBool() ? 'x' : 'y';
+  let imageName = terrainName + direction.toUpperCase();
   let firstRiverObject = {
     name: riverLikeTerrains[terrainIndex].name,
     defense: riverLikeTerrains[terrainIndex].defense,
@@ -328,10 +330,10 @@ export function firstRiverCreator(terrainName) {
     position: position,
     id: id,   
     sense: randomBool() ? 1 : -1,
-    direction: randomBool() ? 'x' : 'y',
+    direction: direction,
     isDead: randomBool(),
     hasBridge: false,
-    image: 'riverX'
+    image: imageName
   };
   firstRiverObject.image = setImage(firstRiverObject);
   return firstRiverObject;
@@ -363,6 +365,13 @@ export function cloneRiver(river) {
 
 export function initPos(){
   let pos = {};
+  pos.x = randomNumber(0, boardSize);
+  pos.y = randomNumber(0, boardSize);
+  return pos;
+}
+/*
+export function initPos(){
+  let pos = {};
   let bool1 = randomBool();
   let bool2 = randomBool();
   if(bool1) {
@@ -374,7 +383,7 @@ export function initPos(){
   }
   return pos;
 }
-
+*/
 export function getTerrainIndexByName(name){
   let index = 0;
   for(let i = 0; i < riverLikeTerrains.length; i++){
@@ -438,7 +447,7 @@ export function turns(riverLike) {
 
 export function die(riverLike){ riverLike.isDead = true;}
 
-export function setImage(riverLike) {  return (riverLike.direction === 'x') ? 'riverX' : 'riverY';}
+export function setImage(riverLike) {  return riverLike.image; }
 
 export function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -457,7 +466,14 @@ export function shuffle(array) {
 
 export function randomBool() { return randomNumber(1, 10) > 5 ? true : false; }
 
+export function randomRiver() {
+  const number = randomNumber(0, 5);
+  const name = riverLikeTerrains[randomNumber(0, 3)].name;
+  const board = createBoardWithRiver(boardSize, number, name);
+  return board;
+}
 
-const board1 = createBoardWithRiver(boardSize, 2, 'river');
-//const board2 = createBoardWithRiver(boardSize, 2, 'river');
-export const board = [board1];
+const board1 = randomRiver();
+const board2 = randomRiver();
+
+export const board = [board1, board2];
