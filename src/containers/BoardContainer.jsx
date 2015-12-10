@@ -1,22 +1,23 @@
 import { connect } from 'react-redux';
 
-import Board from '../components/Board';
-import { selectSquare } from '../actions';
+import BoardMenu from '../components/BoardMenu';
+import { selectSquare, addNewBoard } from '../actions';
 
 function mapStateToProps(state) {
   return {
-    board: state.board,
+    boards: state.board,
     turn: state.turn
   };
 }
 
 function mapActionsToProps(dispatch) {
   return {
-  	onSelectSquare: id => dispatch(selectSquare(id))
+  	onSelectSquare: id => dispatch(selectSquare(id)),
+  	onAddBoard: () => dispatch(addNewBoard())
   };
 }
 
 export default connect(
   mapStateToProps,
   mapActionsToProps
-)(Board);
+)(BoardMenu);

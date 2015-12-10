@@ -4,6 +4,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import injecTapEventPlugin from 'react-tap-event-plugin';
 import MenuDivider from 'material-ui/lib/menus/menu-divider';
 import MenuProfileContainer from '../containers/MenuProfileContainer';
+import BoardContainer from '../containers/BoardContainer';
 import Title from './Title';
 
 injecTapEventPlugin();
@@ -37,7 +38,7 @@ export default class Nav extends Component {
           <MenuItem primaryText="Follow Us :)" onTouchTap={this.handleTouchTap.bind(this)} />
         </LeftNav>
         <AppBar title={<Title navigate={navigate} />} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfileContainer navigate={navigate} />} />
-      {this.props.children}
+        {this.props.children}
       </nav>
     );
   }

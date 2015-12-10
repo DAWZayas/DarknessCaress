@@ -83,3 +83,7 @@
   padding-left: 24px;
   margin-bottom: 8px;
 }
+
+.board-component {
+  height: 80%!important;
+}

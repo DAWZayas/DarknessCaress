@@ -6,6 +6,8 @@ export const SET_EQUIPMENT = 'SET_EQUIPMENT';
 export const REMOVE_EQUIPMENT = 'REMOVE_EQUIPMENT';
 export const SELECT_SQUARE = 'SELECT_SQUARE';
 export const CHANGE_LOGGING = 'CHANGE_LOGGING';
+export const ADD_NEW_BOARD = 'ADD_NEW_BOARD';
+
 
 export function setFriend(friend) {
 	return { type: SET_FRIEND, friend};
@@ -37,4 +39,8 @@ export function selectSquare(id) {
 
 export function changeLogging() {
 	return { type: CHANGE_LOGGING };
+}
+
+export function addNewBoard() {
+	return { type: ADD_NEW_BOARD };
 }
