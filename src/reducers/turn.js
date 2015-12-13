@@ -1,8 +1,9 @@
 import { SELECT_SQUARE } from '../actions';
 
-function selectSquare(state, id) {
+function selectSquare(state, position, index) {
   const selection = {
-    selected: id
+    selected: position,
+    board: index
   };
   return Object.assign({}, state, selection);
 }
@@ -10,7 +11,7 @@ function selectSquare(state, id) {
 export default function turnReducer(state = {}, action) {
 	switch (action.type) {
   	case SELECT_SQUARE:
-  		return selectSquare(state, action.id);
+  		return selectSquare(state, action.position, action.index);
   	default:
   		return state;
   }

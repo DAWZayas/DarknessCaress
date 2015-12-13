@@ -14,7 +14,9 @@ export default class Offline extends Component {
   handleTouchTap(e){
     const { navigate } = this.props;
     const path = e.target.innerHTML.toLowerCase();
-    navigate(path);
+    path === 'help'
+      ? window.location.assign('https://en.wikipedia.org/wiki/Turn-based_strategy')
+      : navigate(path);
   }
   handleLog(){
     const { loggingState, logging } = this.props;

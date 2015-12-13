@@ -8,15 +8,14 @@ export default class Square extends Component {
     super(props);
   }
 
-	handleClick(id) {
-    this.props.onSelectSquare(id);
+	handleClick(position, index) {
+    this.props.onSelectSquare(position, index);
   }
 
   render() {
-    const { id, image, selected } = this.props;
-    const select = selected === id ? 'success' : '';
+    const { id, image, position, index } = this.props;
     return (
-      <td height="48px" width="48px" className={ select } onClick={() => this.handleClick(id)}>
+      <td height="48px" width="48px" onClick={() => this.handleClick(position, index)}>
         <img src={ images[image] } alt={ id } height="48px" width="48px" />
       </td>
     );
@@ -27,6 +26,7 @@ export default class Square extends Component {
 Square.propTypes = {
   id: PropTypes.number,
 	image: PropTypes.string,
-  selected: PropTypes.number,
-  onSelectSquare: PropTypes.func
+  onSelectSquare: PropTypes.func,
+  position: PropTypes.array,
+  index: PropTypes.number
 };

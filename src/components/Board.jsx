@@ -9,20 +9,20 @@ export default class Board extends Component {
   }
 
   render() {
-    const { board, turn, onSelectSquare } = this.props;
+    const { board, onSelectSquare, index } = this.props;
     let key = 0;
     return (
       <div>
         <table className="customTable">
         <tbody>
           {
-            board.map ( (row) => {
+            board.map ( (row, index1) => {
             	return (
             		<tr key={ key++ }>
             		{
-            			row.map ( (square) => {
+            			row.map ( (square, index2) => {
             				return (
-        							<Square key={ square.id } id={ square.id } image={ square.image } selected={ turn.selected } onSelectSquare={onSelectSquare} />
+        							<Square key={ square.id } position={[index1, index2]} index={index} id={ square.id } image={ square.image } onSelectSquare={onSelectSquare} />
             				);
             			})
             		}
@@ -40,6 +40,6 @@ export default class Board extends Component {
 
 Board.propTypes = {
   board: PropTypes.array.isRequired,
-  turn: PropTypes.object,
-  onSelectSquare: PropTypes.func
+  onSelectSquare: PropTypes.func,
+  index: PropTypes.number
 };

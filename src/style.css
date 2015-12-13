@@ -89,3 +89,11 @@
   height: 393px;
   width: 393px;
 }
+
+.submenu {
+  margin-top: 0px!important;
+}
+
+.btn {
+  margin: 10px!important;
+}

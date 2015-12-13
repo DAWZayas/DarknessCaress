@@ -14,11 +14,14 @@ export default class Online extends Component {
   handleTouchTap(e){
     const { navigate } = this.props;
     const path = e.target.innerHTML.toLowerCase();
-    navigate(path);
+    path === 'help'
+      ? window.location.assign('https://en.wikipedia.org/wiki/Turn-based_strategy')
+      : navigate(path);
   }
   handleLog(){
-    const { loggingState, logging } = this.props;
+    const { loggingState, logging, navigate } = this.props;
     loggingState(logging);
+    navigate('/');
   }
   render() {
     return (

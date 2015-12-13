@@ -5,14 +5,13 @@ import { selectSquare, addNewBoard } from '../actions';
 
 function mapStateToProps(state) {
   return {
-    boards: state.board,
-    turn: state.turn
+    boards: state.board
   };
 }
 
 function mapActionsToProps(dispatch) {
   return {
-  	onSelectSquare: id => dispatch(selectSquare(id)),
+  	onSelectSquare: (position, index) => dispatch(selectSquare(position, index)),
   	onAddBoard: () => dispatch(addNewBoard())
   };
 }

@@ -17,12 +17,14 @@ export default class BoardMenu extends Component {
   }
 
   handleChangeIndex(index) {
+    this.props.onSelectSquare([-1, -1], 0);
     this.setState({
       slideIndex: index
     });
   }
 
   handleChangeTabs(value) {
+    this.props.onSelectSquare([-1, -1], 0);
     this.setState({
       slideIndex: parseInt(value, 10)
     });
@@ -43,7 +45,7 @@ export default class BoardMenu extends Component {
         padding: 10
       }
     };
-    const { boards, turn, onSelectSquare } = this.props;
+    const { boards, onSelectSquare } = this.props;
 
     return (
       <div className="board-component">
@@ -67,7 +69,7 @@ export default class BoardMenu extends Component {
           boards.map( (board, index) => {
             return (
               <div className="board-component" key={index} style={style.slide}>
-                <Board board={board} turn={turn} onSelectSquare={onSelectSquare} />
+                <Board index={index} board={board} onSelectSquare={onSelectSquare} />
               </div>
             );
           })
@@ -98,7 +100,7 @@ export default class BoardMenu extends Component {
           boards.map( (board, index) => {
             return (
               <div className="board-component" key={index} style={style.slide}>
-                <Board board={board} turn={turn} onSelectSquare={onSelectSquare} />
+                <Board index={index} board={board} onSelectSquare={onSelectSquare} />
               </div>
             );
           })
@@ -113,7 +115,6 @@ export default class BoardMenu extends Component {
 
 BoardMenu.propTypes = {
   boards: PropTypes.array.isRequired,
-  turn: PropTypes.object,
   onSelectSquare: PropTypes.func,
   onAddBoard: PropTypes.func
 };

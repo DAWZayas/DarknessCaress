@@ -18,12 +18,16 @@ export default class Title extends Component {
   }
 
   render() {
+    const { logging } = this.props;
     return (
       <div>
-        <Link to="/">Darkness Caress</Link>
-        <span onClick={this.handleTouchTap.bind(this)}>
-          <IconButton iconClassName="material-icons" id="playButton" >videogame_asset</IconButton> 
-        </span>
+        <Link to="/"><span className="titulo">Darkness Caress</span></Link>
+        {
+          logging === false ? <span/> :
+          <span onClick={this.handleTouchTap.bind(this)}>
+            <IconButton iconClassName="material-icons" id="playButton" >videogame_asset</IconButton> 
+          </span>
+        }
       </div>
     );
   }
@@ -32,5 +36,6 @@ export default class Title extends Component {
 Title.propTypes = {
   // Injected by React Router
   children: PropTypes.node,
-  navigate: PropTypes.func
+  navigate: PropTypes.func,
+  logging: PropTypes.bool
 };

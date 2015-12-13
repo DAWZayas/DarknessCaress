@@ -84,10 +84,11 @@ export const friends = [
 
 export const turn = {
   active: true,
-  selected: -1
+  selected: [-1, -1],
+  board: 0
 };
 
-export const terrains = [
+export const terrains = [ 
 {
   id: 0,
   name: 'plains',
@@ -134,7 +135,7 @@ export const terrains = [
   image: 'mountain'
 },
 {
-  id: 6,
+  id: 5,
   name: 'building',
   defense: 2,
   avoid: 2,
@@ -229,20 +230,20 @@ export function createTerrain(type, size, terrains) {
   return namesOfTerrain;
 }
 
-export function determineType(type) { //PORCENTAJES, SOBRAN O FALTAN DOS TIPOS DE TERRENO....
+export function determineType(type) {
   let terrain = [];
-  switch(type) {
+  switch(type) { //plains  forest  desert  snow  mountain  building 
     case 1:
-      terrain = [40, (-1), 30, 30, 30, 10];
+      terrain = [40, (-1), 0, 10, 40, 1];
       break;
     case 2:
-      terrain = [40, 30, (-1), 30, 30, 10];
+      terrain = [10, 0, (-1), 0, 40, 1];
       break;
     case 3:
-      terrain = [40, 30, 30, (-1), 30, 10];
+      terrain = [20, 20, 0, (-1), 30, 1];
       break;
     default:
-      terrain = [(-1), 30, 40, 30, 30, 10];
+      terrain = [(-1), 40, 10, 20, 20, 3];
   }
   return terrain;
 }
@@ -304,10 +305,13 @@ export function riverCreator(rivers, terrainName) {
     arrayOfRivers[i]=[];
     arrayOfRivers[i][0] = firstRiverCreator(terrainName);
     u = 1;
+    let index = 0;
     while (!arrayOfRivers[i][u-1].isDead) {
       arrayOfRivers[i][u] = cloneRiver(arrayOfRivers[i][u-1]);
-      goWithTheFlow(arrayOfRivers[i][u]);
+      goWithTheFlow(arrayOfRivers[i][u], index);
+      buildBridge(arrayOfRivers[i][u], index, terrainName);
       u++;
+      index++;
     } 
   }
   return arrayOfRivers;
@@ -335,7 +339,7 @@ export function firstRiverCreator(terrainName) {
     hasBridge: false,
     image: imageName
   };
-  firstRiverObject.image = setImage(firstRiverObject);
+//  firstRiverObject.image = setImage(firstRiverObject);
   return firstRiverObject;
 }
 
@@ -407,8 +411,11 @@ export function previousPosition(i, u){ //  NEVER USED ???
   }
 }
 
-export function goWithTheFlow(river){
+export function goWithTheFlow(river, index){
   let action = generateRandomAction();
+  if((index !== 0) && (index % 4 === 0)) {
+    action = 1;
+  }
   switch(action) {
     case 2:
       turns(river);
@@ -441,13 +448,22 @@ export function advance(riverLike) {
 
 export function turns(riverLike) {
   riverLike.direction = (riverLike.direction === 'x') ? 'y' : 'x';
-  riverLike.image = setImage(riverLike);
+//  riverLike.image = setImage(riverLike);
   return riverLike.direction;
 }
 
 export function die(riverLike){ riverLike.isDead = true;}
 
-export function setImage(riverLike) {  return riverLike.image; }
+export function buildBridge(riverLike, index, terrainName) {
+  if((index !== 0) && (index % 3 === 0)) {
+    riverLike.name = 'bridge';
+  }else{
+    riverLike.name = terrainName;
+  }
+  riverLike.image = riverLike.name + riverLike.direction.toUpperCase();
+}
+
+//export function setImage(riverLike) {  return riverLike.image; }
 
 export function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -468,12 +484,15 @@ export function randomBool() { return randomNumber(1, 10) > 5 ? true : false; }
 
 export function randomRiver() {
   const number = randomNumber(0, 5);
-  const name = riverLikeTerrains[randomNumber(0, 3)].name;
+  const name = riverLikeTerrains[randomNumber(0, 2)].name;
   const board = createBoardWithRiver(boardSize, number, name);
   return board;
 }
 
-const board1 = randomRiver();
-const board2 = randomRiver();
+
+const number1 = randomNumber(0, 5);
+const board1 = createBoardWithRiver(boardSize, number1, 'river');
+const number2 = randomNumber(0, 5);
+const board2 = createBoardWithRiver(boardSize, number2, 'river');
 
 export const board = [board1, board2];

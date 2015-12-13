@@ -33,8 +33,8 @@ export function removeEquipment(equipment) {
 	return { type: REMOVE_EQUIPMENT, equipment};
 }
 
-export function selectSquare(id) {
-	return { type: SELECT_SQUARE, id};
+export function selectSquare(position, index) {
+	return { type: SELECT_SQUARE, position, index};
 }
 
 export function changeLogging() {

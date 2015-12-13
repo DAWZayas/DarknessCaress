@@ -9,14 +9,14 @@ export default class SubMenu extends Component {
   }
 
   render() {
-    const { turn, onSelectSquare } = this.props;
+    const { boards, turn, onSelectSquare } = this.props;
     return (
       <div>
         <span  className={turn.active ? 'hidden' : ''}>
           <h3>Waiting for the opponent...</h3>
         </span>
         <span  className={turn.active ? '' : 'hidden'}>
-          <TurnMenu turn={turn} onSelectSquare={onSelectSquare}/>
+          <TurnMenu boards={boards} turn={turn} onSelectSquare={onSelectSquare}/>
         </span>
       </div>
     );
@@ -25,5 +25,6 @@ export default class SubMenu extends Component {
 
 SubMenu.propTypes = {
   onSelectSquare: PropTypes.func,
-  turn: PropTypes.object
+  turn: PropTypes.object,
+  boards: PropTypes.array
 };
