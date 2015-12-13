@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import MenuProfile from '../containers/MenuProfile';
-import { changeLogging } from '../actions';
+
 import { pushState } from 'redux-router';
 
 

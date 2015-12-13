@@ -41,7 +41,7 @@ export default class TabContainer extends Component {
       <div>
       <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
         <Tab label="Equipment" value="0" />
-        <Tab label="Characters" value="1" />
+        <Tab label="Champions" value="1" />
         <Tab label="Friends" value="2" />
       </Tabs>
       <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChangeIndex.bind(this)}>
