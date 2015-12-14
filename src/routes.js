@@ -5,6 +5,7 @@ import App from './containers/App';
 import GameContainer from './containers/GameContainer';
 import TabContainer from './containers/TabContainer';
 import UnitsContainer from './containers/UnitsContainer';
+import UnitDetailContainer from './containers/UnitDetailContainer';
 import EquipmentContainer from './containers/EquipmentContainer';
 import FriendsContainer from './containers/FriendsContainer';
 
@@ -13,6 +14,7 @@ export default (
     <Route path="game" component={GameContainer} />
     <Route path="profile" component={TabContainer} />
     <Route path="units" component={UnitsContainer} />
+    <Route path="units/:name" component={UnitDetailContainer} />
     <Route path="equipment" component={EquipmentContainer} />
     <Route path="friends" component={FriendsContainer} />
     <Redirect path="*" to="/" />

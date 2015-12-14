@@ -96,12 +96,12 @@ export const terrains = [
   avoid: 0,
   movementSlow: 2,
   passable: true,
-  image: 'plain'
+  image: 'plains'
 },
 {
   id: 1,
   name: 'forest',
-  defense: 0,
+  defense: 2,
   avoid: 1,
   movementSlow: 0.5,
   passable: true,
@@ -114,13 +114,13 @@ export const terrains = [
   avoid: 0,
   movementSlow: 3,
   passable: true,
-  image: 'desert1'
+  image: 'desert'
 },
 {
   id: 3,
   name: 'snow',
   defense: 0,
-  avoid: 0,
+  avoid: 1,
   movementSlow: 3,
   passable: true,
   image: 'snow'
@@ -137,11 +137,11 @@ export const terrains = [
 {
   id: 5,
   name: 'building',
-  defense: 2,
+  defense: 3,
   avoid: 2,
   movementSlow: 1,
   passable: true,
-  image: 'building1'
+  image: 'building'
 }
 ];
 
@@ -209,7 +209,7 @@ export function createBoard(size, terrains) {
     board[i] = []; 
     for (let j = 0; j < size; j++) {
       let currentTerrain = terrainComplete[idSquare];
-      board[i][j] = generateSquare(idSquare, currentTerrain); 
+      board[i][j] = generateSquare(idSquare, currentTerrain, terrains); 
       idSquare++;
     }
   }
@@ -263,7 +263,10 @@ export function iterateTakeSquares(terrain, size) {
   return terrain;
 }
 
-export function generateSquare(idSquare, currentTerrain) {
+export function generateSquare(idSquare, currentTerrain, terrains) {
+  const terrain = searchTerrain(terrains, currentTerrain);
+  const newTerrain = Object.assign({}, terrain, {id: idSquare});
+  /*
   return {
     id: idSquare,
     name: currentTerrain,
@@ -271,6 +274,12 @@ export function generateSquare(idSquare, currentTerrain) {
     interactive: false,
     image: currentTerrain
   };
+  */
+  return newTerrain;
+}
+
+export function searchTerrain(terrains, name) {
+  return terrains.filter( terrain => terrain.name === name )[0];
 }
 
 export function takeSquares(percent, size) {

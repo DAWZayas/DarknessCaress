@@ -17,14 +17,14 @@ export default class BoardMenu extends Component {
   }
 
   handleChangeIndex(index) {
-    this.props.onSelectSquare([-1, -1], 0);
+    this.props.onSelectSquare([-1, -1], index);
     this.setState({
       slideIndex: index
     });
   }
 
   handleChangeTabs(value) {
-    this.props.onSelectSquare([-1, -1], 0);
+    this.props.onSelectSquare([-1, -1], parseInt(value, 10));
     this.setState({
       slideIndex: parseInt(value, 10)
     });
@@ -76,8 +76,8 @@ export default class BoardMenu extends Component {
         }
         {
           boards.length >= 5 ? '' :
-            (<div className="board-component" style={style.slide}>
-              <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick()}>New Game</button>
+            (<div className="board-component center-block" style={style.slide}>
+              <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick()}>Start New Game</button>
             </div>)
         }
       </SwipeableViews>

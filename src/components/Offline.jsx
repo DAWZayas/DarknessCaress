@@ -19,8 +19,9 @@ export default class Offline extends Component {
       : navigate(path);
   }
   handleLog(){
-    const { loggingState, logging } = this.props;
+    const { loggingState, logging, navigate } = this.props;
     loggingState(logging);
+    navigate('/');
   }
   render() {  
     return (

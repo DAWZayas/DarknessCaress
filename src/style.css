@@ -100,6 +100,7 @@
   margin: 10px!important;
 }
 
+<<<<<<< HEAD
 #experienceBar{
   width:60% !important;
   height:14px !important;
@@ -141,4 +142,14 @@
 body{
   background-color:#353535 !important;
   color:#FFF!important;
+}
+
+.boardSubMenu {
+  padding: 0px!important;
+  margin: 0px!important;
+}
+
+.bordered{
+  padding: 10px!important;
+  font-size: 1.2em;
 }
