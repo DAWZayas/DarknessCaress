@@ -1,10 +1,13 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+*{
+  font-family: 'Raleway', sans-serif;
+}
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
   src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://fonts.gstatic.com/s/materialicons/v9/2fcrYFNaTjcS6g4U3t-Y5ewrjPiaoEww8AihgqWRJAo.woff) format('woff');
 }
-
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -97,3 +100,27 @@
 .btn {
   margin: 10px!important;
 }
+#experienceBar{
+  width:60% !important;
+  height:14px !important;
+}
+#overlap{
+  position:relative;
+  float:left;
+  margin-right:25px;
+}
+#avatarHolder{
+  position:absolute;
+  height:80px;
+  width:80px;
+  top:-7px;
+  left:-7px;
+}
+#principalHeroes{
+  display: flex;
+  justify-content: space-around;
+}
+#principalHeroes div{
+  text-align:center;
+}
+
