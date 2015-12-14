@@ -19,5 +19,5 @@ export default class UnitsList extends Component{
 }
 UnitsList.propTypes = {
   pokemons: PropTypes.array,
-  inputValue: PropTypes.String
+  inputValue: PropTypes.string
 };
