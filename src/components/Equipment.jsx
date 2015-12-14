@@ -1,20 +1,19 @@
 import React, { Component, PropTypes } from 'react';
+const apiUrl = 'http://www.feplanet.net/media/sprites/8/items/sword/';
 
-export default class Equipment extends Component {
-
-  render() {
-    const { name, damage, durability } = this.props;
-    return (
-      <li>
-        <span>{name}: {damage} damage, {durability} durability.</span>
-      </li>
-    );
+export default class Equipment extends Component{
+  render(){
+    return( <div className="equipment">
+              <figure>
+                  <img src={`${apiUrl}${this.props.item.name.toLowerCase()}.gif`} width="80"/>
+              </figure>
+              <div>
+                <span>{this.props.item.id}</span> - {this.props.item.name}
+              </div>  
+           </div>
+          ); 
   }
-
 }
-
 Equipment.propTypes = {
-  name: PropTypes.string,
-  damage: PropTypes.string,
-  durability: PropTypes.string
+  item: PropTypes.object
 };

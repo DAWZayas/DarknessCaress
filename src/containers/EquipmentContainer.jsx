@@ -1,22 +1,24 @@
-import { connect } from 'react-redux';
-
+import React, { Component } from 'react';
+import EquipmentSearch from '../components/EquipmentSearch';
 import EquipmentList from '../components/EquipmentList';
-import { setEquipment } from '../actions';
+import { allItems } from '../utils/allItems';
 
+export default class UnitsContainer extends Component{
+	constructor(props){
+		super(props);
+		this.state = {inputValue:''};
+	}
 
-function mapStateToProps(state) {
-  return {
-    equipment: state.equipment
-  };
+	searchBy(input){
+		this.setState({ inputValue : input.target.value });
+	}
+
+	render(){
+ 		return(	<div>
+ 					<EquipmentSearch searchBy={this.searchBy.bind(this)} />
+ 					<EquipmentList items={allItems} inputValue={this.state.inputValue.toLowerCase()}/>
+ 				</div>
+        );    
+	}
+
 }
-
-function mapActionsToProps(dispatch) {
-  return {
-  	onAddEquipmentClick: equip => dispatch(setEquipment(equip))
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(EquipmentList);

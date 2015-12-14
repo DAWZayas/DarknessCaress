@@ -4,11 +4,12 @@ import Unit from './Unit';
 export default class UnitsList extends Component{
   
   render(){
+    const { pokemons } = this.props;
     return( <div className="Pokemons">
             {
-              this.props.pokemons.map( pokemon => {
+              pokemons.map( (pokemon, index) => {
                 if(pokemon.name.search(this.props.inputValue) >  -1) {
-                  return (<Unit key={pokemon.id} pokemon={pokemon}/>);    
+                  return (<Unit key={index} pokemon={pokemon}/>);    
                 } 
               
               })

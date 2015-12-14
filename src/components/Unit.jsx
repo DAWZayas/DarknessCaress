@@ -1,19 +1,24 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
+
 const apiUrl = 'http://img.pokemondb.net/sprites/black-white/anim/normal/';
 
 export default class Unit extends Component{
+  
   render(){
+    const { pokemon } = this.props;
     return( <div className="Pokemon">
               <figure>
-                  <img src={`${apiUrl}${this.props.pokemon.name}.gif`} width="80"/>
+                  <Link to={`/units/${pokemon.name}`}><img src={`${apiUrl}${pokemon.name}.gif`} width="80"/></Link>
               </figure>
               <div>
-                <span>{this.props.pokemon.id}</span> - {this.props.pokemon.name}
+                <span>{pokemon.id}</span> - {pokemon.name}
               </div>  
            </div>
           ); 
   }
 }
+
 Unit.propTypes = {
   pokemon: PropTypes.object
 };

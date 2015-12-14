@@ -9,7 +9,12 @@ export default class TurnMenu extends Component {
   }
 
   handleDeselectButtonClick() {
-    this.props.onSelectSquare([-1, -1], 0);
+    const board = this.props.turn;
+    this.props.onSelectSquare([-1, -1], board);
+  }
+
+  handleRemoveBoard() {
+
   }
 
   render() {
@@ -19,9 +24,8 @@ export default class TurnMenu extends Component {
       <div>
         {
           (selectedSquare === -1)
-          ? <div className="submenu"><h3>Select a square of the map</h3></div>
-          : <div className="submenu">
-              <h3>Terrain selected:</h3>
+          ? <div className="alert alert-info boardSubMenu" role="alert">Select a square of the map<button onClick={() => this.handleRemoveBoard()} className="btn btn-alert pull-right"><span className="glyphicon glyphicon-trash"></span></button></div>
+          : <div className="alert alert-info boardSubMenu" role="alert">
               <img src={ images[selectedSquare.image] } alt={ 'terrain selected' } height="48px" width="48px" />
               <span> { selectedSquare.name }. Position: row { turn.selected[0] + 1}, column { turn.selected[1] + 1}.</span><br/>
               <button className="btn btn-info" type="button" onClick={() => this.handleDeselectButtonClick()}>Deselect Square</button>

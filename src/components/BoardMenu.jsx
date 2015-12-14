@@ -17,14 +17,14 @@ export default class BoardMenu extends Component {
   }
 
   handleChangeIndex(index) {
-    this.props.onSelectSquare([-1, -1], 0);
+    this.props.onSelectSquare([-1, -1], index);
     this.setState({
       slideIndex: index
     });
   }
 
   handleChangeTabs(value) {
-    this.props.onSelectSquare([-1, -1], 0);
+    this.props.onSelectSquare([-1, -1], parseInt(value, 10));
     this.setState({
       slideIndex: parseInt(value, 10)
     });
