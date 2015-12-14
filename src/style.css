@@ -8,6 +8,7 @@
   font-weight: 400;
   src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://fonts.gstatic.com/s/materialicons/v9/2fcrYFNaTjcS6g4U3t-Y5ewrjPiaoEww8AihgqWRJAo.woff) format('woff');
 }
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -74,11 +75,9 @@
   left:-215px; 
   size: 30px;
 }
-#mainNav{
-  background: #E0E0E0;
-}
+
 #headerNav {
-  background-color:#00bcd4;
+  background-color:#523C26;
   color: rgba(255, 255, 255, 1);
   font-size: 24px;
   line-height: 64px;
@@ -100,6 +99,7 @@
 .btn {
   margin: 10px!important;
 }
+
 #experienceBar{
   width:60% !important;
   height:14px !important;
@@ -113,14 +113,32 @@
   position:absolute;
   height:80px;
   width:80px;
-  top:-7px;
+  top:-6px;
   left:-7px;
 }
 #principalHeroes{
-  display: flex;
-  justify-content: space-around;
+  float:left;
+  width:50%;
 }
 #principalHeroes div{
-  text-align:center;
+  text-align:left;
 }
-
+#stadistics{
+  text-align:right;
+}
+#headerB{
+  background-color: #523C26 !important;
+}
+#tabbedTabs div{
+  background-color:#96704E;
+}
+#tabbedTabs div:nth-child(2) div:first-child{
+  background-color:#1FAAFB !important;
+}
+.material-icons{
+  color:#FFF !important;
+}
+body{
+  background-color:#353535 !important;
+  color:#FFF!important;
+}
