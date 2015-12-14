@@ -16,7 +16,7 @@ export default class UnitDetail extends Component{
 		else{
 			return (
 				   <section className="PokeDetail">
-			         <h4>{pokemon.name}</h4>
+			         <h3>{pokemon.name.slice(0, 1).toUpperCase() + pokemon.name.slice(1)}</h3>
 			       	<div className="PokeDetail-images">
 			       	  <img src={`${apiUrl}${pokemon.name}.gif`} width="80"/>
 			        </div>
