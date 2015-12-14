@@ -24,10 +24,12 @@ export default class TurnMenu extends Component {
       <div>
         {
           (selectedSquare === -1)
-          ? <div className="alert alert-info boardSubMenu" role="alert">Select a square of the map<button onClick={() => this.handleRemoveBoard()} className="btn btn-alert pull-right"><span className="glyphicon glyphicon-trash"></span></button></div>
+          ? ''
           : <div className="alert alert-info boardSubMenu" role="alert">
-              <img src={ images[selectedSquare.image] } alt={ 'terrain selected' } height="48px" width="48px" />
-              <span> { selectedSquare.name }. Position: row { turn.selected[0] + 1}, column { turn.selected[1] + 1}.</span><br/>
+              <div className="bordered">
+                <img src={ images[selectedSquare.image] } alt={ 'terrain selected' } height="48px" width="48px" />
+                <span> { selectedSquare.name.slice(0, 1).toUpperCase() + selectedSquare.name.slice(1) }. Defense: { selectedSquare.defense }. Dodge: { selectedSquare.avoid }.</span><br/>
+              </div>
               <button className="btn btn-info" type="button" onClick={() => this.handleDeselectButtonClick()}>Deselect Square</button>
             </div>
         }
