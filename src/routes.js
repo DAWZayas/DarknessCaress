@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router';
+import { Route, Redirect, IndexRoute } from 'react-router';
 
 import App from './containers/App';
 import GameContainer from './containers/GameContainer';
@@ -8,6 +8,7 @@ import UnitsContainer from './containers/UnitsContainer';
 import UnitDetailContainer from './containers/UnitDetailContainer';
 import EquipmentContainer from './containers/EquipmentContainer';
 import FriendsContainer from './containers/FriendsContainer';
+import Landing from './components/Landing';
 
 export default (
   <Route path="/" component={App}>
@@ -19,5 +20,6 @@ export default (
     <Route path="friends" component={FriendsContainer} />
     <Redirect path="*" to="/" />
     <Redirect path="github" to="https://github.com" />
+    <IndexRoute component={Landing} />
   </Route>
 );

@@ -11,7 +11,7 @@ export default class UnitDetail extends Component{
 		const { pokemon } = this.props;
 		const { pokeName } = this.props;
 		if(pokemon === undefined){
-			return ( <h1> {pokeName} no es un Pokémon :(</h1>);
+			return ( <h2> {pokeName} no es un Pokémon :(</h2>);
 		}
 		else{
 			return (

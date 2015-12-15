@@ -9,7 +9,7 @@ export default class Unit extends Component{
     return( 
      <div className="Pokemon">
         <figure>
-            <Link to={`/units/${pokemon.name}`}><img src={`${apiUrl}${pokemon.name}.gif`} width="80"/></Link>
+            <Link to={`units/${pokemon.name}`}><img src={`${apiUrl}${pokemon.name}.gif`} width="80"/></Link>
         </figure>
         <div>
           <span>{pokemon.id}</span> - {pokemon.name.slice(0, 1).toUpperCase() + pokemon.name.slice(1)}

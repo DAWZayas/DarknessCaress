@@ -26,11 +26,11 @@ export default class Online extends Component {
   render() {
     return (
        <IconMenu iconButtonElement={<IconButton iconClassName="material-icons">account_circle</IconButton>}>
-         <MenuItem primaryText="Profile" onTouchTap={this.handleTouchTap.bind(this)} leftIcon={<FontIcon className="material-icons">person</FontIcon>} />
-         <MenuItem primaryText="Settings" onTouchTap={this.handleTouchTap.bind(this)} leftIcon={<FontIcon className="material-icons">settings</FontIcon>} />
-         <MenuItem primaryText="Help" onTouchTap={this.handleTouchTap.bind(this)} leftIcon={<FontIcon className="material-icons">help</FontIcon>} />
+         <MenuItem primaryText="Profile" onTouchTap={this.handleTouchTap.bind(this)} leftIcon={<FontIcon className="material-icons icono-negro">person</FontIcon>} />
+         <MenuItem primaryText="Settings" onTouchTap={this.handleTouchTap.bind(this)} leftIcon={<FontIcon className="material-icons icono-negro">settings</FontIcon>} />
+         <MenuItem primaryText="Help" onTouchTap={this.handleTouchTap.bind(this)} leftIcon={<FontIcon className="material-icons icono-negro">help</FontIcon>} />
          <MenuDivider />
-         <MenuItem primaryText="Log Out" onTouchTap={this.handleLog.bind(this)} leftIcon={<FontIcon className="glyphicon glyphicon-log-out" />} />
+         <MenuItem primaryText="Log Out" onTouchTap={this.handleLog.bind(this)} leftIcon={<FontIcon className="glyphicon glyphicon-log-out icono-negro" />} />
        </IconMenu>
     );
   }

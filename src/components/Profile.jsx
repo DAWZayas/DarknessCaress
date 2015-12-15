@@ -15,9 +15,8 @@ export default class Profile extends Component {
         <div>
           <p className="profile">Nivel 15</p>
           <LinearProgress id="experienceBar" mode="determinate" value={60} />
-        </div>  
-        <p>rangosssss (variable.state)</p>
-      <div>
+        </div>
+      <div className="status-content">
         <div id="principalHeroes">
         <div>
           <img src={`${apiUrl}bulbasaur.gif`} width="80" />
@@ -26,10 +25,6 @@ export default class Profile extends Component {
         <div>
           <img src={`${apiUrl}ivysaur.gif`} width="80" />
           <p>2nd Most used hero: ivysaur.</p>
-        </div>
-        <div>
-          <img src={`${apiUrl}venusaur.gif`} width="80" />
-          <p>3th Most used hero: venosaur.</p>
         </div>
         </div>
         <div id="stadistics">

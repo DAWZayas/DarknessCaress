@@ -208,3 +208,14 @@ body{
   font-size: 1.2em;
 }
 
+.icono-negro {
+  color:#4f4f4f!important;
+}
+
+.status-content {
+  margin-top: 50px!important;
+}
+
+.imagen-landing {
+  width: 500px!important;
+}
