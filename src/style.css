@@ -100,11 +100,11 @@
   margin: 10px!important;
 }
 
-<<<<<<< HEAD
 #experienceBar{
   width:60% !important;
   height:14px !important;
 }
+
 #overlap{
   position:relative;
   float:left;
@@ -130,10 +130,10 @@
 #headerB{
   background-color: #523C26 !important;
 }
-#tabbedTabs div{
+.tabbedTabs div{
   background-color:#96704E;
 }
-#tabbedTabs div:nth-child(2) div:first-child{
+.tabbedTabs div:nth-child(2) div:first-child{
   background-color:#1FAAFB !important;
 }
 .material-icons{
