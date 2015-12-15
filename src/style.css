@@ -1,3 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+*{
+  font-family: 'Raleway', sans-serif;
+}
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -71,11 +75,9 @@
   left:-215px; 
   size: 30px;
 }
-#mainNav{
-  background: #E0E0E0;
-}
+
 #headerNav {
-  background-color:#00bcd4;
+  background-color:#523C26;
   color: rgba(255, 255, 255, 1);
   font-size: 24px;
   line-height: 64px;
@@ -97,6 +99,7 @@
 .btn {
   margin: 10px!important;
 }
+
 .Pokemons {
   display: flex;
   flex-wrap: wrap;
@@ -151,3 +154,57 @@
   position: absolute;
   right: 0;
 }
+
+#experienceBar{
+  width:60% !important;
+  height:14px !important;
+}
+#overlap{
+  position:relative;
+  float:left;
+  margin-right:25px;
+}
+#avatarHolder{
+  position:absolute;
+  height:80px;
+  width:80px;
+  top:-6px;
+  left:-7px;
+}
+#principalHeroes{
+  float:left;
+  width:50%;
+}
+#principalHeroes div{
+  text-align:left;
+}
+#stadistics{
+  text-align:right;
+}
+#headerB{
+  background-color: #523C26 !important;
+}
+#tabbedTabs div{
+  background-color:#96704E;
+}
+#tabbedTabs div:nth-child(2) div:first-child{
+  background-color:#1FAAFB !important;
+}
+.material-icons{
+  color:#FFF !important;
+}
+body{
+  background-color:#353535 !important;
+  color:#FFF!important;
+}
+
+.boardSubMenu {
+  padding: 0px!important;
+  margin: 0px!important;
+}
+
+.bordered{
+  padding: 10px!important;
+  font-size: 1.2em;
+}
+

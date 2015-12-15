@@ -33,7 +33,7 @@ export default class Nav extends Component {
     const { navigate, logging, loggingState } = this.props;
     return (
       <nav>
-        <LeftNav id="mainNav" ref="leftNav" docked={false} header={<div id="headerNav">DarknessCaress</div>} disableSwipeToOpen>
+        <LeftNav ref="leftNav" docked={false} header={<div id="headerNav">DarknessCaress</div>} disableSwipeToOpen>
           <MenuItem primaryText="Home" onTouchTap={this.handleTouchTap.bind(this)} />
           {
             logging === true ? <MenuItem primaryText="Game" onTouchTap={this.handleTouchTap.bind(this)} /> : ''
@@ -42,7 +42,7 @@ export default class Nav extends Component {
           <MenuItem primaryText="GitHub" onTouchTap={this.handleTouchTap.bind(this)} />
           <MenuItem primaryText="Follow Us :)" onTouchTap={this.handleTouchTap.bind(this)} />
         </LeftNav>
-        <AppBar title={<Title logging={logging} navigate={navigate} />} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfile navigate={navigate} logging={logging} loggingState={loggingState} />} />
+        <AppBar id="headerB" title={<Title logging={logging} navigate={navigate} />} onLeftIconButtonTouchTap={this.handleClick.bind(this) } iconElementRight={<MenuProfile navigate={navigate} logging={logging} loggingState={loggingState} />} />
       {this.props.children}
       </nav>
     );

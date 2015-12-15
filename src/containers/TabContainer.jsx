@@ -4,7 +4,7 @@ import SwipeableViews from 'react-swipeable-views';
 import injecTapEventPlugin from 'react-tap-event-plugin';
 
 import EquipmentContainer from './EquipmentContainer';
-import FriendsContainer from './FriendsContainer';
+import Profile from '../components/Profile';
 import UnitsContainer from './UnitsContainer';
 
 injecTapEventPlugin();
@@ -39,10 +39,10 @@ export default class TabContainer extends Component {
     
     return (
       <div>
-      <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+      <Tabs id="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
         <Tab label="Equipment" value="0" />
         <Tab label="Champions" value="1" />
-        <Tab label="Friends" value="2" />
+        <Tab label="Status" value="2" />
       </Tabs>
       <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChangeIndex.bind(this)}>
         <div style={style.slide}>
@@ -52,7 +52,7 @@ export default class TabContainer extends Component {
           <UnitsContainer />
         </div>
         <div style={style.slide}>
-          <FriendsContainer />
+          <Profile />
         </div>
       </SwipeableViews>
       </div>
