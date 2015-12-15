@@ -97,3 +97,57 @@
 .btn {
   margin: 10px!important;
 }
+.Pokemons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+}
+.Pokemon {
+  background: #f7f7f7;
+  height: 150px;
+  position: relative;
+  text-align: center;
+  width: 130px;
+}
+.Pokemon:hover{
+  border: 1px solid #ed1c23;
+}
+.Pokemon figure {
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+}
+.Pokemon div {
+  background: #ed1c23;
+  bottom: 0;
+  color: #fff;
+  left: 0;
+  padding: 5px 0;
+  position: absolute;
+  right: 0;
+}
+
+.equipment {
+  background: #f7f7f7;
+  height: 120px;
+  position: relative;
+  text-align: center;
+}
+.equipment:hover{
+  border: 1px solid #ed1c23;
+}
+.equipment figure {
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+}
+.equipment div {
+  background: #ed1c23;
+  bottom: 0;
+  color: #fff;
+  left: 0;
+  padding: 5px 0;
+  position: absolute;
+  right: 0;
+}
