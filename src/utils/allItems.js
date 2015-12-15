@@ -1,7 +1,7 @@
 export const allItems = [
   {
     'id': '001',
-    'name': 'Armorslayer',
+    'name': 'armorslayer',
     'buy': '1260',
     'uses': '18',
     'rng': '1',
@@ -12,7 +12,7 @@ export const allItems = [
   },
   {
     'id': '002',
-    'name': 'Audhulma',
+    'name': 'audhulma',
     'buy': '----',
     'uses': '30',
     'rng': '1',
@@ -23,7 +23,7 @@ export const allItems = [
   },  
   {
     'id': '003',
-    'name': 'Brave Sword',
+    'name': 'brave sword',
     'buy': '7500',
     'uses': '30',
     'rng': '1',
@@ -34,7 +34,7 @@ export const allItems = [
   },
   {
     'id': '004',
-    'name': 'Iron Blade',
+    'name': 'iron blade',
     'buy': '980',
     'uses': '18',
     'rng': '1',
@@ -45,7 +45,7 @@ export const allItems = [
   },
   {
     'id': '005',
-    'name': 'Iron Sword',
+    'name': 'iron sword',
     'buy': '480',
     'uses': '5',
     'rng': '18',
@@ -56,7 +56,7 @@ export const allItems = [
   },
   {
     'id': '006',
-    'name': 'Killing Edge',
+    'name': 'killing edge',
     'buy': '640',
     'uses': '18',
     'rng': '2',
@@ -67,7 +67,7 @@ export const allItems = [
   },
   {
     'id': '007',
-    'name': 'Lancereaver',
+    'name': 'lancereaver',
     'buy': '1800',
     'uses': '18',
     'rng': '3',
@@ -78,7 +78,7 @@ export const allItems = [
   },
   {
     'id': '008',
-    'name': 'Light Brand',
+    'name': 'light brand',
     'buy': '1260',
     'uses': '18',
     'rng': '18',
@@ -89,7 +89,7 @@ export const allItems = [
   },
   {
     'id': '009',
-    'name': 'Poison Sword',
+    'name': 'poison sword',
     'buy': '1260',
     'uses': '18',
     'rng': '18',
@@ -100,7 +100,7 @@ export const allItems = [
   },
   {
     'id': '010',
-    'name': 'Rapier',
+    'name': 'rapier',
     'buy': '1260',
     'uses': '18',
     'rng': '18',
@@ -111,7 +111,7 @@ export const allItems = [
   },
   {
     'id': '011',
-    'name': 'Rapier',
+    'name': 'rapier',
     'buy': '8000',
     'uses': '40',
     'rng': '2',
@@ -122,7 +122,7 @@ export const allItems = [
   },
   {
     'id': '012',
-    'name': 'ShadowKiller',
+    'name': 'shadowkiller',
     'buy': '500',
     'uses': '18',
     'rng': '18',
