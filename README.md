@@ -22,10 +22,10 @@ Server side:
 * And more!
 
 Links:
-*[Additional information](https://github.com/DAWZayas/DarknessCaress).
-*ghpages:
-*[DEMO](http://dawzayas.github.io/DarknessCaress/)
-*firebase:
-*[DEMO](https://darkness-caress.firebaseapp.com/)
-*firebase with mobiletest:
-*[DEMO](http://mobiletest.me/htc_one_emulator/?u=https://darkness-caress.firebaseapp.com/)
+* [Additional information](https://github.com/DAWZayas/DarknessCaress).
+* ghpages:
+* [DEMO](http://dawzayas.github.io/DarknessCaress/)
+* firebase:
+* [DEMO](https://darkness-caress.firebaseapp.com/)
+* firebase with mobiletest:
+* [DEMO](http://mobiletest.me/htc_one_emulator/?u=https://darkness-caress.firebaseapp.com/)
