@@ -8,7 +8,8 @@
     "test": "npm run lint ; node_modules/.bin/mocha --compilers js:babel-core/register --require test/test_helper.js './test/tests.js'",
     "test:watch": "npm run test -- --watch",
     "lint": "./node_modules/.bin/eslint --ext=jsx --ext=js src/ test/",
-    "dist": "rm -rf dist/bundle.js dist/*.svg && ./node_modules/.bin/webpack --config webpack.production.config.js"
+    "dist": "rm -rf dist/bundle.js dist/*.svg && ./node_modules/.bin/webpack --config webpack.production.config.js",
+    "deploy": "npm run dist -- && node_modules/.bin/firebase login && node_modules/.bin/firebase deploy && node_modules/.bin/firebase open"
   },
   "author": "Alberto, Alejandro, Carlos",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "eslint-loader": "^1.1.0",
     "eslint-plugin-react": "^3.6.3",
     "file-loader": "^0.8.4",
+    "firebase-tools": "^2.1.0",
     "jsdom": "^7.0.2",
     "mocha": "^2.3.3",
     "react-addons-test-utils": "^0.14.0",
@@ -36,10 +38,11 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
-    "immutable": "^3.7.5",
     "babel-runtime": "^5.8.29",
     "bootstrap": "^3.3.5",
+    "firebase": "^2.3.2",
     "history": "^1.13.0",
+    "immutable": "^3.7.5",
     "material-ui":"^0.13.2",
     "material-design-icons":"^2.0.0",
     "react": "^0.14.0",
