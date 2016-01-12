@@ -52,7 +52,7 @@ export default class BoardMenu extends Component {
       {
       boards.length < 5 ?
       (<div>
-      <Tabs className="tabbedTabs"onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+      <Tabs className="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
         {
           boards.map( (board, index) => {
             const newValue = '' + index;
@@ -84,7 +84,7 @@ export default class BoardMenu extends Component {
       </div>)
       :
       (<div>
-      <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+      <Tabs className="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
         {
           boards.map( (board, index) => {
             const newValue = '' + index;
