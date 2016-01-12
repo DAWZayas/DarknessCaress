@@ -21,8 +21,8 @@ Server side:
 * Matchmaking with players, or IA.
 * And more!
 
-[Additional information](https://github.com/DAWZayas/DarknessCaress).
-ghpages:
-[DEMO](http://dawzayas.github.io/DarknessCaress/)
-firebase:
-[DEMO](http://mobiletest.me/htc_one_emulator/?u=https://darkness-caress.firebaseio.com/)
+Links:
+* [Additional information](https://github.com/DAWZayas/DarknessCaress).
+* [Ghpages](http://dawzayas.github.io/DarknessCaress/).
+* [Firebase](https://darkness-caress.firebaseapp.com/).
+* [Firebase with mobiletest](http://mobiletest.me/htc_one_emulator/?u=https://darkness-caress.firebaseapp.com/).
