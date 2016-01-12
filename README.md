@@ -2,7 +2,6 @@
 #Darkness' Caress:
 ### The world-wide well-known on-line game.
 
-
 Rpg-themed turn-based on-line multiplayin'-game featuring:
 * Live saving any progress done, so even if you disconnect suddenly, progress will be stored.
 * Unlock characters, armor, weapons, skins and so on.
