@@ -77,7 +77,6 @@
 }
 
 #headerNav {
-  background-color:#523C26;
   color: rgba(255, 255, 255, 1);
   font-size: 24px;
   line-height: 64px;
@@ -103,49 +102,29 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-
 }
-.Pokemon {
-  background: #96704E;
+#Pokemon {
   height: 150px;
   position: relative;
   text-align: center;
   width: 130px;
 }
-.Pokemon:hover{
-  border: 1px solid #ed1c23;
-}
-.Pokemon figure {
-  cursor: pointer;
-  margin: 5px;
-  padding: 5px;
-}
-.Pokemon div {
-  background: #523C26;
-  bottom: 0;
-  color: #fff;
-  left: 0;
-  padding: 5px 0;
-  position: absolute;
-  right: 0;
-}
-
-.equipment {
-  background: #96704E;
+#Equipment {
   height: 120px;
   position: relative;
   text-align: center;
 }
-.equipment:hover{
-  border: 1px solid #ed1c23;
+.Selectable:hover{
+  border: 1px solid #3375AE;
+  background-color:#424242;
 }
-.equipment figure {
+.Selectable figure {
   cursor: pointer;
   margin: 5px;
   padding: 5px;
 }
-.equipment div {
-  background: #523C26;
+.Selectable div {
+  background: #424242;
   bottom: 0;
   color: #fff;
   left: 0;
@@ -153,8 +132,8 @@
   position: absolute;
   right: 0;
 }
-
 #experienceBar{
+  background-color: #E6E6E6;
   width:60% !important;
   height:14px !important;
 }
@@ -180,15 +159,6 @@
 }
 #stadistics{
   text-align:right;
-}
-#headerB{
-  background-color: #523C26 !important;
-}
-.tabbedTabs div{
-  background-color:#96704E;
-}
-.tabbedTabs div:nth-child(2) div:first-child{
-  background-color:#1FAAFB !important;
 }
 .material-icons{
   color:#FFF !important;

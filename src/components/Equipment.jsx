@@ -3,7 +3,7 @@ const apiUrl = 'http://www.feplanet.net/media/sprites/8/items/sword/';
 
 export default class Equipment extends Component{
   render(){
-    return( <div className="equipment">
+    return( <div id="Equipment" className="Selectable">
               <figure>
                   <img src={`${apiUrl}${this.props.item.name.toLowerCase()}.gif`} width="80"/>
               </figure>

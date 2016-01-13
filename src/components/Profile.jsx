@@ -14,7 +14,7 @@ export default class Profile extends Component {
         </div>
         <div>
           <p className="profile">Nivel 15</p>
-          <LinearProgress id="experienceBar" mode="determinate" value={60} />
+          <LinearProgress id="experienceBar" mode="determinate" value={60} color="#33B5E5"/>
         </div>
       <div className="status-content">
         <div id="principalHeroes">

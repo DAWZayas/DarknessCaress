@@ -7,7 +7,7 @@ export default class Unit extends Component{
   render(){
     const { pokemon } = this.props;
     return( 
-     <div className="Pokemon">
+     <div id="Pokemon" className="Selectable">
         <figure>
             <Link to={`units/${pokemon.name}`}><img src={`${apiUrl}${pokemon.name}.gif`} width="80"/></Link>
         </figure>
