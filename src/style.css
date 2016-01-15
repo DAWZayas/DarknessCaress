@@ -104,10 +104,11 @@
   justify-content: space-around;
 }
 #Pokemon {
-  height: 150px;
+  margin-bottom: 0.2em;
+  height: 10em;
   position: relative;
   text-align: center;
-  width: 130px;
+  width: 30vw;
 }
 #Equipment {
   height: 120px;
