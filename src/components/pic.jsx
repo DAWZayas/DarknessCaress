@@ -5,14 +5,14 @@ const apiUrl = 'http://img.pokemondb.net/sprites/black-white/anim/normal/';
 
 export default class Unit extends Component{
   render(){
-    const { unit } = this.props;
+    const { pokemon } = this.props;
     return( 
      <div id="Pokemon" className="Selectable">
         <figure>
-            <Link to={`units/${unit.name}`}><UnitImage unit={unit}></Link>
+            <Link to={`units/${pokemon.name}`}><img src={`${apiUrl}${pokemon.name}.gif`} width="80"/></Link>
         </figure>
         <div>
-          <span>{unit.id}</span> - {unit.name.slice(0, 1).toUpperCase() + unit.name.slice(1)}
+          <span>{pokemon.id}</span> - {pokemon.name.slice(0, 1).toUpperCase() + pokemon.name.slice(1)}
         </div>  
      </div>
     ); 
@@ -20,5 +20,5 @@ export default class Unit extends Component{
 }
 
 Unit.propTypes = {
-  unit: PropTypes.object
+  pokemon: PropTypes.object
 };
