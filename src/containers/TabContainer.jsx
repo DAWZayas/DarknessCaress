@@ -36,7 +36,6 @@ export default class TabContainer extends Component {
         padding: 10
       }
     };
-    
     return (
       <div>
       <Tabs className="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>

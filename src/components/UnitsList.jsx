@@ -10,11 +10,21 @@ export default class UnitsList extends Component{
     const { pokemons } = this.props;
     return(
       <div id="Slider">
-        <Coverflow width="960" height="500" displayQuantityOfSide={2} navigation={false}>
+        <Coverflow media={{
+			'@media (max-width: 900px)': {
+				width: 'auto',
+				height: '400px'
+			},
+			'@media (min-width: 900px)': {
+				width: 'auto',
+				height: '400px'
+			}
+		}}
+		displayQuantityOfSide={2} navigation={false}>
           {
             pokemons.map( (unit, index) => {
               if (unit.name.search(this.props.inputValue) > -1) {
-                return ( <img key={ index } alt={ unit.name } url={ `units/${unit.name}` } src={ `${apiUrl}${unit.name}.gif` } width="300" /> );
+                return ( <img key={ index } alt={ unit.name } url={ `units/${unit.name}` } src={ `${apiUrl}${unit.name}.gif` }height="300" width="300" /> );
              // return ( <UnitImage key={ index }  unit={ unit }/> );
               }
             })
