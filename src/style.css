@@ -77,6 +77,7 @@
 }
 
 #headerNav {
+  background-color:#523C26;
   color: rgba(255, 255, 255, 1);
   font-size: 24px;
   line-height: 64px;
@@ -98,34 +99,29 @@
 .btn {
   margin: 10px!important;
 }
-.Pokemons {
+.heroes {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+
 }
-#Pokemon {
-  margin-bottom: 0.2em;
-  height: 10em;
+.hero {
+  background: #96704E;
+  height: 150px;
   position: relative;
   text-align: center;
-  width: 30vw;
+  width: 130px;
 }
-#Equipment {
-  height: 120px;
-  position: relative;
-  text-align: center;
+.hero:hover{
+  border: 1px solid #ed1c23;
 }
-.Selectable:hover{
-  border: 1px solid #3375AE;
-  background-color:#424242;
-}
-.Selectable figure {
+.hero figure {
   cursor: pointer;
   margin: 5px;
   padding: 5px;
 }
-.Selectable div {
-  background: #424242;
+.hero div {
+  background: #523C26;
   bottom: 0;
   color: #fff;
   left: 0;
@@ -133,8 +129,32 @@
   position: absolute;
   right: 0;
 }
+
+.item {
+  background: #96704E;
+  height: 120px;
+  position: relative;
+  text-align: center;
+}
+.item:hover{
+  border: 1px solid #ed1c23;
+}
+.item figure {
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+}
+.item div {
+  background: #523C26;
+  bottom: 0;
+  color: #fff;
+  left: 0;
+  padding: 5px 0;
+  position: absolute;
+  right: 0;
+}
+
 #experienceBar{
-  background-color: #E6E6E6;
   width:60% !important;
   height:14px !important;
 }
@@ -160,6 +180,15 @@
 }
 #stadistics{
   text-align:right;
+}
+#headerB{
+  background-color: #523C26 !important;
+}
+.tabbedTabs div{
+  background-color:#96704E;
+}
+.tabbedTabs div:nth-child(2) div:first-child{
+  background-color:#1FAAFB !important;
 }
 .material-icons{
   color:#FFF !important;
@@ -189,7 +218,4 @@ body{
 
 .imagen-landing {
   width: 500px!important;
-}
-#Slider{
-	background-image: url("http://www.planwallpaper.com/static/images/2022725-wallpaper_625864_Iz6NK8G.jpg");
 }

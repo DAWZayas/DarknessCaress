@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from './containers/Root';
+import Root from './containers/Root/Root';
 
 import init from './utils/init';
 
@@ -10,6 +10,6 @@ require('bootstrap/dist/css/bootstrap.min.css');
 const store = init();
 
 ReactDOM.render(
-  <Root store={store}/>,
+  <Root store={store} />,
   document.getElementById('root')
 );

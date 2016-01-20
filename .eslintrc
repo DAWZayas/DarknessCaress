@@ -1,55 +1,58 @@
 {
-    "parser": "babel-eslint",
-    "env": {
-        "browser": true,
-        "node": true,
-        "es6": true,
-        "jasmine": true
-    },
-    "ecmaFeatures": {
-        "jsx": true,
-        "arrowFunctions": true
-    },
-    "globals": {
-        "React": true
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "camelcase": [2, {
-            "properties": "always"
-        }],
-        "comma-spacing": [2, {
-            "before": false,
-            "after": true
-        }],
-        "eqeqeq": [2, "smart"],
-        "indent": [0, 2, {
-            "SwitchCase": 1
-        }],
-        "no-unused-vars": [2, {
-            "vars": "all",
-            "args": "after-used"
-        }],
-        "no-use-before-define": [2, "nofunc"],
-        "quotes": [2, "single"],
-        "semi": [2, "always"],
-        "jsx-quotes": 1,
+  "ecmaFeatures": {
+    "modules": true,
+    "jsx": true
+  },
 
-        // eslint-plugin-react specific
-        "react/jsx-boolean-value": 1,
-        "react/jsx-no-undef": 1,
-        "react/jsx-uses-react": 1,
-        "react/jsx-uses-vars": 1,
-        "react/no-did-mount-set-state": 1,
-        "react/no-did-update-set-state": 1,
-        "react/no-multi-comp": 1,
-        "react/no-unknown-property": 1,
-        "react/prop-types": 1,
-        "react/react-in-jsx-scope": 1,
-        "react/self-closing-comp": 1,
-        "react/sort-comp": 1,
-        "react/wrap-multilines": 1
-    }
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,   
+    "jquery": true
+  },
+
+  "rules": {
+
+    "no-extra-semi": 2,           // disallow unnecessary semicolons
+    "no-func-assign": 2,          // disallow overwriting functions written as function declarations
+    "no-irregular-whitespace": 1, // disallow irregular whitespace outside of strings and comments
+    "no-sparse-arrays": 1,        // disallow sparse arrays
+    "no-unreachable": 2,          // disallow unreachable statements after a return, throw, continue, or break statement
+    "use-isnan": 2,               // disallow comparisons with the value NaN
+    "valid-typeof": 2,            // Ensure that the results of typeof are compared against a valid string
+
+
+    ////////// Best Practices //////////
+
+    "eqeqeq": 2,                // require the use of === and !==
+    "no-alert": 1,              // disallow the use of alert, confirm, and prompt
+
+    ////////// Variables //////////
+
+    "no-delete-var": 1,               // disallow deletion of variables
+    "no-undef": 2,                    // disallow use of undeclared variables unless mentioned in a /*global */ block
+    "no-undef-init": 1,               // disallow use of undefined when initializing variables
+    "no-unused-vars": 0,              // disallow declaration of variables that are not used in the code
+    "no-use-before-define": 2,        // disallow use of variables before they are defined
+
+    ////////// Stylistic Issues //////////
+
+    "camelcase": 1,                 // require camel case names
+    "comma-spacing": 1,             // enforce spacing before and after comma
+    "eol-last": 2,                  // enforce newline at the end of file, with no multiple empty lines
+    "new-cap": 2,                   // require a capital letter for constructors
+    "no-array-constructor": 1,      // disallow use of the Array constructor
+    "no-mixed-spaces-and-tabs": 1,  // disallow mixed spaces and tabs for indentation
+    "no-multiple-empty-lines": 1,   // disallow multiple empty lines (off by default)
+    "no-trailing-spaces": 2,        // disallow trailing whitespace at the end of lines
+    "semi": 2,                      // require or disallow use of semicolons instead of ASI
+    "space-after-keywords": 1,      // require a space after certain keywords (off by default)
+    "space-infix-ops": 1,           // require spaces around operators
+
+
+    ////////// ECMAScript 6 //////////
+
+    "no-var": 2,          // require let or const instead of var (off by default) 
+
+  }
 }
