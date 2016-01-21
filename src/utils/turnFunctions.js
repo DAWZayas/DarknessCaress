@@ -66,7 +66,7 @@ export function generateOverlayArray(boardSize) {
 	let overlayArray = Array(boardSize).fill(Array(boardSize));
 	for (let i = 0; i < boardSize; i++) {
 		for (let j = 0; j < boardSize; j++) {
-			overlayArray[i][j] = 3;
+			overlayArray[i][j] = 0;
 		};
 	};
 	return overlayArray;
