@@ -36,8 +36,8 @@ export default class GameTabs extends Component {
     });
   }
 
-  onNewGameButtonClick() {
-    this.props.addNewBoard();
+  onNewGameButtonClick(size, rivers) {
+    this.props.addNewBoard(size, rivers);
     this.setState({
       slideIndex: 0
     });
@@ -81,7 +81,7 @@ export default class GameTabs extends Component {
           {
             boards.length >= 5 ? '' :
               (<div className="center-block" style={style.slide}>
-                <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick()}>Start New Game</button>
+                <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
               </div>)
           }
         </SwipeableViews>

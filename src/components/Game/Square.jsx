@@ -9,10 +9,15 @@ export default class Square extends Component {
   }
 
   render() {
-    const { id, image, position } = this.props;
+    const { id, image, position, color } = this.props;
     return (
-      <td height="48px" width="48px">
-        <img src={ images[image] } alt={ id } height="48px" width="48px" />
+      <td className="squareHolder">
+        <div className="square">
+          <img src={ images[image] } alt={ id } height="48px" width="48px" />
+        </div>
+        <div className="squareOverlay">
+          <div className={`overlay${color}`} />
+        </div>
       </td>
     );
   }
@@ -22,5 +27,6 @@ export default class Square extends Component {
 Square.propTypes = {
   id: PropTypes.number,
 	image: PropTypes.string,
-  position: PropTypes.array
+  position: PropTypes.array,
+  color: PropTypes.number
 };
