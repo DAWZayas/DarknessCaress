@@ -70,6 +70,37 @@
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
+.log{  
+  padding-top: 20vh;
+  margin: 11vh;
+  margin-top: 13vh;
+}
+.log .logoboros{
+  position: absolute;
+  width: 32vh;
+  margin: 3vh;
+  margin-top: -12em;
+}
+
+.log div{
+  margin-bottom: 0.75em;
+}
+
+.log div:nth-child(4){
+  width: 60vw;
+  margin-top: 1.75em;
+}
+.log div:nth-child(4) button{
+  background-color: #636363!important;
+}
+.log div:nth-child(4) button div div span{
+  color: rgba(0,0,0,0.3)!important;
+}
+.log a{
+  text-align: center;
+  color: #4B84B5;
+}
+
 #playButton{
   margin-left: 50%;
   left:-215px; 

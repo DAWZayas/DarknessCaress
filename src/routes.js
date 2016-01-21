@@ -9,10 +9,12 @@ import UnitDetailContainer from './containers/UnitDetailContainer';
 import EquipmentContainer from './containers/EquipmentContainer';
 import FriendsContainer from './containers/FriendsContainer';
 import Landing from './components/Landing';
+import LoginContainer from './containers/LoginContainer';
 
 export default (
   <Route path="/" component={App}>
     <Route path="game" component={GameContainer} />
+    <Route path="Login" component={LoginContainer} />
     <Route path="profile" component={TabContainer} />
     <Route path="units" component={UnitsContainer} />
     <Route path="units/:name" component={UnitDetailContainer} />
