@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 
 injecTapEventPlugin();
 
-export default class Login extends Component {
+export default class ChangePassword extends Component {
 
   constructor(props) {
     super(props);
@@ -21,23 +21,21 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="log">
+      <div className="pass">
         <div> <img className="logoboros" src="http://img14.deviantart.net/b815/i/2012/363/0/5/ouroboros_fma_by_jordanpokemon28-d5pjakh.png"/></div>
-        <TextField floatingLabelText="User Name" />
-        <TextField floatingLabelText="Password" 
-        type="password" />
+        <TextField floatingLabelText="Email" />
         <br/>
-        <RaisedButton label="Log In" onTouchTap={this.handleLog.bind(this)}/>
+        <RaisedButton label="Recovery My Password" onTouchTap={this.handleLog.bind(this)}/>
         <br/>
         <Link to="register"><span className="titulo">No account yet? Create one</span></Link>
         <br/>
-        <Link to="changepassword"><span className="titulo">Forgot password?</span></Link>
+        Already have an account?<Link to="login"><span className="titulo">Login</span></Link>
       </div>         
     );
   }
 }
 
-Login.propTypes = {
+ChangePassword.propTypes = {
   // Injected by React Router
   children: PropTypes.node,
   loggingState: PropTypes.func,

@@ -22,7 +22,7 @@ export default class Offline extends Component {
 
     handleLogin(){
     const { navigate } = this.props;
-    const path = 'Login';
+    const path = 'login';
     navigate(path);
   }
   

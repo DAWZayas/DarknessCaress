@@ -71,7 +71,7 @@
 .material-icons.md-48 { font-size: 48px; }
 
 .log{  
-  padding-top: 20vh;
+  padding-top: 15vh;
   margin: 11vh;
   margin-top: 13vh;
 }
@@ -79,26 +79,89 @@
   position: absolute;
   width: 32vh;
   margin: 3vh;
-  margin-top: -12em;
+  margin-top: -10em;
 }
 
 .log div{
   margin-bottom: 0.75em;
 }
 
-.log div:nth-child(4){
+.log div:nth-child(5){
   width: 60vw;
   margin-top: 1.75em;
 }
-.log div:nth-child(4) button{
+.log div:nth-child(5) button{
   background-color: #636363!important;
 }
-.log div:nth-child(4) button div div span{
-  color: rgba(0,0,0,0.3)!important;
+.log div:nth-child(5) button div div span{
+  color: #000000!important;
 }
 .log a{
   text-align: center;
   color: #4B84B5;
+  margin-left: 6vw;
+}
+.reg{  
+  padding-top: 12vh;
+  margin: 11vh;
+  margin-top: 13vh;
+}
+.reg .logoboros{
+  position: absolute;
+  width: 32vh;
+  margin: 3vh;
+  margin-top: -9em;
+}
+
+.reg div{
+  margin-bottom: 0.4em;
+}
+
+.reg div:nth-child(7){
+  width: 60vw;
+  margin-top: 1.75em;
+}
+.reg div:nth-child(7) button{
+  background-color: #636363!important;
+}
+.reg div:nth-child(7) button div div span{
+  color: #000000!important;
+}
+.reg a{
+  text-align: center;
+  color: #4B84B5;
+  margin-left: 2vw;
+}
+.pass{  
+  padding-top: 15vh;
+  margin: 11vh;
+  margin-top: 13vh;
+}
+.pass .logoboros{
+  position: absolute;
+  width: 32vh;
+  margin: 3vh;
+  margin-top: -10em;
+}
+
+.pass div{
+  margin-bottom: 0.75em;
+}
+
+.pass div:nth-child(4){
+  width: 60vw;
+  margin-top: 1.75em;
+}
+.pass div:nth-child(4) button{
+  background-color: #636363!important;
+}
+.pass div:nth-child(4) button div div span{
+  color: #000000!important;
+}
+.pass a{
+  text-align: center;
+  color: #4B84B5;
+  margin-left: 6vw;
 }
 
 #playButton{
