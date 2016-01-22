@@ -4,14 +4,14 @@ const apiUrl = 'http://img.pokemondb.net/sprites/black-white/anim/normal/';
 
 export default class UnitImage extends Component{
   render(){
-    const { unit } = this.props;
+    const { key, unit } = this.props;
     return( 
-      <img key={ key } alt={unit.name} url={`units/${unit.name}`} src={`${apiUrl}${unit.name}.gif`} width="300" /> 
+      <img key={ key } alt={unit.name} url={`units/${unit.name}`} src={`${apiUrl}${unit.name}.gif`} /> 
     ); 
   }
 }
 
 UnitImage.propTypes = {
-  unit: PropTypes.object,
-  key: PropTypes.number
+  key: PropTypes.number,
+  unit: PropTypes.object
 };

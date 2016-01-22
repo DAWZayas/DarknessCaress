@@ -17,7 +17,7 @@ export default class UnitsContainer extends Component{
  		return(	
         <div>
  					<UnitSearch searchBy={this.searchBy.bind(this)} />
- 					<UnitsList pokemons={allUnits} inputValue={this.state.inputValue.toLowerCase()}/>
+ 					<UnitsList units={allUnits} inputValue={this.state.inputValue.toLowerCase()}/>
  				</div>
         );    
 	}
