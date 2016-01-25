@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import Carousel from 'nuka-carousel';
 import Unit from './Unit';
+import decorator from './SliderDecorator.js';
 
 export default class Slider extends Component{
   render(){
     const {units, inputValue} = this.props;
     return(
-      <Carousel slidesToShow={5} slidesToScroll={"auto"} cellSpacing={4}>
+      //React resposive here
+      <Carousel ref={"carousel"} decorators={decorator} slidesToShow={5} slidesToScroll={"auto"} cellSpacing={4}>
       {
       units.map((unit, index)=>{
       	if(unit.name.search(inputValue) > -1){
