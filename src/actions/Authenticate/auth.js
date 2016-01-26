@@ -1,14 +1,14 @@
-export const INIT_AUTH = 'INIT_AUTH';
-export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
-export const SIGN_OUT_SUCCESS = 'SIGN_OUT_SUCCESS';
+import { INIT_AUTH, SIGN_IN_SUCCESS, SIGN_OUT_SUCCESS } from './action_types';
+import { pushState } from 'redux-router';
+
+export const navigate = (path) => pushState(null, path);
 
 function authenticate(provider) {
   return (dispatch, getState) => {
     const { firebase } = getState();
-
     firebase.authWithOAuthPopup(provider, (error, authData) => {
       if (error) {
-        console.error('ERROR @ authWithOAuthPopup :', error); // eslint-disable-line no-console
+        console.error('ERROR @ authWithOAuthPopup :', error);
       }
       else {
         dispatch({
@@ -21,6 +21,10 @@ function authenticate(provider) {
       }
     });
   };
+}
+
+export function signInWithGoogle() {
+  return authenticate('google');
 }
 
 export function initAuth() {
@@ -36,18 +40,6 @@ export function initAuth() {
   };
 }
 
-export function signInWithGithub() {
-  return authenticate('github');
-}
-
-export function signInWithGoogle() {
-  return authenticate('google');
-}
-
-export function signInWithTwitter() {
-  return authenticate('twitter');
-}
-
 export function signOut() {
   return (dispatch, getState) => {
     const { firebase } = getState();
@@ -55,5 +47,11 @@ export function signOut() {
     dispatch({
       type: SIGN_OUT_SUCCESS
     });
+  };
+}
+
+export function cancelSignIn() {
+  return dispatch => {
+    return dispatch(pushState(null, '/'));
   };
 }

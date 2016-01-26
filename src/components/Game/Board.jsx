@@ -1,19 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 
 import Square from './Square';
-import { generateOverlayArray } from '../../utils/turnFunctions';
 
 export default class Board extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      overlayArray: generateOverlayArray(this.props.board.length)
-    };
   }
 
   render() {
-    const { board } = this.props;
+    const { board, selectSquare, turn } = this.props;
     return (
       <div>
         <table className="customTable">
@@ -25,7 +21,7 @@ export default class Board extends Component {
             		{
             			row.map ( (square, index2) => {
             				return (
-        						  <Square key={ index2 } position={[index1, index2]} id={ square.id } image={ square.image } color={this.state.overlayArray[index1][index2]} />
+        						  <Square key={ index2 } position={[index1, index2]} id={ square.id } image={ square.image } color={this.props.overlayArray[index1][index2]} { ...this.props } />
             				);
             			})
             		}
@@ -42,5 +38,8 @@ export default class Board extends Component {
 }
 
 Board.propTypes = {
-  board: PropTypes.array.isRequired
+  board: PropTypes.array.isRequired,
+  overlayArray: PropTypes.array,
+  selectSquare: PropTypes.func,
+  turn: PropTypes.string
 };

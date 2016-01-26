@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
-import * as NavActions from '../../actions/Nav';
+import * as NavActions from '../../actions/Authenticate';
 
 export default connect(
-  state => ({ state }),
+  state => ({ auth: state.auth }),
   NavActions
 )(Nav);

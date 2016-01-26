@@ -4,8 +4,9 @@ export const terrains = [
   name: 'plains',
   defense: 1,
   avoid: 0,
-  movementSlow: 2,
+  movementSlow: 1,
   passable: true,
+  unit: null,
   image: 'plains'
 },
 {
@@ -13,8 +14,9 @@ export const terrains = [
   name: 'forest',
   defense: 2,
   avoid: 1,
-  movementSlow: 0.5,
+  movementSlow: 2,
   passable: true,
+  unit: null,
   image: 'forest'
 },
 {
@@ -24,6 +26,7 @@ export const terrains = [
   avoid: 0,
   movementSlow: 3,
   passable: true,
+  unit: null,
   image: 'desert'
 },
 {
@@ -33,6 +36,7 @@ export const terrains = [
   avoid: 1,
   movementSlow: 3,
   passable: true,
+  unit: null,
   image: 'snow'
 },
 {
@@ -40,8 +44,9 @@ export const terrains = [
   name: 'mountain',
   defense: 2,
   avoid: 2,
-  movementSlow: 1,
-  passable: false,
+  movementSlow: 3,
+  passable: true,
+  unit: null,
   image: 'mountain'
 },
 {
@@ -51,6 +56,7 @@ export const terrains = [
   avoid: 2,
   movementSlow: 1,
   passable: true,
+  unit: null,
   image: 'building'
 }
 ];

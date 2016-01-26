@@ -8,10 +8,24 @@ export default class Square extends Component {
     super(props);
   }
 
+  handleSelectSquare(position) {
+    switch(this.props.turn){
+      case 'start':
+        this.props.selectSquare(position);
+        break;
+      case 'moving':
+        this.props.moveUnit(position);
+        break;
+      case 'attacking':
+        this.props.attackUnit(position);
+        break;
+    }
+  }
+
   render() {
     const { id, image, position, color } = this.props;
     return (
-      <td className="squareHolder">
+      <td className="squareHolder" onClick={() => this.handleSelectSquare(position)}>
         <div className="square">
           <img src={ images[image] } alt={ id } height="48px" width="48px" />
         </div>
@@ -28,5 +42,7 @@ Square.propTypes = {
   id: PropTypes.number,
 	image: PropTypes.string,
   position: PropTypes.array,
-  color: PropTypes.number
+  color: PropTypes.number,
+  selectSquare:PropTypes.func,
+  turn: PropTypes.string
 };

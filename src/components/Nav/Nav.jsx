@@ -29,7 +29,7 @@ export default class Nav extends Component {
   }
 
   render() {
-    const { navigate } = this.props;
+    const { auth, navigate } = this.props;
     return (
       <nav>
         <LeftNav ref="leftNav" docked={false} header={<div id="headerNav">DarknessCaress</div>} disableSwipeToOpen>
@@ -39,7 +39,7 @@ export default class Nav extends Component {
           <MenuItem primaryText="GitHub" onTouchTap={this.handleTouchTap.bind(this, 'github')} />
           <MenuItem primaryText="Follow Us :)" onTouchTap={this.handleTouchTap.bind(this, 'twitter')} />
         </LeftNav>
-      <AppBar title={<Title />} onLeftIconButtonTouchTap={this.handleToggle.bind(this)} iconElementRight={<ProfileMenu navigate={navigate} />} />
+      <AppBar title={<Title />} onLeftIconButtonTouchTap={this.handleToggle.bind(this)} iconElementRight={<ProfileMenu signInWithGoogle={this.props.signInWithGoogle} auth={auth} navigate={navigate} />} />
       {this.props.children}
       </nav>
     );

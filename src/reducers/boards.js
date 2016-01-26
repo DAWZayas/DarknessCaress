@@ -1,7 +1,7 @@
 import { SET_BOARDS } from '../actions/Game';
 
 function setBoards(state, boards) {
-  return boards.slice();
+  return boards;
 }
 
 export default function boardsReducer(state = [], action) {

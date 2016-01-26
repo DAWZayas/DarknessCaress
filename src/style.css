@@ -246,8 +246,28 @@ body{
   height: 48px!important;
   width: 48px!important;
   position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .squareOverlay {
   z-index: 200;
 }
+
+.boardMenu {
+  overflow: visible;
+  height: 200px;
+}
+
+html {
+  height: 100vh!important;
+}
+
+.board-component {
+  height: 80vh;
+}
+/*
+nav {
+  height: 80vh;
+}
+*/

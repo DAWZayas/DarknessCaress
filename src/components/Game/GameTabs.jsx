@@ -3,7 +3,7 @@ import { Tabs, Tab } from 'material-ui';
 import SwipeableViews from 'react-swipeable-views';
 import injecTapEventPlugin from 'react-tap-event-plugin';
 
-import Board from './Board';
+import Game from './Game';
 
 injecTapEventPlugin();
 
@@ -50,7 +50,7 @@ export default class GameTabs extends Component {
         padding: 10
       }
     };
-    const { boards } = this.props;
+    const boards = this.props.boards || [];
     return (
       <div>
       {
@@ -58,7 +58,7 @@ export default class GameTabs extends Component {
       (<div>
         <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
           {
-            boards.map( (board, index) => {
+            boards.map( (boardObject, index) => {
               const newValue = '' + index;
               const newLabel = 'Game ' + (index + 1);
               return (
@@ -70,10 +70,11 @@ export default class GameTabs extends Component {
         </Tabs>
         <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChangeIndex.bind(this)}>
           {
-            boards.map( (board, index) => {
+            boards.map( (boardObject, index) => {
+              const boardId = Object.keys(boardObject)[0];
               return (
-                <div key={index} style={style.slide}>
-                  <Board board={board} />
+                <div className="board-component" key={index} style={style.slide}>
+                  <Game className="game" board={boardObject[`${boardId}`]} boardId={boardId} { ...this.props } />
                 </div>
               );
             })
@@ -90,7 +91,7 @@ export default class GameTabs extends Component {
       (<div>
         <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
           {
-            boards.map( (board, index) => {
+            boards.map( (boardObject, index) => {
               const newValue = '' + index;
               const newLabel = 'Game ' + (index + 1);
               return (
@@ -101,10 +102,11 @@ export default class GameTabs extends Component {
         </Tabs>
         <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChangeIndex.bind(this)}>
           {
-            boards.map( (board, index) => {
+            boards.map( (boardObject, index) => {
+              const boardId = Object.keys(boardObject)[0];
               return (
                 <div className="board-component" key={index} style={style.slide}>
-                  <Board board={board} />
+                  <Game className="game" board={boardObject[`${boardId}`]} boardId={boardId} { ...this.props } />
                 </div>
               );
             })
@@ -120,6 +122,7 @@ export default class GameTabs extends Component {
 GameTabs.propTypes = {
   boards: PropTypes.array,
   addNewBoard: PropTypes.func,
+  updateBoard: PropTypes.func,
   registerListeners: PropTypes.func,
   unregisterListeners: PropTypes.func
 };
