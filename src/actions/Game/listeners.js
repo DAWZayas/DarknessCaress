@@ -2,8 +2,9 @@ import { SET_BOARDS } from './action_types';
 
 export function registerListeners() {
   return (dispatch, getState) => {
-    const { firebase } = getState();
-    const ref = firebase.child('myBoards');
+    const { firebase, auth } = getState();
+    const userId = auth.id;
+    const ref = firebase.child(`users/${userId}/myBoards`);
     ref.on('value', snapshot => {
       const promises = (snapshot.val() || []).map( boardId => new Promise(
         resolve => firebase.child(`boards/${boardId}`).on('value', snapshot => {
@@ -25,8 +26,8 @@ export function registerListeners() {
 
 export function unregisterListeners() {
   return (dispatch, getState) => {
-    const { firebase } = getState();
-    const ref = firebase.child('myBoards');
+    const { firebase, auth } = getState();
+    const ref = firebase.child('users');
     ref.off();
     dispatch({
       type: SET_BOARDS,

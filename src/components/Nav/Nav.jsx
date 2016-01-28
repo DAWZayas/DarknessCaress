@@ -42,7 +42,7 @@ export default class Nav extends Component {
       <nav>
         <LeftNav ref="leftNav" docked={false} header={<div id="headerNav">DarknessCaress</div>} disableSwipeToOpen>
           <MenuItem primaryText="Home" onTouchTap={this.handleTouchTap.bind(this, '/')} />
-          <MenuItem primaryText="Game" onTouchTap={this.handleTouchTap.bind(this, 'game')} />
+          { auth.authenticated === true ? <MenuItem primaryText="Game" onTouchTap={this.handleTouchTap.bind(this, 'game')} /> : <span/> }
           <MenuDivider />
           <MenuItem primaryText="GitHub" onTouchTap={this.handleTouchTap.bind(this, 'github')} />
           <MenuItem primaryText="Follow Us :)" onTouchTap={this.handleTouchTap.bind(this, 'twitter')} />

@@ -17,6 +17,9 @@ export default class GameTabs extends Component {
   }
 
   componentWillMount() {
+    if(this.props.auth.authenticated === false) {
+      this.props.navigate('/');
+    }
     this.props.registerListeners();
   }
  
@@ -37,7 +40,8 @@ export default class GameTabs extends Component {
   }
 
   onNewGameButtonClick(size, rivers) {
-    this.props.addNewBoard(size, rivers);
+    const userId = this.props.auth.id;
+    this.props.searchNewGame(userId);
     this.setState({
       slideIndex: 0
     });
@@ -83,6 +87,7 @@ export default class GameTabs extends Component {
             boards.length >= 5 ? '' :
               (<div className="center-block" style={style.slide}>
                 <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
+              //AÑADIR EL SPINNER AL BUSCAR NEW GAME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
               </div>)
           }
         </SwipeableViews>
