@@ -12,6 +12,8 @@ export default (
   	<Route path="game" component={GameContainer} />
     <Route path="profile" component={ProfileContainer} />
     <Route path="login" component={LoginContainer} />
+    <Route path="create" component={LoginContainer} />
+    <Route path="change" component={LoginContainer} />
   	<Redirect path="*" to="/" />
     <IndexRoute component={Landing} />
   </Route>

@@ -14,19 +14,16 @@ export default function authReducer(state = initialState, action) {
         authenticated,
         id: authenticated ? payload.uid : null
       };
-
     case authActions.SIGN_IN_SUCCESS:
       return {
         authenticated: true,
         id: payload.uid
       };
-
     case authActions.SIGN_OUT_SUCCESS:
       return {
         authenticated: false,
         id: null
       };
-
     default:
       return state;
   }

@@ -9,6 +9,7 @@ import createLogger from 'redux-logger';
 
 import { FIREBASE_URL } from '../config';
 import Firebase from 'firebase';
+import { initAuth } from '../actions/Authenticate/auth';
 
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunk),
@@ -20,6 +21,8 @@ const createStoreWithMiddleware = compose(
 export default function configureStore(initialState) {
 
   const store = createStoreWithMiddleware(reducer, initialState || { firebase: new Firebase(FIREBASE_URL) });
+
+  store.dispatch(initAuth());
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

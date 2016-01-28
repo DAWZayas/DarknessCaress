@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 
 import { FIREBASE_URL } from '../config';
 import Firebase from 'firebase';
+import { initAuth } from '../actions/Authenticate/auth';
 
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunk),
@@ -14,5 +15,7 @@ const createStoreWithMiddleware = compose(
 )(createStore);
 
 export default function configureStore(initialState) {
-  return createStoreWithMiddleware(reducer, initialState || { firebase: new Firebase(FIREBASE_URL) });
+  const store = createStoreWithMiddleware(reducer, initialState || { firebase: new Firebase(FIREBASE_URL) });
+  store.dispatch(initAuth());
+  return store;
 }

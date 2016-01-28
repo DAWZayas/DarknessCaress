@@ -15,6 +15,14 @@ export default class Nav extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.registerListeners();
+  }
+
+  componentWillUnmount() {
+    this.props.unregisterListeners();
+  }
+
   handleToggle() {
     this.refs.leftNav.toggle();// Show/Hide the Menu
   }
@@ -39,7 +47,7 @@ export default class Nav extends Component {
           <MenuItem primaryText="GitHub" onTouchTap={this.handleTouchTap.bind(this, 'github')} />
           <MenuItem primaryText="Follow Us :)" onTouchTap={this.handleTouchTap.bind(this, 'twitter')} />
         </LeftNav>
-      <AppBar title={<Title />} onLeftIconButtonTouchTap={this.handleToggle.bind(this)} iconElementRight={<ProfileMenu signInWithGoogle={this.props.signInWithGoogle} auth={auth} navigate={navigate} />} />
+      <AppBar title={<Title />} onLeftIconButtonTouchTap={this.handleToggle.bind(this)} iconElementRight={<ProfileMenu auth={auth} navigate={navigate} signOut={this.props.signOut} />} />
       {this.props.children}
       </nav>
     );
@@ -49,5 +57,9 @@ export default class Nav extends Component {
 Nav.propTypes = {
   // Injected by React Router
   children: PropTypes.node,
-  navigate: PropTypes.func
+  auth: PropTypes.object,
+  navigate: PropTypes.func,
+  signOut: PropTypes.func,
+  registerListeners: PropTypes.func,
+  unregisterListeners: PropTypes.func
 };
