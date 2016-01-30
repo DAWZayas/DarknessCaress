@@ -60,6 +60,6 @@ Nav.propTypes = {
   auth: PropTypes.object,
   navigate: PropTypes.func,
   signOut: PropTypes.func,
-  registerListeners: PropTypes.func,
-  unregisterListeners: PropTypes.func
+  registerNavListeners: PropTypes.func,
+  unregisterNavListeners: PropTypes.func
 };

@@ -22,11 +22,11 @@ export default class GameTabs extends Component {
     }
     this.props.registerListeners();
   }
- 
+
   componentWillUnmount() {
     this.props.unregisterListeners();
   }
- 
+
   handleChangeIndex(index) {
     this.setState({
       slideIndex: index

@@ -1,6 +1,9 @@
 import { createBoardWithRiver } from '../../utils/boardGenerator.js';
 import { pushState } from 'redux-router';
 
+import { randomNumber } from '../../utils/generalFunctions';
+import { allUnits } from '../../utils/Units';
+
 export const navigate = (path) => pushState(null, path);
 
 export function searchNewGame(userId) {
@@ -8,24 +11,42 @@ export function searchNewGame(userId) {
     const { firebase } = getState();
     const matchmakingReference = firebase.child('matchmaking');
     matchmakingReference.transaction( matchmaking => {
-      const matchmakingArray = matchmaking || [];
-      matchmakingArray.push(userId);
-      while(matchmakingArray.length > 1) {
-        const idOne = matchmakingArray.shift();
-        const idTwo = matchmakingArray.shift();
-        createNewBoard(idOne, idTwo, firebase);
+      let matchmakingString = matchmaking || '';
+      if(matchmakingString != '') {
+        createNewBoard(matchmakingString, userId, firebase);
+        matchmakingString = null;
+      }else{
+        matchmakingString = userId;
       }
-      return matchmakingArray;
-    });
+      return matchmakingString;
+    }, () => {}, false);
   };
 }
 
 function createNewBoard(idOne, idTwo, firebase) {
-  const newBoard = createBoardWithRiver(8, 2, 'river');
+  let newBoard = createBoardWithRiver(8, 2, 'river');
+  newBoard = fillBoardWithUnits(newBoard);
   const newBoardReference = firebase.child('boards').push(newBoard);
   const newBoardId = newBoardReference.key();
   addBoardToUser(idOne, newBoardId, firebase);
   addBoardToUser(idTwo, newBoardId, firebase);
+}
+
+function fillBoardWithUnits(board) {
+  for (let i = 0; i < 6; i++) {
+    const unit = allUnits[randomNumber(0, 22)];
+    board = placeOneUnit(unit, board, 0);
+    board = placeOneUnit(unit, board, 1);
+  };
+  return board;
+}
+
+function placeOneUnit(unit, board, side) {
+  const boardSize = board.length;
+  const positionX = randomNumber(0, boardSize);
+  const positionY = side === 0 ? randomNumber(0, Math.floor(boardSize / 2)) : randomNumber(Math.floor(boardSize / 2), boardSize);
+  board[positionX][positionY] = Object.assign({}, board[positionX][positionY], {unit: unit});
+  return board;
 }
 
 function addBoardToUser(userId, boardId, firebase) {
