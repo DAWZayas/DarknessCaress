@@ -26,7 +26,7 @@ export function searchNewGame(userId) {
 function createNewBoard(idOne, idTwo, firebase) {
   let newBoard = createBoardWithRiver(8, 2, 'river');
   newBoard = fillBoardWithUnits(newBoard);
-  const newBoardReference = firebase.child('boards').push(newBoard);
+  const newBoardReference = firebase.child('boards').push({board: newBoard, turn: idOne, 0: idOne, 1: idTwo});
   const newBoardId = newBoardReference.key();
   addBoardToUser(idOne, newBoardId, firebase);
   addBoardToUser(idTwo, newBoardId, firebase);
@@ -45,7 +45,12 @@ function placeOneUnit(unit, board, side) {
   const boardSize = board.length;
   const positionX = randomNumber(0, boardSize);
   const positionY = side === 0 ? randomNumber(0, Math.floor(boardSize / 2)) : randomNumber(Math.floor(boardSize / 2), boardSize);
-  board[positionX][positionY] = Object.assign({}, board[positionX][positionY], {unit: unit});
+  if(board[positionX][positionY].passable === false || board[positionX][positionY].unit != null) {
+    board = placeOneUnit(unit, board, side);
+  }else{
+    unit = Object.assign({}, unit, {army: side});
+    board[positionX][positionY] = Object.assign({}, board[positionX][positionY], {unit: unit});
+  }
   return board;
 }
 
@@ -59,6 +64,6 @@ function addBoardToUser(userId, boardId, firebase) {
 export function updateBoard(board, boardId) {
 	return (dispatch, getState) => {
     const { firebase } = getState();
-    firebase.child(`boards/${boardId}`).set(board);
+    firebase.child(`boards/${boardId}/board`).set(board);
   };
 }

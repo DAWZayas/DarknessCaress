@@ -11,5 +11,5 @@ export default combineReducers({
 	boards,
   firebase,
   router,
-  user
+  user,
 });

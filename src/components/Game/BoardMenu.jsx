@@ -33,10 +33,11 @@ export default class BoardMenu extends Component {
     const highlightedPosition = movedSquare[0] != -1 ? movedSquare
       : selectedSquare[0] === -1 ? -1 : selectedSquare;
     const highlightedSquare = highlightedPosition === -1 ? -1 : board[highlightedPosition[0]][highlightedPosition[1]];
+    const turnTitle = this.props.boardObject.turn != this.props.userId ? 'Enemy Turn... aqui el username' : 'Es tu turno';
     return (
       <div>
       {
-        highlightedSquare === -1 ? <span>Es tu turno</span> :
+        highlightedSquare === -1 ? <span>{turnTitle}</span> :
         <div>
           <div>
             <img src={ images[highlightedSquare.image] } alt={ 'terrain selected' } height="48px" width="48px" />
@@ -46,9 +47,14 @@ export default class BoardMenu extends Component {
             selectedUnit === null ? null :
             <div>
               <span> { selectedUnit.name }. Movement: { selectedUnit.movement }.</span><br/>
-              <button className="btn btn-info" type="button" onClick={() => this.handleMove()}>{turn === 'moving' ? 'Stay' : turn === 'moved' || turn === 'attacking' ? 'Return' : 'Move'}</button>
-              <button className="btn btn-info" type="button" onClick={() => this.handleAttack()}>{turn === 'attacking' ? 'Cancel' : 'Attack'}</button>
-              <button className="btn btn-info" type="button" onClick={() => this.handleDefend()}>Defend</button>
+              {
+                this.props.boardObject.turn != this.props.userId ? null :
+                <div>
+                  <button className="btn btn-info" type="button" onClick={() => this.handleMove()}>{turn === 'moving' ? 'Stay' : turn === 'moved' || turn === 'attacking' ? 'Return' : 'Move'}</button>
+                  <button className="btn btn-info" type="button" onClick={() => this.handleAttack()}>{turn === 'attacking' ? 'Cancel' : 'Attack'}</button>
+                  <button className="btn btn-info" type="button" onClick={() => this.handleDefend()}>Defend</button>
+                </div>
+              }
             </div>
           }
           <button className="btn btn-info" type="button" onClick={() => this.handleDeselect()}>x</button>

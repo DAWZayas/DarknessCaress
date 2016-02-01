@@ -78,7 +78,7 @@ export default class GameTabs extends Component {
               const boardId = Object.keys(boardObject)[0];
               return (
                 <div className="board-component" key={index} style={style.slide}>
-                  <Game className="game" board={boardObject[`${boardId}`]} boardId={boardId} { ...this.props } />
+                  <Game className="game" boardObject={boardObject[`${boardId}`]} board={boardObject[`${boardId}`].board} boardId={boardId} { ...this.props } />
                 </div>
               );
             })
@@ -111,7 +111,7 @@ export default class GameTabs extends Component {
               const boardId = Object.keys(boardObject)[0];
               return (
                 <div className="board-component" key={index} style={style.slide}>
-                  <Game className="game" board={boardObject[`${boardId}`]} boardId={boardId} { ...this.props } />
+                  <Game className="game" boardObject={boardObject[`${boardId}`]} board={boardObject[`${boardId}`].board} boardId={boardId} { ...this.props } />
                 </div>
               );
             })
