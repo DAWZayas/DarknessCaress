@@ -11,15 +11,21 @@ export function searchNewGame(userId) {
     const { firebase } = getState();
     const matchmakingReference = firebase.child('matchmaking');
     matchmakingReference.transaction( matchmaking => {
-      let matchmakingString = matchmaking || '';
-      if(matchmakingString != '') {
-        createNewBoard(matchmakingString, userId, firebase);
-        matchmakingString = null;
-      }else{
-        matchmakingString = userId;
+      const matchmakingArray = matchmaking || [];
+      return matchmakingArray.concat(userId);
+    }, (e, complete, array) => {
+      console.log(">>>>>", e, complete, array.val());
+      if (complete) {
+        firebase.child('matchmaking').transaction( matchmaking => {
+          const matchmakingArray = matchmaking || [];
+          while(matchmakingArray.length > 1) {
+            console.log(matchmakingArray.shift());
+            console.log(matchmakingArray.shift());
+          }
+          return matchmakingArray;
+        }, () => {}, false);
       }
-      return matchmakingString;
-    }, () => {}, false);
+    }, false);
   };
 }
 
@@ -44,7 +50,7 @@ function fillBoardWithUnits(board) {
 function placeOneUnit(unit, board, side) {
   const boardSize = board.length;
   const positionX = randomNumber(0, boardSize);
-  const positionY = side === 0 ? randomNumber(0, Math.floor(boardSize / 2)) : randomNumber(Math.floor(boardSize / 2), boardSize);
+  const positionY = side === 0 ? randomNumber(0, Math.floor(boardSize / 2)) : randomNumber(Math.ceil(boardSize / 2), boardSize);
   if(board[positionX][positionY].passable === false || board[positionX][positionY].unit != null) {
     board = placeOneUnit(unit, board, side);
   }else{

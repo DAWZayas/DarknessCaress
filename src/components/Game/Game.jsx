@@ -19,7 +19,7 @@ export default class Game extends Component {
   }
 
   selectSquare(position) {
-    const unit = position[0] != -1 ? this.props.board[position[0]][position[1]].unit || null : null;
+    const unit = position[0] !== -1 ? this.props.board[position[0]][position[1]].unit || null : null;
     this.setState({
       overlayArray: this.state.emptyOverlayArray,
       selectedSquare: position,
@@ -127,7 +127,7 @@ export default class Game extends Component {
     return (
       <div>
         <Board board={board} boardObject={this.props.boardObject} overlayArray={this.state.overlayArray} selectSquare={this.selectSquare.bind(this)} moveUnit={this.moveUnit.bind(this)} attackUnit={this.attackUnit.bind(this)} { ...this.state } />
-        <BoardMenu className="boardMenu" board={board} boardObject={this.props.boardObject} selectSquare={this.selectSquare.bind(this)} deSelectSquare={this.deSelectSquare.bind(this)} selectMove={this.selectMove.bind(this)} moveUnit={this.moveUnit.bind(this)} selectAttack={this.selectAttack.bind(this)} deSelectAttack={this.deSelectAttack.bind(this)} attackUnit={this.attackUnit.bind(this)} endMove={this.endMove.bind(this)} { ...this.state } />
+        <BoardMenu className="boardMenu" board={board} boardObject={this.props.boardObject} selectSquare={this.selectSquare.bind(this)} deSelectSquare={this.deSelectSquare.bind(this)} selectMove={this.selectMove.bind(this)} moveUnit={this.moveUnit.bind(this)} selectAttack={this.selectAttack.bind(this)} deSelectAttack={this.deSelectAttack.bind(this)} attackUnit={this.attackUnit.bind(this)} endMove={this.endMove.bind(this)} userId={this.props.auth.id} { ...this.state } />
       </div>
     );
   }

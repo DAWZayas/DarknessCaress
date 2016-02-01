@@ -48,7 +48,7 @@ export default class BoardMenu extends Component {
             <div>
               <span> { selectedUnit.name }. Movement: { selectedUnit.movement }.</span><br/>
               {
-                this.props.boardObject.turn != this.props.userId ? null :
+                this.props.boardObject.turn !== this.props.userId || selectedUnit.active === false || this.props.boardObject[`${selectedUnit.army}`] === this.props.userId ? null :
                 <div>
                   <button className="btn btn-info" type="button" onClick={() => this.handleMove()}>{turn === 'moving' ? 'Stay' : turn === 'moved' || turn === 'attacking' ? 'Return' : 'Move'}</button>
                   <button className="btn btn-info" type="button" onClick={() => this.handleAttack()}>{turn === 'attacking' ? 'Cancel' : 'Attack'}</button>

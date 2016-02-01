@@ -8,6 +8,10 @@ import { generateOverlayArray } from './turnFunctions';
 	*REphase: NOTHING IS COMMITED, RESTART
 */
 
+function changeState(state, position = [-1, -1], unit = null) {
+	return newState;
+}
+
 //INITIAL STATE
 state = {
   emptyOverlayArray: emptyOverlayArray,
@@ -109,5 +113,3 @@ this.setState({
   movedSquare: [-1, -1], //CHANGED
   phase: 'start' //CHANGED
 });
-
-//CREATE A FUNCTION createNewState = (position, unit, oldState) => newState ???
