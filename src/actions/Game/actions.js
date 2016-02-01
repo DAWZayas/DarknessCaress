@@ -10,61 +10,8 @@ export function searchNewGame(userId) {
   return (dispatch, getState) => {
     const { firebase } = getState();
     const matchmakingReference = firebase.child('matchmaking');
-    matchmakingReference.transaction( matchmaking => {
-      const matchmakingArray = matchmaking || [];
-      return matchmakingArray.concat(userId);
-    }, (e, complete, array) => {
-      console.log(">>>>>", e, complete, array.val());
-      if (complete) {
-        firebase.child('matchmaking').transaction( matchmaking => {
-          const matchmakingArray = matchmaking || [];
-          while(matchmakingArray.length > 1) {
-            console.log(matchmakingArray.shift());
-            console.log(matchmakingArray.shift());
-          }
-          return matchmakingArray;
-        }, () => {}, false);
-      }
-    }, false);
+    matchmakingReference.transaction( matchmaking => (matchmaking || []).concat([userId]) );
   };
-}
-
-function createNewBoard(idOne, idTwo, firebase) {
-  let newBoard = createBoardWithRiver(8, 2, 'river');
-  newBoard = fillBoardWithUnits(newBoard);
-  const newBoardReference = firebase.child('boards').push({board: newBoard, turn: idOne, 0: idOne, 1: idTwo});
-  const newBoardId = newBoardReference.key();
-  addBoardToUser(idOne, newBoardId, firebase);
-  addBoardToUser(idTwo, newBoardId, firebase);
-}
-
-function fillBoardWithUnits(board) {
-  for (let i = 0; i < 6; i++) {
-    const unit = allUnits[randomNumber(0, 22)];
-    board = placeOneUnit(unit, board, 0);
-    board = placeOneUnit(unit, board, 1);
-  };
-  return board;
-}
-
-function placeOneUnit(unit, board, side) {
-  const boardSize = board.length;
-  const positionX = randomNumber(0, boardSize);
-  const positionY = side === 0 ? randomNumber(0, Math.floor(boardSize / 2)) : randomNumber(Math.ceil(boardSize / 2), boardSize);
-  if(board[positionX][positionY].passable === false || board[positionX][positionY].unit != null) {
-    board = placeOneUnit(unit, board, side);
-  }else{
-    unit = Object.assign({}, unit, {army: side});
-    board[positionX][positionY] = Object.assign({}, board[positionX][positionY], {unit: unit});
-  }
-  return board;
-}
-
-function addBoardToUser(userId, boardId, firebase) {
-  firebase.child(`users/${userId}/myBoards`).once('value', snapshot => {
-    const oldBoards = snapshot.val() || [];
-    firebase.child(`users/${userId}/myBoards`).set([boardId, ...oldBoards]);
-  });
 }
 
 export function updateBoard(board, boardId) {
