@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'; 
-import UnitImage from './UnitImage'; 
+import HeroImage from './HeroImage'; 
  
 export default class Unit extends Component{ 
   render(){ 

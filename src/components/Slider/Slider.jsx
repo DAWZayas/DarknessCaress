@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Carousel from 'nuka-carousel';
-import { SliderUnit as Unit } from '../Unit/SliderUnit';
+import Hero from '../Heroes/Hero';
 import decorator from './SliderDecorator.js';
 
 export default class Slider extends Component{
