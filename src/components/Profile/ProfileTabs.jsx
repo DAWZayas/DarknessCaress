@@ -3,7 +3,7 @@ import { Tabs, Tab } from 'material-ui';
 import SwipeableViews from 'react-swipeable-views';
 import injecTapEventPlugin from 'react-tap-event-plugin';
 
-import Heroes from '../Heroes/Heroes';
+import HeroesList from '../Heroes/HeroesList';
 import Profile from './Profile';
 import Items from '../Items/Items';
 
@@ -65,7 +65,7 @@ export default class ProfileTabs extends Component {
             <Profile />
           </div>
           <div style={style.slide}>
-            <Heroes heroes={heroes} searchBy={this.searchByHero.bind(this)} />
+            <HeroesList heroes={heroes} searchBy={this.searchByHero.bind(this)} />
           </div>
           <div style={style.slide}>
             <Items items={items} searchBy={this.searchByItem.bind(this)} />
