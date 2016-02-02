@@ -3,7 +3,7 @@ import { Tabs, Tab } from 'material-ui';
 import SwipeableViews from 'react-swipeable-views';
 import injecTapEventPlugin from 'react-tap-event-plugin';
 
-import HeroesList from '../Heroes/HeroesList';
+import Heroes from '../Heroes/Heroes';
 import Profile from './Profile';
 import Items from '../Items/Items';
 
@@ -51,24 +51,26 @@ export default class ProfileTabs extends Component {
         padding: 10
       }
     };
+
     const items = allItems.filter( item => item.name.search(this.state.searchedItem.toLowerCase()) > -1 );
     const heroes = allHeroes.filter( hero => hero.name.search(this.state.searchedHero.toLowerCase()) > -1 );
+
     return (
       <div>
-        <Tabs className="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+        <Tabs className="tabbedTabs" onChange={ this.handleChangeTabs.bind(this) } value={ this.state.slideIndex + '' }>
           <Tab label="Profile" value="0" />
           <Tab label="Heroes" value="1" />
           <Tab label="Items" value="2" />
         </Tabs>
-        <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChangeIndex.bind(this)}>
-          <div style={style.slide}>
+        <SwipeableViews index={ this.state.slideIndex } onChangeIndex={ this.handleChangeIndex.bind(this) }>
+          <div style={ style.slide }>
             <Profile />
           </div>
-          <div style={style.slide}>
-            <HeroesList heroes={heroes} searchBy={this.searchByHero.bind(this)} />
+          <div style={ style.slide }>
+            <Heroes heroes={ heroes } searchBy={ this.searchByHero.bind(this) } />
           </div>
-          <div style={style.slide}>
-            <Items items={items} searchBy={this.searchByItem.bind(this)} />
+          <div style={ style.slide }>
+            <Items items={ items } searchBy={ this.searchByItem.bind(this) } />
           </div>
         </SwipeableViews>
       </div>

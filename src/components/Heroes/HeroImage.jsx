@@ -2,16 +2,17 @@ import React, { Component, PropTypes } from 'react';
 
 const apiUrl = 'http://img.pokemondb.net/sprites/black-white/anim/normal/';
 
-export default class UnitImage extends Component{
+export default class HeroImage extends Component{
   render(){
-    const { key, unit } = this.props;
-    return( 
-      <img key={ key } alt={unit.name} url={`units/${unit.name}`} src={`${apiUrl}${unit.name}.gif`} /> 
-    ); 
+    const { key, hero } = this.props;
+    /*url={`heroes/${hero.name}`}*/
+    return(
+      <img key={ key } alt={hero.name} src={`${apiUrl}${hero.name}.gif`} />
+    );
   }
 }
 
-UnitImage.propTypes = {
+HeroImage.propTypes = {
   key: PropTypes.number,
-  unit: PropTypes.object
+  hero: PropTypes.object
 };

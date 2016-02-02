@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 const apiUrl = 'http://img.pokemondb.net/sprites/black-white/anim/normal/';
 
-export default class UnitDetail extends Component{
+export default class HeroDetail extends Component{
 	constructor(props){
 		super(props);
 	}
@@ -12,18 +12,18 @@ export default class UnitDetail extends Component{
     else{
 			return (
        <section className="PokeDetail">
-         <h3>{pokemon.name.slice(0, 1).toUpperCase() + pokemon.name.slice(1)}</h3>
+         <h3>{hero.name.slice(0, 1).toUpperCase() + hero.name.slice(1)}</h3>
          <div className="PokeDetail-images">
-          <img src={`${apiUrl}${pokemon.name}.gif`} width="80"/>
+          <img src={`${apiUrl}${hero.name}.gif`} width="80"/>
          </div>
          <div className="PokeDetail-info">
            <ul>
-             <li>Type: {pokemon.type}</li>
-             <li>Species: {pokemon.species}</li>
-             <li>Attack: {pokemon.stats.attack}</li>
-             <li>Defense: {pokemon.stats.defense}</li>
-             <li>Hp: {pokemon.stats.hp}</li>
-             <li>Speed: {pokemon.stats.speed}</li>
+             <li>Type: {hero.type}</li>
+             <li>Species: {hero.species}</li>
+             <li>Attack: {hero.stats.attack}</li>
+             <li>Defense: {hero.stats.defense}</li>
+             <li>Hp: {hero.stats.hp}</li>
+             <li>Speed: {hero.stats.speed}</li>
            </ul>
          </div>
        </section>
@@ -32,6 +32,6 @@ export default class UnitDetail extends Component{
 	}
 }
 
-UnitDetail.propTypes = {
+HeroDetail.propTypes = {
   hero: PropTypes.object
 };

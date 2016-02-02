@@ -6,10 +6,10 @@ const apiUrl = 'http://img.pokemondb.net/sprites/black-white/anim/normal/';
 import Hero from './Hero';
 
 export default class HeroList extends Component{
-  
+
   render(){
     const { heroes } = this.props;
-    return( 
+    return(
       <div className="heroes">
         <Coverflow width="960" height="500" displayQuantityOfSide={2} navigation={false}>
         {
@@ -21,7 +21,7 @@ export default class HeroList extends Component{
         }
         </Coverflow>
       </div>
-    ); 
+    );
   }
 }
 
