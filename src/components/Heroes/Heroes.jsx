@@ -12,7 +12,7 @@ export default class Heroes extends Component{
 	render(){
 		const { heroes, searchBy } = this.props;
  		return(
- 			<div><p>potatoes</p>
+ 			<div>
 				<HeroSearch searchBy={ searchBy } />
  				<HeroesList heroes={ heroes } />
  			</div>
