@@ -6,11 +6,38 @@ import { allUnits } from '../../utils/Units';
 
 export const navigate = (path) => pushState(null, path);
 
-export function searchNewGame(userId) {
-  return (dispatch, getState) => {
-    const { firebase } = getState();
-    const matchmakingReference = firebase.child('matchmaking');
-    matchmakingReference.transaction( matchmaking => {
+export function searchNewGame( userId ) {
+  return ( dispatch, getState ) => {
+    const { firebase } = getState( );
+    //From here to Line 38, were made by Arceso. ¯\_(ツ)_/¯ ~ 4 SURE IS ALL WRONG!
+    const matchListSnapshot = firebase.child('matchmaking');
+    matchListSnapshot.val() ? matchmake( userId ) : addToMatchmaking( );
+
+
+    function matchmake( userId, ref = matchListSnapshot ) {
+      addToFirstOpponentList( userId );
+      const theOneWhoWasChoosedAsOpponent = firebase.child(`${opponentId}/userList/`).orderByChild("timestamp").limitToFirst(1);
+      theOneWhoWasChoosedAsOpponent === userId ? true : searchNewGame( userId );
+    }
+
+    function addToFirstOpponentList( userId, ref = matchListSnapshot) {
+      const opponentId = ref.limitToFirst(1);
+      const listRef = firebase.child(`${opponentId}/userList/`);
+      return listRef.push( {
+        "userId": userId,
+        "timestamp": Firebase.ServerValue.TIMESTAMP
+      } );
+    }
+
+    function addToMatchmaking( ref = matchmakingList ) {
+      ref.push( {
+        "userId": userId,
+        "userList": { }
+      } );
+    }
+
+/*    const matchmakingReference = firebase.child('matchmaking');
+      matchmakingReference.transaction( matchmaking => {
       const matchmakingArray = matchmaking || [];
       return matchmakingArray.concat(userId);
     }, (e, complete, array) => {
@@ -26,7 +53,7 @@ export function searchNewGame(userId) {
         }, () => {}, false);
       }
     }, false);
-  };
+*/  };
 }
 
 function createNewBoard(idOne, idTwo, firebase) {
