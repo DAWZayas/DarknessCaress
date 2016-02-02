@@ -17,7 +17,10 @@ export function searchNewGame( userId ) {
     function matchmake( userId, ref = matchListSnapshot ) {
       addToFirstOpponentList( userId );
       const theOneWhoWasChoosedAsOpponent = firebase.child(`${opponentId}/userList/`).orderByChild("timestamp").limitToFirst(1);
-      theOneWhoWasChoosedAsOpponent === userId ? true : searchNewGame( userId );
+      const opponentId = ref.limitToFirst(1);
+      theOneWhoWasChoosedAsOpponent === userId ?  
+        createNewBoard( opponentId, userId, firebase) : 
+        searchNewGame( userId );
     }
 
     function addToFirstOpponentList( userId, ref = matchListSnapshot) {
@@ -56,7 +59,7 @@ export function searchNewGame( userId ) {
 */  };
 }
 
-function createNewBoard(idOne, idTwo, firebase) {
+function createNewBoard(idOne, idTwo, firebase = firebase) {
   let newBoard = createBoardWithRiver(8, 2, 'river');
   newBoard = fillBoardWithUnits(newBoard);
   const newBoardReference = firebase.child('boards').push({board: newBoard, turn: idOne, 0: idOne, 1: idTwo});
