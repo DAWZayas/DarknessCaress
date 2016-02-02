@@ -1,13 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { LeftNav, AppBar} from 'material-ui';
 import MenuItem from 'material-ui/lib/menus/menu-item';
-import injecTapEventPlugin from 'react-tap-event-plugin';
 import MenuDivider from 'material-ui/lib/menus/menu-divider';
 
 import Title from './Title';
 import ProfileMenu from './ProfileMenu';
-
-injecTapEventPlugin();
 
 export default class Nav extends Component {
 
@@ -31,7 +28,7 @@ export default class Nav extends Component {
     const { navigate } = this.props;
     //const path = e.target.innerHTML.toLowerCase();
     path === 'github' ? window.location.assign('https://github.com/DAWZayas/DarknessCaress')
-      : path ==='twitter' ? window.location.assign('https://twitter.com/Darkness_Caress') 
+      : path ==='twitter' ? window.location.assign('https://twitter.com/Darkness_Caress')
       : navigate(path);
     this.handleToggle();
   }

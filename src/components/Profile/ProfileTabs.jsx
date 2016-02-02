@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'material-ui';
 import SwipeableViews from 'react-swipeable-views';
-import injecTapEventPlugin from 'react-tap-event-plugin';
 
 import Heroes from '../Heroes/Heroes';
 import Profile from './Profile';
@@ -9,8 +8,6 @@ import Items from '../Items/Items';
 
 import { allItems } from '../../utils/allItems';
 import { allHeroes } from '../../utils/allHeroes';
-
-injecTapEventPlugin();
 
 export default class ProfileTabs extends Component {
 

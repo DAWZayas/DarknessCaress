@@ -1,8 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { TextField, RaisedButton } from 'material-ui';
-import injecTapEventPlugin from 'react-tap-event-plugin';
-
-injecTapEventPlugin();
 
 export default class Login extends Component {
 
@@ -38,7 +35,7 @@ export default class Login extends Component {
           <img className="logoboros" src="http://img14.deviantart.net/b815/i/2012/363/0/5/ouroboros_fma_by_jordanpokemon28-d5pjakh.png"/>
         </div>
         {
-          this.props.route.path === 'change' 
+          this.props.route.path === 'change'
           ? (
             <div>
               <TextField ref="email" floatingLabelText="Email" />
@@ -55,7 +52,7 @@ export default class Login extends Component {
         }
         <br/>
         {
-          this.props.route.path === 'change' 
+          this.props.route.path === 'change'
           ? (
             <div>
               <RaisedButton label="Change My Password" onTouchTap={this.handleChangePassword.bind(this)}/>
@@ -65,7 +62,7 @@ export default class Login extends Component {
               <span onClick={() => this.props.navigate('create')}>No account yet? Create one</span>
             </div>
           )
-          : this.props.route.path === 'create' 
+          : this.props.route.path === 'create'
           ? (
             <div>
               <RaisedButton label="Register" onTouchTap={this.handleCreateAccount.bind(this)}/>

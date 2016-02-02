@@ -1,11 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Tabs, Tab } from 'material-ui';
 import SwipeableViews from 'react-swipeable-views';
-import injecTapEventPlugin from 'react-tap-event-plugin';
 
 import Game from './Game';
-
-injecTapEventPlugin();
 
 export default class GameTabs extends Component {
 
