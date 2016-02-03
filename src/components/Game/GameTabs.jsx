@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Tabs, Tab } from 'material-ui';
 import SwipeableViews from 'react-swipeable-views';
 
+import searchNewGame from '../../actions/Game/actions.js'; //FIXME: How Charles will handle this? 
+
 import Game from './Game';
 
 export default class GameTabs extends Component {
@@ -84,7 +86,7 @@ export default class GameTabs extends Component {
             boards.length >= 5 ? '' :
               (<div className="center-block" style={style.slide}>
                 <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
-              //AÑADIR EL SPINNER AL BUSCAR NEW GAME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+              //NOTE: Add spinner when waiting for a game.
               </div>)
           }
         </SwipeableViews>

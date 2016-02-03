@@ -9,30 +9,42 @@ export const navigate = (path) => pushState(null, path);
 export function searchNewGame( userId ) {
   return ( dispatch, getState ) => {
     const { firebase } = getState( );
-    //From here to Line 38, were made by Arceso. ¯\_(ツ)_/¯ ~ 4 SURE IS ALL WRONG!
+    /*
+     NOTE:
+     1º) Check if i am listed to not add me to that entry.
+     2º) If i am listed and waiting, lock that StartNewGame!
+     3º) Check components/Game/GameTabs.jsx - searchNewGame is not a function.
+    */
     const matchListSnapshot = firebase.child('matchmaking');
-    matchListSnapshot.val() ? matchmake( userId ) : addToMatchmaking( );
-
+    matchListSnapshot.hasChild ? matchmake( userId ) : addToMatchmaking( );
 
     function matchmake( userId, ref = matchListSnapshot ) {
+      console.log(">>>>>>> MATCHMAKE" );
       addToFirstOpponentList( userId );
-      const theOneWhoWasChoosedAsOpponent = firebase.child(`${opponentId}/userList/`).orderByChild("timestamp").limitToFirst(1);
-      const opponentId = ref.limitToFirst(1);
-      theOneWhoWasChoosedAsOpponent === userId ?  
-        createNewBoard( opponentId, userId, firebase) : 
-        searchNewGame( userId );
+      ref.startAt().limitToFirst(1).once("child_added", (snapshot)=>{
+        const opponentId = snapshot.key() ;
+          firebase.child(`matchmaking/${opponentId}/userList/`).startAt().limitToFirst(1).once("child_added", (snapshot)=>{
+            console.log(">>>>>>>\"snapshot=\""+snapshot.key() );
+            snapshot.val().userId === userId ?
+              createNewBoard( opponentId, userId, firebase) :
+              setTimeout(searchNewGame( userId ), 1000);
+          });
+      });
     }
 
-    function addToFirstOpponentList( userId, ref = matchListSnapshot) {
-      const opponentId = ref.limitToFirst(1);
-      const listRef = firebase.child(`${opponentId}/userList/`);
-      return listRef.push( {
-        "userId": userId,
-        "timestamp": Firebase.ServerValue.TIMESTAMP
-      } );
+    function addToFirstOpponentList( userId, ref = matchListSnapshot ) {
+      ref.startAt().limitToFirst(1).once("child_added", (snapshot)=>{
+        const opponentId = snapshot.key() ;
+        const listRef = firebase.child(`matchmaking/${opponentId}/userList/`);
+        listRef.push( {
+          "userId": userId,
+          "timestamp": Firebase.ServerValue.TIMESTAMP
+        });
+      });
     }
 
-    function addToMatchmaking( ref = matchmakingList ) {
+    function addToMatchmaking( ref = matchListSnapshot ) {
+      console.log(">>>>>>> addToMatchmaking" );
       ref.push( {
         "userId": userId,
         "userList": { }
