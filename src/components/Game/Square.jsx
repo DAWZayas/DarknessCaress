@@ -9,7 +9,7 @@ export default class Square extends Component {
   }
 
   handleSelectSquare(position) {
-    switch(this.props.turn){
+    switch(this.props.boardObject.overlayObject.phase){
       case 'start':
         this.props.selectSquare(position);
         break;

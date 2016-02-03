@@ -9,7 +9,11 @@ export default class Matchmaker extends Component {
   }
 
   componentWillMount() {
-    this.props.matchmakingOn();
+    if(admins.indexOf(this.props.auth.id) === -1) {
+      this.props.navigate('login');
+    }else{
+      this.props.matchmakingOn();
+    }
   }
 
   componentWillUnmount() {
@@ -17,15 +21,18 @@ export default class Matchmaker extends Component {
   }
 
   render() {
-    const message = admins.indexOf(this.props.auth.id) === -1 ? 'Log in as admin' : 'Matchmaking...';
     return (
-      <div>
-        { message }
-      </div>
+      <h1>
+        Matchmaking....
+      </h1>
     );
   }
 
 }
 
 Matchmaker.propTypes = {
+  auth: PropTypes.object,
+  navigate: PropTypes.func,
+  matchmakingOn: PropTypes.func,
+  matchmakingOff: PropTypes.func
 };

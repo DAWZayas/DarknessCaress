@@ -1,24 +1,25 @@
+import { pushState } from 'redux-router';
 import { createBoardWithRiver } from '../../utils/boardGenerator.js';
 import { randomNumber } from '../../utils/generalFunctions';
 import { allUnits } from '../../utils/Units';
 import { admins } from '../../config/admins';
+
+export const navigate = (path) => pushState(null, path);
 
 export function matchmakingOn() {
   return (dispatch, getState) => {
     const { firebase, auth } = getState();
     const matchmakingReference = firebase.child('matchmaking');
     matchmakingReference.on('value', snapshot => {
-      if(admins.indexOf(auth.id) != -1) {
-      	matchmakingReference.transaction( matchmaking => {
-      		let matchmakingArray = matchmaking || [];
-      		while(matchmakingArray.length > 1) {
-      			const idOne = matchmakingArray.shift();
-      			const idTwo = matchmakingArray.shift();
-      			createNewBoard(idOne, idTwo, firebase);
-      		}
-          return matchmakingArray;
-      	});
-      }
+      matchmakingReference.transaction( matchmaking => {
+      	let matchmakingArray = matchmaking || [];
+      	while(matchmakingArray.length > 1) {
+      		const idOne = matchmakingArray.shift();
+      		const idTwo = matchmakingArray.shift();
+      		createNewBoard(idOne, idTwo, firebase);
+      	}
+        return matchmakingArray;
+      });
     });
   };
 }
@@ -62,5 +63,9 @@ function placeOneUnit(unit, board, side) {
 }
 
 function addBoardToUser(userId, boardId, firebase) {
-  firebase.child(`users/${userId}/myBoards`).transaction( boards => (boards || []).concat([boardId]) );
+  firebase.child(`users/${userId}/myBoards`).transaction( boards => {
+    let boardArray = boards || [];
+    boardArray.unshift(boardId);
+    return boardArray;
+  }, () => {}, false);
 }
