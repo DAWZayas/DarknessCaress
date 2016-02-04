@@ -32,11 +32,13 @@ export function searchNewGame( userId ) {
       console.log(">>>>>>> MATCHMAKE" );
       addToFirstOpponentList( userId );
       ref.startAt().limitToFirst(1).once("child_added", (snapshot)=>{
-        const opponentId = snapshot.key() ;
-          firebase.child(`matchmaking/${opponentId}/userList/`).startAt().limitToFirst(1).once("child_added", (snapshot)=>{
+        const opponentTmpId = snapshot.key();
+        const opponentId = snapshot.child("userId").val();
+        console.log(">>>>>>> opponentId"+opponentId );
+          firebase.child(`matchmaking/${opponentTmpId}/userList/`).startAt().limitToFirst(1).once("child_added", (snapshot)=>{
             console.log(">>>>>>>\"snapshot=\""+snapshot.key() );
             snapshot.val().userId === userId ?
-              ( firebase.child(`matchmaking/${opponentId}`).remove(),
+              ( firebase.child(`matchmaking/${opponentTmpId}`).remove(),
                 createNewBoard( opponentId, userId, firebase) ):
               setTimeout(searchNewGame( userId ), 1000);
           });
@@ -47,8 +49,8 @@ export function searchNewGame( userId ) {
     function addToFirstOpponentList( userId, ref = matchListSnapshot ) {
       console.log(">>>>>>> addToFirstOpponentList" );
       ref.startAt().limitToFirst(1).once("child_added", (snapshot)=>{
-        const opponentId = snapshot.key() ;
-        const listRef = firebase.child(`matchmaking/${opponentId}/userList/`);
+        const opponentTmpId = snapshot.key() ;
+        const listRef = firebase.child(`matchmaking/${opponentTmpId}/userList/`);
         listRef.push( {
           "userId": userId
         });
@@ -127,3 +129,4 @@ export function updateBoard(board, boardId) {
     firebase.child(`boards/${boardId}/board`).set(board);
   };
 }
+
