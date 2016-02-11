@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import Board from './Board';
 import BoardMenu from './BoardMenu';
+import EndGameModal from './EndGameModal';
 
 export default class Game extends Component {
 
@@ -9,9 +10,32 @@ export default class Game extends Component {
     super(props);
   }
 
-  isEndOfTurn(army) {
-    //check the board for active units in this army....
-    return true;
+  isEndOfTurn(myArmy, boardId, newBoard) {
+    let unitIsActive = false;
+    this.props.board.map( row => {
+      row.map( square => {
+        if(square.unit !== undefined && square.unit.army === myArmy && square.unit.active !== false) {
+          unitIsActive = true;
+        }
+      })
+    });
+    if(!unitIsActive) {
+      this.props.endTurn(boardId, newBoard);
+    }
+  }
+
+  isEndOfGame(myArmy) {
+    let unitIsAlive = false;
+    this.props.board.map( row => {
+      row.map( square => {
+        if(square.unit !== undefined && square.unit.army === myArmy) {
+          unitIsAlive = true;
+        }
+      })
+    });
+    if(!unitIsAlive) {
+      this.endGame(this.props.auth.id);
+    }
   }
 
   selectSquare(position) {
@@ -49,7 +73,7 @@ export default class Game extends Component {
   moveUnit(position) {
     const positionX = position[0];
     const positionY = position[1];
-    if(this.props.boardObject.overlayObject.overlayArray[positionX][positionY] === 1 && this.props.board[positionX][positionY].unit === undefined) {
+    if(this.props.boardObject.overlayObject.overlayArray[positionX][positionY] === 1 && (this.props.board[positionX][positionY].unit === undefined || this.props.board[positionX][positionY].unit === null)) {
       const overlayObject = {
         overlayArray: this.props.boardObject.overlayObject.emptyOverlayArray,
         movedSquare: position,
@@ -84,6 +108,9 @@ export default class Game extends Component {
     if(this.props.boardObject.overlayObject.overlayArray[positionX][positionY] === 2 && this.props.board[positionX][positionY].unit != undefined && this.props.board[positionX][positionY].unit.army != this.props.boardObject.overlayObject.selectedUnit.army) {
       const oldEnemyUnit = this.props.board[positionX][positionY].unit;
       const newEnemyUnit = oldEnemyUnit.hp - 10 > 0 ? Object.assign({}, oldEnemyUnit, {hp: oldEnemyUnit.hp - 10}) : null;
+      if(newEnemyUnit === null) {
+        this.isEndOfGame(oldEnemyUnit.army);
+      }
       let newBoard = this.props.board.slice();
       newBoard[positionX][positionY] = Object.assign({}, this.props.board[positionX][positionY], { unit: newEnemyUnit });
       this.props.updateBoard(boardId, newBoard);
@@ -118,15 +145,18 @@ export default class Game extends Component {
       phase: 'start'
     };
     this.props.updateOverlay(boardId, overlayObject);
-    if(this.isEndOfTurn(finalUnit.army)) {
-      this.props.endTurn(boardId, newBoard);
-    }
+    this.isEndOfTurn(finalUnit.army, boardId, newBoard)
+  }
+
+  endGame(winner) {
+    this.props.endTheGame(this.props.boardId, winner);
   }
 
   render() {
     const { board } = this.props;
     return (
       <div>
+        { this.props.boardObject.winner != undefined ? <EndGameModal userId={this.props.auth.id} winner={this.props.boardObject.winner} boardId={this.props.boardId} eraseBoardFromFirebase={this.props.eraseBoardFromFirebase} /> : null }
         <Board board={board} boardObject={this.props.boardObject} overlayArray={this.props.boardObject.overlayObject.overlayArray} selectSquare={this.selectSquare.bind(this)} moveUnit={this.moveUnit.bind(this)} attackUnit={this.attackUnit.bind(this)} { ...this.props } />
         <BoardMenu className="boardMenu" board={board} boardObject={this.props.boardObject} selectSquare={this.selectSquare.bind(this)} deSelectSquare={this.deSelectSquare.bind(this)} selectMove={this.selectMove.bind(this)} moveUnit={this.moveUnit.bind(this)} selectAttack={this.selectAttack.bind(this)} deSelectAttack={this.deSelectAttack.bind(this)} attackUnit={this.attackUnit.bind(this)} endMove={this.endMove.bind(this)} userId={this.props.auth.id} { ...this.props } />
       </div>
