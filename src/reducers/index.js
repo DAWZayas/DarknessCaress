@@ -5,6 +5,7 @@ import auth from './auth';
 import boards from './boards';
 import firebase from './firebase';
 import user from './user';
+import notifications from './notifications';
 
 export default combineReducers({
 	auth,
@@ -12,4 +13,5 @@ export default combineReducers({
   firebase,
   router,
   user,
+  notifications,
 });

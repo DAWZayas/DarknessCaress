@@ -36,7 +36,7 @@ export function searchNewGame( userId ) {
         const opponentId = snapshot.child("userId").val();
         console.log(">>>>>>> opponentId"+opponentId );
           firebase.child(`matchmaking/${opponentTmpId}/userList/`).startAt().limitToFirst(1).once("child_added", (snapshot)=>{
-            console.log(">>>>>>>\"snapshot=\""+snapshot.key() );
+            console.log(">>>>>>>\"snapshot=\""+snapshot.numChildren() );
             snapshot.val().userId === userId ?
               ( firebase.child(`matchmaking/${opponentTmpId}`).remove(),
                 createNewBoard( opponentId, userId, firebase) ):

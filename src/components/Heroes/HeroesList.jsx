@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Slider from '../Slider/Slider';
+import Slider from './Slider';
 
 export default class HeroList extends Component{
   render(){

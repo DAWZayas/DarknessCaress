@@ -14,10 +14,12 @@ export default class Nav extends Component {
 
   componentDidMount() {
     this.props.registerListeners();
+    this.props.notificationListener();
   }
 
   componentWillUnmount() {
     this.props.unregisterListeners();
+    this.props.notificationListenerKiller();
   }
 
   handleToggle() {
@@ -34,7 +36,8 @@ export default class Nav extends Component {
   }
 
   render() {
-    const { auth, navigate } = this.props;
+    const { auth, notifications, navigate } = this.props;
+
     return (
       <nav>
         <LeftNav ref="leftNav" docked={false} header={<div id="headerNav">DarknessCaress</div>} disableSwipeToOpen>
@@ -44,8 +47,8 @@ export default class Nav extends Component {
           <MenuItem primaryText="GitHub" onTouchTap={this.handleTouchTap.bind(this, 'github')} />
           <MenuItem primaryText="Follow Us :)" onTouchTap={this.handleTouchTap.bind(this, 'twitter')} />
         </LeftNav>
-      <AppBar title={<Title />} onLeftIconButtonTouchTap={this.handleToggle.bind(this)} iconElementRight={<ProfileMenu auth={auth} navigate={navigate} signOut={this.props.signOut} />} />
-      {this.props.children}
+          <AppBar title={ <Title /> } onLeftIconButtonTouchTap={ this.handleToggle.bind(this) } iconElementRight={<ProfileMenu auth={auth} notifications={notifications}navigate={navigate} signOut={this.props.signOut} />} />
+          {this.props.children}
       </nav>
     );
   }
@@ -55,8 +58,11 @@ Nav.propTypes = {
   // Injected by React Router
   children: PropTypes.node,
   auth: PropTypes.object,
+  notifications: PropTypes.object,
   navigate: PropTypes.func,
   signOut: PropTypes.func,
   registerNavListeners: PropTypes.func,
-  unregisterNavListeners: PropTypes.func
+  unregisterNavListeners: PropTypes.func,
+  notificationListener: PropTypes.func,
+  notificationListenerKiller: PropTypes.func
 };

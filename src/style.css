@@ -72,7 +72,7 @@
 
 #playButton{
   margin-left: 50%;
-  left:-215px; 
+  left:-215px;
   size: 30px;
 }
 
@@ -81,7 +81,7 @@
   color: rgba(255, 255, 255, 1);
   font-size: 24px;
   line-height: 64px;
-  font-weight: 300; 
+  font-weight: 300;
   padding-left: 24px;
   margin-bottom: 8px;
 }
@@ -265,6 +265,18 @@ html {
 
 .board-component {
   height: 80vh;
+}
+.notification_badge{
+  padding: 0 !important;
+
+}
+.notification_badge span{
+  color:white;
+  width: 16px !important;
+  height: 16px !important;
+}
+.transparent_badge span{
+  background-color: rgba(0, 0, 0, 0)!important;
 }
 /*
 nav {

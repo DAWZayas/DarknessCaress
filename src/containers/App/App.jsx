@@ -7,6 +7,9 @@ import * as navActions from '../../actions/Nav';
 injecTapEventPlugin();
 
 export default connect(
-  state => ({ auth: state.auth }),
+  state => ({
+    auth: state.auth,
+    notifications: state.notifications
+  }),
   navActions
 )(Nav);

@@ -6,6 +6,7 @@ import GameContainer from './containers/GameContainer/GameContainer';
 import ProfileContainer from './containers/ProfileContainer/ProfileContainer';
 import LoginContainer from './containers/LoginContainer/LoginContainer';
 import Landing from './components/Landing/Landing';
+import NotificationsContainer from './containers/Notifications/NotificationsContainer';
 
 export default (
   <Route path="/" component={App}>
@@ -14,6 +15,7 @@ export default (
     <Route path="login" component={LoginContainer} />
     <Route path="create" component={LoginContainer} />
     <Route path="change" component={LoginContainer} />
+    <Route path="notifications" component={NotificationsContainer} />
   	<Redirect path="*" to="/" />
     <IndexRoute component={Landing} />
   </Route>
