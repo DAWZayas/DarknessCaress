@@ -10,7 +10,7 @@ export default class Profile extends Component {
     return (
       <div id="mainBodyProfile">
         <h2>user.name</h2>
-        <FirstPartProfile user= {user} />
+        <FirstPartProfile changeAvatar={this.props.changeAvatar} user= {user} />
         <StadisticsProfile user= {user}/>
       </div>
     );

@@ -3,6 +3,7 @@ import { Avatar, LinearProgress } from 'material-ui';
 import IconButton from 'material-ui/lib/icon-button';
 import AvatarPerfil from './AvatarPerfil';
 import { Modal, ModalClose } from 'react-modal-bootstrap';
+import AvatarList from './AvatarList';
 
 
 export default class FirstPartProfile extends Component {
@@ -25,16 +26,17 @@ export default class FirstPartProfile extends Component {
       <div>
         <div className="overlap">
           <IconButton onFocus={() => this.handleOpenClick()} >
-            <AvatarPerfil />
+            <AvatarPerfil user={user} />
           </IconButton>
         </div>
         <Modal isOpen={isOpen} onRequestHide={ () => this.handleCancelClick() } backdrop keyboard>
           <div className="modal-header">
             <ModalClose onClick={() => this.handleCancelClick()} />
-            <h4>CHUS YOR HABATAR</h4> 
+            <h4>CHUS YOR HABATAR</h4>
           </div>
           <div className="modal-body">
-            <button className="btn" type="button" onClick={ () => this.handleCancelClick() }>agree</button>
+            <AvatarList changeAvatar={this.props.changeAvatar} />
+            <button className="btn" type="button" onClick={ () => this.handleCancelClick() }>cancel</button>
           </div>
         </Modal>
         <div>

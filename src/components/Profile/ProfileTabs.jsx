@@ -66,7 +66,7 @@ export default class ProfileTabs extends Component {
         </Tabs>
         <SwipeableViews index={ this.state.slideIndex } onChangeIndex={ this.handleChangeIndex.bind(this) }>
           <div style={ style.slide }>
-            <Profile user={ user } />
+            <Profile changeAvatar={this.props.changeAvatar} user={ user } />
           </div>
           <div style={ style.slide }>
             <Heroes heroes={ heroes } searchBy={ this.searchByHero.bind(this) } />
@@ -83,5 +83,6 @@ export default class ProfileTabs extends Component {
 ProfileTabs.PropTypes={
   user: PropTypes.object,
   registerListeners: PropTypes.func,
-  unregisterListeners: PropTypes.func
+  unregisterListeners: PropTypes.func,
+
 };

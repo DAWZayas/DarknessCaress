@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Avatar } from 'material-ui';
+
+import { images } from '../../utils/imageProfileExports';
 
 export default class AvatarPerfil extends Component {
   render() {
+    const { user } = this.props;
     return (
         <div className="overlap">
-            <img id="avatarHolder" src="http://vignette4.wikia.nocookie.net/cardfight/images/f/fa/Ouroboros.png"/>
-            <Avatar src="http://www.feplanet.net/media/buddyicon/7/bartre.gif" size={70} />
+            <img id="avatarHolder" src={ images.Ouroboros }/>
+            <Avatar src={ images[user.avatar] } size={70} />
         </div>
     );
   }
 }
+AvatarPerfil.propTypes = {
+  user: PropTypes.object
+};
