@@ -1,3 +1,7 @@
+import { pushState } from 'redux-router';
+
+export const navigate = (path) => pushState(null, path);
+
 function refreshNotifications( notifications ){
   return {
     type: 'NOTIFICATION_REFRESH',
@@ -7,8 +11,8 @@ function refreshNotifications( notifications ){
 
 export function  notificationListener() {
   return (dispatch, getState) => {
-    const { firebase } = getState();
-    const userId = "google:117455282037448467157";
+    const { firebase, auth } = getState();
+    const userId = auth.id;
     firebase.child(`users/${userId}/notifications`).on('value', (snapshot) => {
       dispatch( refreshNotifications( snapshot.val() || { } ));
     });
