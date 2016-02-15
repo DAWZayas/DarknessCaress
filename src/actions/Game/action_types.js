@@ -1,2 +1,4 @@
 export const SET_BOARDS = 'SET_BOARDS';
-export const SET_TURN = 'SET_TURN';
+export const CHANGE_OVERLAY_ARRAY = 'CHANGE_OVERLAY_ARRAY';
+export const UPDATE_BOARD = 'UPDATE_BOARD';
+export const CHANGE_TURN = 'CHANGE_TURN';

@@ -16,24 +16,13 @@ export default class ProfileTabs extends Component {
     this.state = {
       slideIndex: 0, //doesn't work if you change it to 1 or 2, but should work (?)
       searchedHero: '',
-      searchedItem: '',
-      loading: true
+      searchedItem: ''
     };
   }
   componentWillMount() {
     if(this.props.auth.authenticated === false) {
       this.props.navigate('/');
     }
-    this.props.registerListeners();
-  }
-  componentWillUnmount() {
-    this.props.unregisterListeners();
-  }
-
-  componentWillReceiveProps(nextProps){
-    this.setState({
-      loading: false
-    });
   }
 
   handleChangeIndex(index) {
@@ -65,11 +54,10 @@ export default class ProfileTabs extends Component {
       }
     };
 
-    const { loading } = this.state;
     const items = allItems.filter( item => item.name.search(this.state.searchedItem.toLowerCase()) > -1 );
     const heroes = allHeroes.filter( hero => hero.name.search(this.state.searchedHero.toLowerCase()) > -1 );
     const { user } = this.props;
-    return loading ? <span>calgando</span> : (
+    return !user ? <span>calgando</span> : (
       <div>
         <Tabs className="tabbedTabs" onChange={ this.handleChangeTabs.bind(this) } value={ this.state.slideIndex + '' }>
           <Tab label="Profile" value="0" />

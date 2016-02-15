@@ -1,4 +1,5 @@
-import { SET_BOARDS } from './action_types';
+import { SET_BOARDS, ADD_OVERLAY_ARRAY } from './action_types';
+import { getStartState } from '../../utils/turnStateFunctions';
 
 export function registerListeners() {
   return (dispatch, getState) => {
@@ -9,8 +10,9 @@ export function registerListeners() {
       const promises = (snapshot.val() || []).map( boardId => new Promise(
         resolve => firebase.child(`boards/${boardId}`).on('value', snapshot => {
           const newObject = {};
-          const newKey = boardId;
-          newObject[newKey] = snapshot.val();
+          const boardSize = snapshot.val().board.length;
+          const overlayObject = getStartState(boardSize);
+          newObject[boardId] = Object.assign({}, snapshot.val(), {overlayObject: overlayObject});
           resolve(newObject)
         })
       ));

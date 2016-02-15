@@ -13,13 +13,13 @@ export default class BoardMenu extends Component {
   }
 
   handleMove() {
-    this.props.turn === 'moving'
+    this.props.boardObject.overlayObject.phase === 'moving'
       ? this.props.selectSquare(this.props.selectedSquare)
       : this.props.selectMove();
   }
 
   handleAttack() {
-    this.props.turn === 'attacking'
+    this.props.boardObject.overlayObject.phase === 'attacking'
       ? this.props.deSelectAttack()
       : this.props.selectAttack();
   }
@@ -29,11 +29,12 @@ export default class BoardMenu extends Component {
   }
 
   render() {
-    const { board, selectedSquare, selectedUnit, turn, movedSquare } = this.props;
+    const { selectedSquare, selectedUnit, phase, movedSquare } = this.props.boardObject.overlayObject;
+    const { board } = this.props;
     const highlightedPosition = movedSquare[0] != -1 ? movedSquare
       : selectedSquare[0] === -1 ? -1 : selectedSquare;
     const highlightedSquare = highlightedPosition === -1 ? -1 : board[highlightedPosition[0]][highlightedPosition[1]];
-    const turnTitle = this.props.boardObject.turn != this.props.userId ? 'Enemy Turn... aqui el username' : 'Es tu turno';
+    const turnTitle = this.props.boardObject.turn != this.props.userId ? 'Enemy Turn... username' : 'Your move';
     return (
       <div>
       {
@@ -48,10 +49,10 @@ export default class BoardMenu extends Component {
             <div>
               <span> { selectedUnit.name }. Movement: { selectedUnit.movement }.</span><br/>
               {
-                this.props.boardObject.turn !== this.props.userId || selectedUnit.active === false || this.props.boardObject[`${selectedUnit.army}`] === this.props.userId ? null :
+                this.props.boardObject.turn !== this.props.userId || selectedUnit.active === false || this.props.boardObject[`${selectedUnit.army}`] !== this.props.userId ? null :
                 <div>
-                  <button className="btn btn-info" type="button" onClick={() => this.handleMove()}>{turn === 'moving' ? 'Stay' : turn === 'moved' || turn === 'attacking' ? 'Return' : 'Move'}</button>
-                  <button className="btn btn-info" type="button" onClick={() => this.handleAttack()}>{turn === 'attacking' ? 'Cancel' : 'Attack'}</button>
+                  <button className="btn btn-info" type="button" onClick={() => this.handleMove()}>{phase === 'moving' ? 'Stay' : phase === 'moved' || phase === 'attacking' ? 'Return' : 'Move'}</button>
+                  <button className="btn btn-info" type="button" onClick={() => this.handleAttack()}>{phase === 'attacking' ? 'Cancel' : 'Attack'}</button>
                   <button className="btn btn-info" type="button" onClick={() => this.handleDefend()}>Defend</button>
                 </div>
               }
@@ -76,6 +77,5 @@ BoardMenu.propTypes = {
   selectMove: PropTypes.func,
   selectAttack: PropTypes.func,
   deSelectAttack: PropTypes.func,
-  endMove: PropTypes.func,
-  turn: PropTypes.string
+  endMove: PropTypes.func
 };

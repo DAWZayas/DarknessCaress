@@ -7,11 +7,22 @@ import { generateOverlayArray } from './turnFunctions';
 	*END: COMMIT CHANGES TO FIREBASE AND RESTART
 	*REphase: NOTHING IS COMMITED, RESTART
 */
+export function getStartState(boardSize) {
+	const emptyOverlayArray = generateOverlayArray(boardSize);
+	return {
+    emptyOverlayArray: emptyOverlayArray,
+    overlayArray: emptyOverlayArray,
+    movedSquare: [-1, -1],
+    selectedSquare: [-1, -1],
+    selectedUnit: null,
+    phase: 'start'
+  };
+}
 
 function changeState(state, position = [-1, -1], unit = null) {
 	return newState;
 }
-
+/*
 //INITIAL STATE
 state = {
   emptyOverlayArray: emptyOverlayArray,
@@ -113,3 +124,4 @@ this.setState({
   movedSquare: [-1, -1], //CHANGED
   phase: 'start' //CHANGED
 });
+*/
