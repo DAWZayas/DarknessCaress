@@ -2,132 +2,163 @@ import React, { Component, PropTypes } from 'react';
 
 import Board from './Board';
 import BoardMenu from './BoardMenu';
+import EndGameModal from './EndGameModal';
 
 export default class Game extends Component {
 
   constructor(props) {
     super(props);
-    const emptyOverlayArray = this.props.generateOverlayArray(this.props.board.length);
-    this.state = {
-      emptyOverlayArray: emptyOverlayArray,
-      overlayArray: emptyOverlayArray,
-      movedSquare: [-1, -1],
-      selectedSquare: [-1, -1],
-      selectedUnit: null,
-      turn: 'start'
-    };
+  }
+
+  isEndOfTurn(myArmy, boardId, newBoard) {
+    let unitIsActive = false;
+    this.props.board.map( row => {
+      row.map( square => {
+        if(square.unit !== undefined && square.unit.army === myArmy && square.unit.active !== false) {
+          unitIsActive = true;
+        }
+      })
+    });
+    if(!unitIsActive) {
+      this.props.endTurn(boardId, newBoard);
+    }
+  }
+
+  isEndOfGame(myArmy) {
+    let unitIsAlive = false;
+    this.props.board.map( row => {
+      row.map( square => {
+        if(square.unit !== undefined && square.unit.army === myArmy) {
+          unitIsAlive = true;
+        }
+      })
+    });
+    if(!unitIsAlive) {
+      this.endGame(this.props.auth.id);
+    }
   }
 
   selectSquare(position) {
     const unit = position[0] !== -1 ? this.props.board[position[0]][position[1]].unit || null : null;
-    this.setState({
-      overlayArray: this.state.emptyOverlayArray,
+    const overlayObject = {
+      overlayArray: this.props.boardObject.overlayObject.emptyOverlayArray,
       selectedSquare: position,
       selectedUnit: unit,
-      turn: 'start'
-    });
+      phase: 'start'
+    };
+    this.props.updateOverlay(this.props.boardId, overlayObject);
   }
 
   deSelectSquare() {
-    this.setState({
-      overlayArray: this.state.emptyOverlayArray,
+    const overlayObject = {
+      overlayArray: this.props.boardObject.overlayObject.emptyOverlayArray,
       movedSquare: [-1, -1],
       selectedSquare: [-1, -1],
       selectedUnit: null,
-      turn: 'start'
-    });
+      phase: 'start'
+    };
+    this.props.updateOverlay(this.props.boardId, overlayObject);
   }
 
   selectMove() {
-    const newOverlayArray = this.props.calculateMoves(this.props.board, this.state.selectedSquare, this.state.selectedUnit);
-    this.setState({
+    const newOverlayArray = this.props.calculateMoves(this.props.board, this.props.boardObject.overlayObject.selectedSquare, this.props.boardObject.overlayObject.selectedUnit);
+    const overlayObject = {
       overlayArray: newOverlayArray,
       movedSquare: [-1, -1],
-      turn: 'moving'
-    });
+      phase: 'moving'
+    };
+    this.props.updateOverlay(this.props.boardId, overlayObject);
   }
 
   moveUnit(position) {
     const positionX = position[0];
     const positionY = position[1];
-    this.state.overlayArray[positionX][positionY] === 1
-      && this.props.board[positionX][positionY].unit === undefined
-      ? this.setState({
-          overlayArray: this.state.emptyOverlayArray,
-          movedSquare: position,
-          turn: 'moved'
-        })
-      : null;
-    this.forceUpdate();
+    if(this.props.boardObject.overlayObject.overlayArray[positionX][positionY] === 1 && (this.props.board[positionX][positionY].unit === undefined || this.props.board[positionX][positionY].unit === null)) {
+      const overlayObject = {
+        overlayArray: this.props.boardObject.overlayObject.emptyOverlayArray,
+        movedSquare: position,
+        phase: 'moved'
+      };
+      this.props.updateOverlay(this.props.boardId, overlayObject);
+    }
   }
 
   selectAttack() {
-    const attackingPosition = this.state.movedSquare[0] != -1 ? this.state.movedSquare : this.state.selectedSquare;
-    const newOverlayArray = this.props.calculateAttackArea(this.props.board, attackingPosition, this.state.selectedUnit);
-    this.setState({
+    const attackingPosition = this.props.boardObject.overlayObject.movedSquare[0] != -1 ? this.props.boardObject.overlayObject.movedSquare : this.props.boardObject.overlayObject.selectedSquare;
+    const newOverlayArray = this.props.calculateAttackArea(this.props.board, attackingPosition, this.props.boardObject.overlayObject.selectedUnit);
+    const overlayObject = {
       overlayArray: newOverlayArray,
-      turn: 'attacking'
-    });
+      phase: 'attacking'
+    };
+    this.props.updateOverlay(this.props.boardId, overlayObject);
   }
 
   deSelectAttack() {
-    this.setState({
-      overlayArray: this.state.emptyOverlayArray,
-      turn: 'moved'
-    })
+    const overlayObject = {
+      overlayArray: this.props.boardObject.overlayObject.emptyOverlayArray,
+      phase: 'moved'
+    };
+    this.props.updateOverlay(this.props.boardId, overlayObject);
   }
 
   attackUnit(position) {
+    const { boardId } = this.props;
     const positionX = position[0];
     const positionY = position[1];
-    if(this.state.overlayArray[positionX][positionY] === 2 && this.props.board[positionX][positionY].unit != undefined && this.props.board[positionX][positionY].unit.army != this.state.selectedUnit.army) {
-      this.setState({
-        overlayArray: this.state.emptyOverlayArray,
-        movedSquare: [-1, -1],
-        selectedSquare: position,
-        turn: 'start'
-      });
-      //CALCULATE ATTACKS
-      this.props.updateBoards(OBJECT);
-      //SAVE TO FIREBASE (UNIT.ACTIVE = FALSE) BOTH UNITS
+    if(this.props.boardObject.overlayObject.overlayArray[positionX][positionY] === 2 && this.props.board[positionX][positionY].unit != undefined && this.props.board[positionX][positionY].unit.army != this.props.boardObject.overlayObject.selectedUnit.army) {
+      const oldEnemyUnit = this.props.board[positionX][positionY].unit;
+      const newEnemyUnit = oldEnemyUnit.hp - 10 > 0 ? Object.assign({}, oldEnemyUnit, {hp: oldEnemyUnit.hp - 10}) : null;
+      if(newEnemyUnit === null) {
+        this.isEndOfGame(oldEnemyUnit.army);
+      }
+      let newBoard = this.props.board.slice();
+      newBoard[positionX][positionY] = Object.assign({}, this.props.board[positionX][positionY], { unit: newEnemyUnit });
+      this.props.updateBoard(boardId, newBoard);
+      this.endMove();
     }
   }
 
   endMove() {
-    const boardId = this.props.boardId;
-    const startingPositionX = this.state.selectedSquare[0];
-    const startingPositionY = this.state.selectedSquare[1];
-    const finalPositionX = this.state.movedSquare[0];
-    const finalPositionY = this.state.movedSquare[1];
-    const finalUnit = Object.assign({}, this.state.selectedUnit, {active: false});
-    this.setState({
-      overlayArray: this.state.emptyOverlayArray,
-      selectedSquare: this.state.movedSquare,
-      movedSquare: [-1, -1],
-      turn: 'start'
-    });
+    const { boardId } = this.props;
+    let selectedSquare = [-1, -1];
+    const startingPositionX = this.props.boardObject.overlayObject.selectedSquare[0];
+    const startingPositionY = this.props.boardObject.overlayObject.selectedSquare[1];
+    const finalPositionX = this.props.boardObject.overlayObject.movedSquare[0];
+    const finalPositionY = this.props.boardObject.overlayObject.movedSquare[1];
+    const finalUnit = Object.assign({}, this.props.boardObject.overlayObject.selectedUnit, {active: false});
+    let newBoard = this.props.board.slice();
     if(finalPositionX === -1) {
-      let newBoard = this.props.board.slice();
       newBoard[startingPositionX][startingPositionY] = Object.assign({}, this.props.board[startingPositionX][startingPositionY], { unit: finalUnit });
-      this.props.updateBoard(newBoard, this.props.boardId);
-      //this.props.updateBoard(`boards/${boardId}/${startingPositionX}/${startingPositionY}`, { unit: finalUnit });
+      selectedSquare = this.props.boardObject.overlayObject.selectedSquare;
     }else{
-      let newBoard = this.props.board.slice();
       newBoard[startingPositionX][startingPositionY] = Object.assign({}, this.props.board[startingPositionX][startingPositionY], { unit: null });
       newBoard[finalPositionX][finalPositionY] = Object.assign({}, this.props.board[finalPositionX][finalPositionY], { unit: finalUnit });
-      this.props.updateBoard(newBoard, this.props.boardId);
-      //this.props.updateBoard(`boards/${boardId}/${startingPositionX}/${startingPositionY}`, { unit: null });
-      //this.props.updateBoard(`boards/${boardId}/${finalPositionX}/${finalPositionY}`, { unit: finalUnit });
+      selectedSquare = this.props.boardObject.overlayObject.movedSquare;
     }
-    this.forceUpdate();
+    this.props.updateBoard(boardId, newBoard);
+    this.props.uploadBoardToFirebase(boardId, newBoard);
+    const overlayObject = {
+      overlayArray: this.props.boardObject.overlayObject.emptyOverlayArray,
+      selectedSquare: selectedSquare,
+      selectedUnit: finalUnit,
+      movedSquare: [-1, -1],
+      phase: 'start'
+    };
+    this.props.updateOverlay(boardId, overlayObject);
+    this.isEndOfTurn(finalUnit.army, boardId, newBoard)
+  }
+
+  endGame(winner) {
+    this.props.endTheGame(this.props.boardId, winner);
   }
 
   render() {
     const { board } = this.props;
     return (
       <div>
-        <Board board={board} boardObject={this.props.boardObject} overlayArray={this.state.overlayArray} selectSquare={this.selectSquare.bind(this)} moveUnit={this.moveUnit.bind(this)} attackUnit={this.attackUnit.bind(this)} { ...this.state } />
-        <BoardMenu className="boardMenu" board={board} boardObject={this.props.boardObject} selectSquare={this.selectSquare.bind(this)} deSelectSquare={this.deSelectSquare.bind(this)} selectMove={this.selectMove.bind(this)} moveUnit={this.moveUnit.bind(this)} selectAttack={this.selectAttack.bind(this)} deSelectAttack={this.deSelectAttack.bind(this)} attackUnit={this.attackUnit.bind(this)} endMove={this.endMove.bind(this)} userId={this.props.auth.id} { ...this.state } />
+        { this.props.boardObject.winner != undefined ? <EndGameModal userId={this.props.auth.id} winner={this.props.boardObject.winner} boardId={this.props.boardId} eraseBoardFromFirebase={this.props.eraseBoardFromFirebase} /> : null }
+        <Board board={board} boardObject={this.props.boardObject} overlayArray={this.props.boardObject.overlayObject.overlayArray} selectSquare={this.selectSquare.bind(this)} moveUnit={this.moveUnit.bind(this)} attackUnit={this.attackUnit.bind(this)} { ...this.props } />
+        <BoardMenu className="boardMenu" board={board} boardObject={this.props.boardObject} selectSquare={this.selectSquare.bind(this)} deSelectSquare={this.deSelectSquare.bind(this)} selectMove={this.selectMove.bind(this)} moveUnit={this.moveUnit.bind(this)} selectAttack={this.selectAttack.bind(this)} deSelectAttack={this.deSelectAttack.bind(this)} attackUnit={this.attackUnit.bind(this)} endMove={this.endMove.bind(this)} userId={this.props.auth.id} { ...this.props } />
       </div>
     );
   }

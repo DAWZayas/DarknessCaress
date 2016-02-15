@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Tabs, Tab } from 'material-ui';
 import SwipeableViews from 'react-swipeable-views';
 
-import searchNewGame from '../../actions/Game/actions.js'; //FIXME: How Charles will handle this? 
+import searchNewGame from '../../actions/Game/actions.js'; //FIXME: How Charles will handle this?
 
 import Game from './Game';
 
@@ -11,6 +11,7 @@ export default class GameTabs extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       slideIndex: 0 //doesn't work if you change it to 1 or 2, but should work (?)
     };
   }
@@ -24,6 +25,14 @@ export default class GameTabs extends Component {
 
   componentWillUnmount() {
     this.props.unregisterListeners();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    nextProps.boards !== this.props.boards
+    ? this.setState({
+        loading: false
+      })
+    : null;
   }
 
   handleChangeIndex(index) {
@@ -54,7 +63,8 @@ export default class GameTabs extends Component {
       }
     };
     const boards = this.props.boards || [];
-    return (
+    const user = this.props.user || {status: 'searching'};
+    return this.state.loading ? <span>LOADING!!!</span> : (
       <div>
       {
       boards.length < 5 ?
@@ -85,8 +95,11 @@ export default class GameTabs extends Component {
           {
             boards.length >= 5 ? '' :
               (<div className="center-block" style={style.slide}>
-                <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
-              //NOTE: Add spinner when waiting for a game.
+                {
+                  user.status !== 'searching'
+                  ? <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
+                  : <span>SEARCH FOR A GAME!!!</span>
+                }
               </div>)
           }
         </SwipeableViews>

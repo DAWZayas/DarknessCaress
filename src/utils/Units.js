@@ -9,7 +9,8 @@ export const allUnits = {
     "sp_def": 50,
     "movement": 6,
     "range": {0: 1, 1: 3},
-    "fly": false
+    "fly": false,
+    image: "link"
 },
 2: {
     "id": "02",
@@ -21,7 +22,8 @@ export const allUnits = {
     "sp_def": 65,
     "movement": 5,
     "range": {0: 1, 1: 3},
-    "fly": false
+    "fly": false,
+    image: "cloud"
 },
 3: {
     "id": "03",
@@ -33,7 +35,8 @@ export const allUnits = {
     "sp_def": 25,
     "movement": 6,
     "range": {0: 1, 1: 3},
-    "fly": true
+    "fly": true,
+    image: "metaknight"
 },
 4: {
     "id": "04",
@@ -45,7 +48,8 @@ export const allUnits = {
     "sp_def": 80,
     "movement": 3,
     "range": {0: 1, 1: 3},
-    "fly": false
+    "fly": false,
+    image: "general"
 },
 5: {
     "id": "05",
@@ -57,7 +61,8 @@ export const allUnits = {
     "sp_def": 32,
     "movement": 5,
     "range": {0: 1, 1: 3},
-    "fly": false
+    "fly": false,
+    image: "tobi"
 },
 6: {
     "id": "06",
@@ -69,7 +74,8 @@ export const allUnits = {
     "sp_def": 40,
     "movement": 4,
     "range": {0: 1, 1: 3},
-    "fly": true
+    "fly": true,
+    image: "midna"
 },
 7: {
     "id": "07",
@@ -81,7 +87,8 @@ export const allUnits = {
     "sp_def": 50,
     "movement": 6,
     "range": {0: 1, 1: 3},
-    "fly": false
+    "fly": false,
+    image: "lyn"
 },
 8: {
     "id": "08",
@@ -93,21 +100,10 @@ export const allUnits = {
     "sp_def": 65,
     "movement": 5,
     "range": {0: 1, 1: 3},
-    "fly": false
+    "fly": false,
+    image: "deadpool"
 },
 9: {
-    "id": "09",
-    "name": "MeatBoy",
-    "hp": 40,
-    "attack": 30,
-    "defense": 40,
-    "sp_atk": 45,
-    "sp_def": 65,
-    "movement": 6,
-    "range": {0: 1, 1: 3},
-    "fly": false
-},
-10: {
     "id": "10",
     "name": "Shuma Gorath",
     "hp": 70,
@@ -117,9 +113,10 @@ export const allUnits = {
     "sp_def": 65,
     "movement": 5,
     "range": {0: 1, 1: 3},
-    "fly": true
+    "fly": true,
+    image: "shuma_gorath"
 },
-11: {
+10: {
     "id": "1",
     "name": "Mewtwo",
     "hp": 45,
@@ -129,9 +126,10 @@ export const allUnits = {
     "sp_def": 40,
     "movement": 5,
     "range": {0: 1, 1: 3},
-    "fly": true
+    "fly": true,
+    image: "mewtwo"
 },
-12: {
+11: {
     "id": "12",
     "name": "Samus",
     "hp": 65,
@@ -141,9 +139,10 @@ export const allUnits = {
     "sp_def": 55,
     "movement": 4,
     "range": {0: 1, 1: 3},
-    "fly": false
+    "fly": false,
+    image: "samus"
 },
-13: {
+12: {
     "id": "13",
     "name": "Jirachi",
     "hp": 90,
@@ -153,9 +152,10 @@ export const allUnits = {
     "sp_def": 65,
     "movement": 5,
     "range": {0: 1, 1: 3},
-    "fly": true
+    "fly": true,
+    image: "jirachi"
 },
-14: {
+13: {
     "id": "14",
     "name": "Belzemon",
     "hp": 60,
@@ -165,9 +165,10 @@ export const allUnits = {
     "sp_def": 65,
     "movement": 4,
     "range": {0: 1, 1: 3},
-    "fly": true
+    "fly": true,
+    image: "belzemon"
 },
-15: {
+14: {
     "id": "15",
     "name": "Isaac",
     "hp": 50,
@@ -177,9 +178,10 @@ export const allUnits = {
     "sp_def": 45,
     "movement": 5,
     "range": {0: 1, 1: 3},
-    "fly": false
+    "fly": false,
+    image: "isaac"
 },
-16: {
+15: {
     "id": "16",
     "name": "Korra",
     "hp": 50,
@@ -189,9 +191,10 @@ export const allUnits = {
     "sp_def": 50,
     "movement": 6,
     "range": {0: 1, 1: 3},
-    "fly": false
+    "fly": false,
+    image: "korra"
 },
-17: {
+16: {
     "id": "17",
     "name": "Charizard",
     "hp": 40,
@@ -201,11 +204,12 @@ export const allUnits = {
     "sp_def": 40,
     "movement": 5,
     "range": {0: 1, 1: 3},
-    "fly": true
+    "fly": true,
+    image: "charizard"
 },
-18: {
+17: {
     "id": "18",
-    "name": "Boba Fet",
+    "name": "Bobba Fett",
     "hp": 60,
     "attack": 50,
     "defense": 65,
@@ -213,9 +217,10 @@ export const allUnits = {
     "sp_def": 65,
     "movement": 4,
     "range": {0: 1, 1: 3},
-    "fly": true
+    "fly": true,
+    image: "bobba_fett"
 },
-19: {
+18: {
     "id": "19",
     "name": "Master Chief",
     "hp": 60,
@@ -225,9 +230,10 @@ export const allUnits = {
     "sp_def": 65,
     "movement": 5,
     "range": {0: 1, 1: 3},
-    "fly": false
+    "fly": false,
+    image: "master_chief"
 },
-20: {
+19: {
     "id": "20",
     "name": "Estela",
     "hp": 60,
@@ -237,9 +243,10 @@ export const allUnits = {
     "sp_def": 65,
     "movement": 4,
     "range": {0: 1, 1: 3},
-    "fly": true
+    "fly": true,
+    image: "estela"
 },
-21: {
+20: {
     "id": "21",
     "name": "Vivi",
     "hp": 20,
@@ -249,9 +256,10 @@ export const allUnits = {
     "sp_def": 25,
     "movement": 2,
     "range": {0: 1, 1: 3},
-    "fly": false
+    "fly": false,
+    image: "vivi"
 },
-22: {
+21: {
     "id": "22",
     "name": "Megaman",
     "hp": 45,
@@ -261,6 +269,7 @@ export const allUnits = {
     "sp_def": 50,
     "movement": 5,
     "range": {0: 1, 1: 3},
-    "fly": false
+    "fly": false,
+    image: "megaman"
 }
 }
