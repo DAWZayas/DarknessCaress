@@ -159,10 +159,10 @@
   height:14px !important;
 }
 
-#overlap{
+.overlap{
   position:relative;
   float:left;
-  margin-right:25px;
+  margin-right:18vw;
 }
 #avatarHolder{
   position:absolute;
