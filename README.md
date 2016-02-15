@@ -1,27 +1,27 @@
-# ManyMovies
+### Carlos Ballesteros, Alberto Mata, Alejandro Sanchez.
+#Darkness' Caress:
+### The world-wide well-known on-line game.
 
-Project developed by: Alexandra Martín, Alexia Torres and Sergio Panadero.
+Rpg-themed turn-based on-line multiplayin'-game featuring:
+* Live saving any progress done, so even if you disconnect suddenly, progress will be stored.
+* Unlock characters, armor, weapons, skins and so on.
+* World-wide ranking, so you know how bad you actually are.
+* Tutorial for the damn noobs. Everyone hate noobs.
+* Create your very own account, so you can add friends, stat-tracking, etc.
+* You can chat with people on the same instance of map, or if you add them to your group, even out of it.
 
-##Reason of the project:
+The web will be able to:
+* Check everyones profile: including level, equipment, number of matches, etc.
+* Create & manage accounts.
+* Chat with in-game players.
 
-We decided to do an application to help people keep track of their watched movies, the release of movies new movies, and suggest them movies to watch.
+Server side:
+* Database storage for every important data.
+* Matchmaking with players, or IA.
+* And more!
 
-##Description:
-
-The user interface will have a list of new releases and popular films that you might be interested in. 
-You will have a calendar with the new releases that you have selected.
-The user will have a search box to look for movies and be able to see their info and add it to lists.
-
-##Content:
-
-This application will have this features being able to be changed in a future.
-
-1. Sign up / Login up
-2. Look for movies
-3. Create and manage personalized lists
-4. Get suggested movies
-5. Favorite and comment on movies
-6. Get a calendar with the new releases you are interested in
-7. Share lists with other users
-8. See other users public lists
-
+Links:
+* [Additional information](https://github.com/DAWZayas/DarknessCaress).
+* [Ghpages](http://dawzayas.github.io/DarknessCaress/).
+* [Firebase](https://darkness-caress.firebaseapp.com/).
+* [Firebase with mobiletest](http://mobiletest.me/htc_one_emulator/?u=https://darkness-caress.firebaseapp.com/).
