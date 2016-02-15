@@ -7,8 +7,37 @@ export const navigate = (path) => pushState(null, path);
 export function searchNewGame(userId) {
   return (dispatch, getState) => {
     const { firebase } = getState();
-    firebase.child('matchmaking').transaction( matchmaking => (matchmaking || []).concat(userId) , () => {}, false );
+    firebase.child('matchmaking').once('value', snapshot => {
+      if(!snapshot) {
+        firebase.child('matchmaking').push(userId);
+      }else{
+        const matchmakingObject = snapshot.val();
+        const firstKey = Object.keys(matchmakingObject)[0];
+        const opponent = matchmakingObject[firstKey];
+        matchmake(userId, opponent, firebase);
+        firebase.child(`matchmaking/${firstKey}`).remove();
+      }
+    });
   };
+}
+
+function matchmake(userAsking, userReceiving, firebase) {
+  sendSolicitatingNotification(userAsking, userReceiving, firebase);
+  sendSolicitationNotification(userReceiving, userAsking, firebase);
+}
+
+function sendSolicitatingNotification(userAsking, userReceiving, firebase) {
+  firebase.child(`users/${userAsking}/notifications`).push({
+    "type": "gameSolicitating",
+    "userId": userReceiving
+  });
+}
+
+function sendSolicitationNotification(userReceiving, userAsking, firebase) {
+  firebase.child(`users/${userReceiving}/notifications`).push({
+    "type": "gameSolicitation",
+    "userId": userAsking
+  });
 }
 
 export function updateOverlay(boardId, overlayObject) {
@@ -38,33 +67,41 @@ export function uploadBoardToFirebase(boardId, newBoard) {
   };
 }
 
-export function endTurn(boardId, newBoard) {
+export function endTurn(boardId, board) {
   return (dispatch, getState) => {
-    debugger;
-    const finalBoard = newBoard.map( row => {
-      return row.map( square => {
-        if(square.unit !== undefined) {
-          square.unit = Object.assign({}, square.unit, {active: true});
-        }
-        return square;
-      })
-    });
-    dispatch({
-      type: CHANGE_TURN,
-      boardId,
-      finalBoard
-    });
     const { firebase } = getState();
-    firebase.child(`boards/${boardId}`).once('value', snapshot => {
-      const boardObject = snapshot.val();
-      const firstUser = boardObject[0];
-      const secondUser = boardObject[1];
-      boardObject.turn === firstUser
-      ? firebase.child(`boards/${boardId}/turn`).set(secondUser)
-      : firebase.child(`boards/${boardId}/turn`).set(firstUser);
-      firebase.child(`boards/${boardId}/board`).set(finalBoard);
-    });
+    const finalBoard = endTurnInRedux(board, dispatch);
+    endTurnInFirebase(boardId, finalBoard, firebase);
   };
+}
+
+function endTurnInRedux(board, dispatch) {
+  const finalBoard = board.map( row => {
+    return row.map( square => {
+      if(square.unit !== undefined) {
+        square.unit = Object.assign({}, square.unit, {active: true});
+      }
+      return square;
+    })
+  });
+  dispatch({
+    type: CHANGE_TURN,
+    boardId,
+    finalBoard
+  });
+  return finalBoard;
+}
+
+function endTurnInFirebase(boardId, finalBoard, firebase) {
+  firebase.child(`boards/${boardId}`).once('value', snapshot => {
+    const boardObject = snapshot.val();
+    const firstUser = boardObject[0];
+    const secondUser = boardObject[1];
+    boardObject.turn === firstUser
+    ? firebase.child(`boards/${boardId}/turn`).set(secondUser)
+    : firebase.child(`boards/${boardId}/turn`).set(firstUser);
+    firebase.child(`boards/${boardId}/board`).set(finalBoard);
+  });
 }
 
 export function endTheGame(boardId, winner) {

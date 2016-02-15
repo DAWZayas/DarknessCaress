@@ -63,9 +63,9 @@ function placeOneUnit(unit, board, side) {
 }
 
 function addBoardToUser(userId, boardId, firebase) {
-  firebase.child(`users/${userId}/myBoards`).transaction( boards => {
-    let boardArray = boards || [];
-    boardArray.unshift(boardId);
-    return boardArray;
-  }, () => {}, false);
+  firebase.child(`users/${userId}/myBoards`).once('value', snapshot => {
+    const boardArray = snapshot.val() || [];
+    firebase.child(`users/${userId}/myBoards`).set([boardId, ...boardArray]);
+  });
+  firebase.child(`users/${userId}/status`).set('playing');
 }
