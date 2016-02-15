@@ -5,6 +5,8 @@ import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
 import Button from './Button';
 
+import { createNewBoard, searchNewGame } from '../../actions/Game/actions';
+
 export default class GameSolicitationNotification extends Component {
   componentWillMount() {
     const { notification } = this.props;
@@ -14,17 +16,33 @@ export default class GameSolicitationNotification extends Component {
       this.setState({
         opponent: snapshot.val()
       });
-      this.forceUpdate();
     });
   }
+
+  handleAccept() {
+    const myUserId = this.props.auth.id;
+    const opponentId = this.props.notification.userId;
+    const { notificationId } = this.props;
+    createNewBoard(myUserId, opponentId);
+    this.props.removeNotification(notificationId);
+    this.props.navigate('game');
+  }
+
+  handleCancel() {
+    const opponentId = this.props.notification.userId;
+    const { notificationId } = this.props;
+    searchNewGame(opponentId);
+    this.props.removeNotification(notificationId);
+  }
+
   render(){
-    const avatarImg='https://edgecast.wizard101.com/image/free/Wizard/C/Duel/pvpicon.gif';
+    const avatarImg = 'https://edgecast.wizard101.com/image/free/Wizard/C/Duel/pvpicon.gif';
     const { notification } = this.props;
     const opponent = this.state ? this.state.opponent : {};
     const { username,  level, mmr } = opponent;
-    const textUsername = "You have recived a game propousal from: "+username;
-    const textLevel = "Level: "+level;
-    const textMMR= "MMR: "+mmr;
+    const textUsername = "You have recived a game propousal from: " + username;
+    const textLevel = "Level: " + level;
+    const textMMR = "MMR: " + mmr;
     return(
       <Card>
         <CardHeader
@@ -45,8 +63,8 @@ export default class GameSolicitationNotification extends Component {
             </li>
           </ul>
           <div>
-            <Button text="Accept" positive={true} callback={()=>{}}/>
-            <Button text="Cancel" positive={false} callback={()=>{}}/>
+            <Button text="Accept" positive={true} callback={ () => this.handleAccept() }/>
+            <Button text="Cancel" positive={false} callback={ () => this.handleCancel() }/>
           </div>
         </CardText>
       </Card>

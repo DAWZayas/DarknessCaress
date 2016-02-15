@@ -1,4 +1,4 @@
-import { SET_BOARDS, CHANGE_OVERLAY_ARRAY, UPDATE_BOARD, CHANGE_TURN } from '../actions/Game';
+import { SET_BOARDS, CHANGE_OVERLAY_ARRAY, UPDATE_BOARD, CHANGE_TURN } from '../actions/Game/action_types';
 
 function setBoards(state, boards) {
   return boards;

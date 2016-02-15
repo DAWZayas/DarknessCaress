@@ -31,13 +31,15 @@ export function matchmakingOff() {
   };
 }
 
-function createNewBoard(idOne, idTwo, firebase) {
-  let newBoard = createBoardWithRiver(8, 2, 'river');
-  newBoard = fillBoardWithUnits(newBoard);
-  const newBoardReference = firebase.child('boards').push({board: newBoard, turn: idOne, 0: idOne, 1: idTwo});
-  const newBoardId = newBoardReference.key();
-  addBoardToUser(idOne, newBoardId, firebase);
-  addBoardToUser(idTwo, newBoardId, firebase);
+export function createNewBoard(idOne, idTwo, firebase) {
+  return (dispatch, getState) => {
+    let newBoard = createBoardWithRiver(8, 2, 'river');
+    newBoard = fillBoardWithUnits(newBoard);
+    const newBoardReference = firebase.child('boards').push({board: newBoard, turn: idOne, 0: idOne, 1: idTwo});
+    const newBoardId = newBoardReference.key();
+    addBoardToUser(idOne, newBoardId, firebase);
+    addBoardToUser(idTwo, newBoardId, firebase);
+  };
 }
 
 function fillBoardWithUnits(board) {

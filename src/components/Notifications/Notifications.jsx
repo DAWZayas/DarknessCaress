@@ -15,7 +15,7 @@ export default class Notifications extends Component {
       {
         Object.keys( notifications ).map(( child, index ) => {
           const notification = notifications[child];
-          return <NotificationManager key={ index } notification={notification}/>
+          return <NotificationManager key={ index } notificationId={child} notification={notification} {...this.props} />
         })
       }
       </div>
