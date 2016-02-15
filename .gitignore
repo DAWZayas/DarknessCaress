@@ -12,7 +12,3 @@ build
 # Vim temp files:
 *.swp
 *.swo
-
-# Unignore:
-# Raw Themes:
-! ./node_modules/material-ui/lib/styles/raw-themes/*
