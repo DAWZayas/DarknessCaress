@@ -19,7 +19,7 @@ export default class Nav extends Component {
 
   componentWillUnmount() {
     this.props.unregisterListeners();
-    this.props.notificationListenerKiller();
+    this.props.notificationUnlistener();
   }
 
   handleToggle() {
