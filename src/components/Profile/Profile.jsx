@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Avatar, LinearProgress } from 'material-ui';
 //import Unit from './Unit';
 
@@ -6,6 +6,7 @@ const apiUrl = 'http://img.pokemondb.net/sprites/black-white/anim/normal/';
 
 export default class Profile extends Component {
   render() {
+    const { user } = this.props;
     return (
       <div id="mainBodyProfile">
         <div id="overlap">
@@ -13,8 +14,8 @@ export default class Profile extends Component {
           <Avatar src="http://www.feplanet.net/media/buddyicon/7/bartre.gif" size={70} />
         </div>
         <div>
-          <p className="profile">Nivel 15</p>
-          <LinearProgress id="experienceBar" mode="determinate" value={60} />
+          <p className="profile">level {user.level} </p>
+          <LinearProgress id="experienceBar" mode="determinate" value={user.exp} />
         </div>
       <div className="status-content">
         <div id="principalHeroes">
@@ -31,23 +32,27 @@ export default class Profile extends Component {
           <h3>Stadistics: </h3>
           <div>
             <img/>
-            <p>MMR: 50</p>
+            <p>MMR: {user.mmr}</p>
           </div>
           <div>
             <img/>
-            <p>Victory: 0</p>
+            <p>Victory: {user.record.victories}</p>
           </div>
           <div>
             <img/>
-            <p>Defeats: 326</p>
+            <p>Defeats: {user.record.defeats}</p>
           </div>
           <div>
             <img/>
-            <p>Ties: 1</p>
+            <p>Ties: {user.record.ties}</p>
           </div>
         </div>
         </div>
-      </div>
+    </div>
     );
   }
 }
+
+Profile.propTypes = {
+  user: PropTypes.object
+};
