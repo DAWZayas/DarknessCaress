@@ -2,54 +2,41 @@ import React, { Component, PropTypes } from 'react';
 import { Avatar, LinearProgress } from 'material-ui';
 import IconButton from 'material-ui/lib/icon-button';
 import AvatarPerfil from './AvatarPerfil';
-import Dialog from 'material-ui/lib/dialog';
-import FlatButton from 'material-ui/lib/flat-button';
+import { Modal, ModalClose } from 'react-modal-bootstrap';
+
 
 export default class FirstPartProfile extends Component {
-  constructor(props) {
+    constructor(props) {
     super(props);
-    this.state = {
-      open: false
-    };
+    this.state = { isOpen: false };
   }
 
-  handleOpen(){
-    this.setState({
-      open: true
-    });
+  handleCancelClick() {
+    this.setState({ isOpen: false });
   }
-
-  handleClose(){
-    this.setState({
-      open: false
-    });
+  handleOpenClick() {
+    this.setState({isOpen: true})
   }
 
   render() {
-  const actions = [
-      <FlatButton
-        label="Cancel"
-        secondary={true}
-        onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.handleClose}
-      />,
-    ];
+    const { isOpen } = this.state;
     const { user } = this.props;
     return (
       <div>
         <div className="overlap">
-          <IconButton onTouchTap={this.handleOpen} >
+          <IconButton onFocus={() => this.handleOpenClick()} >
             <AvatarPerfil />
           </IconButton>
         </div>
-        <Dialog title="Dialog With Actions" actions={actions} modal={false} open={this.state.open} onRequestClose={this.handleClose}>
-          The actions in this window were passed in as an array of React objects.
-        </Dialog>
+        <Modal isOpen={isOpen} onRequestHide={ () => this.handleCancelClick() } backdrop keyboard>
+          <div className="modal-header">
+            <ModalClose onClick={() => this.handleCancelClick()} />
+            <h4>CHUS YOR HABATAR</h4> 
+          </div>
+          <div className="modal-body">
+            <button className="btn" type="button" onClick={ () => this.handleCancelClick() }>agree</button>
+          </div>
+        </Modal>
         <div>
           <p className="profile">level {user.level} </p>
           <LinearProgress id="experienceBar" mode="determinate" value={user.exp} />
