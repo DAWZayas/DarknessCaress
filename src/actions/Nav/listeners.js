@@ -1,4 +1,8 @@
-import { SET_USER } from './action_types';
+import { pushState } from 'redux-router';
+
+import { SET_USER, NOTIFICATION_REFRESH } from './action_types';
+
+export const navigate = (path) => pushState(null, path);
 
 export function registerListeners() {
   return (dispatch, getState) => {
@@ -39,27 +43,36 @@ export function unregisterListeners() {
 }
 
 // Notifications:
-export function refreshNotifications( notifications ){
-  return {
-    type: 'NOTIFICATION_REFRESH',
-    notification: notifications
-  };
-}
-
-export function  notificationListener() {
+export function notificationListener() {
   return (dispatch, getState) => {
-    const { firebase, auth } = getState();
-    const userId = auth.id;
-    firebase.child(`users/${userId}/notifications`).on('value', (snapshot) => {
-      dispatch( refreshNotifications( snapshot.val() || { } ));
+    const { firebase } = getState();
+    firebase.onAuth(function(authData) {
+      if(authData) {
+        firebase.child(`users/${authData.uid}/notifications`).on('value', snapshot => {
+          const notifications = snapshot.val() || {};
+          dispatch({
+            type: NOTIFICATION_REFRESH,
+            notification: notifications
+          });
+        });
+      }else{
+        firebase.child('users').off();
+        dispatch({
+          type: NOTIFICATION_REFRESH,
+          notification: {}
+        });
+      }
     });
   };
 }
 
-export function  notificationListenerKiller() {
+export function notificationUnlistener() {
   return (dispatch, getState) => {
-    const { firebase, auth } = getState();
-    const userId = auth.id;
-    firebase.child(`users/${userId}/notifications`).off();
+    const { firebase } = getState();
+    firebase.child('users').off();
+    dispatch({
+      type: NOTIFICATION_REFRESH,
+      notification: {}
+    });
   };
 }

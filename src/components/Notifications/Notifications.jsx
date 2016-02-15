@@ -9,7 +9,7 @@ export default class Notifications extends Component {
   }
 
   render(){
-    const { notifications, } = this.props;
+    const { notifications, auth } = this.props;
     return(
       <div>
       {

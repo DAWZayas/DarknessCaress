@@ -1,7 +1,7 @@
 import * as notificationActions from '../actions/Notifications';
 
 function notificationRefresh(state, notification){
-  return Object.assign({}, state, notification);
+  return notification;
 }
 
 export default function notificationReducer(state = {}, action) {
