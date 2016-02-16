@@ -21,7 +21,7 @@ export default class Board extends Component {
             		{
             			row.map ( (square, index2) => {
             				return (
-        						  <Square key={ index2 } position={[index1, index2]} id={ square.id } image={ square.image } color={this.props.overlayArray[index1][index2]} { ...this.props } />
+        						  <Square key={ index2 } position={[index1, index2]} id={ square.id } image={ square.image } unit={square.unit} color={this.props.overlayArray[index1][index2]} { ...this.props } />
             				);
             			})
             		}

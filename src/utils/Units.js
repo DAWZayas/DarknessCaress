@@ -156,19 +156,6 @@ export const allUnits = {
     image: "jirachi"
 },
 13: {
-    "id": "14",
-    "name": "Belzemon",
-    "hp": 60,
-    "attack": 55,
-    "defense": 60,
-    "sp_atk": 65,
-    "sp_def": 65,
-    "movement": 4,
-    "range": {0: 1, 1: 3},
-    "fly": true,
-    image: "belzemon"
-},
-14: {
     "id": "15",
     "name": "Isaac",
     "hp": 50,
@@ -181,20 +168,7 @@ export const allUnits = {
     "fly": false,
     image: "isaac"
 },
-15: {
-    "id": "16",
-    "name": "Korra",
-    "hp": 50,
-    "attack": 50,
-    "defense": 50,
-    "sp_atk": 30,
-    "sp_def": 50,
-    "movement": 6,
-    "range": {0: 1, 1: 3},
-    "fly": false,
-    image: "korra"
-},
-16: {
+14: {
     "id": "17",
     "name": "Charizard",
     "hp": 40,
@@ -207,20 +181,7 @@ export const allUnits = {
     "fly": true,
     image: "charizard"
 },
-17: {
-    "id": "18",
-    "name": "Bobba Fett",
-    "hp": 60,
-    "attack": 50,
-    "defense": 65,
-    "sp_atk": 45,
-    "sp_def": 65,
-    "movement": 4,
-    "range": {0: 1, 1: 3},
-    "fly": true,
-    image: "bobba_fett"
-},
-18: {
+15: {
     "id": "19",
     "name": "Master Chief",
     "hp": 60,
@@ -233,33 +194,7 @@ export const allUnits = {
     "fly": false,
     image: "master_chief"
 },
-19: {
-    "id": "20",
-    "name": "Estela",
-    "hp": 60,
-    "attack": 30,
-    "defense": 60,
-    "sp_atk": 55,
-    "sp_def": 65,
-    "movement": 4,
-    "range": {0: 1, 1: 3},
-    "fly": true,
-    image: "estela"
-},
-20: {
-    "id": "21",
-    "name": "Vivi",
-    "hp": 20,
-    "attack": 20,
-    "defense": 20,
-    "sp_atk": 300,
-    "sp_def": 25,
-    "movement": 2,
-    "range": {0: 1, 1: 3},
-    "fly": false,
-    image: "vivi"
-},
-21: {
+16: {
     "id": "22",
     "name": "Megaman",
     "hp": 45,

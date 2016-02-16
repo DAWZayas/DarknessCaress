@@ -242,6 +242,11 @@ body{
   position: relative;
 }
 
+.squareUnit {
+  position: absolute;
+  top: 0;
+}
+
 .square, .squareOverlay {
   height: 48px!important;
   width: 48px!important;
