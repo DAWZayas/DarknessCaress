@@ -9,7 +9,9 @@ export default class Profile extends Component {
     const { user } = this.props;
     return (
       <div id="mainBodyProfile">
-        <h2>user.name</h2>
+        <div id="backroundProfile">
+          <h2>{user.username}</h2>
+        </div>
         <FirstPartProfile changeAvatar={this.props.changeAvatar} user= {user} />
         <StadisticsProfile user= {user}/>
       </div>

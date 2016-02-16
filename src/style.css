@@ -69,13 +69,25 @@
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
-
+.titulo{
+  color: #FFFFFF;
+}
 #playButton{
   margin-left: 50%;
   left:-215px;
   size: 30px;
 }
-
+.appBarStyle{
+background-color: #455a64!important;
+}
+.appBarStyle svg{
+fill: #212121!important;
+}
+.modal-content{
+      background-color: #212121!important;
+      color:#009688;
+      font-family: "Arial Black", Arial;
+}
 #headerNav {
   background-color:#523C26;
   color: rgba(255, 255, 255, 1);
@@ -153,49 +165,72 @@
   position: absolute;
   right: 0;
 }
+#backroundProfile{
+  background-position: 50% 30%;
+  background-size: cover;
+  background-image: url(http://deskbg.com/s3/wpp/4/4655/diablo-3-dangerous-moment-desktop-background.jpg);
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 96.4px;
+  position: fixed;
+  border-bottom: 3.5px solid #009688;
+}
+#backroundProfile h2{
+  font-family: "Arial Black", Arial;
+  font-size: 35px;
+  margin: 0;
+  text-align: center;
+  color: #009688;
+}
 
 #experienceBar{
-  width:60% !important;
-  height:14px !important;
+  height:15px !important;
 }
-
+.imageStadistics{
+  width: 10%;
+}
+.exp{
+  z-index: -1;
+  transform: translate(0px, 91px);
+}
 .overlap{
-  position:relative;
-  float:left;
-  margin-right:18vw;
+  z-index: 1;
+  margin-left: -50px;
+  position: fixed;
+  top: 35px;
+  left: 50%;
 }
 #avatarHolder{
-  position:absolute;
-  height:80px;
-  width:80px;
-  top:-6px;
-  left:-7px;
-}
-#principalHeroes{
-  float:left;
-  width:50%;
-}
-#principalHeroes div{
-  text-align:left;
+  border: 3.5px solid #009688 !important;
 }
 #stadistics{
-  text-align:right;
+  text-align:center;;
+}
+
+#stadistics p{
+  font-family: "Arial Black", Arial;
+  font-size: 20px;
+  text-transform: uppercase;
+  margin: 0;
 }
 #headerB{
   background-color: #523C26 !important;
 }
 .tabbedTabs div{
-  background-color:#96704E;
+  background-color:#616161;
+  font-family: "Arial Black", Arial !important;
+  color: #212121 !important;
 }
 .tabbedTabs div:nth-child(2) div:first-child{
-  background-color:#1FAAFB !important;
+  background-color:#009688 !important;
 }
 .material-icons{
-  color:#FFF !important;
+  color:#212121 !important;
 }
 body{
-  background-color:#353535 !important;
-  color:#FFF!important;
+  background-color: #616161 !important;
+  color: #212121!important;
 }
 
 .boardSubMenu {
@@ -213,7 +248,7 @@ body{
 }
 
 .status-content {
-  margin-top: 50px!important;
+  margin-top: 99px!important;
 }
 
 .imagen-landing {
