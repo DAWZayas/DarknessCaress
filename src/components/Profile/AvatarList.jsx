@@ -12,7 +12,7 @@ export default class AvatarList extends Component {
     return (
         <div>
           <IconButton onFocus={this.handleOpenClick.bind(this, 'avatar0')} >
-            <Avatar src{ images.avatar0 } size={70} />
+            <Avatar src={ images.avatar0 } size={70} />
           </IconButton>
           <IconButton onFocus={this.handleOpenClick.bind(this, 'Ouroboros')} >
             <Avatar src={ images.avatar1 } size={70} />
@@ -22,9 +22,6 @@ export default class AvatarList extends Component {
           </IconButton>
           <IconButton onFocus={this.handleOpenClick.bind(this, 'avatar3')} >
             <Avatar src={ images.avatar3 } size={70} />
-          </IconButton>
-          <IconButton onFocus={this.handleOpenClick.bind(this, 'avatar0')} >
-            <Avatar src{ images.avatar4 } size={70} />
           </IconButton>
           <IconButton onFocus={this.handleOpenClick.bind(this, 'Ouroboros')} >
             <Avatar src={ images.avatar4 } size={70} />
@@ -36,7 +33,7 @@ export default class AvatarList extends Component {
             <Avatar src={ images.avatar6 } size={70} />
           </IconButton>
           <IconButton onFocus={this.handleOpenClick.bind(this, 'avatar0')} >
-            <Avatar src{ images.avatar7 } size={70} />
+            <Avatar src={ images.avatar7 } size={70} />
           </IconButton>
           <IconButton onFocus={this.handleOpenClick.bind(this, 'Ouroboros')} >
             <Avatar src={ images.avatar8 } size={70} />
