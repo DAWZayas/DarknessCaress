@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { images } from '../../utils/imageExports';
+import { heroes } from '../../utils/heroesExports';
 
 export default class Square extends Component {
 
@@ -23,12 +24,17 @@ export default class Square extends Component {
   }
 
   render() {
-    const { id, image, position, color } = this.props;
+    const { id, image, position, color, unit } = this.props;
     return (
       <td className="squareHolder" onClick={() => this.handleSelectSquare(position)}>
         <div className="square">
           <img src={ images[image] } alt={ id } height="48px" width="48px" />
         </div>
+        { unit ? (
+        <div className="squareUnit">
+          <img src={ heroes[unit.image] } alt={ id } height="48px" width="48px" />
+        </div>)
+        : null }
         <div className="squareOverlay">
           <div className={`overlay${color}`} />
         </div>

@@ -7,7 +7,7 @@ function setBoards(state, boards) {
 function changeOverlay(state, boardId, overlayObject) {
 	return state.map( board => {
 		if(Object.keys(board)[0] === boardId) {
-			board[`${boardId}`].overlayObject = Object.assign({}, board[`${boardId}`].overlayObject, overlayObject); 
+			board[`${boardId}`].overlayObject = Object.assign({}, board[`${boardId}`].overlayObject, overlayObject);
 		}
 		return board;
 	});

@@ -18,16 +18,18 @@ export function searchNewGame(userId) {
       const matchmakingObject = snapshot.val();
       const firstKey = Object.keys(matchmakingObject)[0];
       const opponent = matchmakingObject[firstKey];
-      matchmake(userId, opponent, firebase);
+      sendSolicitationNotification(opponent, userId, firebase);
       firebase.child(`matchmaking/${firstKey}`).remove();
     }
   });
 }
 
+/*
 function matchmake(userAsking, userReceiving, firebase) {
   sendSolicitatingNotification(userAsking, userReceiving, firebase);
   sendSolicitationNotification(userReceiving, userAsking, firebase);
 }
+*/
 
 function sendSolicitatingNotification(userAsking, userReceiving, firebase) {
   firebase.child(`users/${userAsking}/notifications`).push({
@@ -56,7 +58,7 @@ export function createNewBoard(idOne, idTwo) {
 
 function fillBoardWithUnits(board) {
   for (let i = 0; i < 6; i++) {
-    const unit = allUnits[randomNumber(0, 22)];
+    const unit = allUnits[randomNumber(1, 16)];
     board = placeOneUnit(unit, board, 0);
     board = placeOneUnit(unit, board, 1);
   };
