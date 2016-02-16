@@ -10,6 +10,7 @@ export const navigate = (path) => pushState(null, path);
 
 //SEARCH GAME ACTIONS
 export function searchNewGame(userId) {
+  debugger;
   const firebase = new Firebase('https://darkness-caress.firebaseio.com');
   firebase.child('matchmaking').once('value', snapshot => {
     if(!snapshot.val()) {
@@ -18,16 +19,18 @@ export function searchNewGame(userId) {
       const matchmakingObject = snapshot.val();
       const firstKey = Object.keys(matchmakingObject)[0];
       const opponent = matchmakingObject[firstKey];
-      matchmake(userId, opponent, firebase);
+      sendSolicitationNotification(opponent, userId, firebase);
       firebase.child(`matchmaking/${firstKey}`).remove();
     }
   });
 }
 
+/*
 function matchmake(userAsking, userReceiving, firebase) {
   sendSolicitatingNotification(userAsking, userReceiving, firebase);
   sendSolicitationNotification(userReceiving, userAsking, firebase);
 }
+*/
 
 function sendSolicitatingNotification(userAsking, userReceiving, firebase) {
   firebase.child(`users/${userAsking}/notifications`).push({
