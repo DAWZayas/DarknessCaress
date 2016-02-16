@@ -1,6 +1,6 @@
 export const userTemplate = {
 	username: 'n00b',
-	avatar: 'default',
+	avatar: 'avatar0',
 	level: 0,
 	exp: 0,
 	heroes: [],
