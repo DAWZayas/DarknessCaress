@@ -2,23 +2,26 @@ import { pushState } from 'redux-router';
 
 import { SET_BOARDS, CHANGE_OVERLAY_ARRAY, UPDATE_BOARD, CHANGE_TURN } from './action_types';
 
+import { createBoardWithRiver } from '../../utils/boardGenerator.js';
+import { randomNumber } from '../../utils/generalFunctions';
+import { allUnits } from '../../utils/Units';
+
 export const navigate = (path) => pushState(null, path);
 
+//SEARCH GAME ACTIONS
 export function searchNewGame(userId) {
-  return (dispatch, getState) => {
-    const { firebase } = getState();
-    firebase.child('matchmaking').once('value', snapshot => {
-      if(!snapshot) {
-        firebase.child('matchmaking').push(userId);
-      }else{
-        const matchmakingObject = snapshot.val();
-        const firstKey = Object.keys(matchmakingObject)[0];
-        const opponent = matchmakingObject[firstKey];
-        matchmake(userId, opponent, firebase);
-        firebase.child(`matchmaking/${firstKey}`).remove();
-      }
-    });
-  };
+  const firebase = new Firebase('https://darkness-caress.firebaseio.com');
+  firebase.child('matchmaking').once('value', snapshot => {
+    if(!snapshot.val()) {
+      firebase.child('matchmaking').push(userId);
+    }else{
+      const matchmakingObject = snapshot.val();
+      const firstKey = Object.keys(matchmakingObject)[0];
+      const opponent = matchmakingObject[firstKey];
+      matchmake(userId, opponent, firebase);
+      firebase.child(`matchmaking/${firstKey}`).remove();
+    }
+  });
 }
 
 function matchmake(userAsking, userReceiving, firebase) {
@@ -40,6 +43,48 @@ function sendSolicitationNotification(userReceiving, userAsking, firebase) {
   });
 }
 
+//CREATE BOARD ACTIONS
+export function createNewBoard(idOne, idTwo) {
+  const firebase = new Firebase('https://darkness-caress.firebaseio.com');
+  let newBoard = createBoardWithRiver(8, 2, 'river');
+  newBoard = fillBoardWithUnits(newBoard);
+  const newBoardReference = firebase.child('boards').push({board: newBoard, turn: idOne, 0: idOne, 1: idTwo});
+  const newBoardId = newBoardReference.key();
+  addBoardToUser(idOne, newBoardId, firebase);
+  addBoardToUser(idTwo, newBoardId, firebase);
+}
+
+function fillBoardWithUnits(board) {
+  for (let i = 0; i < 6; i++) {
+    const unit = allUnits[randomNumber(0, 22)];
+    board = placeOneUnit(unit, board, 0);
+    board = placeOneUnit(unit, board, 1);
+  };
+  return board;
+}
+
+function placeOneUnit(unit, board, side) {
+  const boardSize = board.length;
+  const positionX = randomNumber(0, boardSize);
+  const positionY = side === 0 ? randomNumber(0, Math.floor(boardSize / 2)) : randomNumber(Math.ceil(boardSize / 2), boardSize);
+  if(board[positionX][positionY].passable === false || board[positionX][positionY].unit != null) {
+    board = placeOneUnit(unit, board, side);
+  }else{
+    unit = Object.assign({}, unit, {army: side});
+    board[positionX][positionY] = Object.assign({}, board[positionX][positionY], {unit: unit});
+  }
+  return board;
+}
+
+function addBoardToUser(userId, boardId, firebase) {
+  firebase.child(`users/${userId}/myBoards`).once('value', snapshot => {
+    const boardArray = snapshot.val() || [];
+    firebase.child(`users/${userId}/myBoards`).set([boardId, ...boardArray]);
+  });
+  firebase.child(`users/${userId}/status`).set('playing');
+}
+
+//TURN ACTIONS
 export function updateOverlay(boardId, overlayObject) {
   return (dispatch, getState) => {
     dispatch({

@@ -6,7 +6,7 @@ import GameContainer from './containers/GameContainer/GameContainer';
 import ProfileContainer from './containers/ProfileContainer/ProfileContainer';
 import LoginContainer from './containers/LoginContainer/LoginContainer';
 import Landing from './components/Landing/Landing';
-import NotificationsContainer from './containers/Notifications/NotificationsContainer';
+import NotificationsContainer from './containers/NotificationsContainer/NotificationsContainer';
 import MatchmakerContainer from './containers/MatchmakerContainer/MatchmakerContainer';
 
 export default (

@@ -14,7 +14,7 @@ export default class NotificationManager extends Component {
     const  Component = notificationComponents[notification.type] ;
     return(
       <div>
-        <Component notification={ notification }/>
+        <Component notification={ notification } {...this.props} />
       </div>
     );
   }
