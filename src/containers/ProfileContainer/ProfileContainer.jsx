@@ -5,6 +5,6 @@ import * as ProfileActions from '../../actions/Profile';
 
 export default connect(
   state => ({ auth: state.auth, user: state.user }),
-  {},
+
   ProfileActions
 )(ProfileTabs);

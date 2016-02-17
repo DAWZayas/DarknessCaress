@@ -1,17 +1,27 @@
 import React, { Component, PropTypes } from 'react';
-import Slider from '../Slider/Slider';
+import Hero from './Hero';
 
-export default class HeroList extends Component{
+export default class HeroesList extends Component{
   render(){
-    const {heroes, searchBy} = this.props;
+    const {heroes, searchBy, user} = this.props;
     return(
       <div>
-        <Slider heroes={ heroes } />
+      {
+        heroes.map((hero, index)=>{
+          if(hero.name.search(searchBy) > -1){
+            return(
+              <Hero user= {user} key={index} hero={ hero } />
+            );
+          }
+        })
+      }
       </div>
     );
   }
 }
 
-HeroList.propTypes = {
-  heroes: PropTypes.array
+HeroesList.propTypes = {
+  heroes: PropTypes.array,
+  searchBy: PropTypes.string,
+  user: PropTypes.object
 };

@@ -55,7 +55,7 @@ export default class ProfileTabs extends Component {
     };
 
     const items = allItems.filter( item => item.name.search(this.state.searchedItem.toLowerCase()) > -1 );
-    const heroes = allHeroes.filter( hero => hero.name.search(this.state.searchedHero.toLowerCase()) > -1 );
+    const heroes = allHeroes.filter( hero => hero.image.search(this.state.searchedHero.toLowerCase()) > -1 );
     const { user } = this.props;
     return !user ? <span>calgando</span> : (
       <div>
@@ -69,7 +69,7 @@ export default class ProfileTabs extends Component {
             <Profile changeAvatar={this.props.changeAvatar} user={ user } />
           </div>
           <div style={ style.slide }>
-            <Heroes heroes={ heroes } searchBy={ this.searchByHero.bind(this) } />
+            <Heroes heroes={ heroes } user={ user } searchBy={ this.searchByHero.bind(this) } />
           </div>
           <div style={ style.slide }>
             <Items items={ items } searchBy={ this.searchByItem.bind(this) } />

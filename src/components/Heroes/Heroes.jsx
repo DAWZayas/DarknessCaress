@@ -10,11 +10,11 @@ export default class Heroes extends Component{
 	}
 
 	render(){
-		const { heroes, searchBy } = this.props;
+		const { heroes, searchBy, user } = this.props;
  		return(
  			<div>
 				<HeroSearch searchBy={ searchBy } />
- 				<HeroesList heroes={ heroes } />
+ 				<HeroesList user={ user } heroes={ heroes } />
  			</div>
     );
 	}
@@ -22,5 +22,6 @@ export default class Heroes extends Component{
 
 Heroes.propTypes = {
   heroes: PropTypes.array,
-  searchBy: PropTypes.func
+  searchBy: PropTypes.func,
+	user: PropTypes.object
 };
