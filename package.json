@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "install": "sh ./InstallEditedModules.sh; npm install",
     "start": "node_modules/.bin/webpack-dev-server",
     "test": "npm run lint ; node_modules/.bin/mocha --compilers js:babel-core/register --require test/test_helper.js './test/tests.js'",
     "test:watch": "npm run test -- --watch",
