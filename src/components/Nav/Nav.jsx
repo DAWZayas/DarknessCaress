@@ -47,7 +47,7 @@ export default class Nav extends Component {
           <MenuItem primaryText="GitHub" onTouchTap={this.handleTouchTap.bind(this, 'github')} />
           <MenuItem primaryText="Follow Us :)" onTouchTap={this.handleTouchTap.bind(this, 'twitter')} />
         </LeftNav>
-          <AppBar title={ <Title /> } onLeftIconButtonTouchTap={ this.handleToggle.bind(this) } iconElementRight={<ProfileMenu auth={auth} notifications={notifications}navigate={navigate} signOut={this.props.signOut} />} />
+          <AppBar className="appBarStyle" title={ <Title /> } onLeftIconButtonTouchTap={ this.handleToggle.bind(this) } iconElementRight={<ProfileMenu auth={auth} notifications={notifications}navigate={navigate} signOut={this.props.signOut} />} />
           {this.props.children}
       </nav>
     );

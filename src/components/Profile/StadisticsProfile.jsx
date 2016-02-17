@@ -7,33 +7,25 @@ export default class StadisticsProfile extends Component {
     const { user } = this.props;
     return (
       <div className="status-content">
-        <div id="principalHeroes">
-        <div>
-          <img src={`${apiUrl}bulbasaur.gif`} width="80" />
-          <p>1st Most used hero: bulbasaur.</p>
-        </div>
-        <div>
-          <img src={`${apiUrl}ivysaur.gif`} width="80" />
-          <p>2nd Most used hero: ivysaur.</p>
-        </div>
-        </div>
         <div id="stadistics">
-          <h3>Stadistics: </h3>
           <div>
             <img/>
             <p>MMR: {user.mmr}</p>
           </div>
           <div>
-            <img/>
-            <p>Victory: {user.record.victories}</p>
+            <img className="imageStadistics" src="https://cdn2.iconfinder.com/data/icons/trick-or-treat/512/halloween_8-512.png"/>
+            <p>Victory:</p>
+            <p>{user.record.victories}</p>
           </div>
           <div>
-            <img/>
-            <p>Defeats: {user.record.defeats}</p>
+            <img className="imageStadistics" src="https://cdn2.iconfinder.com/data/icons/trick-or-treat/512/halloween_8-512.png"/>
+            <p>Defeats:</p>
+            <p>{user.record.defeats}</p>
           </div>
           <div>
-            <img/>
-            <p>Ties: {user.record.ties}</p>
+            <img className="imageStadistics" src="https://cdn2.iconfinder.com/data/icons/trick-or-treat/512/halloween_8-512.png"/>
+            <p>Ties:</p>
+            <p>{user.record.ties}</p>
           </div>
         </div>
       </div>

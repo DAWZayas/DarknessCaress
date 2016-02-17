@@ -10,7 +10,6 @@ export const navigate = (path) => pushState(null, path);
 
 //SEARCH GAME ACTIONS
 export function searchNewGame(userId) {
-  debugger;
   const firebase = new Firebase('https://darkness-caress.firebaseio.com');
   firebase.child('matchmaking').once('value', snapshot => {
     if(!snapshot.val()) {
@@ -59,7 +58,7 @@ export function createNewBoard(idOne, idTwo) {
 
 function fillBoardWithUnits(board) {
   for (let i = 0; i < 6; i++) {
-    const unit = allUnits[randomNumber(0, 22)];
+    const unit = allUnits[randomNumber(1, 16)];
     board = placeOneUnit(unit, board, 0);
     board = placeOneUnit(unit, board, 1);
   };

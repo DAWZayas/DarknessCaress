@@ -34,7 +34,7 @@ export default class ProfileMenu extends Component {
        notificationCount = "";
      }
     return (
-      <Badge badgeContent={ notificationCount } primary={ true } className={ badgeClassName } >
+      <Badge badgeStyle={{backgroundColor: '#009688'}} badgeContent={ notificationCount } primary={ true } className={ badgeClassName } >
         <IconMenu iconButtonElement={<IconButton iconClassName="material-icons">account_circle</IconButton>}>
           { auth.authenticated === false ? <MenuItem primaryText="Log In" onTouchTap={this.handleTouchTap.bind(this, 'login')} leftIcon={<FontIcon className="glyphicon glyphicon-log-out icono-negro" />} /> : <span/> }
           <MenuItem primaryText="Profile" onTouchTap={this.handleTouchTap.bind(this, 'profile')} leftIcon={<FontIcon className="material-icons icono-negro">person</FontIcon>} />

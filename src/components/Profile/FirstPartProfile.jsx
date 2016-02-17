@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Avatar, LinearProgress } from 'material-ui';
 import IconButton from 'material-ui/lib/icon-button';
-import AvatarPerfil from './AvatarPerfil';
 import { Modal, ModalClose } from 'react-modal-bootstrap';
 import AvatarList from './AvatarList';
 
+import { images } from '../../utils/imageProfileExports';
 
 export default class FirstPartProfile extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ export default class FirstPartProfile extends Component {
       <div>
         <div className="overlap">
           <IconButton onFocus={() => this.handleOpenClick()} >
-            <AvatarPerfil user={user} />
+              <Avatar id="avatarHolder" src={ images[user.avatar] } size={82} />
           </IconButton>
         </div>
         <Modal isOpen={isOpen} onRequestHide={ () => this.handleCancelClick() } backdrop keyboard>
@@ -39,8 +39,7 @@ export default class FirstPartProfile extends Component {
             <button className="btn" type="button" onClick={ () => this.handleCancelClick() }>cancel</button>
           </div>
         </Modal>
-        <div>
-          <p className="profile">level {user.level} </p>
+        <div className="exp">
           <LinearProgress id="experienceBar" mode="determinate" value={user.exp} />
         </div>
       </div>
