@@ -7,6 +7,7 @@ import { images } from '../../utils/imageProfileExports';
 export default class AvatarList extends Component {
   handleOpenClick(avatar) {
     this.props.changeAvatar(avatar);
+    this.props.isOpen();
   }
   render() {
     return (
