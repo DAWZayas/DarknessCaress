@@ -9,27 +9,32 @@ export default class BoardMenu extends Component {
   }
 
   handleDeselect() {
-    this.props.deSelectSquare(this.props.boardId, this.props.boardObject, this.props.position);
+    const { boardObject, boardId } = this.props;
+    const position = boardObject.overlayObject.selectedSquare;
+    this.props.deSelectSquare(boardId, boardObject, position);
   }
 
   handleMove() {
+    const { board, boardObject, boardId } = this.props;
+    const position = boardObject.overlayObject.selectedSquare;
     this.props.boardObject.overlayObject.phase === 'moving'
-      ? this.props.selectSquare(this.props.selectedSquare, this.props.board, this.props.boardObject)
-      : this.props.selectMove(this.props.boardObject, this.props.board, this.props.boardId);
+      ? this.props.selectSquare(position, board, boardObject, boardId)
+      : this.props.selectMove(boardObject, board, boardId);
   }
 
   handleAttack() {
+    const { board, boardObject, boardId } = this.props;
     this.props.boardObject.overlayObject.phase === 'attacking'
-      ? this.props.deSelectAttack(this.props.board, this.props.boardObject)
-      : this.props.selectAttack(this.props.boardObject, this.props.board);
+      ? this.props.deSelectAttack(boardObject, overlayArray, boardId)
+      : this.props.selectAttack(boardObject, board, boardId);
   }
 
   handleDefend() {
-    this.props.endMove(this.props.boardObject, this.props.boardId, this.props.board, this.props.overlayArray);
+    const { board, boardObject, boardId, overlayArray } = this.props;
+    this.props.endMove(boardObject, boardId, board, overlayArray);
   }
 
   render() {
-    debugger;
     const { selectedSquare, selectedUnit, phase, movedSquare } = this.props.boardObject.overlayObject;
     const { board } = this.props;
     const highlightedPosition = movedSquare[0] != -1

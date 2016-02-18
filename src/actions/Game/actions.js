@@ -245,12 +245,14 @@ function endGame(winner) {
 const DEFAULT_POSITION = [-1, -1];
 
 function handleOverlayObject(boardObject, overlayArray, movedSquare, selectedSquare, selectedUnit, phase){
+  debugger;
   const previousOverlayObject = boardObject.overlayObject;
     const updatedOverlayArray = overlayArray ? overlayArray : previousOverlayObject.overlayArray;
     const updatedMovedSquare = movedSquare ? movedSquare : previousOverlayObject.movedSquare;
     const updatedSelectedSquare = selectedSquare ? selectedSquare : previousOverlayObject.selectedSquare;
     const updatedSelectedUnit = selectedUnit ? selectedUnit : previousOverlayObject.selectedUnit;
     const updatedPhase = phase ? phase : previousOverlayObject.phase;
+    const emptyOverlayArray = generateOverlayArray(boardObject.overlayObject.overlayArray.length);
   return {
       overlayArray:updatedOverlayArray,
       movedSquare:updatedMovedSquare,
@@ -271,6 +273,7 @@ export function selectSquare(position, board, boardObject, boardId) {
 
 export function deSelectSquare(boardId, boardObject, position) {
   return (dispatch, getState) => {
+      debugger;
     const overlayArray = boardObject.overlayObject.emptyOverlayArray;
     const overlayObject = handleOverlayObject(boardObject, overlayArray, DEFAULT_POSITION, position, null, 'start');
     dispatch(updateOverlay(boardId, overlayObject));
@@ -305,7 +308,7 @@ function youCanMove(boardObject, position, board){
   return canYouMove && isThereNoUnit;
 }
 
-export function selectAttack(boardObject, board) {
+export function selectAttack(boardObject, board, boardId) {
   return (dispatch, getState) => {
     const attackingPosition = boardObject.overlayObject.movedSquare[0] != -1 ? boardObject.overlayObject.movedSquare : boardObject.overlayObject.selectedSquare;
     const newOverlayArray = calculateAttackArea(board, attackingPosition, boardObject.overlayObject.selectedUnit);
@@ -346,7 +349,6 @@ export function youCanAttack(boardObject, board){
 }
 
 export function endMove(boardObject, boardId, board, overlayArray) {
-  debugger;
   return (dispatch, getState) => {
     const unmoved = -1;
     let selectedSquare = [-1, -1];
@@ -394,7 +396,7 @@ export function endMove(boardObject, boardId, board, overlayArray) {
 	2: ATTACK (RED)
 	3: HEALING (GREEN)
 */
-export const BLANK_SPACE = 0;
+export const BLANKSPACE = 0;
 export const MOVE = 1;
 export const ATTACK = 2;
 export const HEALING = 3;
@@ -409,7 +411,7 @@ export function calculateMoves(boardArray, selectedPositionArray, hero) {
 	hero.fly ?
 		calculateFlyingMoves(boardArray, overlayArray, selectedPositionArray, hero.movement + 1, hero) :
 		calculateWalkingMoves(boardArray, overlayArray, selectedPositionArray, hero.movement + position.movementSlow, hero);
-	overlayArray[selectedPositionArray[0]][selectedPositionArray[1]] = BLANK_SPACE;
+	overlayArray[selectedPositionArray[0]][selectedPositionArray[1]] = BLANKSPACE;
 	return overlayArray;
 }
 
@@ -475,12 +477,15 @@ function calculateAttackCircle(boardSize, overlayArray, selectedPositionArray, h
 
 //HELPER FUNCTION
 export function generateOverlayArray(boardSize) {
+  const BLANKSPACE = 0;
+  console.log(">>>>>>>>>>>>>>>>>>>>XXX Shiets Happens: "+BLANKSPACE);
 	let overlayArray = [];
 	for (let i = 0; i < boardSize; i++) {
 		overlayArray[i] = [];
 		for (let j = 0; j < boardSize; j++) {
-			overlayArray[i][j] = BLANK_SPACE;
+			overlayArray[i][j] = BLANKSPACE;
 		};
 	};
+  console.log(">>>>>>>>>>>>>>>>>>>>XXX Shiets Happens2: "+overlayArray);
 	return overlayArray;
 }

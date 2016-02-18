@@ -11,6 +11,7 @@ export function registerListeners() {
         resolve => firebase.child(`boards/${boardId}`).on('value', snapshot => {
           const newObject = {};
           const boardSize = snapshot.val().board.length;
+          console.log(">>>>>>>>>>>>I've called getStartState");
           const overlayObject = getStartState(boardSize);
           newObject[boardId] = Object.assign({}, snapshot.val(), {overlayObject: overlayObject});
           resolve(newObject)
