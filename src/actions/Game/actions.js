@@ -245,7 +245,6 @@ function endGame(winner) {
 const DEFAULT_POSITION = [-1, -1];
 
 function handleOverlayObject(boardObject, overlayArray, movedSquare, selectedSquare, selectedUnit, phase){
-  debugger;
   const previousOverlayObject = boardObject.overlayObject;
     const updatedOverlayArray = overlayArray ? overlayArray : previousOverlayObject.overlayArray;
     const updatedMovedSquare = movedSquare ? movedSquare : previousOverlayObject.movedSquare;
@@ -254,6 +253,7 @@ function handleOverlayObject(boardObject, overlayArray, movedSquare, selectedSqu
     const updatedPhase = phase ? phase : previousOverlayObject.phase;
     const emptyOverlayArray = generateOverlayArray(boardObject.overlayObject.overlayArray.length);
   return {
+      emptyOverlayArray: emptyOverlayArray,
       overlayArray:updatedOverlayArray,
       movedSquare:updatedMovedSquare,
       selectedSquare:updatedSelectedSquare,
@@ -273,7 +273,6 @@ export function selectSquare(position, board, boardObject, boardId) {
 
 export function deSelectSquare(boardId, boardObject, position) {
   return (dispatch, getState) => {
-      debugger;
     const overlayArray = boardObject.overlayObject.emptyOverlayArray;
     const overlayObject = handleOverlayObject(boardObject, overlayArray, DEFAULT_POSITION, position, null, 'start');
     dispatch(updateOverlay(boardId, overlayObject));
@@ -478,7 +477,6 @@ function calculateAttackCircle(boardSize, overlayArray, selectedPositionArray, h
 //HELPER FUNCTION
 export function generateOverlayArray(boardSize) {
   const BLANKSPACE = 0;
-  console.log(">>>>>>>>>>>>>>>>>>>>XXX Shiets Happens: "+BLANKSPACE);
 	let overlayArray = [];
 	for (let i = 0; i < boardSize; i++) {
 		overlayArray[i] = [];
@@ -486,6 +484,5 @@ export function generateOverlayArray(boardSize) {
 			overlayArray[i][j] = BLANKSPACE;
 		};
 	};
-  console.log(">>>>>>>>>>>>>>>>>>>>XXX Shiets Happens2: "+overlayArray);
 	return overlayArray;
 }
