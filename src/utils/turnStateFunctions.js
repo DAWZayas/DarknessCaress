@@ -1,5 +1,5 @@
 import { generateOverlayArray } from './turnFunctions';
-/*phase GUIDE
+/*phase'S STATE GUIDE
 	START: NOTHING
 	MOVING: CALCULATING POSSIBLE MOVES
 	MOVED: CHOSEN NEW POSITION, NOT COMMITED
@@ -9,11 +9,13 @@ import { generateOverlayArray } from './turnFunctions';
 */
 export function getStartState(boardSize) {
 	const emptyOverlayArray = generateOverlayArray(boardSize);
+  const unMoved = [-1, -1];
+  const unSelected = [-1, -1];
 	return {
     emptyOverlayArray: emptyOverlayArray,
     overlayArray: emptyOverlayArray,
-    movedSquare: [-1, -1],
-    selectedSquare: [-1, -1],
+    movedSquare: unMoved,
+    selectedSquare: unSelected,
     selectedUnit: null,
     phase: 'start'
   };

@@ -10,15 +10,16 @@ export default class Square extends Component {
   }
 
   handleSelectSquare(position) {
+    const { board, boardObject, boardId} = this.props;
     switch(this.props.boardObject.overlayObject.phase){
       case 'start':
-        this.props.selectSquare(position);
+        this.props.selectSquare(position, board, boardObject, boardId);
         break;
       case 'moving':
-        this.props.moveUnit(position);
+        this.props.moveUnit(position, board, boardObject, boardId);
         break;
       case 'attacking':
-        this.props.attackUnit(position);
+        this.props.attackUnit(boardId, position, boardObject, board);
         break;
     }
   }

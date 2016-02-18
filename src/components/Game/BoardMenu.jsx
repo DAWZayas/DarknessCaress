@@ -9,30 +9,34 @@ export default class BoardMenu extends Component {
   }
 
   handleDeselect() {
-    this.props.deSelectSquare();
+    this.props.deSelectSquare(this.props.boardId, this.props.boardObject, this.props.position);
   }
 
   handleMove() {
     this.props.boardObject.overlayObject.phase === 'moving'
-      ? this.props.selectSquare(this.props.selectedSquare)
-      : this.props.selectMove();
+      ? this.props.selectSquare(this.props.selectedSquare, this.props.board, this.props.boardObject)
+      : this.props.selectMove(this.props.boardObject, this.props.board, this.props.boardId);
   }
 
   handleAttack() {
     this.props.boardObject.overlayObject.phase === 'attacking'
-      ? this.props.deSelectAttack()
-      : this.props.selectAttack();
+      ? this.props.deSelectAttack(this.props.board, this.props.boardObject)
+      : this.props.selectAttack(this.props.boardObject, this.props.board);
   }
 
   handleDefend() {
-    this.props.endMove();
+    this.props.endMove(this.props.boardObject, this.props.boardId, this.props.board, this.props.overlayArray);
   }
 
   render() {
+    debugger;
     const { selectedSquare, selectedUnit, phase, movedSquare } = this.props.boardObject.overlayObject;
     const { board } = this.props;
-    const highlightedPosition = movedSquare[0] != -1 ? movedSquare
-      : selectedSquare[0] === -1 ? -1 : selectedSquare;
+    const highlightedPosition = movedSquare[0] != -1
+      ? movedSquare
+      : selectedSquare[0] === -1
+        ? -1
+        : selectedSquare;
     const highlightedSquare = highlightedPosition === -1 ? -1 : board[highlightedPosition[0]][highlightedPosition[1]];
     const turnTitle = this.props.boardObject.turn != this.props.userId ? 'Enemy Turn... username' : 'Your move';
     return (
