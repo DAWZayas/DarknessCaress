@@ -10,6 +10,7 @@ export const navigate = (path) => pushState(null, path);
 
 //SEARCH GAME ACTIONS
 export function searchNewGame(userId) {
+  debugger;
   const firebase = new Firebase('https://darkness-caress.firebaseio.com');
   firebase.child('matchmaking').once('value', snapshot => {
     if(!snapshot.val()) {

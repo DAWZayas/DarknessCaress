@@ -24,7 +24,8 @@ export default class Login extends Component {
   handleCreateAccount() {
     const email = this.refs.email.getValue();
     const password = this.refs.password.getValue();
-    this.props.createUser(email, password);
+    const username = this.refs.username.getValue();
+    this.props.createUser(email, password, username);
     this.props.navigate('login');
   }
 
@@ -43,12 +44,20 @@ export default class Login extends Component {
               <TextField ref="newPassword" floatingLabelText="Repeat password" type="password" />
             </div>
           )
-          : (
-            <div>
-              <TextField ref="email" floatingLabelText="Email" />
-              <TextField ref="password" floatingLabelText="Password" type="password" />
-            </div>
-          )
+          : this.props.route.path === 'create'
+            ? (
+              <div>
+                <TextField ref="email" floatingLabelText="Email" />
+                <TextField ref="password" floatingLabelText="Password" type="password" />
+                <TextField ref="username" floatingLabelText="Username" type="text" />
+              </div>
+            )
+            : (
+              <div>
+                <TextField ref="email" floatingLabelText="Email" />
+                <TextField ref="password" floatingLabelText="Password" type="password" />
+              </div>
+              )
         }
         <br/>
         {

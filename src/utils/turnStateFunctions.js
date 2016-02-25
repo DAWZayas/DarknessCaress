@@ -1,4 +1,15 @@
-import { generateOverlayArray } from './turnFunctions';
+
+function generateOverlayArray(boardSize) {
+    let overlayArray = [];
+    for (let i = 0; i < boardSize; i++) {
+      overlayArray[i] = [];
+      for (let j = 0; j < boardSize; j++) {
+        overlayArray[i][j] = 0;
+      };
+    };
+    return overlayArray;
+  }
+
 /*phase GUIDE
 	START: NOTHING
 	MOVING: CALCULATING POSSIBLE MOVES

@@ -4,7 +4,7 @@ import { userTemplate } from '../../utils/userTemplate';
 
 export const navigate = (path) => pushState(null, path);
 
-export function createUser(email, password) {
+export function createUser(email, password, username) {
   return (dispatch, getState) => {
     const { firebase } = getState();
     firebase.createUser({
@@ -13,7 +13,8 @@ export function createUser(email, password) {
       if (error) {
         console.log("Error creating user:", error);
       } else {
-        firebase.child(`users/${userData.uid}`).set(userTemplate);
+        const newUser = Object.assign({}, userTemplate, {username: username});
+        firebase.child(`users/${userData.uid}`).set(newUser);
         console.log("Successfully created user account with uid:", userData.uid);
       }
     });
@@ -97,7 +98,9 @@ export function authenticate(provider) {
       else {
         firebase.child('users').once("value", function(snapshot) {
           if(snapshot.child(`${authData.uid}`).exists() === false) {
-            firebase.child(`users/${authData.uid}`).set(userTemplate);
+            const newUsername = provider === 'google' ? authData.google.displayName : authData.github.username;
+            const newUser = Object.assign({}, userTemplate, {username: newUsername});
+            firebase.child(`users/${authData.uid}`).set(newUser);
           }
         });
         dispatch(pushState(null, '/'));

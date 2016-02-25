@@ -5,6 +5,7 @@ import SwipeableViews from 'react-swipeable-views';
 import searchNewGame from '../../actions/Game/actions.js'; //FIXME: How Charles will handle this?
 
 import Game from './Game';
+import Spinner from '../Spinner/Spinner';
 
 export default class GameTabs extends Component {
 
@@ -49,7 +50,21 @@ export default class GameTabs extends Component {
 
   onNewGameButtonClick(size, rivers) {
     const userId = this.props.auth.id;
-    this.props.searchNewGame(userId);
+    const firebase = new Firebase('https://darkness-caress.firebaseio.com');
+    firebase.child('matchmaking').once('value', snapshot => {
+      if(!snapshot.val()) {
+        firebase.child('matchmaking').push(userId);
+      }else{
+        const matchmakingObject = snapshot.val();
+        const firstKey = Object.keys(matchmakingObject)[0];
+        const opponent = matchmakingObject[firstKey];
+        firebase.child(`users/${opponent}/notifications`).push({
+          "type": "gameSolicitation",
+          "userId": userId
+        });
+        firebase.child(`matchmaking/${firstKey}`).remove();
+      }
+    });
     this.setState({
       slideIndex: 0
     });
@@ -64,7 +79,7 @@ export default class GameTabs extends Component {
     };
     const boards = this.props.boards || [];
     const user = this.props.user || {status: 'searching'};
-    return this.state.loading ? <span>LOADING!!!</span> : (
+    return this.state.loading ? <div className="loadingIcon"><Spinner /></div> : (
       <div>
       {
       boards.length < 5 ?
@@ -98,7 +113,7 @@ export default class GameTabs extends Component {
                 {
                   user.status !== 'searching'
                   ? <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
-                  : <span>SEARCH FOR A GAME!!!</span>
+                  : <div className="loadingIcon"><Spinner /></div>
                 }
               </div>)
           }

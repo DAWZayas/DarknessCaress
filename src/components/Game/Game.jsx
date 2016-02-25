@@ -14,7 +14,7 @@ export default class Game extends Component {
     let unitIsActive = false;
     this.props.board.map( row => {
       row.map( square => {
-        if(square.unit !== undefined && square.unit.army === myArmy && square.unit.active !== false) {
+        if(square.unit && square.unit.army === myArmy && square.unit.active !== false) {
           unitIsActive = true;
         }
       })
@@ -61,7 +61,7 @@ export default class Game extends Component {
   }
 
   selectMove() {
-    const newOverlayArray = this.props.calculateMoves(this.props.board, this.props.boardObject.overlayObject.selectedSquare, this.props.boardObject.overlayObject.selectedUnit);
+    const newOverlayArray = this.props.functions.calculateMoves(this.props.board, this.props.boardObject.overlayObject.selectedSquare, this.props.boardObject.overlayObject.selectedUnit);
     const overlayObject = {
       overlayArray: newOverlayArray,
       movedSquare: [-1, -1],
@@ -85,7 +85,7 @@ export default class Game extends Component {
 
   selectAttack() {
     const attackingPosition = this.props.boardObject.overlayObject.movedSquare[0] != -1 ? this.props.boardObject.overlayObject.movedSquare : this.props.boardObject.overlayObject.selectedSquare;
-    const newOverlayArray = this.props.calculateAttackArea(this.props.board, attackingPosition, this.props.boardObject.overlayObject.selectedUnit);
+    const newOverlayArray = this.props.functions.calculateAttackArea(this.props.board, attackingPosition, this.props.boardObject.overlayObject.selectedUnit);
     const overlayObject = {
       overlayArray: newOverlayArray,
       phase: 'attacking'
@@ -156,7 +156,7 @@ export default class Game extends Component {
     const { board } = this.props;
     return (
       <div>
-        { this.props.boardObject.winner != undefined ? <EndGameModal userId={this.props.auth.id} winner={this.props.boardObject.winner} boardId={this.props.boardId} eraseBoardFromFirebase={this.props.eraseBoardFromFirebase} /> : null }
+        { this.props.boardObject.winner ? <EndGameModal userId={this.props.auth.id} winner={this.props.boardObject.winner} boardId={this.props.boardId} eraseBoardFromFirebase={this.props.eraseBoardFromFirebase} /> : null }
         <Board board={board} boardObject={this.props.boardObject} overlayArray={this.props.boardObject.overlayObject.overlayArray} selectSquare={this.selectSquare.bind(this)} moveUnit={this.moveUnit.bind(this)} attackUnit={this.attackUnit.bind(this)} { ...this.props } />
         <BoardMenu className="boardMenu" board={board} boardObject={this.props.boardObject} selectSquare={this.selectSquare.bind(this)} deSelectSquare={this.deSelectSquare.bind(this)} selectMove={this.selectMove.bind(this)} moveUnit={this.moveUnit.bind(this)} selectAttack={this.selectAttack.bind(this)} deSelectAttack={this.deSelectAttack.bind(this)} attackUnit={this.attackUnit.bind(this)} endMove={this.endMove.bind(this)} userId={this.props.auth.id} { ...this.props } />
       </div>
@@ -168,7 +168,6 @@ export default class Game extends Component {
 Game.propTypes = {
   board: PropTypes.array,
   boardId: PropTypes.string,
-  calculateMoves: PropTypes.func,
-  generateOverlayArray: PropTypes.func,
+  functions: PropTypes.object,
   updateBoards: PropTypes.func
 };

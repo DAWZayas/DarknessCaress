@@ -318,8 +318,8 @@ html {
 .transparent_badge span{
   background-color: rgba(0, 0, 0, 0)!important;
 }
-/*
-nav {
-  height: 80vh;
+
+.loadingIcon > div > div {
+  background-color: rgba(0, 0, 0, 0)!important;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0)!important;
 }
-*/

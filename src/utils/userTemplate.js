@@ -1,5 +1,5 @@
 export const userTemplate = {
-	username: 'n00b',
+	rank: 'n00b',
 	avatar: 'avatar0',
 	level: 0,
 	exp: 0,

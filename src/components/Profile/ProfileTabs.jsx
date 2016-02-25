@@ -5,6 +5,7 @@ import SwipeableViews from 'react-swipeable-views';
 import Heroes from '../Heroes/Heroes';
 import Profile from './Profile';
 import Items from '../Items/Items';
+import Spinner from '../Spinner/Spinner';
 
 import { allItems } from '../../utils/allItems';
 import { allHeroes } from '../../utils/allHeroes';
@@ -57,12 +58,13 @@ export default class ProfileTabs extends Component {
     const items = allItems.filter( item => item.name.search(this.state.searchedItem.toLowerCase()) > -1 );
     const heroes = allHeroes.filter( hero => hero.name.search(this.state.searchedHero.toLowerCase()) > -1 );
     const { user } = this.props;
-    return !user ? <span>calgando</span> : (
+    return !user ? <div className="loadingIcon"><Spinner /></div> : (
       <div>
         <Tabs className="tabbedTabs" onChange={ this.handleChangeTabs.bind(this) } value={ this.state.slideIndex + '' }>
           <Tab label="Profile" value="0" />
           <Tab label="Heroes" value="1" />
-          <Tab label="Items" value="2" />
+          <Tab label="Friends" value="2" />
+          <Tab label="Items" value="3" />
         </Tabs>
         <SwipeableViews index={ this.state.slideIndex } onChangeIndex={ this.handleChangeIndex.bind(this) }>
           <div style={ style.slide }>
