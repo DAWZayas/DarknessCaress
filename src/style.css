@@ -89,7 +89,7 @@ fill: #212121!important;
       font-family: "Arial Black", Arial;
 }
 #headerNav {
-  background-color:#523C26;
+  background-color:#455A64;
   color: rgba(255, 255, 255, 1);
   font-size: 24px;
   line-height: 64px;
@@ -203,6 +203,23 @@ fill: #212121!important;
 }
 #avatarHolder{
   border: 3.5px solid #009688 !important;
+}
+#avatarHolder2{
+  border: 3.5px solid #009688 !important;
+  margin-top: 7px;
+  margin-right: 3px;
+}
+#avatarHolder3{
+  border: 3.5px solid #009688 !important;
+  margin-left: -0.5em;
+  margin-bottom: 0.2em;
+}
+#headerNav p{
+font-family: "Arial Black", Arial;
+font-size: 35px;
+margin: 0;
+text-align: center;
+color: #009688;
 }
 #stadistics{
   text-align:center;;
