@@ -1,4 +1,4 @@
-import { SET_BOARD, SET_BOARDS, ADD_OVERLAY_ARRAY } from './action_types';
+import { SET_BOARD, SET_BOARDS, SET_OPPONENTS, ADD_OVERLAY_ARRAY } from './action_types';
 import { getStartState } from '../../utils/turnStateFunctions';
 
 export function registerListeners() {
@@ -13,7 +13,7 @@ export function registerListeners() {
           const boardSize = snapshot.val().board.length;
           const overlayObject = getStartState(boardSize);
           newObject[boardId] = Object.assign({}, snapshot.val(), {overlayObject: overlayObject});
-          resolve(newObject)
+          resolve(newObject);
         })
       ));
       Promise.all(promises).then(function(boards) {
@@ -50,6 +50,36 @@ export function registerGameListeners(boardId) {
         type: 'SET_BOARD',
         board: newObject,
         id: boardId
+      });
+    });
+  };
+}
+
+export function registerOpponentsListeners() {
+  return (dispatch, getState) => {
+    const { firebase, auth } = getState();
+    const userId = auth.id;
+    const ref = firebase.child(`users/${userId}/myBoards`);
+    ref.on('value', snapshot => {
+      const promises = (snapshot.val() || []).map( boardId => new Promise(
+        resolve => firebase.child(`boards/${boardId}`).on('value', snapshot => {
+          const opponentId = snapshot.val()[0] === userId ? snapshot.val()[1] : snapshot.val()[0];
+          firebase.child(`users/${opponentId}/username`).once('value', snapshot => {
+            const opponentName = snapshot.val();
+            let opponentObject = {};
+            opponentObject[boardId] = opponentName;
+            resolve(opponentObject);
+          });
+          
+        })
+      ));
+      Promise.all(promises).then(function(opponents) {
+        let opponentsObject = {};
+        opponents.map( opponent => opponentsObject = Object.assign({}, opponentsObject, opponent));
+        dispatch({
+          type: SET_OPPONENTS,
+          opponents: opponentsObject
+        });
       });
     });
   };

@@ -22,6 +22,7 @@ export default class GameTabs extends Component {
       this.props.navigate('/');
     }
     this.props.registerListeners();
+    this.props.registerOpponentsListeners();
   }
 
   componentWillUnmount() {

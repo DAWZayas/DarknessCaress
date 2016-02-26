@@ -34,7 +34,7 @@ export default class BoardMenu extends Component {
     const highlightedPosition = movedSquare[0] != -1 ? movedSquare
       : selectedSquare[0] === -1 ? -1 : selectedSquare;
     const highlightedSquare = highlightedPosition === -1 ? -1 : board[highlightedPosition[0]][highlightedPosition[1]];
-    const turnTitle = this.props.boardObject.turn != this.props.userId ? `Enemy Turn... ${this.props.boardObject.turn}` : 'Your move';
+    const turnTitle = this.props.boardObject.turn != this.props.userId ? `Enemy Turn... ${this.props.opponents[this.props.boardId]}` : 'Your move';
     return (
       <div>
       {

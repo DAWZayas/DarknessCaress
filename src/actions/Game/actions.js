@@ -56,7 +56,7 @@ export function createNewBoard(idOne, idTwo) {
   addBoardToUser(idTwo, newBoardId, firebase);
 }
 
-function fillBoardWithUnits(board) {
+function fillBoardWithUnits(board) { //DIFFERENT UNITS!!!!!!!!!!!!!!!!!!!
   for (let i = 0; i < 6; i++) {
     const unit = allUnits[randomNumber(1, 16)];
     board = placeOneUnit(unit, board, 0);
