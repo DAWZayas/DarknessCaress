@@ -1,4 +1,4 @@
-import { SET_BOARDS, ADD_OVERLAY_ARRAY } from './action_types';
+import { SET_BOARD, SET_BOARDS, ADD_OVERLAY_ARRAY } from './action_types';
 import { getStartState } from '../../utils/turnStateFunctions';
 
 export function registerListeners() {
@@ -29,11 +29,28 @@ export function registerListeners() {
 export function unregisterListeners() {
   return (dispatch, getState) => {
     const { firebase, auth } = getState();
-    const ref = firebase.child('users');
-    ref.off();
+    firebase.child('users').off();
+    firebase.child('boards').off();
     dispatch({
       type: SET_BOARDS,
       boards: []
+    });
+  };
+}
+
+export function registerGameListeners(boardId) {
+  return (dispatch, getState) => {
+    const { firebase } = getState();
+    firebase.child(`boards/${boardId}`).on('value', snapshot => {
+      const newObject = {};
+      const boardSize = snapshot.val().board.length;
+      const overlayObject = getStartState(boardSize);
+      newObject[boardId] = Object.assign({}, snapshot.val(), {overlayObject: overlayObject});
+      dispatch({
+        type: 'SET_BOARD',
+        board: newObject,
+        id: boardId
+      });
     });
   };
 }

@@ -10,6 +10,10 @@ export default class Game extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    this.props.registerGameListeners(this.props.boardId);
+  }
+
   isEndOfTurn(myArmy, boardId, newBoard) {
     let unitIsActive = false;
     this.props.board.map( row => {
@@ -145,7 +149,7 @@ export default class Game extends Component {
       phase: 'start'
     };
     this.props.updateOverlay(boardId, overlayObject);
-    this.isEndOfTurn(finalUnit.army, boardId, newBoard)
+    this.isEndOfTurn(finalUnit.army, boardId, newBoard);
   }
 
   endGame(winner) {

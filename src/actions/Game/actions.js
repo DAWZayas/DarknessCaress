@@ -10,7 +10,6 @@ export const navigate = (path) => pushState(null, path);
 
 //SEARCH GAME ACTIONS
 export function searchNewGame(userId) {
-  debugger;
   const firebase = new Firebase('https://darkness-caress.firebaseio.com');
   firebase.child('matchmaking').once('value', snapshot => {
     if(!snapshot.val()) {
@@ -118,16 +117,18 @@ export function uploadBoardToFirebase(boardId, newBoard) {
 export function endTurn(boardId, board) {
   return (dispatch, getState) => {
     const { firebase } = getState();
-    const finalBoard = endTurnInRedux(board, dispatch);
+    const finalBoard = endTurnInRedux(board, boardId, dispatch);
     endTurnInFirebase(boardId, finalBoard, firebase);
   };
 }
 
-function endTurnInRedux(board, dispatch) {
+function endTurnInRedux(board, boardId, dispatch) {
   const finalBoard = board.map( row => {
     return row.map( square => {
-      if(square.unit !== undefined) {
+      if(square.unit && square.unit.image) {
         square.unit = Object.assign({}, square.unit, {active: true});
+      }else{
+        square.unit = null;
       }
       return square;
     })
