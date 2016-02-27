@@ -39,10 +39,14 @@ export default class Nav extends Component {
   render() {
     const { auth, notifications, navigate, user } = this.props;
     const avatar = !auth.authenticated || !user ? <div id="headerNav">DarknessCaress</div> : <ProfileNav user={user} />;
-
+  const myleftnav = {
+    backgroundColor: '#616161',
+    fontFamily: 'Arial Black, Arial',
+    fontSize: '35px'
+  }
     return (
       <nav>
-        <LeftNav ref="leftNav" docked={false} header={avatar} disableSwipeToOpen>
+        <LeftNav ref="leftNav" id="myleftnav" style={myleftnav} docked={false} header={avatar} disableSwipeToOpen>
           <MenuItem primaryText="Home" onTouchTap={this.handleTouchTap.bind(this, '/')} />
           { auth.authenticated === true ? <MenuItem primaryText="Game" onTouchTap={this.handleTouchTap.bind(this, 'game')} /> : <span/> }
           <MenuDivider />

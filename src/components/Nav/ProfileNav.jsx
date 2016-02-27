@@ -16,7 +16,7 @@ export default class Nav extends Component {
       <div id="headerNav">
           <Avatar id="avatarHolder3" src={ images[user.avatar] } size={50} />
           <p>{user.username}</p>
-        {user.mmr}
+          <div className="mmrcontainer" ><h6>{user.mmr}</h6></div>
       </div>
     );
   }

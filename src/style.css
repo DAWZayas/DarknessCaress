@@ -1,7 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway);
-*{
-  font-family: 'Raleway', sans-serif;
-}
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -89,7 +87,9 @@ fill: #212121!important;
       font-family: "Arial Black", Arial;
 }
 #headerNav {
-  background-color:#455A64;
+  background-position: 50% 30%;
+  background-size: cover;
+  background-image: url(http://deskbg.com/s3/wpp/4/4655/diablo-3-dangerous-moment-desktop-background.jpg);
   color: rgba(255, 255, 255, 1);
   font-size: 24px;
   line-height: 64px;
@@ -165,6 +165,7 @@ fill: #212121!important;
   position: absolute;
   right: 0;
 }
+
 #backroundProfile{
   background-position: 50% 30%;
   background-size: cover;
@@ -212,7 +213,7 @@ fill: #212121!important;
 #avatarHolder3{
   border: 3.5px solid #009688 !important;
   margin-left: -0.5em;
-  margin-bottom: 0.2em;
+  margin-bottom: -0.4em;
 }
 #headerNav p{
 font-family: "Arial Black", Arial;
@@ -220,6 +221,17 @@ font-size: 35px;
 margin: 0;
 text-align: center;
 color: #009688;
+position: absolute;
+transform: translate(1.4em, -1.72em);
+}
+.mmrcontainer{
+  transform: translate(0,-0.5em);
+}
+.mmrcontainer h6{
+  font-family: "Arial Black", Arial;
+  font-size: 21px;
+  margin: 0;
+ margin-left: 70%;
 }
 #stadistics{
   text-align:center;;
@@ -233,6 +245,9 @@ color: #009688;
 }
 #headerB{
   background-color: #523C26 !important;
+}
+#myleftnav{
+    font-family: "Arial Black", Arial !important;
 }
 .tabbedTabs div{
   background-color:#616161;
