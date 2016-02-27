@@ -43,7 +43,7 @@ export default class Game extends Component {
   }
 
   selectSquare(position) {
-    const unit = position[0] !== -1 ? this.props.board[position[0]][position[1]].unit || null : null;
+    const unit = position && position[0] !== -1 ? this.props.board[position[0]][position[1]].unit || null : null;
     const overlayObject = {
       overlayArray: this.props.boardObject.overlayObject.emptyOverlayArray,
       selectedSquare: position,

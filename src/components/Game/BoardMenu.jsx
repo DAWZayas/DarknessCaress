@@ -14,7 +14,7 @@ export default class BoardMenu extends Component {
 
   handleMove() {
     this.props.boardObject.overlayObject.phase === 'moving'
-      ? this.props.selectSquare(this.props.selectedSquare)
+      ? this.props.selectSquare(this.props.boardObject.overlayObject.selectedSquare)
       : this.props.selectMove();
   }
 

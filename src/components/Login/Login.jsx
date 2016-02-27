@@ -33,7 +33,7 @@ export default class Login extends Component {
     return (
       <div className="log">
         <div>
-          <img className="logoboros" src="http://img14.deviantart.net/b815/i/2012/363/0/5/ouroboros_fma_by_jordanpokemon28-d5pjakh.png"/>
+          <img className="logoboros" src="http://img14.deviantart.net/b815/i/2012/363/0/5/ouroboros_fma_by_jordanpokemon28-d5pjakh.png" />
         </div>
         {
           this.props.route.path === 'change'

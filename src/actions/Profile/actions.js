@@ -1,4 +1,8 @@
+import { pushState } from 'redux-router';
+
 import { SET_AVATAR, SEARCH_FRIEND } from './action_types';
+
+export const navigate = (path) => pushState(null, path);
 
 export function changeAvatar(avatarName, userId) {
   return (dispatch, getState) => {
