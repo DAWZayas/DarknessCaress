@@ -4,6 +4,9 @@ import ProfileTabs from '../../components/Profile/ProfileTabs';
 import * as ProfileActions from '../../actions/Profile';
 
 export default connect(
-  state => ({ auth: state.auth, user: state.user }),
+  state => ({ auth: state.auth, 
+					  	user: state.user,
+					  	friends: state.friends,
+					  	searchFriend: state.searchFriend }),
   ProfileActions
 )(ProfileTabs);

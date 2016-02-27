@@ -7,6 +7,8 @@ import firebase from './firebase';
 import user from './user';
 import notifications from './notifications';
 import opponents from './opponents';
+import friendSearch from './friendSearch';
+import friends from './friends';
 
 export default combineReducers({
 	auth,
@@ -15,5 +17,7 @@ export default combineReducers({
   router,
   user,
   notifications,
-  opponents
+  opponents,
+  friendSearch,
+  friends
 });

@@ -1,4 +1,4 @@
-import { SET_HEROES } from './action_types';
+import { SET_HEROES, SET_FRIENDS } from './action_types';
 
 export function registerListeners() {
   return (dispatch, getState) => {
@@ -31,6 +31,29 @@ export function unregisterListeners() {
     dispatch({
       type: SET_BOARDS,
       boards: []
+    });
+  };
+}
+
+export function registerFriendsListeners() {
+  return (dispatch, getState) => {
+    const { firebase, auth } = getState();
+    const userId = auth.id;
+    const ref = firebase.child(`users/${userId}/friends`);
+    ref.on('value', snapshot => {
+      const promises = (snapshot.val() || []).map( friendId => new Promise(
+        resolve => firebase.child(`users/${friendId}`).on('value', snapshot => {
+          const friendObject = {};
+          friendObject[friendId] = snapshot.val();
+          resolve(friendObject)
+        })
+      ));
+      Promise.all(promises).then(function(friends) {
+        dispatch({
+          type: SET_FRIENDS,
+          friends
+        });
+      });
     });
   };
 }

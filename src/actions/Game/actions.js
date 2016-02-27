@@ -56,13 +56,27 @@ export function createNewBoard(idOne, idTwo) {
   addBoardToUser(idTwo, newBoardId, firebase);
 }
 
-function fillBoardWithUnits(board) { //DIFFERENT UNITS!!!!!!!!!!!!!!!!!!!
-  for (let i = 0; i < 6; i++) {
-    const unit = allUnits[randomNumber(1, 16)];
+function fillBoardWithUnits(board) {
+  const numbers = getNumbers(6);
+  numbers.map( number => {
+    const unit = allUnits[number];
     board = placeOneUnit(unit, board, 0);
     board = placeOneUnit(unit, board, 1);
-  };
+  });
   return board;
+}
+
+function getNumbers(quantity) {
+  let numbers = [];
+  let counter = 0;
+  while(counter < quantity) {
+    const number = randomNumber(1, 16);
+    if(numbers.indexOf(number) === -1) {
+      numbers[counter] = number;
+      counter++;
+    }
+  }
+  return numbers;
 }
 
 function placeOneUnit(unit, board, side) {

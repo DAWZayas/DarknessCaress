@@ -4,7 +4,7 @@ function setOpponents(state, opponents) {
   return opponents;
 }
 
-export default function boardsReducer(state = {}, action) {
+export default function opponentReducer(state = {}, action) {
   switch (action.type) {
     case SET_OPPONENTS:
       return setOpponents(state, action.opponents);

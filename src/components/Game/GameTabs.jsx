@@ -66,6 +66,7 @@ export default class GameTabs extends Component {
         firebase.child(`matchmaking/${firstKey}`).remove();
       }
     });
+    firebase.child(`users/${userId}/status`).set('searching');
     this.setState({
       slideIndex: 0
     });

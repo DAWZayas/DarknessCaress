@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
-import FriendSearch from './FriendSearch';
-import FriendsList from './FriendsList';
+import { FriendDetails } from './FriendDetails';
+import Spinner from '../Spinner/Spinner';
 
 export default class Friends extends Component{
 
@@ -9,12 +9,31 @@ export default class Friends extends Component{
 		super(props);
 	}
 
+	handleSearchFriend() {
+		const friendId = this.refs.search.value;
+		if(friendId !== '') {
+			this.props.searchFriend(friendId);
+		}
+	}
+
 	render(){
-		const { friends, searchBy } = this.props;
+		const { friends, friendSearch, addFriend, removeFriend } = this.props;
  		return(
  			<div>
-				<FriendSearch searchBy={ searchBy } />
- 				<FriendList friends={ friends } />
+				<input type="text" placeholder="Your friend's name" ref="search" />
+				<button onClick={() => this.handleSearchFriend()}>Search</button>
+				<div>
+ 					<span>Searched Friends</span>
+ 				</div>
+ 				<div>
+ 					{
+ 						friends.map( (friendObject, index) => {
+ 							return (
+ 								<button key={index}>{friendObject[Object.keys(friendObject)[0]].username}</button>
+ 							);
+ 						})
+ 					}
+ 				</div>
  			</div>
     );
 	}
@@ -22,5 +41,8 @@ export default class Friends extends Component{
 
 Friends.propTypes = {
   friends: PropTypes.array,
-  searchBy: PropTypes.func
+  friendSearch: PropTypes.object,
+  searchFriend: PropTypes.func,
+  addFriend: PropTypes.func,
+  removeFriend: PropTypes.func
 };
