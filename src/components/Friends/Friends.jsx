@@ -32,6 +32,7 @@ export default class Friends extends Component{
  				</div>
  				<div>
  					{
+
  						friends.map( (friend, index) => {
  							return (
  								<FriendDetails key={ index } friend={ friend } removeFriend={ removeFriend } sendGameNotification={ sendGameNotification } />

@@ -12,6 +12,7 @@ import pathY from '../media/images/pathY.png';
 import mountain from '../media/images/mountain.png';
 import plains from '../media/images/plains.png';
 import snow from '../media/images/snow.png';
+import menuBar from '../media/menuBar/menuBar.png';
 
 export const images = {
 	riverX: riverX,
@@ -27,5 +28,6 @@ export const images = {
 	pathY: pathY,
 	mountain: mountain,
 	plains: plains,
-	snow: snow
+	snow: snow,
+  menuBar: menuBar
 };

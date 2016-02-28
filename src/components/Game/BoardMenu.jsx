@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { images } from '../../utils/imageExports';
+import { heroes } from '../../utils/heroesExports';
 
 export default class BoardMenu extends Component {
 
@@ -28,6 +29,18 @@ export default class BoardMenu extends Component {
     this.props.endMove();
   }
 
+  rangeToString(range) {
+    let stringifyRange = '';
+    range.map(partialRange => {
+      stringifyRange += partialRange+", ";
+    });
+    return stringifyRange.substring(0, stringifyRange.length - 2);
+  }
+
+  booleanToString(boolean) {
+    return boolean ? 'Flying ' : 'Ground '
+  }
+
   render() {
     const { selectedSquare, selectedUnit, phase, movedSquare } = this.props.boardObject.overlayObject;
     const { board, auth } = this.props;
@@ -39,26 +52,31 @@ export default class BoardMenu extends Component {
       <div>
       {
         highlightedSquare === -1 ? <span>{turnTitle}</span> :
-        <div>
-          <div>
-            <img src={ images[highlightedSquare.image] } alt={ 'terrain selected' } height="48px" width="48px" />
-            <span> { highlightedSquare.name.slice(0, 1).toUpperCase() + highlightedSquare.name.slice(1) }. Defense: { highlightedSquare.defense }. Dodge: { highlightedSquare.avoid }. X: { highlightedPosition[0] }. Y: { highlightedPosition[1] }.</span><br/>
-          </div>
+        <div className="MenuGame">
+        <img className="MenuPic" src={ images.menuBar }/>
           {
-            selectedUnit === null ? null :
+            selectedUnit ?
             <div>
-              <span> { selectedUnit.name }. Movement: { selectedUnit.movement }.</span><br/>
+              <div className="HeroMenu">
+                <div className="HeroPic" style={{ backgroundImage: `url(${heroes[selectedUnit.image]})` }}>
+                </div>
+              </div>
               {
                 this.props.boardObject.turn !== this.props.userId || selectedUnit.active === false || this.props.boardObject[`${selectedUnit.army}`] !== this.props.userId ? null :
                 <div>
-                  <button className="btn btn-info" type="button" onClick={() => this.handleMove()}>{phase === 'moving' ? 'Stay' : phase === 'moved' || phase === 'attacking' ? 'Return' : 'Move'}</button>
-                  <button className="btn btn-info" type="button" onClick={() => this.handleAttack()}>{phase === 'attacking' ? 'Cancel' : 'Attack'}</button>
-                  <button className="btn btn-info" type="button" onClick={() => this.handleDefend()}>Defend</button>
+                  <button className="BaseMenuButtons MoveButton" type="button" onClick={() => this.handleMove()}>{phase === 'moving' ? 'Stay' : phase === 'moved' || phase === 'attacking' ? 'Return' : 'Move'}</button>
+                  <button className="BaseMenuButtons AttackButton" type="button" onClick={() => this.handleAttack()}>{phase === 'attacking' ? 'Cancel' : 'Attack'}</button>
+                  <button className="BaseMenuButtons DefendButton" type="button" onClick={() => this.handleDefend()}>Defend</button>
                 </div>
               }
             </div>
+            :null
           }
-          <button className="btn btn-info" type="button" onClick={() => this.handleDeselect()}>x</button>
+          <div>
+            <div className="TerrainPic" style={{ backgroundImage: `url(${images[highlightedSquare.image]})`}}>
+            </div>
+          </div>
+         <button className="BaseMenuButtons CancelButton" type="button" onClick={() => this.handleDeselect()}>x</button>
         </div>
       }
       </div>

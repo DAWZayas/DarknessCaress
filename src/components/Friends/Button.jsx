@@ -13,7 +13,7 @@ export default class Button extends Component{
       margin: 12,
     };
     return(
-      <RaisedButton backgroundColor={color} label={text} style={style} onMouseDown={ this.handleInteraction.bind(this, friendId) } onTouchEnd={ this.handleInteraction.bind(friendId) }/>
+      <RaisedButton backgroundColor={color} label={text} style={style} onClick={ this.handleInteraction.bind(this, friendId) }/>
     )
   }
 }

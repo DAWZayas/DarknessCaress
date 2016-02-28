@@ -327,3 +327,73 @@ html {
 .tabbedTabs + div, .tabbedTabs + div > div div:nth-child(3)[data-reactid=".0.0.2.1.0.$/=12"] {
   overflow: visible !important;
 }
+
+.HeroPic {
+  background-size: 50px;
+  position: absolute;
+  bottom: 10px;
+  left: 44px;
+  width: 44px;
+  height: 41px;
+  z-index: -1;
+}
+
+.TerrainPic {
+  background-size: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 301px;
+  width: 48px;
+  height: 48px;
+  z-index: -1;
+	border-radius: 25px;
+}
+
+.BaseMenuButtons{
+  background-color: #191919;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    width: 51.30px;
+    height: 25px;
+    font-size: 12px;
+}
+
+.MoveButton{
+  bottom: 5px;
+  left: 93px;
+}
+
+.AttackButton{
+  bottom: 5px;
+  left:145px;
+}
+
+.DefendButton{
+  bottom: 5px;
+  left:197px;
+}
+
+
+.CancelButton{
+  bottom: 5px;
+  left: 249px;
+}
+
+.HeroMenu{
+}
+
+.HeroStats > span:first-child {
+  font-weight: bold;
+}
+
+.MenuGame{
+  position: relative;
+}
+
+.MenuPic{
+  max-width: 391px;
+}
