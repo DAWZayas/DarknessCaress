@@ -38,6 +38,7 @@ export default class Friends extends Component{
  							);
  						})
  					}
+					<div className="height_fixer"></div>
  				</div>
  			</div>
     );

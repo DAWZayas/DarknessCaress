@@ -323,3 +323,7 @@ html {
   background-color: rgba(0, 0, 0, 0)!important;
   box-shadow: 0 0 0 rgba(0, 0, 0, 0)!important;
 }
+
+.tabbedTabs + div, .tabbedTabs + div > div div:nth-child(3)[data-reactid=".0.0.2.1.0.$/=12"] {
+  overflow: visible !important;
+}
