@@ -4,7 +4,7 @@ import SwipeableViews from 'react-swipeable-views';
 
 import Heroes from '../Heroes/Heroes';
 import Profile from './Profile';
-import Items from '../Items/Items';
+import Friends from '../Friends/Friends';
 import Spinner from '../Spinner/Spinner';
 
 import { allItems } from '../../utils/allItems';
@@ -23,6 +23,7 @@ export default class ProfileTabs extends Component {
     if(this.props.auth.authenticated === false) {
       this.props.navigate('/');
     }
+    this.props.registerFriendsListeners();
   }
 
   handleChangeIndex(index) {
@@ -54,15 +55,13 @@ export default class ProfileTabs extends Component {
       }
     };
 
-    const items = allItems.filter( item => item.name.search(this.state.searchedItem.toLowerCase()) > -1 );
-    const { user, heroes } = this.props;
+    const { user, heroes, friends, friendSearch, searchFriend, addFriend, removeFriend } = this.props;
     return ( heroes.length > 0 ? (!user ? <div className="loadingIcon"><Spinner /></div> : (
       <div>
         <Tabs className="tabbedTabs" onChange={ this.handleChangeTabs.bind(this) } value={ this.state.slideIndex + '' }>
           <Tab label="Profile" value="0" />
           <Tab label="Heroes" value="1" />
           <Tab label="Friends" value="2" />
-          <Tab label="Items" value="3" />
         </Tabs>
         <SwipeableViews index={ this.state.slideIndex } onChangeIndex={ this.handleChangeIndex.bind(this) }>
           <div style={ style.slide }>
@@ -72,7 +71,7 @@ export default class ProfileTabs extends Component {
             <Heroes buyHeroe={this.props.buyHeroe} heroes={ heroes } user={ user } searchBy={ this.searchByHero.bind(this) } />
           </div>
           <div style={ style.slide }>
-            <Items items={ items } searchBy={ this.searchByItem.bind(this) } />
+            <Friends friends={ friends } friendSearch={ friendSearch } searchFriend={ searchFriend } addFriend={ addFriend } removeFriend={ removeFriend } />
           </div>
         </SwipeableViews>
       </div>

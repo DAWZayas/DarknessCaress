@@ -104,7 +104,7 @@ export const allUnits = {
     image: "deadpool"
 },
 9: {
-    "id": "10",
+    "id": "09",
     "name": "Shuma Gorath",
     "hp": 70,
     "attack": 55,
@@ -117,7 +117,7 @@ export const allUnits = {
     image: "shuma_gorath"
 },
 10: {
-    "id": "1",
+    "id": "10",
     "name": "Mewtwo",
     "hp": 45,
     "attack": 30,
@@ -130,7 +130,7 @@ export const allUnits = {
     image: "mewtwo"
 },
 11: {
-    "id": "12",
+    "id": "11",
     "name": "Samus",
     "hp": 65,
     "attack": 50,
@@ -143,7 +143,7 @@ export const allUnits = {
     image: "samus"
 },
 12: {
-    "id": "13",
+    "id": "12",
     "name": "Jirachi",
     "hp": 90,
     "attack": 20,
@@ -156,7 +156,7 @@ export const allUnits = {
     image: "jirachi"
 },
 13: {
-    "id": "15",
+    "id": "13",
     "name": "Isaac",
     "hp": 50,
     "attack": 60,
@@ -169,7 +169,7 @@ export const allUnits = {
     image: "isaac"
 },
 14: {
-    "id": "17",
+    "id": "14",
     "name": "Charizard",
     "hp": 40,
     "attack": 50,
@@ -182,7 +182,7 @@ export const allUnits = {
     image: "charizard"
 },
 15: {
-    "id": "19",
+    "id": "15",
     "name": "Master Chief",
     "hp": 60,
     "attack": 55,
@@ -195,7 +195,7 @@ export const allUnits = {
     image: "master_chief"
 },
 16: {
-    "id": "22",
+    "id": "16",
     "name": "Megaman",
     "hp": 45,
     "attack": 20,

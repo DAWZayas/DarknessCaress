@@ -10,6 +10,7 @@ export default class EndGameModal extends Component {
 
   handleCancelClick() {
     this.setState({ isOpen: false });
+    this.props.eraseBoardFromRedux(this.props.boardId);
     this.props.eraseBoardFromFirebase(this.props.userId, this.props.boardId);
   }
 

@@ -14,7 +14,7 @@ export default class BoardMenu extends Component {
 
   handleMove() {
     this.props.boardObject.overlayObject.phase === 'moving'
-      ? this.props.selectSquare(this.props.selectedSquare)
+      ? this.props.selectSquare(this.props.boardObject.overlayObject.selectedSquare)
       : this.props.selectMove();
   }
 
@@ -30,11 +30,11 @@ export default class BoardMenu extends Component {
 
   render() {
     const { selectedSquare, selectedUnit, phase, movedSquare } = this.props.boardObject.overlayObject;
-    const { board } = this.props;
+    const { board, auth } = this.props;
     const highlightedPosition = movedSquare[0] != -1 ? movedSquare
       : selectedSquare[0] === -1 ? -1 : selectedSquare;
     const highlightedSquare = highlightedPosition === -1 ? -1 : board[highlightedPosition[0]][highlightedPosition[1]];
-    const turnTitle = this.props.boardObject.turn != this.props.userId ? 'Enemy Turn... username' : 'Your move';
+    const turnTitle = this.props.boardObject.turn != this.props.userId ? `Enemy Turn... ${this.props.opponents[this.props.boardId]}` : 'Your move';
     return (
       <div>
       {

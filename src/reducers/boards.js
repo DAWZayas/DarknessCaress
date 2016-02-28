@@ -1,7 +1,21 @@
-import { SET_BOARDS, CHANGE_OVERLAY_ARRAY, UPDATE_BOARD, CHANGE_TURN } from '../actions/Game/action_types';
+import { SET_BOARD, DELETE_BOARD, SET_BOARDS, CHANGE_OVERLAY_ARRAY, UPDATE_BOARD, CHANGE_TURN } from '../actions/Game/action_types';
 
 function setBoards(state, boards) {
   return boards;
+}
+
+function setBoard(state, id, board) {
+	const newBoards = state.map( boardObject => {
+		if(Object.keys(boardObject)[0] === id) {
+			boardObject = board;
+		}
+		return boardObject;
+	});
+	return newBoards;
+}
+
+function deleteBoard(state, boardId) {
+	return state.filter( id => id !== boardId);
 }
 
 function changeOverlay(state, boardId, overlayObject) {
@@ -34,6 +48,10 @@ function changeTurn(state, boardId, newBoard) {
 
 export default function boardsReducer(state = [], action) {
   switch (action.type) {
+    case SET_BOARD:
+      return setBoard(state, action.id, action.board);
+    case DELETE_BOARD:
+      return deleteBoard(state, action.board);
     case SET_BOARDS:
       return setBoards(state, action.boards);
     case CHANGE_OVERLAY_ARRAY:

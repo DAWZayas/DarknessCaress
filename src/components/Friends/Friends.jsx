@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
-import FriendSearch from './FriendSearch';
-import FriendsList from './FriendsList';
+import FriendDetails from './FriendDetails';
+import Spinner from '../Spinner/Spinner';
 
 export default class Friends extends Component{
 
@@ -9,12 +9,36 @@ export default class Friends extends Component{
 		super(props);
 	}
 
+	handleSearchFriend() {
+		const friendId = this.refs.search.value;
+		if(friendId !== '') {
+			this.props.searchFriend(friendId);
+		}
+	}
+
 	render(){
-		const { friends, searchBy } = this.props;
+		const { friends, friendSearch, addFriend, removeFriend, sendGameNotification } = this.props;
  		return(
  			<div>
-				<FriendSearch searchBy={ searchBy } />
- 				<FriendList friends={ friends } />
+				<input className="form-control" type="text" ref="search" placeholder="Your friend's name" onChange={ this.handleSearchFriend.bind(this) } />
+				<div>
+ 					{
+ 						Object.keys(friendSearch).map( (friendId, index) => {
+ 							return (
+ 								<p key={index}>{friendSearch[friendId].username}</p>
+ 							);
+ 						})
+ 					}
+ 				</div>
+ 				<div>
+ 					{
+ 						friends.map( (friend, index) => {
+ 							return (
+ 								<FriendDetails key={ index } friend={ friend } removeFriend={ removeFriend } sendGameNotification={ sendGameNotification } />
+ 							);
+ 						})
+ 					}
+ 				</div>
  			</div>
     );
 	}
@@ -22,5 +46,9 @@ export default class Friends extends Component{
 
 Friends.propTypes = {
   friends: PropTypes.array,
-  searchBy: PropTypes.func
+  friendSearch: PropTypes.object,
+  searchFriend: PropTypes.func,
+  addFriend: PropTypes.func,
+  removeFriend: PropTypes.func,
+	sendGameNotification: PropTypes.func
 };
