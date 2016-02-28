@@ -8,7 +8,6 @@ import Friends from '../Friends/Friends';
 import Spinner from '../Spinner/Spinner';
 
 import { allItems } from '../../utils/allItems';
-import { allHeroes } from '../../utils/allHeroes';
 
 export default class ProfileTabs extends Component {
 
@@ -70,7 +69,7 @@ export default class ProfileTabs extends Component {
             <Profile changeAvatar={this.props.changeAvatar} user={ user } />
           </div>
           <div style={ style.slide }>
-            <Heroes heroes={ heroes } searchBy={ this.searchByHero.bind(this) } />
+            <Heroes buyHeroe={this.props.buyHeroe} heroes={ heroes } user={ user } searchBy={ this.searchByHero.bind(this) } />
           </div>
           <div style={ style.slide }>
             <Friends friends={ friends } friendSearch={ friendSearch } searchFriend={ searchFriend } addFriend={ addFriend } sendGameNotification={ sendGameNotification } removeFriend={ removeFriend } />
@@ -85,6 +84,6 @@ ProfileTabs.PropTypes={
   user: PropTypes.object,
   registerListeners: PropTypes.func,
   unregisterListeners: PropTypes.func,
-  sendGameNotification: PropTypes.func
-
+  sendGameNotification: PropTypes.func,
+  heroes: PropTypes.array
 };

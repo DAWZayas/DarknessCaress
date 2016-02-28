@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { IconMenu, IconButton, FontIcon } from 'material-ui';
+import { Avatar } from 'material-ui';
 import MenuItem from 'material-ui/lib/menus/menu-item';//the older folder(default) is bug
 import MenuDivider from  'material-ui/lib/menus/menu-divider';//same as MenuItem
 import Badge from 'material-ui/lib/badge';
+
+import { images } from '../../utils/imageProfileExports';
 
 export default class ProfileMenu extends Component {
 
@@ -21,7 +24,8 @@ export default class ProfileMenu extends Component {
   }
 
   render() {
-    const { auth, notifications } = this.props;
+    const { auth, notifications, user } = this.props;
+    const avatar = !auth.authenticated || !user ? <IconButton iconClassName="material-icons">account_circle</IconButton> : <Avatar id="avatarHolder2" src={ images[user.avatar] } size={37} />;
     let notificationCount = 0;
     for( var keys in notifications ){
       if( notifications.hasOwnProperty(keys) ){
@@ -33,9 +37,10 @@ export default class ProfileMenu extends Component {
        badgeClassName +=" transparent_badge";
        notificationCount = "";
      }
+
     return (
       <Badge badgeStyle={{backgroundColor: '#009688'}} badgeContent={ notificationCount } primary={ true } className={ badgeClassName } >
-        <IconMenu iconButtonElement={<IconButton iconClassName="material-icons">account_circle</IconButton>}>
+        <IconMenu iconButtonElement={avatar}>
           { auth.authenticated === false ? <MenuItem primaryText="Log In" onTouchTap={this.handleTouchTap.bind(this, 'login')} leftIcon={<FontIcon className="glyphicon glyphicon-log-out icono-negro" />} /> : <span/> }
           <MenuItem primaryText="Profile" onTouchTap={this.handleTouchTap.bind(this, 'profile')} leftIcon={<FontIcon className="material-icons icono-negro">person</FontIcon>} />
           { auth.authenticated === true ?  <MenuItem primaryText="Notifications" onTouchTap={this.handleTouchTap.bind(this, 'notifications')} leftIcon={<FontIcon className="material-icons icono-negro">settings</FontIcon>} /> : <span/>}
@@ -50,6 +55,7 @@ export default class ProfileMenu extends Component {
 
 ProfileMenu.propTypes = {
   // Injected by React Router
+  user: PropTypes.object,
   auth: PropTypes.object,
   notifications: PropTypes.object,
   history: PropTypes.object,

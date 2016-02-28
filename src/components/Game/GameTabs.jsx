@@ -83,7 +83,7 @@ export default class GameTabs extends Component {
     return this.state.loading ? <div className="loadingIcon"><Spinner /></div> : (
       <div>
       <div>
-        <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+        <Tabs className="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
           {
             boards.map( (boardObject, index) => {
               const newValue = '' + index;
@@ -106,7 +106,7 @@ export default class GameTabs extends Component {
               );
             })
           }
-          { boards.length < 5 ? 
+          { boards.length < 5 ?
             <div className="center-block" style={style.slide}>
               {
                 user.status !== 'searching'

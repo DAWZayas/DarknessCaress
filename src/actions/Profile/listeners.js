@@ -29,8 +29,8 @@ export function unregisterListeners() {
     const ref = firebase.child('users');
     ref.off();
     dispatch({
-      type: SET_BOARDS,
-      boards: []
+      type: SET_HEROES,
+      heroes: []
     });
   };
 }

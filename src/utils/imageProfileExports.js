@@ -13,7 +13,7 @@ import avatar10 from '../media/imagesprofile/avatar10.png';
 
 export const images = {
 	Ouroboros: Ouroboros,
-  	avatar0: avatar0,
+  avatar0: avatar0,
 	avatar1: avatar1,
 	avatar2: avatar2,
 	avatar3: avatar3,

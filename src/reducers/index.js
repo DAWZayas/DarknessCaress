@@ -6,6 +6,7 @@ import boards from './boards';
 import firebase from './firebase';
 import user from './user';
 import notifications from './notifications';
+import heroes from './heroes';
 import opponents from './opponents';
 import friendSearch from './friendSearch';
 import friends from './friends';
@@ -17,6 +18,7 @@ export default combineReducers({
   router,
   user,
   notifications,
+	heroes,
   opponents,
   friendSearch,
   friends

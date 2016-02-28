@@ -1,6 +1,6 @@
 import { pushState } from 'redux-router';
 
-import { SET_BOARDS, CHANGE_OVERLAY_ARRAY, UPDATE_BOARD, CHANGE_TURN } from './action_types';
+import { DELETE_BOARD, SET_BOARDS, CHANGE_OVERLAY_ARRAY, UPDATE_BOARD, CHANGE_TURN } from './action_types';
 
 import { createBoardWithRiver } from '../../utils/boardGenerator.js';
 import { randomNumber } from '../../utils/generalFunctions';
@@ -167,30 +167,84 @@ function endTurnInFirebase(boardId, finalBoard, firebase) {
   });
 }
 
-export function endTheGame(boardId, winner) {
+export function endTheGame(boardId, winner, loser) {
   return (dispatch, getState) => {
     const { firebase } = getState();
+    rewardWinner(winner, firebase);
+    rewardLoser(loser, firebase);
     firebase.child(`boards/${boardId}/winner`).set(winner);
   };
+}
+
+function rewardWinner(winner, firebase) {
+  rewardExp(winner, 25, firebase);
+  rewardMmr(winner, 30, firebase);
+  rewardPoints(winner, 2, firebase);
+  updateRecord(winner, 1, 0, 0, firebase);
+}
+
+function rewardLoser(loser, firebase) {
+  rewardExp(loser, 10, firebase);
+  rewardMmr(loser, -15, firebase);
+  rewardPoints(loser, 1, firebase);
+  updateRecord(loser, 0, 1, 0, firebase);
+}
+
+function rewardExp(player, exp, firebase) {
+  firebase.child(`users/${player}/exp`).transaction( snapshot => {
+    let points = snapshot || 0;
+    points = points + exp;
+    if(points === 100) {
+      points = 0;
+      firebase.child(`users/${player}/level`).transaction( snapshot => {
+        let level = snapshot || 0;
+        return level + 1;
+      }, () => {}, false);
+    }
+    return points;
+  }, () => {}, false);
+}
+
+function rewardMmr(player, mmr, firebase) {
+  firebase.child(`users/${player}/mmr`).transaction( snapshot => {
+    return snapshot + mmr;
+  }, () => {}, false);
+}
+
+function rewardPoints(player, points, firebase) {
+  firebase.child(`users/${player}/points`).transaction( snapshot => {
+    return snapshot + points;
+  }, () => {}, false);
+}
+
+function updateRecord(player, victory, defeat, tie, firebase) {
+  firebase.child(`users/${player}/record`).transaction( snapshot => {
+    let record = snapshot || {victories: 0, defeats: 0, ties: 0};
+    return {victories: record.victories + victory, defeats: record.defeats + defeat, ties: record.ties + tie};
+  }, () => {}, false);
 }
 
 export function eraseBoardFromFirebase(userId, boardId) {
   return (dispatch, getState) => {
     const { firebase } = getState();
-    eraseBoardFromMyBoard(userId, boardId, dispatch, firebase)
-    eraseBoardFromBoards(userId, boardId, firebase);
+    eraseBoardFromMyBoard(userId, boardId, dispatch, firebase);
+    //eraseBoardFromBoards(userId, boardId, firebase);
   };
 }
-function eraseBoardFromMyBoard(userId, boardId, dispatch, firebase) {
-  firebase.child(`users/${userId}/myBoards`).once('value', snapshot => {
-    const myBoards = snapshot.val();
-    const newMyBoards = myBoards.filter( board => board !== boardId);
+
+export function eraseBoardFromRedux(boardId) {
+  return (dispatch) => {
     dispatch({
-      type: SET_BOARDS,
-      boards: newMyBoards
+      type: DELETE_BOARD,
+      board: boardId
     });
-    firebase.child(`users/${userId}/myBoards`).set(newMyBoards);
-  });
+  };
+}
+
+function eraseBoardFromMyBoard(userId, boardId, dispatch, firebase) {
+  firebase.child(`users/${userId}/myBoards`).transaction( snapshot => {
+    return (snapshot || []).filter( board => board !== boardId);
+  }, () => {}, false);
 }
 
 function eraseBoardFromBoards(userId, boardId, firebase) {

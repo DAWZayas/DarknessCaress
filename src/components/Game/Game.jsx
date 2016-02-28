@@ -28,11 +28,11 @@ export default class Game extends Component {
     }
   }
 
-  isEndOfGame(myArmy) {
+  isEndOfGame(enemyArmy, position) {
     let unitIsAlive = false;
-    this.props.board.map( row => {
-      row.map( square => {
-        if(square.unit !== undefined && square.unit.army === myArmy) {
+    this.props.board.map( (row, index1) => {
+      row.map( (square, index2) => {
+        if(square.unit && square.unit.army === enemyArmy && position[0] !== index1 && position[1] !== index2) {
           unitIsAlive = true;
         }
       })
@@ -111,9 +111,10 @@ export default class Game extends Component {
     const positionY = position[1];
     if(this.props.boardObject.overlayObject.overlayArray[positionX][positionY] === 2 && this.props.board[positionX][positionY].unit != undefined && this.props.board[positionX][positionY].unit.army != this.props.boardObject.overlayObject.selectedUnit.army) {
       const oldEnemyUnit = this.props.board[positionX][positionY].unit;
-      const newEnemyUnit = oldEnemyUnit.hp - 10 > 0 ? Object.assign({}, oldEnemyUnit, {hp: oldEnemyUnit.hp - 10}) : null;
+      const damage = this.props.boardObject.overlayObject.selectedUnit.attack - oldEnemyUnit.defense / 5;
+      const newEnemyUnit = oldEnemyUnit.hp - damage > 0 ? Object.assign({}, oldEnemyUnit, {hp: oldEnemyUnit.hp - damage}) : null;
       if(newEnemyUnit === null) {
-        this.isEndOfGame(oldEnemyUnit.army);
+        this.isEndOfGame(oldEnemyUnit.army, position);
       }
       let newBoard = this.props.board.slice();
       newBoard[positionX][positionY] = Object.assign({}, this.props.board[positionX][positionY], { unit: newEnemyUnit });
@@ -153,16 +154,44 @@ export default class Game extends Component {
   }
 
   endGame(winner) {
-    this.props.endTheGame(this.props.boardId, winner);
+    const { boardId } = this.props;
+    const loser = this.props.boardObject[0] === winner ? this.props.boardObject[1] : this.props.boardObject[0];
+    this.props.endTheGame(this.props.boardId, winner, loser);
   }
 
   render() {
     const { board } = this.props;
     return (
       <div>
-        { this.props.boardObject.winner ? <EndGameModal userId={this.props.auth.id} winner={this.props.boardObject.winner} boardId={this.props.boardId} eraseBoardFromFirebase={this.props.eraseBoardFromFirebase} /> : null }
-        <Board board={board} boardObject={this.props.boardObject} overlayArray={this.props.boardObject.overlayObject.overlayArray} selectSquare={this.selectSquare.bind(this)} moveUnit={this.moveUnit.bind(this)} attackUnit={this.attackUnit.bind(this)} { ...this.props } />
-        <BoardMenu className="boardMenu" board={board} boardObject={this.props.boardObject} selectSquare={this.selectSquare.bind(this)} deSelectSquare={this.deSelectSquare.bind(this)} selectMove={this.selectMove.bind(this)} moveUnit={this.moveUnit.bind(this)} selectAttack={this.selectAttack.bind(this)} deSelectAttack={this.deSelectAttack.bind(this)} attackUnit={this.attackUnit.bind(this)} endMove={this.endMove.bind(this)} userId={this.props.auth.id} { ...this.props } />
+        {
+          this.props.boardObject.winner
+          ? <EndGameModal userId={this.props.auth.id}
+                          winner={this.props.boardObject.winner}
+                          boardId={this.props.boardId}
+                          eraseBoardFromRedux={this.props.eraseBoardFromRedux}
+                          eraseBoardFromFirebase={this.props.eraseBoardFromFirebase} />
+          : null
+        }
+        <Board  board={board}
+                boardObject={this.props.boardObject}
+                overlayArray={this.props.boardObject.overlayObject.overlayArray}
+                selectSquare={this.selectSquare.bind(this)}
+                moveUnit={this.moveUnit.bind(this)}
+                attackUnit={this.attackUnit.bind(this)}
+                { ...this.props } />
+        <BoardMenu  className="boardMenu"
+                    board={board}
+                    boardObject={this.props.boardObject}
+                    selectSquare={this.selectSquare.bind(this)}
+                    deSelectSquare={this.deSelectSquare.bind(this)}
+                    selectMove={this.selectMove.bind(this)}
+                    moveUnit={this.moveUnit.bind(this)}
+                    selectAttack={this.selectAttack.bind(this)}
+                    deSelectAttack={this.deSelectAttack.bind(this)}
+                    attackUnit={this.attackUnit.bind(this)}
+                    endMove={this.endMove.bind(this)}
+                    userId={this.props.auth.id}
+                    { ...this.props } />
       </div>
     );
   }
