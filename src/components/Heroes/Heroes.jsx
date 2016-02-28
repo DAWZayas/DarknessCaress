@@ -14,7 +14,7 @@ export default class Heroes extends Component{
  		return(
  			<div>
 				<HeroSearch searchBy={ searchBy } />
- 				<HeroesList user={ user } heroes={ heroes } />
+ 				<HeroesList user={ user } heroes={ heroes } buyHeroe={this.props.buyHeroe} />
  			</div>
     );
 	}

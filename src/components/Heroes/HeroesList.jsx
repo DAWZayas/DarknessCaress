@@ -10,7 +10,7 @@ export default class HeroesList extends Component{
         heroes.map((hero, index)=>{
           if(hero.name.search(searchBy) > -1){
             return(
-              <Hero user= {user} key={index} hero={ hero } />
+              <Hero user= {user} key={index} hero={hero} buyHeroe= {this.props.buyHeroe} />
             );
           }
         })

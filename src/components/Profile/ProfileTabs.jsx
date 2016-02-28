@@ -7,7 +7,6 @@ import Profile from './Profile';
 import Items from '../Items/Items';
 
 import { allItems } from '../../utils/allItems';
-import { allHeroes } from '../../utils/allHeroes';
 
 export default class ProfileTabs extends Component {
 
@@ -55,9 +54,8 @@ export default class ProfileTabs extends Component {
     };
 
     const items = allItems.filter( item => item.name.search(this.state.searchedItem.toLowerCase()) > -1 );
-    const heroes = allHeroes.filter( hero => hero.image.search(this.state.searchedHero.toLowerCase()) > -1 );
-    const { user } = this.props;
-    return !user ? <span>calgando</span> : (
+    const { user, heroes } = this.props;
+    return ( heroes.length > 0 ? (!user ? <span>calgando users </span> : (
       <div>
         <Tabs className="tabbedTabs" onChange={ this.handleChangeTabs.bind(this) } value={ this.state.slideIndex + '' }>
           <Tab label="Profile" value="0" />
@@ -69,20 +67,18 @@ export default class ProfileTabs extends Component {
             <Profile changeAvatar={this.props.changeAvatar} user={ user } />
           </div>
           <div style={ style.slide }>
-            <Heroes heroes={ heroes } user={ user } searchBy={ this.searchByHero.bind(this) } />
+            <Heroes buyHeroe={this.props.buyHeroe} heroes={ heroes } user={ user } searchBy={ this.searchByHero.bind(this) } />
           </div>
           <div style={ style.slide }>
             <Items items={ items } searchBy={ this.searchByItem.bind(this) } />
           </div>
         </SwipeableViews>
       </div>
-    );
+    )) : <span>calgando heroes </span>);
   }
 }
 
 ProfileTabs.PropTypes={
   user: PropTypes.object,
-  registerListeners: PropTypes.func,
-  unregisterListeners: PropTypes.func,
-
+  heroes: PropTypes.array
 };

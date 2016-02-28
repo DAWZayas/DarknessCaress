@@ -4,22 +4,47 @@ import CardActions from 'material-ui/lib/card/card-actions';
 import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
 import Button from '../Notifications/Button';
+import Snackbar from 'material-ui/lib/snackbar';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 import HeroImage from './HeroImage';
 
 export default class Hero extends Component{
 
-  handleAccept() {
-
+  constructor(props) {
+  super(props);
+  this.state = {
+    open: false,
+  };
+}
+  handleAccept(hero) {
+    if(this.props.user.points < 3){
+      this.handleTouchTap();
+    }else{
+    this.props.buyHeroe(hero);
+    }
   }
 
-
+  handleTouchTap(){
+    this.setState({
+      open: true,
+    });
+  };
+  handleRequestClose(){
+    this.setState({
+      open: false,
+    });
+  };
 
   render(){
 
     const { key, hero, user } = this.props;
     const avatarImg = <HeroImage hero= {hero} />
+    const array = [];
+    const heroWasAcquired = user.heroes ? user.heroes.filter(myHero => myHero.name === hero.name) : array;
     return(
+      <div>
+        <Snackbar open={this.state.open} message="you dont have enough points" autoHideDuration={4000} onRequestClose={this.handleRequestClose} />
      <Card>
        <CardHeader
          avatar= {avatarImg}
@@ -49,14 +74,15 @@ export default class Hero extends Component{
               <p>fly: {hero.fly ? 'yes' : 'no'}</p>
             </li>
             <li>
-              <p>movement:{user.mmr} objeto</p>
+              <p>movement: {hero.range[1]}</p>
             </li>
           </ul>
           <div>
-            <Button text="Buy It!" positive={true} callback={ () => this.handleAccept() }/>
+            {heroWasAcquired.length > 0 ? (<RaisedButton label="you have this heroe" disabled={true}  />) : (<Button text="Buy It!" positive={true} callback={ () => this.handleAccept(hero) }/>)}
           </div>
         </CardText>
       </Card>
+    </div>
     );
   }
 }

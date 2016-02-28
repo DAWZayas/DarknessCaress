@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { LeftNav, AppBar} from 'material-ui';
+import { LeftNav, AppBar, FontIcon} from 'material-ui';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import MenuDivider from 'material-ui/lib/menus/menu-divider';
 
@@ -16,11 +16,13 @@ export default class Nav extends Component {
   componentDidMount() {
     this.props.registerListeners();
     this.props.notificationListener();
+    this.props.heroesListeners();
   }
 
   componentWillUnmount() {
     this.props.unregisterListeners();
     this.props.notificationUnlistener();
+    this.props.heroesUnListeners();
   }
 
   handleToggle() {
@@ -47,7 +49,7 @@ export default class Nav extends Component {
     return (
       <nav>
         <LeftNav ref="leftNav" id="myleftnav" style={myleftnav} docked={false} header={avatar} disableSwipeToOpen>
-          <MenuItem primaryText="Home" onTouchTap={this.handleTouchTap.bind(this, '/')} />
+          <MenuItem primaryText="Home" onTouchTap={this.handleTouchTap.bind(this, '/')} leftIcon={ <FontIcon className="material-icons icono-negro">home</FontIcon> }  />
           { auth.authenticated === true ? <MenuItem primaryText="Game" onTouchTap={this.handleTouchTap.bind(this, 'game')} /> : <span/> }
           <MenuDivider />
           <MenuItem primaryText="GitHub" onTouchTap={this.handleTouchTap.bind(this, 'github')} />
@@ -71,5 +73,7 @@ Nav.propTypes = {
   registerNavListeners: PropTypes.func,
   unregisterNavListeners: PropTypes.func,
   notificationListener: PropTypes.func,
-  notificationListenerKiller: PropTypes.func
+  notificationListenerKiller: PropTypes.func,
+  heroesListeners: PropTypes.func,
+  heroesUnListeners: PropTypes.func
 };
