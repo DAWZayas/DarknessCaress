@@ -48,7 +48,6 @@ export default class FriendDetails extends Component{
 }
 
 FriendDetails.propTypes = {
-	userId: PropTypes.string,
   friend: PropTypes.object,
   removeFriend: PropTypes.func,
 	sendGameNotification: PropTypes.func

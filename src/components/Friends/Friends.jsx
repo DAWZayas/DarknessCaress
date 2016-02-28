@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { FriendDetails } from './FriendDetails';
+import FriendDetails from './FriendDetails';
 import Spinner from '../Spinner/Spinner';
 
 export default class Friends extends Component{
@@ -17,19 +17,18 @@ export default class Friends extends Component{
 	}
 
 	render(){
-		const { friends, friendSearch, addFriend, removeFriend } = this.props;
+		const { friends, friendSearch, addFriend, removeFriend, sendGameNotification } = this.props;
  		return(
  			<div>
-				<input type="text" placeholder="Your friend's name" ref="search" />
-				<button onClick={() => this.handleSearchFriend()}>Search</button>
+				<input className="form-control" type="text" ref="search" placeholder="Your friend's name" onChange={ this.handleSearchFriend.bind(this) } />
 				<div>
  					<span>Searched Friends</span>
  				</div>
  				<div>
  					{
- 						friends.map( (friendObject, index) => {
+ 						friends.map( (friend, index) => {
  							return (
- 								<button key={index}>{friendObject[Object.keys(friendObject)[0]].username}</button>
+ 								<FriendDetails key={ index } friend={ friend } removeFriend={ removeFriend } sendGameNotification={ sendGameNotification } />
  							);
  						})
  					}
@@ -44,5 +43,6 @@ Friends.propTypes = {
   friendSearch: PropTypes.object,
   searchFriend: PropTypes.func,
   addFriend: PropTypes.func,
-  removeFriend: PropTypes.func
+  removeFriend: PropTypes.func,
+	sendGameNotification: PropTypes.func
 };
