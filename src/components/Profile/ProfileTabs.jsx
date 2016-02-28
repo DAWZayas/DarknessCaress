@@ -54,7 +54,7 @@ export default class ProfileTabs extends Component {
       }
     };
 
-    const { user, heroes, friends, friendSearch, searchFriend, addFriend, removeFriend } = this.props;
+    const { user, heroes, friends, friendSearch, searchFriend, addFriend, removeFriend, sendGameNotification } = this.props;
          return ( heroes.length > 0 ? (!user ? <div className="loadingIcon"><Spinner /></div> : (
            <div>
              <Tabs className="tabbedTabs" onChange={ this.handleChangeTabs.bind(this) } value={ this.state.slideIndex + '' }>
@@ -70,7 +70,7 @@ export default class ProfileTabs extends Component {
                  <Heroes buyHeroe={this.props.buyHeroe} heroes={ heroes } user={ user } searchBy={ this.searchByHero.bind(this) } />
                </div>
                <div style={ style.slide }>
-                <Friends friends={ friends } friendSearch={ friendSearch } searchFriend={ searchFriend } addFriend={ addFriend } removeFriend={ removeFriend } />
+                <Friends  sendGameNotification={sendGameNotification} friends={ friends } friendSearch={ friendSearch } searchFriend={ searchFriend } addFriend={ addFriend } removeFriend={ removeFriend } />
                </div>
              </SwipeableViews>
            </div>
