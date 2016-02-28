@@ -25,7 +25,7 @@ export function buyHeroe(hero) {
       const pointPerHeroe = 3;
         if(user.heroes){
           const heroes = user.heroes;
-          heroes.push(hero.name);
+          heroes.push(hero.id);
           firebase.child(`users/${userId}/heroes`).set(heroes);
           const newPoints = user.points - pointPerHeroe;
           firebase.child(`users/${userId}/points`).set(newPoints);
@@ -35,7 +35,7 @@ export function buyHeroe(hero) {
             points: newPoints
           });
         }else {
-          array.push(hero.name);
+          array.push(hero.id);
           firebase.child(`users/${userId}/heroes`).set(array);
           const newPoints = user.points - pointPerHeroe;
           firebase.child(`users/${userId}/points`).set(newPoints);
