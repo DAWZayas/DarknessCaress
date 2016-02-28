@@ -41,7 +41,7 @@ export default class Hero extends Component{
     const { key, hero, user } = this.props;
     const avatarImg = <HeroImage hero= {hero} />
     const array = [];
-    const heroWasAcquired = user.heroes ? user.heroes.filter(myHero => myHero.name === hero.name) : array;
+    const heroWasAcquired = user.heroes ? user.heroes.filter(myHero => myHero === hero.name) : array;
     return(
       <div>
         <Snackbar open={this.state.open} message="you dont have enough points" autoHideDuration={4000} onRequestClose={this.handleRequestClose} />
