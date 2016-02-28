@@ -7,6 +7,6 @@ export default connect(
   state => ({ auth: state.auth, 
 					  	user: state.user,
 					  	friends: state.friends,
-					  	searchFriend: state.searchFriend }),
+					  	friendSearch: state.friendSearch }),
   ProfileActions
 )(ProfileTabs);
