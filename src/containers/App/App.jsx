@@ -8,6 +8,7 @@ injecTapEventPlugin();
 
 export default connect(
   state => ({
+    user: state.user,
     auth: state.auth,
     notifications: state.notifications
   }),

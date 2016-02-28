@@ -1,6 +1,5 @@
 import { pushState } from 'redux-router';
-
-import { SET_USER, NOTIFICATION_REFRESH } from './action_types';
+import { SET_USER, NOTIFICATION_REFRESH, SET_ALL_HEROES } from './action_types';
 
 export const navigate = (path) => pushState(null, path);
 
@@ -73,6 +72,41 @@ export function notificationUnlistener() {
     dispatch({
       type: NOTIFICATION_REFRESH,
       notification: {}
+    });
+  };
+}
+// Heroes:
+
+export function heroesListeners() {
+  return (dispatch, getState) => {
+    const { firebase } = getState();
+    firebase.onAuth(function(authData) {
+      if(authData) {
+        firebase.child(`heroes`).on('value', snapshot => {
+          const heroes = snapshot.val() || [];
+          dispatch({
+            type: SET_ALL_HEROES,
+            heroes: heroes
+          });
+        });
+      }else{
+        firebase.child('heroes').off();
+        dispatch({
+          type: SET_ALL_HEROES,
+          heroes: []
+        });
+        }
+      });
+  };
+}
+
+export function heroesUnListeners() {
+  return (dispatch, getState) => {
+    const { firebase } = getState();
+    firebase.child('heroes').off();
+    dispatch({
+      type: SET_ALL_HEROES,
+      heroes: []
     });
   };
 }

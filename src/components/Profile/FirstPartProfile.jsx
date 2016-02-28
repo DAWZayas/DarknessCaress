@@ -32,10 +32,10 @@ export default class FirstPartProfile extends Component {
         <Modal isOpen={isOpen} onRequestHide={ () => this.handleCancelClick() } backdrop keyboard>
           <div className="modal-header">
             <ModalClose onClick={() => this.handleCancelClick()} />
-            <h4>CHUS YOR HABATAR</h4>
+            <h4>Choose your Avatar</h4>
           </div>
           <div className="modal-body">
-            <AvatarList changeAvatar={this.props.changeAvatar} />
+            <AvatarList isOpen={() => this.handleCancelClick()} changeAvatar={this.props.changeAvatar} />
             <button className="btn" type="button" onClick={ () => this.handleCancelClick() }>cancel</button>
           </div>
         </Modal>

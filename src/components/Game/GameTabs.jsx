@@ -84,7 +84,7 @@ export default class GameTabs extends Component {
       {
       boards.length < 5 ?
       (<div>
-        <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+        <Tabs className="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
           {
             boards.map( (boardObject, index) => {
               const newValue = '' + index;
@@ -121,7 +121,7 @@ export default class GameTabs extends Component {
       </div>)
       :
       (<div>
-        <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+        <Tabs className="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
           {
             boards.map( (boardObject, index) => {
               const newValue = '' + index;

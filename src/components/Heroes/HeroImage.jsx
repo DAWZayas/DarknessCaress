@@ -1,18 +1,18 @@
 import React, { Component, PropTypes } from 'react';
+import { Avatar } from 'material-ui';
 
-const apiUrl = 'http://img.pokemondb.net/sprites/black-white/anim/normal/';
+import { imagesAvatar } from '../../utils/imagesHeroesAvatar';
+
 
 export default class HeroImage extends Component{
   render(){
-    const { key, hero } = this.props;
-    /*url={`heroes/${hero.name}`}*/
+    const { hero } = this.props;
     return(
-      <img key={ key } alt={hero.name} src={`${apiUrl}${hero.name}.gif`} />
+      <Avatar src={ imagesAvatar[hero.image] } size={50} />
     );
   }
 }
 
 HeroImage.propTypes = {
-  key: PropTypes.number,
   hero: PropTypes.object
 };
