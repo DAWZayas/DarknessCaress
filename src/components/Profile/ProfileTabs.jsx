@@ -56,8 +56,7 @@ export default class ProfileTabs extends Component {
 
     const items = allItems.filter( item => item.name.search(this.state.searchedItem.toLowerCase()) > -1 );
     const { user, heroes } = this.props;
-    return ( heroes.length > 0 ? (!user ?<div className="loadingIcon"><Spinner /> : (
-
+    return ( heroes.length > 0 ? (!user ? <div className="loadingIcon"><Spinner /></div> : (
       <div>
         <Tabs className="tabbedTabs" onChange={ this.handleChangeTabs.bind(this) } value={ this.state.slideIndex + '' }>
           <Tab label="Profile" value="0" />
