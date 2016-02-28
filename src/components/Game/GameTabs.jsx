@@ -70,7 +70,6 @@ export default class GameTabs extends Component {
     this.setState({
       slideIndex: 0
     });
-    this.forceUpdate();
   }
 
   render() {
@@ -83,9 +82,7 @@ export default class GameTabs extends Component {
     const user = this.props.user || {status: 'searching'};
     return this.state.loading ? <div className="loadingIcon"><Spinner /></div> : (
       <div>
-      {
-      boards.length < 5 ?
-      (<div>
+      <div>
         <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
           {
             boards.map( (boardObject, index) => {
@@ -96,7 +93,7 @@ export default class GameTabs extends Component {
               );
             })
           }
-          <Tab label="New Game" value={'' + boards.length} />
+          { boards.length < 5 ? <Tab label="New Game" value={'' + boards.length} /> : null }
         </Tabs>
         <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChangeIndex.bind(this)}>
           {
@@ -109,45 +106,17 @@ export default class GameTabs extends Component {
               );
             })
           }
-          {
-            boards.length >= 5 ? '' :
-              (<div className="center-block" style={style.slide}>
-                {
-                  user.status !== 'searching'
-                  ? <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
-                  : <div className="loadingIcon"><Spinner /></div>
-                }
-              </div>)
+          { boards.length < 5 ? 
+            <div className="center-block" style={style.slide}>
+              {
+                user.status !== 'searching'
+                ? <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
+                : <div className="loadingIcon"><Spinner /></div>
+              }
+            </div> : null
           }
         </SwipeableViews>
-      </div>)
-      :
-      (<div>
-        <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
-          {
-            boards.map( (boardObject, index) => {
-              const newValue = '' + index;
-              const newLabel = 'Game ' + (index + 1);
-              return (
-                <Tab key={index} label={newLabel} value={newValue} />
-              );
-            })
-          }
-        </Tabs>
-        <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChangeIndex.bind(this)}>
-          {
-            boards.map( (boardObject, index) => {
-              const boardId = Object.keys(boardObject)[0];
-              return (
-                <div className="board-component" key={index} style={style.slide}>
-                  <Game className="game" boardObject={boardObject[`${boardId}`]} board={boardObject[`${boardId}`].board} boardId={boardId} { ...this.props } />
-                </div>
-              );
-            })
-          }
-        </SwipeableViews>
-      </div>)
-      }
+      </div>
       </div>
     );
   }
