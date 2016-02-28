@@ -6,10 +6,10 @@ function setBoards(state, boards) {
 
 function setBoard(state, id, board) {
 	const newBoards = state.map( boardObject => {
-		if(Object.keys(board)[0] === id) {
-			boardObject[`${id}`] = board;
+		if(Object.keys(boardObject)[0] === id) {
+			boardObject = board;
 		}
-		return board;
+		return boardObject;
 	});
 	return newBoards;
 }

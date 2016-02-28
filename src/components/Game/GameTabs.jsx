@@ -70,7 +70,6 @@ export default class GameTabs extends Component {
     this.setState({
       slideIndex: 0
     });
-    this.forceUpdate();
   }
 
   render() {
