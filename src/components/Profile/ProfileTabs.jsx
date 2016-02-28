@@ -67,7 +67,7 @@ export default class ProfileTabs extends Component {
                 <Profile changeAvatar={this.props.changeAvatar} user={ user } />
               </div>
               <div style={ style.slide }>
-                 <Heroes buyHeroe={this.props.buyHeroe} heroes={ heroes } user={ user } searchBy={ this.searchByHero.bind(this) } />
+                 <Heroes buyHeroe={this.props.buyHeroe} heroes={ heroes } user={ user } searchedHero={this.state.searchedHero} searchBy={ this.searchByHero.bind(this) } />
                </div>
                <div style={ style.slide }>
                 <Friends  sendGameNotification={sendGameNotification} friends={ friends } friendSearch={ friendSearch } searchFriend={ searchFriend } addFriend={ addFriend } removeFriend={ removeFriend } />

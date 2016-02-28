@@ -5,6 +5,7 @@ import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
 import Button from './Button';
 
+import { images } from '../../utils/imageProfileExports';
 
 export default class FriendDetails extends Component{
 
@@ -21,7 +22,7 @@ export default class FriendDetails extends Component{
  		return(
 			<Card>
         <CardHeader
-          avatar={avatar}
+          avatar={images[avatar]}
           title={ "Nombre: "+username}
           subtitle={"Estado: "+status}
           actAsExpander={true}
@@ -38,8 +39,8 @@ export default class FriendDetails extends Component{
             </li>
           </ul>
           <div>
-            <Button text="Jugar" positive={true} callback={ this.props.sendGameNotification } friendId={ friendId } />
-            <Button text="Borrar" positive={false} callback={ this.props.removeFriend } friendId={ friendId } />
+            <Button text="Play" positive={true} callback={ this.props.sendGameNotification } friendId={ friendId } />
+            <Button text="Delete" positive={false} callback={ this.props.removeFriend } friendId={ friendId } />
           </div>
         </CardText>
       </Card>

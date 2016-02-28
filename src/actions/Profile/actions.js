@@ -73,7 +73,7 @@ export function addFriend(friendId) {
   	const { firebase, auth } = getState();
     const userId = auth.id;
 		firebase.child(`users/${userId}/friends`).transaction(snapshot => {
-			const friends = snapshot.val() || [];
+			const friends = snapshot || [];
 			return [...friends, friendId];
 		}, () => {}, false);
 	};
