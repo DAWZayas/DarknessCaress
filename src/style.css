@@ -117,6 +117,18 @@ fill: #212121!important;
   justify-content: space-around;
 
 }
+#heroSearcher{
+  width: 85%;
+}
+.myPoints{
+  font-family: "Arial Black", Arial;
+  font-size: 21px;
+  color:#fff;
+  margin: 0;
+  margin-left: 88%;
+  position: absolute;
+  bottom: 96.7%;
+}
 .hero {
   background: #96704E;
   height: 150px;
@@ -216,13 +228,14 @@ fill: #212121!important;
   margin-bottom: -0.4em;
 }
 #headerNav p{
-font-family: "Arial Black", Arial;
-font-size: 35px;
-margin: 0;
-text-align: center;
-color: #009688;
-position: absolute;
-transform: translate(1.4em, -1.72em);
+  font-family: "Arial Black", Arial;
+  font-size: 19px;
+  margin: 0;
+  text-align: center;
+  color: #009688;
+  position: absolute;
+  transform: translate(2.4em, -2.9em);
+
 }
 .mmrcontainer{
   transform: translate(0,-0.5em);
