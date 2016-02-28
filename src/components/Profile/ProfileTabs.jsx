@@ -7,7 +7,6 @@ import Profile from './Profile';
 import Friends from '../Friends/Friends';
 import Spinner from '../Spinner/Spinner';
 
-import { allItems } from '../../utils/allItems';
 
 export default class ProfileTabs extends Component {
 
@@ -55,30 +54,29 @@ export default class ProfileTabs extends Component {
       }
     };
 
-    const heroes = allHeroes.filter( hero => hero.name.search(this.state.searchedHero.toLowerCase()) > -1 );
-    const { user, friends, friendSearch, searchFriend, addFriend, removeFriend, sendGameNotification} = this.props;
-    return !user ? <div className="loadingIcon"><Spinner /></div> : (
-      <div>
-        <Tabs className="tabbedTabs" onChange={ this.handleChangeTabs.bind(this) } value={ this.state.slideIndex + '' }>
-          <Tab label="Profile" value="0" />
-          <Tab label="Heroes" value="1" />
-          <Tab label="Friends" value="2" />
-        </Tabs>
-        <SwipeableViews index={ this.state.slideIndex } onChangeIndex={ this.handleChangeIndex.bind(this) }>
-          <div style={ style.slide }>
-            <Profile changeAvatar={this.props.changeAvatar} user={ user } />
-          </div>
-          <div style={ style.slide }>
-            <Heroes buyHeroe={this.props.buyHeroe} heroes={ heroes } user={ user } searchBy={ this.searchByHero.bind(this) } />
-          </div>
-          <div style={ style.slide }>
-            <Friends friends={ friends } friendSearch={ friendSearch } searchFriend={ searchFriend } addFriend={ addFriend } sendGameNotification={ sendGameNotification } removeFriend={ removeFriend } />
-          </div>
-        </SwipeableViews>
-      </div>
-    );
-  }
-}
+    const { user, heroes, friends, friendSearch, searchFriend, addFriend, removeFriend } = this.props;
+         return ( heroes.length > 0 ? (!user ? <div className="loadingIcon"><Spinner /></div> : (
+           <div>
+             <Tabs className="tabbedTabs" onChange={ this.handleChangeTabs.bind(this) } value={ this.state.slideIndex + '' }>
+               <Tab label="Profile" value="0" />
+               <Tab label="Heroes" value="1" />
+               <Tab label="Friends" value="2" />
+             </Tabs>
+             <SwipeableViews index={ this.state.slideIndex } onChangeIndex={ this.handleChangeIndex.bind(this) }>
+               <div style={ style.slide }>
+                <Profile changeAvatar={this.props.changeAvatar} user={ user } />
+              </div>
+              <div style={ style.slide }>
+                 <Heroes buyHeroe={this.props.buyHeroe} heroes={ heroes } user={ user } searchBy={ this.searchByHero.bind(this) } />
+               </div>
+               <div style={ style.slide }>
+                <Friends friends={ friends } friendSearch={ friendSearch } searchFriend={ searchFriend } addFriend={ addFriend } removeFriend={ removeFriend } />
+               </div>
+             </SwipeableViews>
+           </div>
+        )) : <div className="loadingIcon"><Spinner /></div>);
+      }
+    }
 
 ProfileTabs.PropTypes={
   user: PropTypes.object,
