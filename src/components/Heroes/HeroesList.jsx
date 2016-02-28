@@ -3,12 +3,12 @@ import Hero from './Hero';
 
 export default class HeroesList extends Component{
   render(){
-    const {heroes, searchBy, user} = this.props;
+    const {heroes, searchedHero, user} = this.props;
     return(
       <div>
       {
         heroes.map((hero, index)=>{
-          if(hero.name.search(searchBy) > -1){
+          if(hero.name.search(searchedHero) > -1){
             return(
               <Hero user= {user} key={index} hero={hero} buyHeroe= {this.props.buyHeroe} />
             );
@@ -22,6 +22,6 @@ export default class HeroesList extends Component{
 
 HeroesList.propTypes = {
   heroes: PropTypes.array,
-  searchBy: PropTypes.string,
+  searchedHero: PropTypes.string,
   user: PropTypes.object
 };

@@ -2,6 +2,13 @@ import React, { Component, PropTypes } from 'react';
 
 import FriendDetails from './FriendDetails';
 import Spinner from '../Spinner/Spinner';
+import Card from 'material-ui/lib/card/card';
+import CardActions from 'material-ui/lib/card/card-actions';
+import CardHeader from 'material-ui/lib/card/card-header';
+import CardText from 'material-ui/lib/card/card-text';
+import Button from './Button';
+
+import { images } from '../../utils/imageProfileExports';
 
 export default class Friends extends Component{
 
@@ -25,7 +32,29 @@ export default class Friends extends Component{
  					{
  						Object.keys(friendSearch).map( (friendId, index) => {
  							return (
- 								<p key={index}>{friendSearch[friendId].username}</p>
+ 								<Card>
+					        <CardHeader
+					          avatar={images[friendSearch[friendId].avatar]}
+					          title={ "Nombre: " + friendSearch[friendId].username}
+					          subtitle={"Estado: " + friendSearch[friendId].status}
+					          actAsExpander={true}
+					          showExpandableButton={true}
+					          />
+					        <CardText expandable={true}>
+					          <p>{friendSearch[friendId].username}</p>
+					          <ul>
+					            <li>
+					              {"Nivel: " + friendSearch[friendId].level}
+					            </li>
+					            <li>
+					              {"MMR: " + friendSearch[friendId].mmr}
+					            </li>
+					          </ul>
+					          <div>
+					            <Button text="Add Friend" positive={true} callback={ this.props.addFriend } friendId={ friendId } />
+					          </div>
+					        </CardText>
+					      </Card>
  							);
  						})
  					}
