@@ -22,7 +22,7 @@ export function searchFriend(username) {
 			const users = snapshot.val();
 			const usersFound = {};
 			Object.keys(users).map( userId => {
-				if(users[userId].username.indexOf(username) !== -1) {
+				if(users[userId].username === username) {
 					usersFound[userId] = users[userId];
 				}
 			});

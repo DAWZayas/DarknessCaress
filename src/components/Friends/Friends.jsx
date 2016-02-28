@@ -23,7 +23,13 @@ export default class Friends extends Component{
 				<input type="text" placeholder="Your friend's name" ref="search" />
 				<button onClick={() => this.handleSearchFriend()}>Search</button>
 				<div>
- 					<span>Searched Friends</span>
+ 					{
+ 						Object.keys(friendSearch).map( (friendId, index) => {
+ 							return (
+ 								<p key={index}>{friendSearch[friendId].username}</p>
+ 							);
+ 						})
+ 					}
  				</div>
  				<div>
  					{
