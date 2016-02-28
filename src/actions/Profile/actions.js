@@ -34,9 +34,10 @@ export function searchFriend(username) {
 	};
 }
 
-export function addFriend(userId, friendId) {
+export function addFriend(friendId) {
 	return (dispatch, getState) => {
-		const { firebase } = getState();
+  	const { firebase, auth } = getState();
+    const userId = auth.id;
 		firebase.child(`users/${userId}/friends`).transaction(snapshot => {
 			const friends = snapshot.val() || [];
 			return [...friends, friendId];
@@ -44,12 +45,24 @@ export function addFriend(userId, friendId) {
 	};
 }
 
-export function removeFriend(userId, friendId) {
+export function removeFriend(friendId) {
 	return (dispatch, getState) => {
-		const { firebase } = getState();
+    const { firebase, auth } = getState();
+    const userId = auth.id;
 		firebase.child(`users/${userId}/friends`).transaction(snapshot => {
-			const friends = snapshot.val() || [];
+			const friends = snapshot || [];
 			return friends.filter(id => id !== friendId);
 		}, () => {}, false);
 	};
+}
+
+export function sendGameNotification(friendId) {
+  return (dispatch, getState) => {
+    const { firebase, auth } = getState();
+    const userId = auth.id;
+    firebase.child(`users/${friendId}/notifications`).push({
+      "type": "gameSolicitation",
+      "userId": userId
+    });
+  }
 }

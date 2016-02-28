@@ -38,7 +38,7 @@ function sendSolicitatingNotification(userAsking, userReceiving, firebase) {
   });
 }
 
-function sendSolicitationNotification(userReceiving, userAsking, firebase) {
+export function sendSolicitationNotification(userReceiving, userAsking, firebase) {
   firebase.child(`users/${userReceiving}/notifications`).push({
     "type": "gameSolicitation",
     "userId": userAsking
