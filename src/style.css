@@ -118,6 +118,13 @@ fill: #212121!important;
   justify-content: space-around;
 
 }
+.myLvl{
+  font-family: "Arial Black", Arial;
+  font-size: 27px;
+  margin: 0;
+  text-align: center;
+  color: #212121;
+}
 #heroSearcher{
   width: 85%;
 }

@@ -54,7 +54,7 @@ export default class GameTabs extends Component {
   onNewGameButtonClick(size, rivers) {
     const array = [];
     const myHeroes= this.props.user.heroes ? this.props.user.heroes : array;
-    if(myHeroes > 5){
+    if(myHeroes.length > 5){
     const userId = this.props.auth.id;
     const firebase = new Firebase('https://darkness-caress.firebaseio.com');
     firebase.child('matchmaking').once('value', snapshot => {
