@@ -50,10 +50,10 @@ export default class Nav extends Component {
       <nav>
         <LeftNav ref="leftNav" id="myleftnav" style={myleftnav} docked={false} header={avatar} disableSwipeToOpen>
           <MenuItem primaryText="Home" onTouchTap={this.handleTouchTap.bind(this, '/')} leftIcon={ <FontIcon className="material-icons icono-negro">home</FontIcon> }  />
-          { auth.authenticated === true ? <MenuItem primaryText="Game" onTouchTap={this.handleTouchTap.bind(this, 'game')} /> : <span/> }
+          { auth.authenticated === true ? <MenuItem primaryText="Game" leftIcon={ <FontIcon className="material-icons icono-negro">games</FontIcon> } onTouchTap={this.handleTouchTap.bind(this, 'game')} /> : <span/> }
           <MenuDivider />
-          <MenuItem primaryText="GitHub" onTouchTap={this.handleTouchTap.bind(this, 'github')} />
-          <MenuItem primaryText="Follow Us :)" onTouchTap={this.handleTouchTap.bind(this, 'twitter')} />
+          <MenuItem primaryText="GitHub"  onTouchTap={this.handleTouchTap.bind(this, 'github')} />
+          <MenuItem primaryText="Follow Us :)"  onTouchTap={this.handleTouchTap.bind(this, 'twitter')} />
         </LeftNav>
           <AppBar className="appBarStyle" title={ <Title /> } onLeftIconButtonTouchTap={ this.handleToggle.bind(this) } iconElementRight={<ProfileMenu user={user} auth={auth} notifications={notifications}navigate={navigate} signOut={this.props.signOut} />} />
           {this.props.children}

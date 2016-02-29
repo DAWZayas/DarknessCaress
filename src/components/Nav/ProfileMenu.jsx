@@ -43,8 +43,7 @@ export default class ProfileMenu extends Component {
         <IconMenu iconButtonElement={avatar}>
           { auth.authenticated === false ? <MenuItem primaryText="Log In" onTouchTap={this.handleTouchTap.bind(this, 'login')} leftIcon={<FontIcon className="glyphicon glyphicon-log-out icono-negro" />} /> : <span/> }
           <MenuItem primaryText="Profile" onTouchTap={this.handleTouchTap.bind(this, 'profile')} leftIcon={<FontIcon className="material-icons icono-negro">person</FontIcon>} />
-          { auth.authenticated === true ?  <MenuItem primaryText="Notifications" onTouchTap={this.handleTouchTap.bind(this, 'notifications')} leftIcon={<FontIcon className="material-icons icono-negro">settings</FontIcon>} /> : <span/>}
-          <MenuItem primaryText="Settings" onTouchTap={this.handleTouchTap.bind(this, 'settings')} leftIcon={<FontIcon className="material-icons icono-negro">settings</FontIcon>} />
+          { auth.authenticated === true ?  <MenuItem primaryText="Notifications" onTouchTap={this.handleTouchTap.bind(this, 'notifications')} leftIcon={<FontIcon className="material-icons icono-negro">feedback</FontIcon>} /> : <span/>}
           <MenuItem primaryText="Help" onTouchTap={this.handleTouchTap.bind(this, 'help')} leftIcon={<FontIcon className="material-icons icono-negro">help</FontIcon>} />
           { auth.authenticated === true ? <MenuItem primaryText="Log Out" onTouchTap={() => this.handleLogOutClick()} leftIcon={<FontIcon className="glyphicon glyphicon-log-out icono-negro" />} /> : <span/> }
         </IconMenu>
