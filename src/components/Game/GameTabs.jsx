@@ -136,7 +136,7 @@ export default class GameTabs extends Component {
               {
                 user.status !== 'searching'
                 ? <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
-                : <div className="loadingIcon"><Spinner /></div>
+                : <div className="loadingIcon" height="10%"><Spinner /></div>
               }
             </div> : null
           }

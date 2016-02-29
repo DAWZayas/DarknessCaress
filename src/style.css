@@ -353,6 +353,7 @@ body{
 
 html {
   height: 100vh!important;
+  overflow-x: hidden!important;
 }
 
 .board-component {
@@ -369,6 +370,10 @@ html {
 }
 .transparent_badge span{
   background-color: rgba(0, 0, 0, 0)!important;
+}
+
+.loadingIcon > div {
+  transform: translateY(-50%);
 }
 
 .loadingIcon > div > div {
