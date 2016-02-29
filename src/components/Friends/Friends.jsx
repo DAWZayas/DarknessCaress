@@ -32,6 +32,8 @@ export default class Friends extends Component{
  					{
  						Object.keys(friendSearch).map( (friendId, index) => {
  							return (
+ 								<div>
+ 								<hr/>
  								<Card>
 					        <CardHeader
 					          avatar={images[friendSearch[friendId].avatar]}
@@ -55,6 +57,8 @@ export default class Friends extends Component{
 					          </div>
 					        </CardText>
 					      </Card>
+ 								<hr/>
+					      </div>
  							);
  						})
  					}
