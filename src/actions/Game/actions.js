@@ -81,7 +81,7 @@ function getNumbers(quantity, size) {
   let numbers = [];
   let counter = 0;
   while(counter < quantity) {
-    const number = randomNumber(1, size);
+    const number = randomNumber(0, size);
     if(numbers.indexOf(number) === -1) {
       numbers[counter] = number;
       counter++;
