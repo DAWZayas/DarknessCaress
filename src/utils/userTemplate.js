@@ -5,7 +5,7 @@ export const userTemplate = {
 	exp: 0,
 	heroes: [],
 	items: [],
-	points: 10,
+	points: 18,
 	mmr: 1000,
 	record: {
 		victories: 0,
