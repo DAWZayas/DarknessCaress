@@ -18,9 +18,7 @@ export default class Friends extends Component{
 
 	handleSearchFriend() {
 		const friendId = this.refs.search.value;
-		if(friendId !== '') {
-			this.props.searchFriend(friendId);
-		}
+		this.props.searchFriend(friendId);
 	}
 
 	render(){
@@ -32,7 +30,7 @@ export default class Friends extends Component{
  					{
  						Object.keys(friendSearch).map( (friendId, index) => {
  							return (
- 								<div>
+ 								<div key={index}>
  								<hr/>
  								<Card>
 					        <CardHeader

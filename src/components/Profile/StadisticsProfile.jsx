@@ -23,7 +23,7 @@ export default class StadisticsProfile extends Component {
           <div>
             <img className="imageStadistics" src="https://cdn2.iconfinder.com/data/icons/trick-or-treat/512/halloween_8-512.png"/>
             <p>Defeats:</p>
-            <p>{user.record.defeats}</p>
+            <p>{ user.record.defeats }</p>
           </div>
         </div>
       </div>
