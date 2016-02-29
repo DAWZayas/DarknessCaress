@@ -110,6 +110,7 @@ fill: #212121!important;
 
 .btn {
   margin: 10px!important;
+  color: #000000;
 }
 .heroes {
   display: flex;
@@ -123,11 +124,10 @@ fill: #212121!important;
 .myPoints{
   font-family: "Arial Black", Arial;
   font-size: 21px;
-  color:#fff;
+  color: #fff;
   margin: 0;
-  margin-left: 88%;
-  position: absolute;
-  bottom: 96.7%;
+  transform: translate(86vw, -93%);
+  position: fixed;
 }
 .hero {
   background: #96704E;

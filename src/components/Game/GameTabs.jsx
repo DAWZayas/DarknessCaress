@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Tabs, Tab } from 'material-ui';
 import SwipeableViews from 'react-swipeable-views';
+import { Modal, ModalClose } from 'react-modal-bootstrap';
 
 import searchNewGame from '../../actions/Game/actions.js'; //FIXME: How Charles will handle this?
 
@@ -13,7 +14,8 @@ export default class GameTabs extends Component {
     super(props);
     this.state = {
       loading: true,
-      slideIndex: 0 //doesn't work if you change it to 1 or 2, but should work (?)
+      slideIndex: 0,
+      isOpen: false
     };
   }
 
@@ -50,6 +52,9 @@ export default class GameTabs extends Component {
   }
 
   onNewGameButtonClick(size, rivers) {
+    const array = [];
+    const myHeroes= this.props.user.heroes ? this.props.user.heroes : array;
+    if(myHeroes > 5){
     const userId = this.props.auth.id;
     const firebase = new Firebase('https://darkness-caress.firebaseio.com');
     firebase.child('matchmaking').once('value', snapshot => {
@@ -70,6 +75,15 @@ export default class GameTabs extends Component {
     this.setState({
       slideIndex: 0
     });
+  } else this.handleOpenClick();
+}
+
+  handleCancelClick() {
+    this.setState({ isOpen: false });
+  }
+
+  handleOpenClick() {
+    this.setState({isOpen: true});
   }
 
   render() {
@@ -78,10 +92,21 @@ export default class GameTabs extends Component {
         padding: 10
       }
     };
+    const { isOpen } = this.state;
     const boards = this.props.boards || [];
     const user = this.props.user || {status: 'searching'};
     return this.state.loading ? <div className="loadingIcon"><Spinner /></div> : (
       <div>
+        <Modal isOpen={isOpen} onRequestHide={ () => this.handleCancelClick() } backdrop keyboard>
+          <div className="modal-header">
+            <ModalClose onClick={() => this.handleCancelClick()} />
+            <h4>buy champs!!!!!</h4>
+          </div>
+          <div className="modal-body">
+            <h4>first you need to buy 6 champs at least for play the game</h4>
+            <button className="btn" type="button" onClick={ () => this.handleCancelClick() }>cancel</button>
+          </div>
+        </Modal>
       <div>
         <Tabs className="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
           {
@@ -124,6 +149,7 @@ export default class GameTabs extends Component {
 
 GameTabs.propTypes = {
   boards: PropTypes.array,
+  user: PropTypes.object,
   addNewBoard: PropTypes.func,
   updateBoard: PropTypes.func,
   registerListeners: PropTypes.func,
