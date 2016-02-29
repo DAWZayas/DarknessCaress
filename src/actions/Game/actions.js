@@ -49,28 +49,39 @@ export function sendSolicitationNotification(userReceiving, userAsking, firebase
 export function createNewBoard(idOne, idTwo) {
   const firebase = new Firebase('https://darkness-caress.firebaseio.com');
   let newBoard = createBoardWithRiver(8, 2, 'river');
-  newBoard = fillBoardWithUnits(newBoard);
+  newBoard = fillBoardWithUnits(newBoard, idOne, idTwo, firebase);
   const newBoardReference = firebase.child('boards').push({board: newBoard, turn: idOne, 0: idOne, 1: idTwo});
   const newBoardId = newBoardReference.key();
   addBoardToUser(idOne, newBoardId, firebase);
   addBoardToUser(idTwo, newBoardId, firebase);
 }
 
-function fillBoardWithUnits(board) {
-  const numbers = getNumbers(6);
-  numbers.map( number => {
-    const unit = allUnits[number];
-    board = placeOneUnit(unit, board, 0);
-    board = placeOneUnit(unit, board, 1);
+function fillBoardWithUnits(board, idOne, idTwo, firebase) {
+  fillSideWithUnits(board, idOne, 0, firebase);
+  fillSideWithUnits(board, idTwo, 1, firebase);
+  return board;
+}
+
+function fillSideWithUnits(board, userId, side, firebase) {
+  firebase.child(`users/${userId}/heroes`).once('value', snapshot => {
+    const heroes = snapshot.val();
+    const size = heroes.length;
+    const numbers = getNumbers(6, size);
+    numbers.map( number => {
+      const heroId = parseInt(heroes[number]);
+      firebase.child(`heroes/${heroId}`).once('value', snapshot => {
+        board = placeOneUnit(snapshot.val(), board, side);
+      });
+    });
   });
   return board;
 }
 
-function getNumbers(quantity) {
+function getNumbers(quantity, size) {
   let numbers = [];
   let counter = 0;
   while(counter < quantity) {
-    const number = randomNumber(1, 16);
+    const number = randomNumber(1, size);
     if(numbers.indexOf(number) === -1) {
       numbers[counter] = number;
       counter++;
