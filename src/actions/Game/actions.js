@@ -50,16 +50,35 @@ export function createNewBoard(idOne, idTwo) {
   const firebase = new Firebase('https://darkness-caress.firebaseio.com');
   let newBoard = createBoardWithRiver(8, 2, 'river');
   newBoard = fillBoardWithUnits(newBoard, idOne, idTwo, firebase);
-  const newBoardReference = firebase.child('boards').push({board: newBoard, turn: idOne, 0: idOne, 1: idTwo});
+  saveBoard(newBoard, idOne, idTwo, firebase);
+}
+
+/*PROMISES
+export function createNewBoard(idOne, idTwo) {
+  const FIRST_ARMY = 0;
+  const SECOND_ARMY = 1;
+  const firebase = new Firebase('https://darkness-caress.firebaseio.com');
+  let board = createBoardWithRiver(8, 2, 'river');
+  new Promise( resolve => {
+    const midBoard = fillSideWithUnits(board, idTwo, SECOND_ARMY, firebase);
+    resolve(midBoard);
+  })
+    .then( anotherBoard => fillSideWithUnits(anotherBoard, idOne, FIRST_ARMY, firebase) )
+    .then( finalBoard => saveBoard(finalBoard, idOne, idTwo, firebase) );
+}
+*/
+
+function saveBoard(board, idOne, idTwo, firebase) {
+  const newBoardReference = firebase.child('boards').push({board: board, turn: idOne, 0: idOne, 1: idTwo});
   const newBoardId = newBoardReference.key();
   addBoardToUser(idOne, newBoardId, firebase);
   addBoardToUser(idTwo, newBoardId, firebase);
 }
 
 function fillBoardWithUnits(board, idOne, idTwo, firebase) {
-  fillSideWithUnits(board, idOne, 0, firebase);
-  fillSideWithUnits(board, idTwo, 1, firebase);
-  return board;
+  const midBoard = fillSideWithUnits(board, idOne, 0, firebase);
+  const finalBoard = fillSideWithUnits(midBoard, idTwo, 1, firebase);
+  //return finalBoard;
 }
 
 function fillSideWithUnits(board, userId, side, firebase) {
@@ -74,9 +93,14 @@ function fillSideWithUnits(board, userId, side, firebase) {
       });
     });
   });
-  return board;
+  //return board;
 }
-
+/*
+firebase.child('heroes').once('value', snapshot => {
+  totalHeroes = snapshot.val();
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+});
+*/
 function getNumbers(quantity, size) {
   let numbers = [];
   let counter = 0;
@@ -100,7 +124,7 @@ function placeOneUnit(unit, board, side) {
     unit = Object.assign({}, unit, {army: side});
     board[positionX][positionY] = Object.assign({}, board[positionX][positionY], {unit: unit});
   }
-  return board;
+  //return board;
 }
 
 function addBoardToUser(userId, boardId, firebase) {
@@ -193,7 +217,7 @@ function rewardWinner(winner, firebase) {
   rewardPoints(winner, 2, firebase);
   updateRecord(winner, 1, 0, 0, firebase);
 }
-
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 function rewardLoser(loser, firebase) {
   rewardExp(loser, 10, firebase);
   rewardMmr(loser, -15, firebase);
