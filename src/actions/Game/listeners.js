@@ -9,11 +9,13 @@ export function registerListeners() {
     ref.on('value', snapshot => {
       const promises = (snapshot.val() || []).map( boardId => new Promise(
         resolve => firebase.child(`boards/${boardId}`).on('value', snapshot => {
-          const newObject = {};
-          const boardSize = snapshot.val().board.length;
-          const overlayObject = getStartState(boardSize);
-          newObject[boardId] = Object.assign({}, snapshot.val(), {overlayObject: overlayObject});
-          resolve(newObject);
+          if(snapshot.exists()) {
+            const newObject = {};
+            const boardSize = snapshot.val().board.length;
+            const overlayObject = getStartState(boardSize);
+            newObject[boardId] = Object.assign({}, snapshot.val(), {overlayObject: overlayObject});
+            resolve(newObject);
+          }
         })
       ));
       Promise.all(promises).then(function(boards) {
@@ -63,14 +65,15 @@ export function registerOpponentsListeners() {
     ref.on('value', snapshot => {
       const promises = (snapshot.val() || []).map( boardId => new Promise(
         resolve => firebase.child(`boards/${boardId}`).on('value', snapshot => {
-          const opponentId = snapshot.val()[0] === userId ? snapshot.val()[1] : snapshot.val()[0];
-          firebase.child(`users/${opponentId}/username`).once('value', snapshot => {
-            const opponentName = snapshot.val();
-            let opponentObject = {};
-            opponentObject[boardId] = opponentName;
-            resolve(opponentObject);
-          });
-          
+          if(snapshot.exists()) {
+            const opponentId = snapshot.val()[0] === userId ? snapshot.val()[1] : snapshot.val()[0];
+            firebase.child(`users/${opponentId}/username`).once('value', snapshot => {
+              const opponentName = snapshot.val();
+              let opponentObject = {};
+              opponentObject[boardId] = opponentName;
+              resolve(opponentObject);
+            });
+          }
         })
       ));
       Promise.all(promises).then(function(opponents) {

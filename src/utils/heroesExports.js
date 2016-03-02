@@ -15,6 +15,23 @@ import samus from '../media/heroes/samus/samus.png';
 import shuma_gorath from '../media/heroes/shuma_gorath/shuma_gorath.png';
 import tobi from '../media/heroes/tobi/tobi.png';
 
+import charizard_gray from '../media/heroes/charizard/charizard_gray.png';
+import cloud_gray from '../media/heroes/cloud/cloud_gray.png';
+import deadpool_gray from '../media/heroes/deadpool/deadpool_gray.png';
+import general_gray from '../media/heroes/general/general_gray.png';
+import isaac_gray from '../media/heroes/isaac/isaac_gray.png';
+import jirachi_gray from '../media/heroes/jirachi/jirachi_gray.png';
+import link_gray from '../media/heroes/link/link_gray.png';
+import lyn_gray from '../media/heroes/lyn/lyn_gray.png';
+import master_chief_gray from '../media/heroes/master_chief/master_chief_gray.png';
+import megaman_gray from '../media/heroes/megaman/megaman_gray.png';
+import metaknight_gray from '../media/heroes/metaknight/metaknight_gray.png';
+import mewtwo_gray from '../media/heroes/mewtwo/mewtwo_gray.png';
+import midna_gray from '../media/heroes/midna/midna_gray.png';
+import samus_gray from '../media/heroes/samus/samus_gray.png';
+import shuma_gorath_gray from '../media/heroes/shuma_gorath/shuma_gorath_gray.png';
+import tobi_gray from '../media/heroes/tobi/tobi_gray.png';
+
 export const heroes = {
 	charizard: charizard,
 	cloud: cloud,
@@ -31,7 +48,24 @@ export const heroes = {
 	midna: midna,
 	samus: samus,
 	shuma_gorath: shuma_gorath,
-	tobi: tobi
+	tobi: tobi,
+
+	charizard_gray: charizard_gray,
+	cloud_gray: cloud_gray,
+	deadpool_gray: deadpool_gray,
+	general_gray: general_gray,
+	isaac_gray: isaac_gray,
+	jirachi_gray: jirachi_gray,
+	link_gray: link_gray,
+	lyn_gray: lyn_gray,
+	master_chief_gray: master_chief_gray,
+	megaman_gray: megaman_gray,
+	metaknight_gray: metaknight_gray,
+	mewtwo_gray: mewtwo_gray,
+	midna_gray: midna_gray,
+	samus_gray: samus_gray,
+	shuma_gorath_gray: shuma_gorath_gray,
+	tobi_gray: tobi_gray
 };
 
 /*

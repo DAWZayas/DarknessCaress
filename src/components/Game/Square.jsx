@@ -43,7 +43,7 @@ export default class Square extends Component {
         </div>
         { unit ? (
         <div>
-          <img className="squareUnit" src={ heroes[unit.image] } alt={ id } height="48px" width="48px" />
+          <img className="squareUnit" src={ unit.active === false ? heroes[`${unit.image}_gray`] : heroes[unit.image] } alt={ id } height="48px" width="48px" />
           {
             this.props.boardObject[unit.army] === this.props.auth.id
               ? <img className="squareUnit" src={ cursors['good'] } alt={ id } height="48px" width="48px" />
