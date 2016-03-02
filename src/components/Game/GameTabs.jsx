@@ -97,18 +97,10 @@ export default class GameTabs extends Component {
     const user = this.props.user || {status: 'searching'};
     return this.state.loading ? <div className="loadingIcon"><Spinner /></div> : (
       <div>
-        <Modal isOpen={isOpen} onRequestHide={ () => this.handleCancelClick() } backdrop keyboard>
-          <div className="modal-header">
-            <ModalClose onClick={() => this.handleCancelClick()} />
-            <h4>buy champs!!!!!</h4>
-          </div>
-          <div className="modal-body">
-            <h4>first you need to buy 6 champs at least for play the game</h4>
-            <button className="btn" type="button" onClick={ () => this.handleCancelClick() }>cancel</button>
-          </div>
-        </Modal>
-      <div>
-        <Tabs className="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+      {
+      boards.length < 5 ?
+      (<div>
+        <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
           {
             boards.map( (boardObject, index) => {
               const newValue = '' + index;
@@ -118,7 +110,7 @@ export default class GameTabs extends Component {
               );
             })
           }
-          { boards.length < 5 ? <Tab label="New Game" value={'' + boards.length} /> : null }
+          <Tab label="New Game" value={'' + boards.length} />
         </Tabs>
         <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChangeIndex.bind(this)}>
           {
@@ -131,17 +123,45 @@ export default class GameTabs extends Component {
               );
             })
           }
-          { boards.length < 5 ?
-            <div className="center-block" style={style.slide}>
-              {
-                user.status !== 'searching'
-                ? <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
-                : <div className="loadingIcon" height="10%"><Spinner /></div>
-              }
-            </div> : null
+          {
+            boards.length >= 5 ? '' :
+              (<div className="center-block" style={style.slide}>
+                {
+                  user.status !== 'searching'
+                  ? <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
+                  : <div className="loadingIcon"><Spinner /></div>
+                }
+              </div>)
           }
         </SwipeableViews>
-      </div>
+      </div>)
+      :
+      (<div>
+        <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+          {
+            boards.map( (boardObject, index) => {
+              const newValue = '' + index;
+              const newLabel = 'Game ' + (index + 1);
+              return (
+                <Tab key={index} label={newLabel} value={newValue} />
+              );
+            })
+          }
+        </Tabs>
+        <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChangeIndex.bind(this)}>
+          {
+            boards.map( (boardObject, index) => {
+              const boardId = Object.keys(boardObject)[0];
+              return (
+                <div className="board-component" key={index} style={style.slide}>
+                  <Game className="game" boardObject={boardObject[`${boardId}`]} board={boardObject[`${boardId}`].board} boardId={boardId} { ...this.props } />
+                </div>
+              );
+            })
+          }
+        </SwipeableViews>
+      </div>)
+      }
       </div>
     );
   }
