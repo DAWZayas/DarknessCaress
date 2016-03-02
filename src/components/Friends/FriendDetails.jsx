@@ -23,8 +23,8 @@ export default class FriendDetails extends Component{
 			<Card>
         <CardHeader
           avatar={images[avatar]}
-          title={ "Nombre: "+username}
-          subtitle={"Estado: "+status}
+          title={ "Name: "+username}
+          subtitle={"State: "+status}
           actAsExpander={true}
           showExpandableButton={true}
           />
@@ -32,7 +32,7 @@ export default class FriendDetails extends Component{
           <p>{username}</p>
           <ul>
             <li>
-              {"Nivel: "+level}
+              {"Level: "+level}
             </li>
             <li>
               {"MMR: "+mmr}

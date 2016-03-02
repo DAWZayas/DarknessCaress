@@ -45,15 +45,18 @@ export default class Nav extends Component {
     backgroundColor: '#616161',
     fontFamily: 'Arial Black, Arial',
     fontSize: '35px'
-  }
+  };
+  const myStyleDivider = {
+    backgroundColor: '#009688'
+  };
     return (
       <nav>
-        <LeftNav ref="leftNav" id="myleftnav" style={myleftnav} docked={false} header={avatar} disableSwipeToOpen>
-          <MenuItem primaryText="Home" onTouchTap={this.handleTouchTap.bind(this, '/')} leftIcon={ <FontIcon className="material-icons icono-negro">home</FontIcon> }  />
-          { auth.authenticated === true ? <MenuItem primaryText="Game" leftIcon={ <FontIcon className="material-icons icono-negro">games</FontIcon> } onTouchTap={this.handleTouchTap.bind(this, 'game')} /> : <span/> }
-          <MenuDivider />
-          <MenuItem primaryText="GitHub"  onTouchTap={this.handleTouchTap.bind(this, 'github')} />
-          <MenuItem primaryText="Follow Us :)"  onTouchTap={this.handleTouchTap.bind(this, 'twitter')} />
+        <LeftNav ref="leftNav" style={myleftnav} docked={false} header={avatar} disableSwipeToOpen>
+          <MenuItem primaryText="Home" className="myMenuItem" onTouchTap={this.handleTouchTap.bind(this, '/')} leftIcon={ <FontIcon className="material-icons">home</FontIcon> }  />
+          { auth.authenticated === true ? <MenuItem primaryText="Game" className="myMenuItem" leftIcon={ <FontIcon className="material-icons">games</FontIcon> } onTouchTap={this.handleTouchTap.bind(this, 'game')} /> : <span/> }
+          <MenuDivider style={myStyleDivider} />
+          <MenuItem primaryText="GitHub" className="myMenuItem" onTouchTap={this.handleTouchTap.bind(this, 'github')} />
+          <MenuItem primaryText="Follow Us :)" className="myMenuItem" onTouchTap={this.handleTouchTap.bind(this, 'twitter')} />
         </LeftNav>
           <AppBar className="appBarStyle" title={ <Title /> } onLeftIconButtonTouchTap={ this.handleToggle.bind(this) } iconElementRight={<ProfileMenu user={user} auth={auth} notifications={notifications}navigate={navigate} signOut={this.props.signOut} />} />
           {this.props.children}
