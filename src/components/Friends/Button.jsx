@@ -8,7 +8,7 @@ export default class Button extends Component{
   }
   render(){
     const { text, positive, friendId} = this.props;
-    const color = positive ? '#00BCD4' : '#FF4081';
+    const color = positive ? '#00BCD4' : '#DE1A27';
     const style = {
       margin: 12,
     };

@@ -36,7 +36,9 @@ export default class FirstPartProfile extends Component {
           </div>
           <div className="modal-body">
             <AvatarList isOpen={() => this.handleCancelClick()} changeAvatar={this.props.changeAvatar} />
-            <button className="btn" type="button" onClick={ () => this.handleCancelClick() }>cancel</button>
+            <div className="buttonOfModal">
+              <button className="btn" type="button" onClick={ () => this.handleCancelClick() }>cancel</button>
+            </div>
           </div>
         </Modal>
         <div className="exp">

@@ -30,6 +30,12 @@ export default class Login extends Component {
   }
 
   render() {
+    const styleButton = {
+      marginLeft: '70px'
+    };
+    const color = '#009688';
+    const color2 = '#D91E1E';
+    const color3 = '#262626';
     return (
       <div className="log">
         {
@@ -37,7 +43,9 @@ export default class Login extends Component {
           ? (
             <div>
               <TextField ref="email" floatingLabelText="Email" />
+              <br/>
               <TextField ref="password" floatingLabelText="Password" type="password" />
+              <br/>
               <TextField ref="newPassword" floatingLabelText="Repeat password" type="password" />
             </div>
           )
@@ -45,13 +53,16 @@ export default class Login extends Component {
             ? (
               <div>
                 <TextField ref="email" floatingLabelText="Email" />
+                <br/>
                 <TextField ref="password" floatingLabelText="Password" type="password" />
+                <br/>
                 <TextField ref="username" floatingLabelText="Username" type="text" />
               </div>
             )
             : (
               <div>
                 <TextField ref="email" floatingLabelText="Email" />
+                <br/>
                 <TextField ref="password" floatingLabelText="Password" type="password" />
               </div>
               )
@@ -61,7 +72,7 @@ export default class Login extends Component {
           this.props.route.path === 'change'
           ? (
             <div>
-              <RaisedButton  secondary={true} label="Change My Password" onTouchTap={this.handleChangePassword.bind(this)}/>
+              <RaisedButton backgroundColor={color} secondary={true} label="Change My Password" onTouchTap={this.handleChangePassword.bind(this)}/>
               <br/>
               <span onClick={() => this.props.navigate('login')}>Already have an account?</span>
               <br/>
@@ -71,14 +82,14 @@ export default class Login extends Component {
           : this.props.route.path === 'create'
           ? (
             <div>
-              <RaisedButton  secondary={true} label="Register" onTouchTap={this.handleCreateAccount.bind(this)}/>
+              <RaisedButton backgroundColor={color} secondary={true} label="Register" onTouchTap={this.handleCreateAccount.bind(this)}/>
               <br/>
               <span onClick={() => this.props.navigate('login')}>Already have an account?</span>
             </div>
           )
           : (
             <div>
-              <RaisedButton secondary={true} label="Log In" onTouchTap={this.handleLogIn.bind(this)}/>
+              <RaisedButton backgroundColor={color} secondary={true} label="Log In" onTouchTap={this.handleLogIn.bind(this)}/>
               <br/>
               <span onClick={() => this.props.navigate('create')}>No account yet? Create one</span>
               <br/>
@@ -86,8 +97,8 @@ export default class Login extends Component {
             </div>
           )
         }
-        <RaisedButton  secondary={true} label="Github" onTouchTap={this.props.authenticate.bind(this, 'github')}/>
-        <RaisedButton secondary={true} label="Google" onTouchTap={this.props.authenticate.bind(this, 'google')}/>
+        <RaisedButton backgroundColor={color3}  secondary={true} label="Github" onTouchTap={this.props.authenticate.bind(this, 'github')}/>
+        <RaisedButton backgroundColor={color2} style = {styleButton} secondary={true} label="Google" onTouchTap={this.props.authenticate.bind(this, 'google')}/>
       </div>
     );
   }

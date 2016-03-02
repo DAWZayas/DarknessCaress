@@ -122,8 +122,24 @@ fill: #212121!important;
   font-family: "Arial Black", Arial;
   font-size: 27px;
   margin: 0;
-  text-align: center;
-  color: #212121;
+  color: #F0F0F0;
+}
+.myRanking{
+  font-family: "Arial Black", Arial;
+  font-size: 25px;
+  margin: 0;
+  text-align: right;
+  color: #F0F0F0;
+}
+.myNumberRanking{
+  font-size: 20px;
+}
+.buttonOfModal{
+  margin-top: 3em;
+}
+.ranking{
+  margin-top: -2.5em;
+  text-align: right;
 }
 #heroSearcher{
   width: 85%;
@@ -210,6 +226,19 @@ fill: #212121!important;
 .imageStadistics{
   width: 10%;
 }
+.imageRanking{
+  width: 1.5em;
+  vertical-align: initial;
+}
+.log{
+  margin-top: 13%;
+  margin-left: 15%;
+  color: #FFF;
+}
+.btn-info {
+    background-color: #009688!important;
+    border-color: #67C6A6!important;
+}
 .exp{
   z-index: -1;
   transform: translate(0px, 91px);
@@ -258,21 +287,20 @@ fill: #212121!important;
 }
 
 #stadistics p{
-  font-family: "Arial Black", Arial;
   font-size: 20px;
-  text-transform: uppercase;
   margin: 0;
+  color: #F0F0F0!important;
 }
 #headerB{
   background-color: #523C26 !important;
 }
-#myleftnav{
-    font-family: "Arial Black", Arial !important;
+.myMenuItem{
+    color: #F0F0F0!important;
 }
 .tabbedTabs div{
   background-color:#616161;
   font-family: "Arial Black", Arial !important;
-  color: #212121 !important;
+  color: #F0F0F0!important;
 }
 .tabbedTabs div:nth-child(2) div:first-child{
   background-color:#009688 !important;
@@ -302,7 +330,16 @@ body{
 .status-content {
   margin-top: 99px!important;
 }
-
+.status-content hr{
+      border-top: 1px solid #009688;
+}
+.profhr {
+  border-top: 1px solid #009688;
+}
+.hrStadistics{
+border-top: 3px solid #009688!important;
+width: 43%;
+}
 .imagen-landing {
   width: 500px!important;
 }
