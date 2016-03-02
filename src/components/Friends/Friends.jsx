@@ -35,8 +35,8 @@ export default class Friends extends Component{
  								<Card>
 					        <CardHeader
 					          avatar={images[friendSearch[friendId].avatar]}
-					          title={ "Nombre: " + friendSearch[friendId].username}
-					          subtitle={"Estado: " + friendSearch[friendId].status}
+					          title={ "Name: " + friendSearch[friendId].username}
+					          subtitle={"Status: " + friendSearch[friendId].status}
 					          actAsExpander={true}
 					          showExpandableButton={true}
 					          />
@@ -44,7 +44,7 @@ export default class Friends extends Component{
 					          <p>{friendSearch[friendId].username}</p>
 					          <ul>
 					            <li>
-					              {"Nivel: " + friendSearch[friendId].level}
+					              {"Level: " + friendSearch[friendId].level}
 					            </li>
 					            <li>
 					              {"MMR: " + friendSearch[friendId].mmr}

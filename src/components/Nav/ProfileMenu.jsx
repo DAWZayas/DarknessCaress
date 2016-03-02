@@ -42,7 +42,7 @@ export default class ProfileMenu extends Component {
       <Badge badgeStyle={{backgroundColor: '#009688'}} badgeContent={ notificationCount } primary={ true } className={ badgeClassName } >
         <IconMenu iconButtonElement={avatar}>
           { auth.authenticated === false ? <MenuItem primaryText="Log In" onTouchTap={this.handleTouchTap.bind(this, 'login')} leftIcon={<FontIcon className="glyphicon glyphicon-log-out icono-negro" />} /> : <span/> }
-          <MenuItem primaryText="Profile" onTouchTap={this.handleTouchTap.bind(this, 'profile')} leftIcon={<FontIcon className="material-icons icono-negro">person</FontIcon>} />
+          { auth.authenticated === true ? <MenuItem primaryText="Profile" onTouchTap={this.handleTouchTap.bind(this, 'profile')} leftIcon={<FontIcon className="material-icons icono-negro">person</FontIcon>} /> : <span/> }
           { auth.authenticated === true ?  <MenuItem primaryText="Notifications" onTouchTap={this.handleTouchTap.bind(this, 'notifications')} leftIcon={<FontIcon className="material-icons icono-negro">feedback</FontIcon>} /> : <span/>}
           <MenuItem primaryText="Help" onTouchTap={this.handleTouchTap.bind(this, 'help')} leftIcon={<FontIcon className="material-icons icono-negro">help</FontIcon>} />
           { auth.authenticated === true ? <MenuItem primaryText="Log Out" onTouchTap={() => this.handleLogOutClick()} leftIcon={<FontIcon className="glyphicon glyphicon-log-out icono-negro" />} /> : <span/> }

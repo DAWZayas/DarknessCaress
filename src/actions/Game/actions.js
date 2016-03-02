@@ -46,6 +46,7 @@ export function sendSolicitationNotification(userReceiving, userAsking, firebase
 }
 
 //CREATE BOARD ACTIONS
+/*
 export function createNewBoard(idOne, idTwo) {
   const firebase = new Firebase('https://darkness-caress.firebaseio.com');
   let newBoard = createBoardWithRiver(8, 2, 'river');
@@ -53,32 +54,10 @@ export function createNewBoard(idOne, idTwo) {
   saveBoard(newBoard, idOne, idTwo, firebase);
 }
 
-/*PROMISES
-export function createNewBoard(idOne, idTwo) {
-  const FIRST_ARMY = 0;
-  const SECOND_ARMY = 1;
-  const firebase = new Firebase('https://darkness-caress.firebaseio.com');
-  let board = createBoardWithRiver(8, 2, 'river');
-  new Promise( resolve => {
-    const midBoard = fillSideWithUnits(board, idTwo, SECOND_ARMY, firebase);
-    resolve(midBoard);
-  })
-    .then( anotherBoard => fillSideWithUnits(anotherBoard, idOne, FIRST_ARMY, firebase) )
-    .then( finalBoard => saveBoard(finalBoard, idOne, idTwo, firebase) );
-}
-*/
-
-function saveBoard(board, idOne, idTwo, firebase) {
-  const newBoardReference = firebase.child('boards').push({board: board, turn: idOne, 0: idOne, 1: idTwo});
-  const newBoardId = newBoardReference.key();
-  addBoardToUser(idOne, newBoardId, firebase);
-  addBoardToUser(idTwo, newBoardId, firebase);
-}
-
 function fillBoardWithUnits(board, idOne, idTwo, firebase) {
   const midBoard = fillSideWithUnits(board, idOne, 0, firebase);
   const finalBoard = fillSideWithUnits(midBoard, idTwo, 1, firebase);
-  //return finalBoard;
+  return finalBoard;
 }
 
 function fillSideWithUnits(board, userId, side, firebase) {
@@ -93,14 +72,45 @@ function fillSideWithUnits(board, userId, side, firebase) {
       });
     });
   });
-  //return board;
+  return board;
 }
-/*
-firebase.child('heroes').once('value', snapshot => {
-  totalHeroes = snapshot.val();
-  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-});
 */
+export function createNewBoard(idOne, idTwo) {
+  const firebase = new Firebase('https://darkness-caress.firebaseio.com');
+  let newBoard = createBoardWithRiver(8, 2, 'river');
+  firebase.child('heroes').once('value', snapshot1 => {
+    const totalHeroes = snapshot1.val();
+    firebase.child(`users/${idOne}/heroes`).once('value', snapshot2 => {
+      const idOneHeroes = snapshot2.val();
+      const idOneSize = idOneHeroes.length;
+      const idOneNumbers = getNumbers(6, idOneSize);
+      idOneNumbers.map( number => {
+        const heroId = parseInt(idOneHeroes[number]);
+        const unit = totalHeroes[heroId];
+        newBoard = placeOneUnit(unit, newBoard, 0);
+      });
+      firebase.child(`users/${idTwo}/heroes`).once('value', snapshot3 => {
+        const idTwoHeroes = snapshot3.val();
+        const idTwoSize = idTwoHeroes.length;
+        const idTwoNumbers = getNumbers(6, idTwoSize);
+        idTwoNumbers.map( number => {
+          const heroId = parseInt(idTwoHeroes[number]);
+          const unit = totalHeroes[heroId];
+          newBoard = placeOneUnit(unit, newBoard, 1);
+        });
+        saveBoard(newBoard, idOne, idTwo, firebase);
+      });
+    });
+  });
+}
+
+function saveBoard(board, idOne, idTwo, firebase) {
+  const newBoardReference = firebase.child('boards').push({board: board, turn: idOne, 0: idOne, 1: idTwo}, () => {
+    const newBoardId = newBoardReference.key();
+    addBoardToBothUsers(idOne, idTwo, newBoardId, firebase);
+  });
+}
+
 function getNumbers(quantity, size) {
   let numbers = [];
   let counter = 0;
@@ -124,7 +134,12 @@ function placeOneUnit(unit, board, side) {
     unit = Object.assign({}, unit, {army: side});
     board[positionX][positionY] = Object.assign({}, board[positionX][positionY], {unit: unit});
   }
-  //return board;
+  return board;
+}
+
+function addBoardToBothUsers(idOne, idTwo, boardId, firebase) {
+  addBoardToUser(idOne, boardId, firebase);
+  addBoardToUser(idTwo, boardId, firebase);
 }
 
 function addBoardToUser(userId, boardId, firebase) {
@@ -229,8 +244,8 @@ function rewardExp(player, exp, firebase) {
   firebase.child(`users/${player}/exp`).transaction( snapshot => {
     let points = snapshot || 0;
     points = points + exp;
-    if(points === 100) {
-      points = 0;
+    if(points >= 100) {
+      points -= 100;
       firebase.child(`users/${player}/level`).transaction( snapshot => {
         let level = snapshot || 0;
         return level + 1;
