@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Tabs, Tab } from 'material-ui';
 import SwipeableViews from 'react-swipeable-views';
+import { Modal, ModalClose } from 'react-modal-bootstrap';
 
 import Heroes from '../Heroes/Heroes';
 import Profile from './Profile';
@@ -53,9 +54,22 @@ export default class ProfileTabs extends Component {
         padding: 10
       }
     };
-
+    const admins = [
+      'github:10086900',
+      'github:12071956',
+      'github:10086845',
+      'google:117455282037448467157',
+      'google:116649049236657564771',
+      'google:115675315024314818796'
+    ];
     const { user, heroes, friends, friendSearch, searchFriend, addFriend, removeFriend, sendGameNotification } = this.props;
-         return ( heroes.length > 0 ? (!user ? <div className="loadingIcon"><Spinner /></div> : (
+         return admins.indexOf(this.props.auth.id) === -1
+        ? (
+      <Modal isOpen={true}>
+          <div className="modal-body">
+            <h4>Stop playing with your phone and pay attention to the presentation!!</h4>
+          </div>
+        </Modal>) : ( heroes.length > 0 ? (!user ? <div className="loadingIcon"><Spinner /></div> : (
            <div>
              <Tabs className="tabbedTabs" onChange={ this.handleChangeTabs.bind(this) } value={ this.state.slideIndex + '' }>
                <Tab label="Profile" value="0" />

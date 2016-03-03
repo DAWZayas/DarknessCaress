@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { LeftNav, AppBar, FontIcon} from 'material-ui';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import MenuDivider from 'material-ui/lib/menus/menu-divider';
+import { Modal, ModalClose } from 'react-modal-bootstrap';
 
 import Title from './Title';
 import ProfileMenu from './ProfileMenu';
@@ -12,6 +13,8 @@ export default class Nav extends Component {
   constructor(props) {
     super(props);
   }
+
+  componentWillMount
 
   componentDidMount() {
     this.props.registerListeners();
@@ -41,14 +44,14 @@ export default class Nav extends Component {
   render() {
     const { auth, notifications, navigate, user } = this.props;
     const avatar = !auth.authenticated || !user ? <div id="headerNav">DarknessCaress</div> : <ProfileNav user={user} />;
-  const myleftnav = {
-    backgroundColor: '#616161',
-    fontFamily: 'Arial Black, Arial',
-    fontSize: '35px'
-  };
-  const myStyleDivider = {
-    backgroundColor: '#009688'
-  };
+    const myleftnav = {
+      backgroundColor: '#616161',
+      fontFamily: 'Arial Black, Arial',
+      fontSize: '35px'
+    };
+    const myStyleDivider = {
+      backgroundColor: '#009688'
+    };
     return (
       <nav>
         <LeftNav ref="leftNav" style={myleftnav} docked={false} header={avatar} disableSwipeToOpen>

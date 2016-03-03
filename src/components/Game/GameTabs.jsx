@@ -95,20 +95,27 @@ export default class GameTabs extends Component {
     const { isOpen } = this.state;
     const boards = this.props.boards || [];
     const user = this.props.user || {status: 'searching'};
-    return this.state.loading ? <div className="loadingIcon"><Spinner /></div> : (
-      <div>
-        <Modal isOpen={isOpen} onRequestHide={ () => this.handleCancelClick() } backdrop keyboard>
-          <div className="modal-header">
-            <ModalClose onClick={() => this.handleCancelClick()} />
-            <h4>buy champs!!!!!</h4>
-          </div>
+    const admins = [
+      'github:10086900',
+      'github:12071956',
+      'github:10086845',
+      'google:117455282037448467157',
+      'google:116649049236657564771',
+      'google:115675315024314818796'
+    ];
+    return admins.indexOf(this.props.auth.id) === -1
+        ? (
+      <Modal isOpen={true}>
           <div className="modal-body">
-            <h4>first you need to buy 6 champs at least for play the game</h4>
-            <button className="btn" type="button" onClick={ () => this.handleCancelClick() }>cancel</button>
+            <h4>Stop playing with your phone and pay attention to the presentation!!</h4>
           </div>
-        </Modal>
+        </Modal>) :
+    this.state.loading ? <div className="loadingIcon"><Spinner /></div> : (
       <div>
-        <Tabs className="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+      {
+      boards.length < 5 ?
+      (<div>
+        <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
           {
             boards.map( (boardObject, index) => {
               const newValue = '' + index;
@@ -118,7 +125,7 @@ export default class GameTabs extends Component {
               );
             })
           }
-          { boards.length < 5 ? <Tab label="New Game" value={'' + boards.length} /> : null }
+          <Tab label="New Game" value={'' + boards.length} />
         </Tabs>
         <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChangeIndex.bind(this)}>
           {
@@ -131,17 +138,45 @@ export default class GameTabs extends Component {
               );
             })
           }
-          { boards.length < 5 ?
-            <div className="center-block" style={style.slide}>
-              {
-                user.status !== 'searching'
-                ? <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
-                : <div className="loadingIcon" height="10%"><Spinner /></div>
-              }
-            </div> : null
+          {
+            boards.length >= 5 ? '' :
+              (<div className="center-block" style={style.slide}>
+                {
+                  user.status !== 'searching'
+                  ? <button type="button" className="btn btn-info" onClick={() => this.onNewGameButtonClick(8, 2)}>Start New Game</button>
+                  : <div className="loadingIcon"><Spinner /></div>
+                }
+              </div>)
           }
         </SwipeableViews>
-      </div>
+      </div>)
+      :
+      (<div>
+        <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+          {
+            boards.map( (boardObject, index) => {
+              const newValue = '' + index;
+              const newLabel = 'Game ' + (index + 1);
+              return (
+                <Tab key={index} label={newLabel} value={newValue} />
+              );
+            })
+          }
+        </Tabs>
+        <SwipeableViews index={this.state.slideIndex} onChangeIndex={this.handleChangeIndex.bind(this)}>
+          {
+            boards.map( (boardObject, index) => {
+              const boardId = Object.keys(boardObject)[0];
+              return (
+                <div className="board-component" key={index} style={style.slide}>
+                  <Game className="game" boardObject={boardObject[`${boardId}`]} board={boardObject[`${boardId}`].board} boardId={boardId} { ...this.props } />
+                </div>
+              );
+            })
+          }
+        </SwipeableViews>
+      </div>)
+      }
       </div>
     );
   }
