@@ -25,3 +25,4 @@ Links:
 * [Ghpages](http://dawzayas.github.io/DarknessCaress/).
 * [Firebase](https://darkness-caress.firebaseapp.com/).
 * [Firebase with mobiletest](http://mobiletest.me/htc_one_emulator/?u=https://darkness-caress.firebaseapp.com/).
+* [Firebase with Google resizer](http://design.google.com/resizer/#device=handset&url=https%3A%2F%2Fdarkness-caress.firebaseapp.com%2F).
