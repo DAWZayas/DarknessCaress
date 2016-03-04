@@ -95,27 +95,24 @@ export default class GameTabs extends Component {
     const { isOpen } = this.state;
     const boards = this.props.boards || [];
     const user = this.props.user || {status: 'searching'};
-    const admins = [
-      'github:10086900',
-      'github:12071956',
-      'github:10086845',
-      'google:117455282037448467157',
-      'google:116649049236657564771',
-      'google:115675315024314818796'
-    ];
-    return admins.indexOf(this.props.auth.id) === -1
-        ? (
-      <Modal isOpen={true}>
-          <div className="modal-body">
-            <h4>Stop playing with your phone and pay attention to the presentation!!</h4>
-          </div>
-        </Modal>) :
-    this.state.loading ? <div className="loadingIcon"><Spinner /></div> : (
+    return this.state.loading ? <div className="loadingIcon"><Spinner /></div> : (
       <div>
+        <div>
+          <Modal isOpen={isOpen} onRequestHide={ () => this.handleCancelClick() } backdrop keyboard>
+            <div className="modal-header">
+              <ModalClose onClick={() => this.handleCancelClick()} />
+              <h4>Buy champs!!!!!</h4>
+            </div>
+            <div className="modal-body">
+              <h4>First you need to buy 6 champs at least to play the game</h4>
+              <button className="btn" type="button" onClick={ () => this.handleCancelClick() }>cancel</button>
+            </div>
+          </Modal>
+        </div>
       {
       boards.length < 5 ?
       (<div>
-        <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+        <Tabs  className="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
           {
             boards.map( (boardObject, index) => {
               const newValue = '' + index;
@@ -152,7 +149,7 @@ export default class GameTabs extends Component {
       </div>)
       :
       (<div>
-        <Tabs onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
+        <Tabs  className="tabbedTabs" onChange={this.handleChangeTabs.bind(this)} value={this.state.slideIndex + ''}>
           {
             boards.map( (boardObject, index) => {
               const newValue = '' + index;

@@ -54,43 +54,30 @@ export default class ProfileTabs extends Component {
         padding: 10
       }
     };
-    const admins = [
-      'github:10086900',
-      'github:12071956',
-      'github:10086845',
-      'google:117455282037448467157',
-      'google:116649049236657564771',
-      'google:115675315024314818796'
-    ];
     const { user, heroes, friends, friendSearch, searchFriend, addFriend, removeFriend, sendGameNotification } = this.props;
-         return admins.indexOf(this.props.auth.id) === -1
-        ? (
-      <Modal isOpen={true}>
-          <div className="modal-body">
-            <h4>Stop playing with your phone and pay attention to the presentation!!</h4>
+    return (
+      heroes.length > 0 ? (!user ? <div className="loadingIcon"><Spinner /></div> : (
+       <div>
+         <Tabs className="tabbedTabs" onChange={ this.handleChangeTabs.bind(this) } value={ this.state.slideIndex + '' }>
+           <Tab label="Profile" value="0" />
+           <Tab label="Heroes" value="1" />
+           <Tab label="Friends" value="2" />
+         </Tabs>
+         <SwipeableViews index={ this.state.slideIndex } onChangeIndex={ this.handleChangeIndex.bind(this) }>
+           <div style={ style.slide }>
+            <Profile changeAvatar={this.props.changeAvatar} user={ user } />
           </div>
-        </Modal>) : ( heroes.length > 0 ? (!user ? <div className="loadingIcon"><Spinner /></div> : (
-           <div>
-             <Tabs className="tabbedTabs" onChange={ this.handleChangeTabs.bind(this) } value={ this.state.slideIndex + '' }>
-               <Tab label="Profile" value="0" />
-               <Tab label="Heroes" value="1" />
-               <Tab label="Friends" value="2" />
-             </Tabs>
-             <SwipeableViews index={ this.state.slideIndex } onChangeIndex={ this.handleChangeIndex.bind(this) }>
-               <div style={ style.slide }>
-                <Profile changeAvatar={this.props.changeAvatar} user={ user } />
-              </div>
-              <div style={ style.slide }>
-                 <Heroes buyHeroe={this.props.buyHeroe} heroes={ heroes } user={ user } searchedHero={this.state.searchedHero} searchBy={ this.searchByHero.bind(this) } />
-               </div>
-               <div style={ style.slide }>
-                <Friends  sendGameNotification={sendGameNotification} friends={ friends } friendSearch={ friendSearch } searchFriend={ searchFriend } addFriend={ addFriend } removeFriend={ removeFriend } />
-               </div>
-             </SwipeableViews>
+          <div style={ style.slide }>
+             <Heroes buyHeroe={this.props.buyHeroe} heroes={ heroes } user={ user } searchedHero={this.state.searchedHero} searchBy={ this.searchByHero.bind(this) } />
            </div>
-        )) : <div className="loadingIcon"><Spinner /></div>);
-      }
-    }
+           <div style={ style.slide }>
+            <Friends  sendGameNotification={sendGameNotification} friends={ friends } friendSearch={ friendSearch } searchFriend={ searchFriend } addFriend={ addFriend } removeFriend={ removeFriend } />
+           </div>
+         </SwipeableViews>
+       </div>
+    )) : <div className="loadingIcon"><Spinner /></div>);
+  }
+}
 
 ProfileTabs.PropTypes={
   user: PropTypes.object,

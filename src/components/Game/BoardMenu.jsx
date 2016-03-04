@@ -51,7 +51,7 @@ export default class BoardMenu extends Component {
     return (
       <div>
       {
-        highlightedSquare === -1 ? <span>{turnTitle}</span> :
+        highlightedSquare === -1 ? <span className="menuTextWhiteColor">{turnTitle}</span> :
         <div>
         <div className="MenuGame">
         <img className="MenuPic" src={ images.menuBar }/>
@@ -79,12 +79,12 @@ export default class BoardMenu extends Component {
           </div>
          <button className="BaseMenuButtons CancelButton" type="button" onClick={() => this.handleDeselect()}>x</button>
         </div>
-        <div>
+        <div className="menuTextWhiteColor">
           {
             selectedUnit ?
             <div className="HeroStats">
               <span>{ selectedUnit.name } </span> <br/>
-              <span>  Attack: { selectedUnit.attack }. Defense: { selectedUnit.defense }. Sp attack: { selectedUnit.sp_atk }. Sp defense: { selectedUnit.sp_def }.</span><br/>
+              <span>  Attack: { selectedUnit.attack }. Defense: { selectedUnit.defense }.</span><br/>
               <span>  HP: { selectedUnit.hp }. Movement: { selectedUnit.movement }. { this.booleanToString(selectedUnit.fly) } unit. Range: { this.rangeToString(selectedUnit.range) }.</span>
             </div>
             :null

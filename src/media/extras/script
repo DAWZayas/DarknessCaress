@@ -1,0 +1,43 @@
+-we can see that we have receive a notification with Alex's invitation.
+ we accept it and our game begins.
+ also, if you don't have any friends or you just want to play a quick game, click the new game button and the game will search for a random opponent to match you with.
+ once the opponent is found you get another notification asking if you're ok with that player. Hit ok and start playing.
+-the board is generated automatically and our units are then placed on the map.
+ the heroes are selected randomly from your bought heroes.
+ one player is assigned the left side of the map, and his characters get placed there, and the other player gets the left sid of the map as his territory.
+ you can inmediately see which units are yours and which ones are your opponent's, because of the little blue and red icons.
+ your units will always appear with the blue (ally) icon, and the other units will show the red (enemy) icon.
+ your opponent, however, will see his units in blue and your units in red, so you'll never confuse your heores and the opponent's.
+-for this presentation we've prepared a specific board.
+ see, nice river, good mix of terrains and it looks like we're winning. This was automatically generated lie all maps.
+-clicking or tapping somewhere on the board will select that square.
+ you can see the terrain selected with it's properties; they are important for battles.
+ if you select a square with a unit in it you'll see that unit's characteristics... examples.
+ if that unit is one of yours, you'll get the game actions.
+-move calculates the range of movement of that unit.
+ different terrains are harder to cross than others (mountains, deserts...). River are impassable for ground units, flying unit can go anywhere.
+ that button became the 'stay' button that goes back to the previous state.
+ click anywhere in that blue area (not in another unit) and you've selected your move.
+ don't worry, you can get back if you want to, this movement is not final.
+-defend will finish that unit's move for this turn, and give it a small boost in defense for the next turn.
+ that units gets greyed out to signify that it's inactive, it has already played.
+-you can see that, between the red and blue icons, and your colored and greyed out units; you can get a good understanding of the state of the battle at first glance.
+ this way you really don't need to remember where you left off. This is a very 'pick up and play' game where you'll play for a couple minutes at a time,
+ so these visual features (?) make the game easier to understand and more fun for everyone.
+-attack selects the area of attack of that unit from that position.
+ each unit has a specific range (close, medium long-range).
+ the attack button becomes the cancel button.
+ when you click on an enemy unit, your unit will attack it.
+ the damage is calculated based on your attack, the enemy's defense and the terrain's defense bonus.
+ the enemy loses hp, and when it reaches 0, it dies and dissapears from the battlefield.
+ that unit's move ends there and it gets greyed out as well (inactive).
+-when all you units move it's your opponent's turn.
+ you can't see each unit's move, only the final attacks or defends.
+ when he finishes, it's your turn again.
+-when the last unit dies, the game ends and you get a prompt.
+ you accept and the board is removed from your games, so you can start a new one.
+ even if you don't accept, the endgame rewards are distributed automatically.
+-the winner gets more exp, rank up his/her mmr, gets some points (?), and maybe a level up.
+ the loser gets some exp (to encourage people to finish games even if they're losing), loses mmr.
+-only 5 games at a time, to keep the volume of traffic down and to not overcomplicate the UI.
+
