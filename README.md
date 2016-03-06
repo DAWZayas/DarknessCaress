@@ -3,26 +3,28 @@
 ### The world-wide well-known on-line game.
 
 Rpg-themed turn-based on-line multiplayin'-game featuring:
+* 1 vs. 1 strategy battles against people from all over the world or your closest friends.
+* Game maps are generated automatically; you’ll never see the same map twice, so the strategic possibilities are endless.
+* Easy to learn mechanics, and a clean and intuitive interface.
+* You can have up to 5 different games going simuntaneously.
 * Live saving any progress done, so even if you disconnect suddenly, progress will be stored.
-* Unlock characters, armor, weapons, skins and so on.
+* Unlock some of your favourite heroes from popular videogame franchises.
 * World-wide ranking, so you know how bad you actually are.
 * Tutorial for the damn noobs. Everyone hate noobs.
 * Create your very own account, so you can add friends, stat-tracking, etc.
-* You can chat with people on the same instance of map, or if you add them to your group, even out of it.
+* Excellent customer support service provided in our twitter account.
 
-The web will be able to:
-* Check everyones profile: including level, equipment, number of matches, etc.
+The web is able to:
+* Check everyone’s profile: including level, number of matches won and lost, global ranking, etc.
 * Create & manage accounts.
-* Chat with in-game players.
-
-Server side:
-* Database storage for every important data.
-* Matchmaking with players, or IA.
+* Calculate the perfect matchmaking for your level and ranking.
+* Send invitations to the friends added to your account, so you can always play with your buddies.
+* Database storage for every important data including your stats and records.
 * And more!
 
 Links:
 * [Additional information](https://github.com/DAWZayas/DarknessCaress).
-* [Ghpages](http://dawzayas.github.io/DarknessCaress/).
-* [Firebase](https://darkness-caress.firebaseapp.com/).
-* [Firebase with mobiletest](http://mobiletest.me/htc_one_emulator/?u=https://darkness-caress.firebaseapp.com/).
-* [Firebase with Google resizer](http://design.google.com/resizer/#device=handset&url=https%3A%2F%2Fdarkness-caress.firebaseapp.com%2F).
+* [DEMO in Ghpages](http://dawzayas.github.io/DarknessCaress/).
+* [DEMO in Firebase](https://darkness-caress.firebaseapp.com/).
+* [DEMO in Firebase with mobiletest](http://mobiletest.me/htc_one_emulator/?u=https://darkness-caress.firebaseapp.com/).
+* [DEMO in Firebase with Google Resizer](http://design.google.com/resizer/#device=handset&url=https%3A%2F%2Fdarkness-caress.firebaseapp.com%2F).
