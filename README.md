@@ -1,4 +1,4 @@
-### Carlos Ballesteros, Alberto Mata, Alejandro Sanchez.
+### Carlos Ballesteros, Alberto Mata, Alejandro Sánchez.
 #Darkness' Caress:
 ### The world-wide well-known on-line game.
 
@@ -6,7 +6,7 @@ Rpg-themed turn-based on-line multiplayin'-game featuring:
 * 1 vs. 1 strategy battles against people from all over the world or your closest friends.
 * Game maps are generated automatically; you’ll never see the same map twice, so the strategic possibilities are endless.
 * Easy to learn mechanics, and a clean and intuitive interface.
-* You can have up to 5 different games going simuntaneously.
+* You can have up to 5 different games going simultaneously.
 * Live saving any progress done, so even if you disconnect suddenly, progress will be stored.
 * Unlock some of your favourite heroes from popular videogame franchises.
 * World-wide ranking, so you know how bad you actually are.
